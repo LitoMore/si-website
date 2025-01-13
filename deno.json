@@ -1,0 +1,51 @@
+{
+	"tasks": {
+		"dev": "deno run -A --node-modules-dir npm:vite",
+		"build": "deno run -A --node-modules-dir npm:vite build",
+		"preview": "deno run -A --node-modules-dir npm:vite preview",
+		"serve": "deno run --allow-net --allow-read jsr:@std/http@1/file-server dist/"
+	},
+	"fmt": {
+		"useTabs": true
+	},
+	"compilerOptions": {
+		"lib": ["ES2020", "DOM", "DOM.Iterable"],
+		"jsx": "react-jsx",
+		"jsxImportSource": "react",
+		"jsxImportSourceTypes": "@types/react"
+	},
+	"imports": {
+		"#atom": "./src/atom.ts",
+		"#components": "./src/components/index.ts",
+		"#constants": "./src/constants.ts",
+		"#context": "./src/context.tsx",
+		"#hooks": "./src/hooks.ts",
+		"#i18n": "./src/i18n/_index.ts",
+		"#types": "./src/types.ts",
+		"#utils": "./src/utils.ts",
+		"@ant-design/icons": "npm:@ant-design/icons@^5.5.2",
+		"@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.3",
+		"@swc/plugin-styled-components": "npm:@swc/plugin-styled-components@^6.7.0",
+		"@types/react": "npm:@types/react@^19.0.8",
+		"@types/react-dom": "npm:@types/react-dom@^19.0.3",
+		"@types/react-virtualized": "npm:@types/react-virtualized@^9.22.0",
+		"@uidotdev/usehooks": "npm:@uidotdev/usehooks@^2.4.1",
+		"@vitejs/plugin-react-swc": "npm:@vitejs/plugin-react-swc@^3.7.2",
+		"antd": "npm:antd@^5.23.3",
+		"css-color-converter": "npm:css-color-converter@^2.0.0",
+		"es-toolkit": "npm:es-toolkit@^1.32.0",
+		"fast-fuzzy": "npm:fast-fuzzy@^1.12.0",
+		"get-relative-luminance": "npm:get-relative-luminance@2.0.0-0",
+		"jotai": "npm:jotai@^2.11.3",
+		"react": "npm:react@^19.0.0",
+		"react-dom": "npm:react-dom@^19.0.0",
+		"react-draggable": "npm:react-draggable@^4.4.6",
+		"react-router": "npm:react-router@^7.1.5",
+		"react-virtualized": "npm:react-virtualized@^9.22.6",
+		"react-virtuoso": "npm:react-virtuoso@^4.12.3",
+		"simple-icons": "npm:simple-icons@^14.5.0",
+		"styled-components": "npm:styled-components@^6.1.14",
+		"vite": "npm:vite@^6.0.10"
+	},
+	"nodeModulesDir": "auto"
+}
