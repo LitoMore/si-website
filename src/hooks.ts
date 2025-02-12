@@ -7,6 +7,7 @@ import { Searcher } from "fast-fuzzy";
 import useImage from "use-image";
 import { useCardSize, useColorTheme, useIcons } from "#atom";
 import { mobileWidth } from "#constants";
+import { useI18n } from "#i18n";
 import {
 	cardSizeToPixels,
 	cloneImagetoSize,
@@ -19,9 +20,10 @@ export { useI18n } from "#i18n";
 
 export const useCopyText = () => {
 	const { message } = App.useApp();
+	const i18n = useI18n();
 	return async (title: string, text: string) => {
 		await globalThis.navigator.clipboard.writeText(text);
-		message.success(`Copied ${title} to clipboard`);
+		message.success(i18n.modal.copied(title));
 	};
 };
 
@@ -40,10 +42,10 @@ export const useSizes = () => {
 	);
 	const galleryMargin = Math.floor((containerWidth % (cardPixels + gap)) / 2) +
 		padding;
-	const iconsPreRow = Math.floor(containerWidth / (cardPixels + gap));
+	const iconsPerRow = Math.floor(containerWidth / (cardPixels + gap));
 	return {
 		isMobileSize,
-		iconsPreRow,
+		iconsPerRow,
 		cardPixels,
 		zoom: cardPixels / CardSize.Small,
 		innerWidth,

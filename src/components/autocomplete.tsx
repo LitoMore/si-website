@@ -44,7 +44,7 @@ const Autocomplete = () => {
 				value: icon.title,
 				icon,
 			}))}
-			placeholder={i18n.searchByBrand}
+			placeholder={i18n.search.searchByBrand}
 			onChange={(value) => setSearchText(value.trim())}
 			onSelect={(value, option) => {
 				setSearchText(value.trim());

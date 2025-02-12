@@ -9,13 +9,13 @@ const Virutalized = memo(
 	(
 		{
 			icons,
-			iconsPreRow,
+			iconsPerRow,
 			cardPixels,
 			innerWidth,
 			galleryHeight,
 		}: {
 			icons: Icon[];
-			iconsPreRow: number;
+			iconsPerRow: number;
 			cardPixels: number;
 			innerWidth: number;
 			galleryHeight: string;
@@ -43,15 +43,15 @@ const Virutalized = memo(
 								);
 							}}
 							cellSizeAndPositionGetter={({ index }) => {
-								const isFirstTwoLines = index < (iconsPreRow - 1) * 2;
+								const isFirstTwoLines = index < (iconsPerRow - 1) * 2;
 								const line = Math.floor(
-									index / (isFirstTwoLines ? iconsPreRow - 1 : iconsPreRow),
+									index / (isFirstTwoLines ? iconsPerRow - 1 : iconsPerRow),
 								);
 								const column =
-									(index % (isFirstTwoLines ? iconsPreRow - 1 : iconsPreRow)) +
+									(index % (isFirstTwoLines ? iconsPerRow - 1 : iconsPerRow)) +
 									(isFirstTwoLines ? 2 : 0);
 								const paddingLeft = Math.floor(
-									(innerWidth - (iconsPreRow * (cardPixels + 5) - 5)) / 2,
+									(innerWidth - (iconsPerRow * (cardPixels + 5) - 5)) / 2,
 								);
 
 								if (index === 0) {

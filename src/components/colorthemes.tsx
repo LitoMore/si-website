@@ -19,13 +19,13 @@ const ColorThemes = () => {
 			}}
 		>
 			<Radio.Button value={ColorTheme.Auto}>
-				{i18n.themeAuto}
+				{i18n.settings.themeAuto}
 			</Radio.Button>
 			<Radio.Button value={ColorTheme.Light}>
-				{i18n.themeLight}
+				{i18n.settings.themeLight}
 			</Radio.Button>
 			<Radio.Button value={ColorTheme.Dark}>
-				{i18n.themeDark}
+				{i18n.settings.themeDark}
 			</Radio.Button>
 		</Radio.Group>
 	);

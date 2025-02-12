@@ -1,6 +1,5 @@
 export { Ads } from "./ads.tsx";
 export { default as Apps } from "./apps.tsx";
-export { Badge } from "./badge.tsx";
 export { default as Brightness } from "./brightness.tsx";
 export { default as Card } from "./card.tsx";
 export { default as CardsizeSlider } from "./cardsizes.tsx";

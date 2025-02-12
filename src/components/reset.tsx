@@ -21,7 +21,7 @@ const Reset = () => {
 				setColorMode(ColorMode.Contrast);
 			}}
 		>
-			{i18n.reset}
+			{i18n.settings.reset}
 		</Button>
 	);
 };

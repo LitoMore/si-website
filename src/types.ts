@@ -30,6 +30,12 @@ export enum BrightnessMode {
 	ShieldsIo = "shieldsio",
 }
 
+export enum BitmapFormat {
+	PNG = "png",
+	JPG = "jpg",
+	WebP = "webp",
+}
+
 export type JsDelivrNpmResponse = {
 	type: string;
 	name: string;

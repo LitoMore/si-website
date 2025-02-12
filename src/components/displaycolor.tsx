@@ -20,14 +20,14 @@ const DisplayColor = () => {
 			}}
 		>
 			<Radio.Button value={ColorMode.Contrast}>
-				{i18n.contrast}{" "}
-				<Tooltip title={i18n.contrastTooltip}>
+				{i18n.settings.contrast}{" "}
+				<Tooltip title={i18n.settings.contrastTooltip}>
 					<QuestionCircleOutlined />
 				</Tooltip>
 			</Radio.Button>
 			<Radio.Button value={ColorMode.Actual}>
-				{i18n.actual}{" "}
-				<Tooltip title={i18n.actualTooltip}>
+				{i18n.settings.actual}{" "}
+				<Tooltip title={i18n.settings.actualTooltip}>
 					<QuestionCircleOutlined />
 				</Tooltip>
 			</Radio.Button>

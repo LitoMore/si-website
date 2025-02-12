@@ -8,6 +8,9 @@ export default defineConfig({
 		deno() as PluginOption,
 		react({ plugins: [["@swc/plugin-styled-components", {}]] }) as PluginOption,
 	],
+	optimizeDeps: {
+		exclude: ["pdfkit", "blob-stream"],
+	},
 	resolve: {
 		alias: {
 			"#atom": "/src/atom.ts",

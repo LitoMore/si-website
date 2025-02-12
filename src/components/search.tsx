@@ -72,7 +72,7 @@ const Search = () => {
 					}K`}
 				</span>
 			)}
-			placeholder={i18n.searchByBrand}
+			placeholder={i18n.search.searchByBrand}
 			onChange={(event) => setSearchText(event.target.value.trim())}
 			onFocus={() => setIsInputFocused(true)}
 			onBlur={() => setIsInputFocused(false)}

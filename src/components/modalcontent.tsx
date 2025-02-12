@@ -8,9 +8,11 @@ import {
 } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { styled } from "styled-components";
-import { useSizes } from "#hooks";
+import { useColorMode } from "#atom";
+import { siWebsiteBrightnessThreshold } from "#constants";
+import { useColorScheme, useI18n, useSizes } from "#hooks";
 import { getAliases, tidyLink } from "#utils";
-import { Icon } from "#types";
+import { ColorMode, Icon } from "#types";
 
 const previewImageSize = 300;
 
@@ -30,11 +32,12 @@ const Image = styled(AntImage).attrs<{ $color?: string }>(
 			</Flex>
 		),
 	}),
-)`
+)<{ $contrast?: string }>`
 	padding: 10px;
 	max-height: ${previewImageSize}px;
 	height: auto;
 	transition: height 0.5s;
+	${(props) => props.$contrast ? `filter: ${props.$contrast};` : ""}
 `;
 
 export const Title = styled.div`
@@ -46,11 +49,17 @@ const Text = styled(Typography.Text).attrs((props) => ({
 	copyable: props.copyable ?? true,
 }))`
 	margin: 0;
+	& [data-icon="copy"] {
+		color: #aaa;
+	}
 `;
 
 const Tag = styled(AntTag)<{ $textColor?: string }>`
 	margin-right: 0;
 	color: ${(props) => props.$textColor} !important;
+	& [data-icon="copy"] {
+		color: #aaa;
+	}
 `;
 
 const Link = styled(Typography.Link).attrs({
@@ -59,10 +68,16 @@ const Link = styled(Typography.Link).attrs({
 	rel: "noopener nofollow noreferrer",
 })`
 	margin: 0;
+	& [data-icon="copy"] {
+		color: #aaa;
+	}
 `;
 
 const ModalContent = ({ icon }: { icon?: Icon }) => {
 	const { isMobileSize } = useSizes();
+	const [colorMode] = useColorMode();
+	const { contrast, isLight, isDark } = useColorScheme();
+	const i18n = useI18n();
 	if (!icon) return null;
 
 	const aliases = getAliases(icon);
@@ -74,6 +89,11 @@ const ModalContent = ({ icon }: { icon?: Icon }) => {
 				<Flex justify="center" align="center" style={{ height: "100%" }}>
 					<Image
 						$color={hexColor}
+						$contrast={colorMode === ColorMode.Contrast &&
+								((isLight && icon.brightness > siWebsiteBrightnessThreshold) ||
+									(isDark && icon.brightness <= 0.05))
+							? contrast
+							: undefined}
 						src={`https://cdn.simpleicons.org/${icon.slug}?viewbox=auto`}
 					/>
 				</Flex>
@@ -81,13 +101,13 @@ const ModalContent = ({ icon }: { icon?: Icon }) => {
 
 			<Col xs={24} sm={8}>
 				<Flex vertical>
-					<Title>Title</Title>
+					<Title>{i18n.modal.title}</Title>
 					<Text>{icon.title}</Text>
 				</Flex>
 
 				{aliases.length > 0 && (
 					<Flex vertical>
-						<Title>Aliases</Title>
+						<Title>{i18n.modal.aliases}</Title>
 						<Flex gap="small">
 							{aliases.map((alias) => <Text key={alias}>{alias}</Text>)}
 						</Flex>
@@ -95,7 +115,7 @@ const ModalContent = ({ icon }: { icon?: Icon }) => {
 				)}
 
 				<Flex vertical>
-					<Title>Color</Title>
+					<Title>{i18n.modal.color}</Title>
 					<div>
 						<Text copyable={{ text: hexColor }}>
 							<Tag color={hexColor} $textColor={icon.relativeColor}>
@@ -107,7 +127,9 @@ const ModalContent = ({ icon }: { icon?: Icon }) => {
 
 				<Flex vertical>
 					<Title>
-						{icon.source === icon.guidelines ? "Source & Guidelines" : "Source"}
+						{icon.source === icon.guidelines
+							? i18n.modal.sourceAndGuidelines
+							: i18n.modal.source}
 					</Title>
 					<Link ellipsis={!isMobileSize} href={icon.source}>
 						{tidyLink(icon.source)}
@@ -116,7 +138,7 @@ const ModalContent = ({ icon }: { icon?: Icon }) => {
 
 				{icon.source !== icon.guidelines && icon.guidelines && (
 					<Flex vertical>
-						<Title>Guidelines</Title>
+						<Title>{i18n.modal.guidelines}</Title>
 						<Link ellipsis={!isMobileSize} href={icon.guidelines}>
 							{tidyLink(icon.guidelines)}
 						</Link>
@@ -125,7 +147,7 @@ const ModalContent = ({ icon }: { icon?: Icon }) => {
 
 				{icon.license && (
 					<Flex vertical>
-						<Title>License</Title>
+						<Title>{i18n.modal.license}</Title>
 						<Link
 							ellipsis={!isMobileSize}
 							href={"url" in icon.license

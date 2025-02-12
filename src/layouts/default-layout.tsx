@@ -8,7 +8,7 @@ export default memo(() => {
 		<Layout>
 			<Header />
 			<Layout.Content>
-				<Gallery />
+				<Gallery mode="virtuoso" />
 			</Layout.Content>
 			<Modal />
 		</Layout>

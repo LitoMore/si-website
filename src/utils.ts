@@ -2,6 +2,7 @@
 import { CSSProperties } from "react";
 import { actionIntentText, actionIntentUrl } from "#constants";
 import {
+	BitmapFormat,
 	BrightnessMode,
 	CardSize,
 	ColorTheme,
@@ -184,4 +185,108 @@ export const cloneImagetoSize = (image: HTMLImageElement, size: number) => {
 	clone.width = size;
 	clone.height = size;
 	return clone;
+};
+
+export const getIconsInRows = (icons: Icon[], iconsPerRow: number) => {
+	const iconsInRows: Icon[][] = [];
+	const rows = Math.floor(icons.length / iconsPerRow);
+	for (let i = 0; i < rows; i++) {
+		iconsInRows.push(icons.slice(i * iconsPerRow, (i + 1) * iconsPerRow));
+	}
+	return iconsInRows;
+};
+
+const loadPdfKitAndBlobStream = async () => {
+	const [pdfkit, blobStream] = await Promise.all([
+		import("pdfkit/js/pdfkit.standalone.js"),
+		import("blob-stream/.js"),
+	]);
+	return [pdfkit.default, blobStream.default];
+};
+
+export const downloadSvg = async (
+	version: string,
+	slug: string,
+	hex?: string,
+) => {
+	let svg = await getSvg(version, slug);
+	if (hex) svg = svg.replace("<svg ", `<svg fill="#${hex}" `);
+	const url = `data:image/svg+xml;base64,${btoa(svg)}`;
+	const a = document.createElement("a");
+	a.classList.add("hidden");
+	a.setAttribute("href", url);
+	a.setAttribute("download", `${slug}.svg`);
+	document.body.append(a);
+	a.click();
+	a.remove();
+};
+
+export const downloadPdf = async (version: string, slug: string) => {
+	const svg = await getSvg(version, slug);
+	const svgPath = svg.split('"')[7];
+	const [PDFDocument, blobStream] = await loadPdfKitAndBlobStream();
+	let document_;
+	let stream;
+	try {
+		document_ = new PDFDocument({ size: [24, 24] });
+		stream = document_.pipe(blobStream());
+		document_.path(svgPath).fill();
+	} catch (error) {
+		document_ = new PDFDocument({ size: "A8" });
+		stream = document_.pipe(blobStream());
+		console.error(error);
+		document_.fontSize(12);
+		document_.text(
+			`Error generating PDF with PDFKit library: ${
+				error instanceof Error ? error.message : error
+			}`,
+			0,
+			0,
+			{
+				align: "center",
+			},
+		);
+	}
+	document_.end();
+	stream.on("finish", () => {
+		const url = stream.toBlobURL("application/pdf");
+		const a = document.createElement("a");
+		a.classList.add("hidden");
+		a.setAttribute("href", url);
+		a.setAttribute("download", `${slug}.pdf`);
+		document.body.append(a);
+		a.click();
+		a.remove();
+	});
+};
+
+export const downloadBitmap = async (
+	version: string,
+	slug: string,
+	hex: string,
+	format: BitmapFormat,
+	size: number = 512,
+) => {
+	let svg = await getSvg(version, slug);
+	svg = svg.replace("<svg ", `<svg fill="#${hex}" `);
+	const canvas = document.createElement("canvas");
+	const ctx = canvas.getContext("2d")!;
+	const ratio = globalThis.devicePixelRatio || 1;
+	canvas.width = size * ratio;
+	canvas.height = size * ratio;
+	canvas.style.width = size + "px";
+	canvas.style.height = size + "px";
+	ctx.scale(ratio, ratio);
+	const img = new Image();
+	img.width = size;
+	img.height = size;
+	img.onload = () => {
+		ctx.drawImage(img, 0, 0, size, size);
+		const pngUrl = canvas.toDataURL(`image/${format}`);
+		const link = document.createElement("a");
+		link.href = pngUrl;
+		link.download = `${slug}.png`;
+		link.click();
+	};
+	img.src = `data:image/svg+xml;base64,${btoa(svg)}`;
 };

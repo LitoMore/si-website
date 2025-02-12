@@ -20,13 +20,13 @@ const IconStyle = () => {
 		>
 			<Radio.Button value={"icon"}>
 				Icon{" "}
-				<Tooltip title={i18n.contrastTooltip}>
+				<Tooltip title={i18n.settings.contrastTooltip}>
 					<QuestionCircleOutlined />
 				</Tooltip>
 			</Radio.Button>
 			<Radio.Button value={"badge"}>
 				Badge{" "}
-				<Tooltip title={i18n.contrastTooltip}>
+				<Tooltip title={i18n.settings.contrastTooltip}>
 					<QuestionCircleOutlined />
 				</Tooltip>
 			</Radio.Button>

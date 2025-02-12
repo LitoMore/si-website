@@ -14,18 +14,36 @@ export enum LanguageCode {
 }
 
 export type Internationalization = {
-	actual: string;
-	actualTooltip: string;
-	contrast: string;
-	contrastTooltip: string;
 	languageName: string;
-	noIconsFound: string;
-	reset: string;
-	searchByBrand: string;
-	themeAuto: string;
-	themeDark: string;
-	themeLight: string;
-	zoom: string;
+	modal: {
+		aliases: string;
+		color: string;
+		copied: (name: string) => string;
+		copy: string;
+		download: string;
+		guidelines: string;
+		license: string;
+		source: string;
+		sourceAndGuidelines: string;
+		svgColored: string;
+		svgPlain: string;
+		title: string;
+	};
+	search: {
+		noIconsFound: string;
+		searchByBrand: string;
+	};
+	settings: {
+		actual: string;
+		actualTooltip: string;
+		contrast: string;
+		contrastTooltip: string;
+		reset: string;
+		themeAuto: string;
+		themeDark: string;
+		themeLight: string;
+		zoom: string;
+	};
 };
 
 export const translations: Record<LanguageCode, Internationalization> = {

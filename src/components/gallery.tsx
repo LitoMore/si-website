@@ -9,16 +9,19 @@ import { useI18n, useSizes } from "#hooks";
 
 // const Virutalized = lazy(() => import("./virtualized.tsx"));
 const Virtuoso = lazy(() => import("./virtuoso.tsx"));
+// const VirutalScroll = lazy(() => import("./virtualscroll.tsx"));
 
-const Gallery = () => {
+const Gallery = (
+	{ mode }: { mode?: "virtualized" | "virtuoso" | "virtualscroll" },
+) => {
 	const [icons] = useIcons();
 	const [filteredIcons] = useFilteredIcons();
 	const {
-		// innerWidth,
-		// iconsPreRow,
+		innerWidth,
+		iconsPerRow,
 		galleryHeight,
 		galleryMargin,
-		// cardPixels,
+		cardPixels,
 	} = useSizes();
 	const i18n = useI18n();
 
@@ -27,11 +30,23 @@ const Gallery = () => {
 			<Flex vertical justify="center" style={{ height: galleryHeight }}>
 				<Empty
 					image={Empty.PRESENTED_IMAGE_SIMPLE}
-					description={i18n.noIconsFound}
+					description={i18n.search.noIconsFound}
 				/>
 			</Flex>
 		);
 	}
+
+	// if (mode === "virtualscroll") {
+	// 	return (
+	// 		<VirutalScroll
+	// 			icons={filteredIcons}
+	// 			innerWidth={innerWidth}
+	// 			cardPixels={cardPixels}
+	// 			galleryHeight={galleryHeight}
+	// 			iconsPerRow={iconsPerRow}
+	// 		/>
+	// 	);
+	// }
 
 	// if (mode === "virtualized") {
 	// 	return (
@@ -40,7 +55,7 @@ const Gallery = () => {
 	// 			innerWidth={innerWidth}
 	// 			galleryHeight={galleryHeight}
 	// 			cardPixels={cardPixels}
-	// 			iconsPreRow={iconsPreRow}
+	// 			iconsPerRow={iconsPerRow}
 	// 		/>
 	// 	);
 	// }
