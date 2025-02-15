@@ -1,5 +1,6 @@
 import { useIcons } from "#atom";
-import { siWebsiteBrightnessThreshold } from "#constants";
+import { brightThreshold } from "#constants";
+import { useColorScheme } from "#hooks";
 import { getMaskStyles } from "#utils";
 import { Icon } from "#types";
 
@@ -7,6 +8,7 @@ const PrefixIcon = (
 	{ icon, style }: { icon?: Icon; style: "color" | "icon" },
 ) => {
 	const [{ version }] = useIcons();
+	const { isLight } = useColorScheme();
 	if (!icon) return null;
 
 	return (
@@ -22,11 +24,10 @@ const PrefixIcon = (
 				backgroundColor: style === "color"
 					? `#${icon.hex ?? "000000"}`
 					: undefined,
-				...(style === "icon" ? getMaskStyles(version, icon) : {}),
-				filter:
-					style === "icon" && icon.brightness > siWebsiteBrightnessThreshold
-						? "var(--si-contrast)"
-						: undefined,
+				...(style === "icon" ? getMaskStyles(version, icon, isLight) : {}),
+				filter: style === "icon" && icon.brightness > brightThreshold
+					? "var(--si-contrast)"
+					: undefined,
 			}}
 		/>
 	);

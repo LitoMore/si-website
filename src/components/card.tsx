@@ -4,7 +4,7 @@
 // @deno-types="@types/react"
 import { CSSProperties } from "react";
 import { useColorMode, useIcons, useSelectedIcon } from "#atom";
-import { siWebsiteBrightnessThreshold } from "#constants";
+import { brightThreshold, darkThreshold } from "#constants";
 import { useColorScheme, useSizes } from "#hooks";
 import { getMaskStyles } from "#utils";
 import { ColorMode, Icon } from "#types";
@@ -18,9 +18,9 @@ const Card = ({ icon, style }: { icon: Icon; style?: CSSProperties }) => {
 	const hexColor = `#${icon.hex}`;
 	const borderColor = isLight ? hexColor : galleryFg;
 	const borderWidth = isLight ? 2 : 1;
-	const applyContrast = colorMode === ColorMode.Contrast &&
-		((isLight && icon.brightness > siWebsiteBrightnessThreshold) ||
-			(isDark && icon.brightness <= 0.05));
+	const a11yFriendly = (isLight && icon.brightness <= brightThreshold) ||
+		(isDark && icon.brightness > darkThreshold);
+	const applyContrast = colorMode === ColorMode.Contrast && !a11yFriendly;
 
 	return (
 		<div

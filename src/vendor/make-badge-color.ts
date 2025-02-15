@@ -6,7 +6,7 @@ import { memoize } from "es-toolkit";
 // @ts-expect-error: No types available
 import { fromString } from "css-color-converter";
 import getRelativeLuminance from "get-relative-luminance";
-import { siWebsiteBrightnessThreshold } from "#constants";
+import { brightThreshold } from "#constants";
 
 const namedColors = {
 	brightgreen: "#4c1",
@@ -65,8 +65,6 @@ export function colorForBackground(color: string, luminance?: boolean) {
 	const actualBrightness = memoizedBrightness(color);
 	return {
 		brightness: actualBrightness,
-		relativeColor: actualBrightness < siWebsiteBrightnessThreshold
-			? "#fff"
-			: "#333",
+		relativeColor: actualBrightness < brightThreshold ? "#fff" : "#333",
 	};
 }

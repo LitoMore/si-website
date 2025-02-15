@@ -1,19 +1,7 @@
 import { useLanguageCode } from "#atom";
 import { formatString } from "#utils";
-import { format } from "vitest/utils";
 import en from "./en.i18n.ts";
 import zh from "./zh.i18n.ts";
-
-export enum LanguageCode {
-	Chinese = "zh",
-	English = "en",
-	// French = "fr",
-	// Japanese = "ja",
-	// Ukrainian = "uk",
-	// Portuguese = "pt",
-	// Russian = "ru",
-	// Spanish = "es",
-}
 
 export type Internationalization = {
 	languageName: string;
@@ -47,6 +35,17 @@ export type Internationalization = {
 		zoom: string;
 	};
 };
+
+export enum LanguageCode {
+	Chinese = "zh",
+	English = "en",
+	// French = "fr",
+	// Japanese = "ja",
+	// Ukrainian = "uk",
+	// Portuguese = "pt",
+	// Russian = "ru",
+	// Spanish = "es",
+}
 
 export const translations: Record<LanguageCode, Internationalization> = {
 	[LanguageCode.English]: en,

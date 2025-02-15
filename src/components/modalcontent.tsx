@@ -9,7 +9,7 @@ import {
 import { LoadingOutlined } from "@ant-design/icons";
 import { styled } from "styled-components";
 import { useColorMode } from "#atom";
-import { siWebsiteBrightnessThreshold } from "#constants";
+import { brightThreshold, darkThreshold } from "#constants";
 import { useColorScheme, useI18n, useSizes } from "#hooks";
 import { getAliases, tidyLink } from "#utils";
 import { ColorMode, Icon } from "#types";
@@ -82,6 +82,12 @@ const ModalContent = ({ icon }: { icon?: Icon }) => {
 
 	const aliases = getAliases(icon);
 	const hexColor = `#${icon.hex}`;
+	const a11yFriendly = (isLight && icon.brightness <= brightThreshold) ||
+		(isDark && icon.brightness > darkThreshold);
+
+	const $contrast = colorMode === ColorMode.Contrast && !a11yFriendly
+		? contrast
+		: undefined;
 
 	return (
 		<Row gutter={16}>
@@ -89,11 +95,7 @@ const ModalContent = ({ icon }: { icon?: Icon }) => {
 				<Flex justify="center" align="center" style={{ height: "100%" }}>
 					<Image
 						$color={hexColor}
-						$contrast={colorMode === ColorMode.Contrast &&
-								((isLight && icon.brightness > siWebsiteBrightnessThreshold) ||
-									(isDark && icon.brightness <= 0.05))
-							? contrast
-							: undefined}
+						$contrast={$contrast}
 						src={`https://cdn.simpleicons.org/${icon.slug}?viewbox=auto`}
 					/>
 				</Flex>
