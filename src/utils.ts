@@ -1,5 +1,5 @@
 // @deno-types="@types/react"
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties } from "react";
 import { actionIntentText, actionIntentUrl } from "#constants";
 import {
 	BitmapFormat,
