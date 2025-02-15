@@ -39,6 +39,8 @@ const Icon = ({ slug }: { slug: string }) => {
 type Position = [x: number, y: number];
 
 const MastodonButton = ({ position }: { position: Position }) => {
+	const [showInput, setShowInput] = useState(false);
+	const [inputVisible, setInputVisible] = useState(false);
 	const [mastodonInstance, setMastodonInstance] = useState("");
 	const { innerWidth } = useSizes();
 	const [x] = position;
@@ -60,7 +62,7 @@ const MastodonButton = ({ position }: { position: Position }) => {
 	return (
 		<SocialButton
 			icon={<Icon slug="mastodon" />}
-			description={
+			description={showInput && (
 				<Flex
 					style={{
 						position: "absolute",
@@ -70,6 +72,8 @@ const MastodonButton = ({ position }: { position: Position }) => {
 						borderRadius: 6,
 						boxShadow:
 							"0 6px 16px 0 rgba(0, 0, 0, 0.08),0 3px 6px -4px rgba(0, 0, 0, 0.12),0 9px 28px 8px rgba(0, 0, 0, 0.05)",
+						opacity: inputVisible ? 1 : 0,
+						transition: "opacity 0.2s, transform 0.2s",
 					}}
 				>
 					<Space.Compact
@@ -79,6 +83,7 @@ const MastodonButton = ({ position }: { position: Position }) => {
 							value={mastodonInstance}
 							placeholder="Your Mastodon instance"
 							onChange={(event) => setMastodonInstance(event.target.value)}
+							onClick={(event) => event.stopPropagation()}
 						/>
 						<Button
 							style={{ borderRadius: "0 6px 6px 0" }}
@@ -91,7 +96,17 @@ const MastodonButton = ({ position }: { position: Position }) => {
 						</Button>
 					</Space.Compact>
 				</Flex>
-			}
+			)}
+			onClick={() => {
+				if (showInput) {
+					setInputVisible(false);
+					setTimeout(() => setShowInput(false), 200);
+					return;
+				} else {
+					setShowInput(true);
+					setTimeout(() => setInputVisible(true), 50);
+				}
+			}}
 		/>
 	);
 };
