@@ -58,7 +58,7 @@ const EmptyView = () => {
 				justify="center"
 				align="center"
 			>
-				<Flex vertical style={{ color: emptyFg }}>
+				<Flex vertical style={{ color: emptyFg, textAlign: "center" }}>
 					<div>
 						{gettext(i18n.footer.line1, [linkRenderer])}
 					</div>
