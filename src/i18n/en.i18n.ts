@@ -5,7 +5,7 @@ const translation: Internationalization = {
 	modal: {
 		aliases: "Aliases",
 		color: "Color",
-		copied: (name: string) => `Copied ${name} to clipboard`,
+		copied: `Copied %s to clipboard`,
 		copy: "Copy",
 		download: "Download",
 		guidelines: "Guidelines",

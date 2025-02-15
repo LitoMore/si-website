@@ -77,7 +77,7 @@ const ModalContent = ({ icon }: { icon?: Icon }) => {
 	const { isMobileSize } = useSizes();
 	const [colorMode] = useColorMode();
 	const { contrast, isLight, isDark } = useColorScheme();
-	const i18n = useI18n();
+	const { i18n } = useI18n();
 	if (!icon) return null;
 
 	const aliases = getAliases(icon);

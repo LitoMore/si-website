@@ -26,7 +26,7 @@ const ModalContent = lazy(() => import("./modalcontent.tsx"));
 
 const CopySvgButtons = ({ icon }: { icon: Icon }) => {
 	const [{ version }] = useIcons();
-	const i18n = useI18n();
+	const { i18n } = useI18n();
 	const copyText = useCopyText();
 
 	const copySvg = async (colored?: boolean) => {
@@ -61,7 +61,7 @@ const CopySvgButtons = ({ icon }: { icon: Icon }) => {
 
 const CdnButtons = ({ icon }: { icon: Icon }) => {
 	const [{ version }] = useIcons();
-	const i18n = useI18n();
+	const { i18n } = useI18n();
 	const copyText = useCopyText();
 
 	const items = [
@@ -100,7 +100,7 @@ const CdnButtons = ({ icon }: { icon: Icon }) => {
 
 const DownloadImage = ({ icon }: { icon: Icon }) => {
 	const [{ version }] = useIcons();
-	const i18n = useI18n();
+	const { i18n } = useI18n();
 
 	const onClick = (format: BitmapFormat) => () =>
 		downloadBitmap(version, icon.slug, icon.hex, format);
@@ -145,7 +145,7 @@ const Modal = () => {
 	const [icon, setSelectedIcon] = useSelectedIcon();
 	const { isMobileSize } = useSizes();
 	const [colorMode] = useColorMode();
-	const i18n = useI18n();
+	const { i18n } = useI18n();
 	const copyText = useCopyText();
 	const isDarkIcon = icon?.relativeColor === "#fff";
 

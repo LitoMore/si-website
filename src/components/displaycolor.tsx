@@ -6,7 +6,7 @@ import { ColorMode } from "#types";
 
 const DisplayColor = () => {
 	const [colorMode, setColorMode] = useColorMode();
-	const i18n = useI18n();
+	const { i18n } = useI18n();
 
 	return (
 		<Radio.Group

@@ -41,6 +41,7 @@
 		"@vitejs/plugin-react-swc": "npm:@vitejs/plugin-react-swc@^3.8.0",
 		"@vitest/browser": "npm:@vitest/browser@^3.0.5",
 		"antd": "npm:antd@^5.24.0",
+		"copy-text-to-clipboard": "npm:copy-text-to-clipboard@^3.2.0",
 		"css-color-converter": "npm:css-color-converter@^2.0.0",
 		"es-toolkit": "npm:es-toolkit@^1.32.0",
 		"fast-fuzzy": "npm:fast-fuzzy@^1.12.0",

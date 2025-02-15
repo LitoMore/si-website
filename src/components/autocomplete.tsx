@@ -16,7 +16,7 @@ const Autocomplete = () => {
 	const searcher = useSearcher();
 	const [filteredIcons, setFilteredIcons] = useFilteredIcons();
 	const [selectedIcon, setSelectedIcon] = useSelectedIcon();
-	const i18n = useI18n();
+	const { i18n } = useI18n();
 
 	const searchIcon = () => {
 		const filteredIcons = searchText ? searcher.search(searchText) : icons.data;

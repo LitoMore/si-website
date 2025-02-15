@@ -23,7 +23,7 @@ const Gallery = (
 		galleryMargin,
 		cardPixels,
 	} = useSizes();
-	const i18n = useI18n();
+	const { i18n } = useI18n();
 
 	if (icons.data.length > 0 && filteredIcons.length === 0) {
 		return (

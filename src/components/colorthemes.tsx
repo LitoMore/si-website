@@ -5,7 +5,7 @@ import { ColorTheme } from "#types";
 
 const ColorThemes = () => {
 	const [colorTheme, setColorTheme] = useColorTheme();
-	const i18n = useI18n();
+	const { i18n } = useI18n();
 
 	return (
 		<Radio.Group

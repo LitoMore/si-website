@@ -11,7 +11,7 @@ const Search = () => {
 	const [, setFilteredIcons] = useFilteredIcons();
 	const { isMobileSize } = useSizes();
 	const { isDark } = useColorScheme();
-	const i18n = useI18n();
+	const { i18n } = useI18n();
 	const [isInputFocused, setIsInputFocused] = useState(false);
 	const inputRef = useRef<InputRef>(null);
 

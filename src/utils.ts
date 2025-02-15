@@ -273,3 +273,8 @@ export const downloadBitmap = async (
 	};
 	img.src = `data:image/svg+xml;base64,${btoa(svg)}`;
 };
+
+export const formatString = (template: string, ...args: string[]) => {
+	let index = 0;
+	return template.replace(/%s/g, () => args[index++] ?? "");
+};

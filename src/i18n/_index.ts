@@ -1,4 +1,6 @@
 import { useLanguageCode } from "#atom";
+import { formatString } from "#utils";
+import { format } from "vitest/utils";
 import en from "./en.i18n.ts";
 import zh from "./zh.i18n.ts";
 
@@ -18,7 +20,7 @@ export type Internationalization = {
 	modal: {
 		aliases: string;
 		color: string;
-		copied: (name: string) => string;
+		copied: string;
 		copy: string;
 		download: string;
 		guidelines: string;
@@ -53,5 +55,5 @@ export const translations: Record<LanguageCode, Internationalization> = {
 
 export const useI18n = () => {
 	const [languageCode] = useLanguageCode();
-	return translations[languageCode];
+	return { i18n: translations[languageCode], format: formatString };
 };

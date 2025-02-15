@@ -1,6 +1,7 @@
 // @deno-types="@types/react"
 import { useEffect, useMemo, useState } from "react";
 import { App } from "antd";
+import copyTextToClipboard from "copy-text-to-clipboard";
 import { useMediaQuery, useWindowSize } from "@uidotdev/usehooks";
 import { Searcher } from "fast-fuzzy";
 // @deno-types="./vendor/types/use-image.d.ts"
@@ -20,10 +21,10 @@ export { useI18n } from "#i18n";
 
 export const useCopyText = () => {
 	const { message } = App.useApp();
-	const i18n = useI18n();
-	return async (title: string, text: string) => {
-		await globalThis.navigator.clipboard.writeText(text);
-		message.success(i18n.modal.copied(title));
+	const { i18n, format } = useI18n();
+	return (title: string, text: string) => {
+		copyTextToClipboard(text);
+		message.success(format(i18n.modal.copied, title));
 	};
 };
 

@@ -7,7 +7,7 @@ const Reset = () => {
 	const [brightnessMode, setBrightnessMode] = useBrightnessMode();
 	const [cardSize, setCardSize] = useCardSize();
 	const [colorMode, setColorMode] = useColorMode();
-	const i18n = useI18n();
+	const { i18n } = useI18n();
 
 	const settingsChanged = brightnessMode !== BrightnessMode.SimpleIcons ||
 		cardSize !== CardSize.Small || colorMode !== ColorMode.Contrast;

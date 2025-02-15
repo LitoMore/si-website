@@ -5,7 +5,7 @@ import { useI18n } from "#hooks";
 
 const IconStyle = () => {
 	const [iconStyle, setIconStyle] = useIconStyle();
-	const i18n = useI18n();
+	const { i18n } = useI18n();
 
 	return (
 		<Radio.Group

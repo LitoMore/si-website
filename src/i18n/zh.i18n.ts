@@ -5,7 +5,7 @@ const translation: Internationalization = {
 	modal: {
 		aliases: "别名",
 		color: "主题色",
-		copied: (name: string) => `已复制 ${name} 到剪贴板`,
+		copied: `已复制 %s 到剪贴板`,
 		copy: "复制",
 		download: "下载图标",
 		guidelines: "设计指南",
