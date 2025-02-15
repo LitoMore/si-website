@@ -39,6 +39,7 @@ export type Internationalization = {
 		iconOutdated: string;
 		submitRequest: string;
 		reportOutdated: string;
+		madeWithLove: string;
 		line1: string;
 		line2: string;
 		line3: string;

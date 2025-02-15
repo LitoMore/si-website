@@ -38,6 +38,7 @@ const translation: Internationalization = {
 		iconOutdated: "Icon outdated?",
 		submitRequest: "Submit a request",
 		reportOutdated: "Report outdated icon",
+		madeWithLove: "Made with ❤️ on GitHub",
 		line1:
 			"A {CC0|https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md} project maintained by the {Simple Icons contributors|https://github.com/simple-icons/simple-icons/graphs/contributors}.",
 		line2:

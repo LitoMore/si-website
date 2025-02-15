@@ -4,6 +4,7 @@
 // @deno-types="@types/react"
 import { lazy } from "react";
 import { Empty, Flex, Typography } from "antd";
+import { styled } from "styled-components";
 import { useFilteredIcons, useIcons } from "#atom";
 import { linkRel } from "#constants";
 import { useColorScheme, useI18n, useSizes } from "#hooks";
@@ -12,20 +13,16 @@ import { useColorScheme, useI18n, useSizes } from "#hooks";
 const Virtuoso = lazy(() => import("./virtuoso.tsx"));
 // const VirutalScroll = lazy(() => import("./virtualscroll.tsx"));
 
-const Link = ({ href, text }: { href: string; text: string }) => {
-	return (
-		<Typography.Link
-			rel={linkRel}
-			target="_blank"
-			href={href}
-		>
-			{text}
-		</Typography.Link>
-	);
-};
+const Link = styled(Typography.Link).attrs({ rel: linkRel, target: "_blank" })<
+	{ $color?: string }
+>`
+	&:not(:hover) {
+		${(props) => props.$color ? `color: ${props.$color};` : ""}
+	}
+`;
 
 const linkRenderer = (text: string, href: string) => (
-	href ? <Link text={text} href={href} /> : text
+	href ? <Link href={href}>{text}</Link> : text
 );
 
 const Gallery = (
@@ -40,7 +37,7 @@ const Gallery = (
 		galleryMargin,
 		// cardPixels,
 	} = useSizes();
-	const { emptyFg } = useColorScheme();
+	const { emptyFg, isLight } = useColorScheme();
 	const { i18n, gettext } = useI18n();
 
 	if (icons.data.length > 0 && filteredIcons.length === 0) {
@@ -62,20 +59,18 @@ const Gallery = (
 						<strong style={{ color: emptyFg }}>
 							{i18n.footer.iconMissing}
 						</strong>
-						<Link
-							text={i18n.footer.submitRequest}
-							href="https://github.com/simple-icons/simple-icons/issues/new?assignees=&labels=new+icon&template=icon_request.yml"
-						/>
+						<Link href="https://github.com/simple-icons/simple-icons/issues/new?assignees=&labels=new+icon&template=icon_request.yml">
+							{i18n.footer.submitRequest}
+						</Link>
 					</Flex>
 
 					<Flex vertical justify="center" align="center">
 						<strong style={{ color: emptyFg }}>
 							{i18n.footer.iconOutdated}
 						</strong>
-						<Link
-							text={i18n.footer.reportOutdated}
-							href="https://github.com/simple-icons/simple-icons/issues/new?assignees=&labels=icon+outdated&template=icon_update.yml"
-						/>
+						<Link href="https://github.com/simple-icons/simple-icons/issues/new?assignees=&labels=icon+outdated&template=icon_update.yml">
+							{i18n.footer.reportOutdated}
+						</Link>
 					</Flex>
 				</Flex>
 				<Flex
@@ -94,6 +89,14 @@ const Gallery = (
 						<div>
 							{gettext(i18n.footer.line3, [linkRenderer])}
 						</div>
+					</Flex>
+					<Flex style={{ marginTop: 40 }}>
+						<Link
+							$color={isLight ? "#878787" : "#737373"}
+							href="https://github.com/LitoMore/si-website"
+						>
+							{i18n.footer.madeWithLove}
+						</Link>
 					</Flex>
 				</Flex>
 			</Flex>
