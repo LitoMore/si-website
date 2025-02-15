@@ -21,10 +21,10 @@ export { useI18n } from "#i18n";
 
 export const useCopyText = () => {
 	const { message } = App.useApp();
-	const { i18n, format } = useI18n();
+	const { i18n, gettext } = useI18n();
 	return (title: string, text: string) => {
 		copyTextToClipboard(text);
-		message.success(format(i18n.modal.copied, title));
+		message.success(gettext(i18n.modal.copied, [title]));
 	};
 };
 

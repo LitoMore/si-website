@@ -1,3 +1,5 @@
+export const linkRel = "noopener nofollow noreferrer";
+
 export const mobileWidth = 576;
 
 export const unicodeStartAt = 0xea01;

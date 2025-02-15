@@ -85,6 +85,7 @@ div[data-testid="virtuoso-scroller"]::-webkit-scrollbar {
 	--si-gallery-bg: #fff;
 	--si-card-fg: #333;
 	--si-card-bg: #fff;
+	--si-empty-fg: #00000073;
 	--si-contrast: contrast(0.65);
 
 	--si-header-fg-dark: #eee;
@@ -93,6 +94,7 @@ div[data-testid="virtuoso-scroller"]::-webkit-scrollbar {
 	--si-gallery-fg-dark: #d9d9d9;
 	--si-card-fg-dark: #fff;
 	--si-card-bg-dark: #333;
+	--si-empty-fg-dark: #ffffff73;
 	--si-contrast-dark: contrast(0.65) brightness(2);
 }
 

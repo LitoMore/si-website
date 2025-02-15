@@ -25,6 +25,7 @@
 		"#i18n": "./src/i18n/_index.ts",
 		"#types": "./src/types.ts",
 		"#utils": "./src/utils.ts",
+		"#utilsx": "./src/utilsx.tsx",
 		"@ant-design/icons": "npm:@ant-design/icons@^5.6.1",
 		"@ant-design/v5-patch-for-react-19": "npm:@ant-design/v5-patch-for-react-19@^1.0.3",
 		"@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.3",

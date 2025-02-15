@@ -1,5 +1,5 @@
 // @deno-types="@types/react"
-import { CSSProperties } from "react";
+import { CSSProperties, ReactNode } from "react";
 import { actionIntentText, actionIntentUrl } from "#constants";
 import {
 	BitmapFormat,
@@ -81,6 +81,7 @@ export const getColorVariables = (isDark: boolean) => {
 		galleryBg: isDark ? "var(--si-gallery-bg-dark)" : "var(--si-gallery-bg)",
 		cardFg: isDark ? "var(--si-card-fg-dark)" : "var(--si-card-fg)",
 		cardBg: isDark ? "var(--si-card-bg-dark)" : "var(--si-card-bg)",
+		emptyFg: isDark ? "var(--si-empty-fg-dark)" : "var(--si-empty-fg)",
 		contrast: isDark ? "var(--si-contrast-dark)" : "var(--si-contrast)",
 	};
 };
@@ -272,9 +273,4 @@ export const downloadBitmap = async (
 		link.click();
 	};
 	img.src = `data:image/svg+xml;base64,${btoa(svg)}`;
-};
-
-export const formatString = (template: string, ...args: string[]) => {
-	let index = 0;
-	return template.replace(/%s/g, () => args[index++] ?? "");
 };

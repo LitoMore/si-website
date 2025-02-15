@@ -5,7 +5,7 @@ const translation: Internationalization = {
 	modal: {
 		aliases: "Aliases",
 		color: "Color",
-		copied: `Copied %s to clipboard`,
+		copied: `Copied {} to clipboard`,
 		copy: "Copy",
 		download: "Download",
 		guidelines: "Guidelines",
@@ -32,6 +32,18 @@ const translation: Internationalization = {
 		themeDark: "Dark",
 		themeLight: "Light",
 		zoom: "Zoom",
+	},
+	footer: {
+		iconMissing: "Icon missing?",
+		iconOutdated: "Icon outdated?",
+		submitRequest: "Submit a request",
+		reportOutdated: "Report outdated icon",
+		line1:
+			"A {CC0|https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md} project maintained by the {Simple Icons contributors|https://github.com/simple-icons/simple-icons/graphs/contributors}.",
+		line2:
+			"Use {GitHub|https://github.com/simple-icons/simple-icons} for requests, corrections and contributions.",
+		line3:
+			"Kindly supported by your donations at {Open Collective|https://opencollective.com/simple-icons}.",
 	},
 };
 

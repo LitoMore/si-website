@@ -1,5 +1,5 @@
 import { useLanguageCode } from "#atom";
-import { formatString } from "#utils";
+import { gettext } from "#utilsx";
 import en from "./en.i18n.ts";
 import zh from "./zh.i18n.ts";
 
@@ -34,6 +34,15 @@ export type Internationalization = {
 		themeLight: string;
 		zoom: string;
 	};
+	footer: {
+		iconMissing: string;
+		iconOutdated: string;
+		submitRequest: string;
+		reportOutdated: string;
+		line1: string;
+		line2: string;
+		line3: string;
+	};
 };
 
 export enum LanguageCode {
@@ -54,5 +63,5 @@ export const translations: Record<LanguageCode, Internationalization> = {
 
 export const useI18n = () => {
 	const [languageCode] = useLanguageCode();
-	return { i18n: translations[languageCode], format: formatString };
+	return { i18n: translations[languageCode], gettext };
 };

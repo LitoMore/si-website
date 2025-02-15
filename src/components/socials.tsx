@@ -2,6 +2,7 @@
 import { ReactNode } from "react";
 import { Flex } from "antd";
 import { styled } from "styled-components";
+import { linkRel } from "#constants";
 import { useColorScheme } from "#hooks";
 
 const Link = styled.a`
@@ -24,7 +25,7 @@ const Social = (
 	return (
 		<Link
 			href={link}
-			rel="noopener nofollow noreferrer"
+			rel={linkRel}
 			target="_blank"
 		>
 			{typeof icon === "string"
