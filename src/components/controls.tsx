@@ -29,6 +29,7 @@ const Controls = () => {
 	return isMobileSize
 		? (
 			<Flex align="center">
+				<Settings />
 				<Translations />
 			</Flex>
 		)

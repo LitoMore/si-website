@@ -1,4 +1,4 @@
-import { Radio, Tooltip } from "antd";
+import { Flex, Radio, Tooltip } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { useColorMode } from "#atom";
 import { useI18n } from "#hooks";
@@ -20,16 +20,20 @@ const DisplayColor = () => {
 			}}
 		>
 			<Radio.Button value={ColorMode.Contrast}>
-				{i18n.settings.contrast}{" "}
-				<Tooltip title={i18n.settings.contrastTooltip}>
-					<QuestionCircleOutlined />
-				</Tooltip>
+				<Flex gap={5}>
+					{i18n.settings.contrast}
+					<Tooltip title={i18n.settings.contrastTooltip}>
+						<QuestionCircleOutlined />
+					</Tooltip>
+				</Flex>
 			</Radio.Button>
 			<Radio.Button value={ColorMode.Actual}>
-				{i18n.settings.actual}{" "}
-				<Tooltip title={i18n.settings.actualTooltip}>
-					<QuestionCircleOutlined />
-				</Tooltip>
+				<Flex gap={5}>
+					{i18n.settings.actual}
+					<Tooltip title={i18n.settings.actualTooltip}>
+						<QuestionCircleOutlined />
+					</Tooltip>
+				</Flex>
 			</Radio.Button>
 		</Radio.Group>
 	);
