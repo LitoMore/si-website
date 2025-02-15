@@ -196,14 +196,6 @@ export const getIconsInRows = (icons: Icon[], iconsPerRow: number) => {
 	return iconsInRows;
 };
 
-const loadPdfKitAndBlobStream = async () => {
-	const [pdfkit, blobStream] = await Promise.all([
-		import("pdfkit/js/pdfkit.standalone.js"),
-		import("blob-stream/.js"),
-	]);
-	return [pdfkit.default, blobStream.default];
-};
-
 export const downloadSvg = async (
 	version: string,
 	slug: string,
@@ -222,42 +214,33 @@ export const downloadSvg = async (
 };
 
 export const downloadPdf = async (version: string, slug: string) => {
-	const svg = await getSvg(version, slug);
-	const svgPath = svg.split('"')[7];
-	const [PDFDocument, blobStream] = await loadPdfKitAndBlobStream();
-	let document_;
-	let stream;
-	try {
-		document_ = new PDFDocument({ size: [24, 24] });
-		stream = document_.pipe(blobStream());
-		document_.path(svgPath).fill();
-	} catch (error) {
-		document_ = new PDFDocument({ size: "A8" });
-		stream = document_.pipe(blobStream());
-		console.error(error);
-		document_.fontSize(12);
-		document_.text(
-			`Error generating PDF with PDFKit library: ${
-				error instanceof Error ? error.message : error
-			}`,
-			0,
-			0,
-			{
-				align: "center",
-			},
-		);
-	}
-	document_.end();
-	stream.on("finish", () => {
-		const url = stream.toBlobURL("application/pdf");
-		const a = document.createElement("a");
-		a.classList.add("hidden");
-		a.setAttribute("href", url);
-		a.setAttribute("download", `${slug}.pdf`);
-		document.body.append(a);
-		a.click();
-		a.remove();
+	const { jsPDF } = await import("jspdf");
+	await import("svg2pdf.js");
+	const svgString = await getSvg(version, slug);
+	const svgPath = svgString.split('"')[7];
+
+	const ns = "http://www.w3.org/2000/svg";
+	const svg = document.createElementNS(ns, "svg");
+	svg.setAttributeNS(null, "role", "img");
+	svg.setAttributeNS(null, "viewBox", "0 0 24 24");
+
+	const title = document.createElementNS(ns, "title");
+	title.textContent = slug;
+
+	const path = document.createElementNS(ns, "path");
+	path.setAttributeNS(null, "d", svgPath);
+
+	svg.appendChild(title);
+	svg.appendChild(path);
+
+	const doc = new jsPDF();
+	await doc.svg(svg, {
+		x: 0,
+		y: 0,
+		width: 24,
+		height: 24,
 	});
+	doc.save(`${slug}.pdf`);
 };
 
 export const downloadBitmap = async (
