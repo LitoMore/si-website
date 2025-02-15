@@ -96,6 +96,10 @@ div[data-testid="virtuoso-scroller"]::-webkit-scrollbar {
 	--si-contrast-dark: contrast(0.65) brightness(2);
 }
 
+.ant-layout {
+	transition: background 0.4s;
+}
+
 /* .ant-layout-content {
 	color: var(--si-gallery-fg);
 	background-color: var(--si-gallery-bg);
