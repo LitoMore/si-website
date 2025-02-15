@@ -5,7 +5,7 @@ const translation: Internationalization = {
 	modal: {
 		aliases: "别名",
 		color: "主题色",
-		copied: `已复制 %s 到剪贴板`,
+		copied: `已复制 {} 到剪贴板`,
 		copy: "复制",
 		download: "下载图标",
 		guidelines: "设计指南",
@@ -14,6 +14,7 @@ const translation: Internationalization = {
 		sourceAndGuidelines: "出处 & 设计指南",
 		svgColored: "彩色 SVG",
 		svgPlain: "黑白 SVG",
+		svgPath: "仅路径",
 		title: "名称",
 	},
 	search: {

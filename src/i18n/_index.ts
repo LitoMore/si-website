@@ -17,6 +17,7 @@ export type Internationalization = {
 		sourceAndGuidelines: string;
 		svgColored: string;
 		svgPlain: string;
+		svgPath: string;
 		title: string;
 	};
 	search: {

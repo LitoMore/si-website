@@ -59,6 +59,8 @@ export const getSvg = async (simpleIconsVersion: string, slug: string) => {
 	return svg;
 };
 
+export const getSvgPath = (svg: string) => svg.split('"')[7];
+
 export const getMaskStyles = (
 	version: string,
 	icon: Icon,

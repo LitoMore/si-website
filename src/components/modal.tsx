@@ -18,6 +18,7 @@ import {
 	getJsdelivrCdnUrl,
 	getSimpleIconsCdnUrl,
 	getSvg,
+	getSvgPath,
 	getUnpkgCdnUrl,
 } from "#utils";
 import { BitmapFormat, ColorMode, Icon } from "#types";
@@ -29,10 +30,24 @@ const CopySvgButtons = ({ icon }: { icon: Icon }) => {
 	const { i18n } = useI18n();
 	const copyText = useCopyText();
 
-	const copySvg = async (colored?: boolean) => {
-		let svg = await getSvg(version, icon.slug);
-		if (colored) svg = svg.replace("<svg ", `<svg fill="#${icon.hex}" `);
-		copyText(colored ? i18n.modal.svgColored : i18n.modal.svgPlain, svg);
+	const copySvg = async (
+		options?: { colored?: boolean; path?: boolean },
+	) => {
+		const svg = await getSvg(version, icon.slug);
+
+		if (options?.path) {
+			const path = getSvgPath(svg);
+			copyText(i18n.modal.svgPath, path);
+			return;
+		}
+
+		if (options?.colored) {
+			const colored = svg.replace("<svg ", `<svg fill="#${icon.hex}" `);
+			copyText(i18n.modal.svgColored, colored);
+			return;
+		}
+
+		copyText(i18n.modal.svgPlain, svg);
 	};
 
 	const items = [{
@@ -40,7 +55,10 @@ const CopySvgButtons = ({ icon }: { icon: Icon }) => {
 		onClick: () => copySvg(),
 	}, {
 		type: i18n.modal.svgColored,
-		onClick: () => copySvg(true),
+		onClick: () => copySvg({ colored: true }),
+	}, {
+		type: i18n.modal.svgPath,
+		onClick: () => copySvg({ path: true }),
 	}].map((x) => ({
 		key: x.type,
 		label: (

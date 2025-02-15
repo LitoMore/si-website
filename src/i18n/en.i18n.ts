@@ -14,6 +14,7 @@ const translation: Internationalization = {
 		sourceAndGuidelines: "Source & Guidelines",
 		svgColored: "Colored SVG",
 		svgPlain: "Plain SVG",
+		svgPath: "Path Only",
 		title: "Title",
 	},
 	search: {
