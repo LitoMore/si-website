@@ -8,7 +8,7 @@ import App from "./app.tsx";
 
 createRoot(document.getElementById("root") as HTMLElement).render(
 	<StrictMode>
-		<BrowserRouter basename="si-website">
+		<BrowserRouter basename={import.meta.env.VITE_BASE_URL}>
 			<App />
 		</BrowserRouter>
 	</StrictMode>,

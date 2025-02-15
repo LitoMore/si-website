@@ -1,9 +1,10 @@
+/// <reference lib="deno.ns" />
 import { defineConfig, PluginOption } from "vite";
 import deno from "@deno/vite-plugin";
 import react from "@vitejs/plugin-react-swc";
 
 export default defineConfig({
-	base: "/si-website",
+	base: Deno.env.get("VITE_BASE_URL"),
 	plugins: [
 		deno() as PluginOption,
 		react({ plugins: [["@swc/plugin-styled-components", {}]] }) as PluginOption,
