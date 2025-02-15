@@ -38,7 +38,7 @@ const translation: Internationalization = {
 		iconOutdated: "有图标过时了吗？",
 		submitRequest: "请求新增图标",
 		reportOutdated: "上报过时图标",
-		madeWithLove: "在 GitHub 上用 ❤️ 发电",
+		madeWithLove: "我们在 GitHub 上用 ❤️ 发电",
 		line1:
 			"此项目基于 {CC0|https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md} 许可证，并由 {Simple Icons 贡献者们|https://github.com/simple-icons/simple-icons/graphs/contributors} 维护。",
 		line2:
