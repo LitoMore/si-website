@@ -20,7 +20,7 @@ const DisplayColor = () => {
 			}}
 		>
 			<Radio.Button value={ColorMode.Contrast}>
-				<Flex gap={5}>
+				<Flex justify="center" gap={5}>
 					{i18n.settings.contrast}
 					<Tooltip title={i18n.settings.contrastTooltip}>
 						<QuestionCircleOutlined />
@@ -28,7 +28,7 @@ const DisplayColor = () => {
 				</Flex>
 			</Radio.Button>
 			<Radio.Button value={ColorMode.Actual}>
-				<Flex gap={5}>
+				<Flex justify="center" gap={5}>
 					{i18n.settings.actual}
 					<Tooltip title={i18n.settings.actualTooltip}>
 						<QuestionCircleOutlined />
