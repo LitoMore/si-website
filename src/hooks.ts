@@ -30,8 +30,9 @@ export const useCopyText = () => {
 
 export const useSizes = () => {
 	const [cardSize] = useCardSize();
-	const { width } = useWindowSize();
+	const { width, height } = useWindowSize();
 	const innerWidth = width || globalThis.window.innerWidth;
+	const innerHeight = height || globalThis.window.innerHeight;
 	const gap = 5;
 	const padding = 10;
 	const isMobileSize = innerWidth < mobileWidth;
@@ -50,6 +51,7 @@ export const useSizes = () => {
 		cardPixels,
 		zoom: cardPixels / CardSize.Small,
 		innerWidth,
+		innerHeight,
 		containerWidth,
 		galleryHeight: "calc(100vh - 54px)",
 		galleryMargin,
