@@ -62,6 +62,7 @@
 		"simple-icons": "npm:simple-icons@^14.5.0",
 		"styled-components": "npm:styled-components@^6.1.15",
 		"svg2pdf.js": "npm:svg2pdf.js@^2.3.0",
+		"tlds": "npm:tlds@^1.255.0",
 		"use-image": "npm:use-image@^1.1.1",
 		"vite": "npm:vite@^6.1.0",
 		"vitest": "npm:vitest@^3.0.5",

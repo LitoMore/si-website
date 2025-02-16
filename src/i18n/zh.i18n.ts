@@ -46,6 +46,11 @@ const translation: Internationalization = {
 		line3:
 			"您可以通过 {Open Collective|https://opencollective.com/simple-icons} 来赞助支持我们。",
 	},
+	share: {
+		share: "分享",
+		actionIntentText: "Simple Icons: 拥有超过 {} 个知名品牌的 SVG 图标合集",
+		yourMastodonInstance: "Mastodon 实例地址",
+	},
 };
 
 export default translation;

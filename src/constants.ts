@@ -10,7 +10,4 @@ export const brightThreshold = 0.65;
 
 export const darkThreshold = 0.05;
 
-export const actionIntentText =
-	"Simple Icons: free SVG icons for popular brands.";
-
 export const actionIntentUrl = "https://simpleicons.org";

@@ -8,10 +8,10 @@ import {
 } from "@ant-design/icons";
 import { styled } from "styled-components";
 import Draggable from "react-draggable";
-import { useLanguageCode } from "#atom";
+import { useIcons, useLanguageCode } from "#atom";
 import { linkRel } from "#constants";
-import { useColorScheme, useSizes } from "#hooks";
-import { getShareUrl } from "#utils";
+import { useColorScheme, useI18n, useSizes } from "#hooks";
+import { formatMastodonUrl, getShareUrl } from "#utils";
 import { LanguageCode } from "#types";
 
 const SocialButton = styled(FloatButton).attrs({
@@ -38,11 +38,18 @@ const Icon = ({ slug }: { slug: string }) => {
 
 type Position = [x: number, y: number];
 
-const MastodonButton = ({ position }: { position: Position }) => {
+const MastodonButton = (
+	{ position, actionIntentText }: {
+		position: Position;
+		actionIntentText: string;
+	},
+) => {
 	const [showInput, setShowInput] = useState(false);
 	const [inputVisible, setInputVisible] = useState(false);
 	const [mastodonInstance, setMastodonInstance] = useState("");
 	const { innerWidth } = useSizes();
+	const { i18n } = useI18n();
+
 	const [x] = position;
 	const middleX = (innerWidth - 30) / 2;
 	const buttonWidth = 250;
@@ -51,13 +58,7 @@ const MastodonButton = ({ position }: { position: Position }) => {
 	const expandLeft = x + middleX > 0;
 	const moveX = baseX + ((baseX - space) * (expandLeft ? 1 : -1));
 
-	const formatMastodonUrl = (instanceUrl: string) => {
-		instanceUrl = instanceUrl.trim().replace(/^https?:\/\//, "");
-		const shareUrl = getShareUrl(`https://${instanceUrl}/share`, {
-			urlInText: true,
-		});
-		return shareUrl;
-	};
+	const instanceUrl = formatMastodonUrl(mastodonInstance, actionIntentText);
 
 	return (
 		<SocialButton
@@ -81,18 +82,22 @@ const MastodonButton = ({ position }: { position: Position }) => {
 					>
 						<Input
 							value={mastodonInstance}
-							placeholder="Your Mastodon instance"
+							placeholder={i18n.share.yourMastodonInstance}
 							onChange={(event) => setMastodonInstance(event.target.value)}
 							onClick={(event) => event.stopPropagation()}
 						/>
 						<Button
-							style={{ borderRadius: "0 6px 6px 0" }}
-							rel={linkRel}
-							target="_blank"
-							href={formatMastodonUrl(mastodonInstance)}
+							style={{
+								borderRadius: "0 6px 6px 0",
+								backgroundColor: instanceUrl ? undefined : "#eee",
+							}}
 							type="primary"
+							disabled={!instanceUrl}
+							target={instanceUrl ? "_blank" : undefined}
+							rel={instanceUrl ? linkRel : undefined}
+							href={instanceUrl}
 						>
-							Share
+							{i18n.share.share}
 						</Button>
 					</Space.Compact>
 				</Flex>
@@ -116,8 +121,10 @@ const FloatButtons = () => {
 	const [isDragging, setIsDragging] = useState(false);
 	const [linkCopied, setLinkCopied] = useState(false);
 	const [position, setPosition] = useState<Position>([0, 0]);
+	const [icons] = useIcons();
 	const [languageCode] = useLanguageCode();
 	const { innerHeight } = useSizes();
+	const { i18n, gettext } = useI18n();
 
 	useEffect(() => {
 		if (linkCopied) {
@@ -128,6 +135,10 @@ const FloatButtons = () => {
 	const headerHeight = 54;
 	const middleY = (innerHeight - headerHeight - 30) / 2;
 	const expandTop = position[1] + middleY > 0;
+
+	const actionIntentText = gettext(i18n.share.actionIntentText, [
+		(Math.floor(icons.data.length / 100) * 100).toString(),
+	]);
 
 	return (
 		<Draggable
@@ -158,7 +169,7 @@ const FloatButtons = () => {
 					icon={<ShareAltOutlined style={{ transform: "translateX(-1px)" }} />}
 					placement={expandTop ? "top" : "bottom"}
 				>
-					{languageCode === LanguageCode.Chinese
+					{languageCode === "_EMPTY_" as LanguageCode
 						? (
 							<>
 								<SocialButton icon={<Icon slug="wechat" />} $iconSize={20} />
@@ -176,19 +187,32 @@ const FloatButtons = () => {
 							<>
 								<SocialButton
 									icon={<Icon slug="x" />}
-									href={getShareUrl("https://x.com/intent/tweet")}
+									href={getShareUrl(
+										"https://x.com/intent/tweet",
+										actionIntentText,
+									)}
 								/>
 								<SocialButton
 									icon={<Icon slug="bluesky" />}
-									href={getShareUrl("https://bsky.app/intent/compose", {
-										urlInText: true,
-									})}
+									href={getShareUrl(
+										"https://bsky.app/intent/compose",
+										actionIntentText,
+										{
+											urlInText: true,
+										},
+									)}
 								/>
 								<SocialButton
 									icon={<Icon slug="threads" />}
-									href={getShareUrl("https://www.threads.net/intent/post")}
+									href={getShareUrl(
+										"https://www.threads.net/intent/post",
+										actionIntentText,
+									)}
 								/>
-								<MastodonButton position={position} />
+								<MastodonButton
+									position={position}
+									actionIntentText={actionIntentText}
+								/>
 							</>
 						)}
 					<FloatButton

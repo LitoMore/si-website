@@ -1,6 +1,6 @@
 // @deno-types="@types/react"
 import { CSSProperties } from "react";
-import { actionIntentText, actionIntentUrl } from "#constants";
+import { actionIntentUrl } from "#constants";
 import {
 	BitmapFormat,
 	BrightnessMode,
@@ -12,6 +12,7 @@ import {
 } from "#types";
 import { colorForBackground } from "./vendor/make-badge-color.ts";
 import { getIconSlug } from "./vendor/simple-icons-sdk.ts";
+import isPublicDomain from "./vendor/is-public-domain.ts";
 
 export { getIconSlug } from "./vendor/simple-icons-sdk.ts";
 
@@ -106,6 +107,7 @@ export const getUnpkgCdnUrl = (version: string, slug: string) =>
 
 export const getShareUrl = (
 	base: string,
+	actionIntentText: string,
 	options: { urlInText?: boolean } = {},
 ) => {
 	const { urlInText } = options;
@@ -275,4 +277,27 @@ export const downloadBitmap = async (
 		link.click();
 	};
 	img.src = `data:image/svg+xml;base64,${btoa(svg)}`;
+};
+
+export const formatMastodonUrl = (
+	instanceUrl: string,
+	actionIntentText: string,
+) => {
+	let url: URL;
+	instanceUrl = "https://" + instanceUrl.trim().replace(/^https?:\/\//, "");
+	try {
+		url = new URL(instanceUrl);
+	} catch {
+		return "";
+	}
+	const { host, hostname } = url;
+	if (!isPublicDomain(hostname)) return "";
+	const shareUrl = getShareUrl(
+		`https://${host}/share`,
+		actionIntentText,
+		{
+			urlInText: true,
+		},
+	);
+	return shareUrl;
 };

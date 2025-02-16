@@ -11,7 +11,7 @@ export function gettext(
 	const pattern = /({[^}]*})/g;
 	const parts = template.split(pattern);
 	let i = 0;
-	return parts.map((part) => {
+	const parsedParts = parts.map((part) => {
 		const partMatch = /^{[^}]*}$/.exec(part);
 		if (partMatch) {
 			const replacer = replacers[i < replacers.length - 1 ? i++ : i];
@@ -26,4 +26,10 @@ export function gettext(
 		}
 		return part;
 	}).filter((x) => Boolean(x));
+
+	if (parsedParts.every((part) => typeof part === "string")) {
+		return parsedParts.join("");
+	}
+
+	return parsedParts;
 }

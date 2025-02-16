@@ -47,6 +47,12 @@ const translation: Internationalization = {
 		line3:
 			"Kindly supported by your donations at {Open Collective|https://opencollective.com/simple-icons}.",
 	},
+	share: {
+		share: "Share",
+		actionIntentText:
+			"Simple Icons: More than {} SVG icons for popular brands.",
+		yourMastodonInstance: "Your Mastodon instance",
+	},
 };
 
 export default translation;

@@ -45,6 +45,11 @@ export type Internationalization = {
 		line2: string;
 		line3: string;
 	};
+	share: {
+		actionIntentText: string;
+		share: string;
+		yourMastodonInstance: string;
+	};
 };
 
 export enum LanguageCode {
