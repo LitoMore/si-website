@@ -1,6 +1,6 @@
 // @deno-types="@types/react"
 import { RefObject, useEffect, useRef, useState } from "react";
-import { Button, Flex, FloatButton, Input, Space } from "antd";
+import { Button, Flex, FloatButton, Input, QRCode, Space } from "antd";
 import {
 	CheckOutlined,
 	LinkOutlined,
@@ -161,6 +161,15 @@ const FloatButtons = () => {
 		(Math.floor(icons.data.length / 100) * 100).toString(),
 	]);
 
+	const qrcode = (
+		<QRCode
+			style={{ padding: 5 }}
+			size={100}
+			value={actionIntentUrl}
+			color="#fff"
+		/>
+	);
+
 	return (
 		<Draggable
 			bounds="body"
@@ -193,7 +202,11 @@ const FloatButtons = () => {
 					{languageCode === LanguageCode.Chinese
 						? (
 							<>
-								<SocialButton icon={<Icon slug="wechat" />} $iconSize={20} />
+								<SocialButton
+									icon={<Icon slug="wechat" />}
+									$iconSize={20}
+									tooltip={qrcode}
+								/>
 								<SocialButton
 									icon={<Icon slug="qq" />}
 									href={getShareUrl(
@@ -201,7 +214,7 @@ const FloatButtons = () => {
 										{ title: actionIntentText, url: actionIntentUrl },
 									)}
 								/>
-								<SocialButton icon={<Icon slug="qzone" />} $iconSize={20} />
+								{/* <SocialButton icon={<Icon slug="qzone" />} $iconSize={20} /> */}
 								<SocialButton
 									icon={<Icon slug="sinaweibo" />}
 									$iconSize={22}
@@ -214,6 +227,7 @@ const FloatButtons = () => {
 								<SocialButton
 									icon={<Icon slug="xiaohongshu" />}
 									$iconSize={30}
+									tooltip={qrcode}
 								/>
 							</>
 						)
