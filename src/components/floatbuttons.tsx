@@ -9,7 +9,7 @@ import {
 import { styled } from "styled-components";
 import Draggable from "react-draggable";
 import { useIcons, useLanguageCode } from "#atom";
-import { linkRel } from "#constants";
+import { actionIntentUrl, linkRel } from "#constants";
 import { useColorScheme, useI18n, useSizes } from "#hooks";
 import { getShareUrl } from "#utils";
 import { LanguageCode } from "#types";
@@ -74,10 +74,7 @@ const MastodonButton = (
 		if (!isPublicDomain(hostname)) return "";
 		const shareUrl = getShareUrl(
 			`https://${host}/share`,
-			actionIntentText,
-			{
-				urlInText: true,
-			},
+			{ text: actionIntentText, url: actionIntentUrl },
 		);
 		return shareUrl;
 	};
@@ -193,13 +190,26 @@ const FloatButtons = () => {
 					icon={<ShareAltOutlined style={{ transform: "translateX(-1px)" }} />}
 					placement={expandTop ? "top" : "bottom"}
 				>
-					{languageCode === "_EMPTY_" as LanguageCode
+					{languageCode === LanguageCode.Chinese
 						? (
 							<>
 								<SocialButton icon={<Icon slug="wechat" />} $iconSize={20} />
-								<SocialButton icon={<Icon slug="qq" />} />
+								<SocialButton
+									icon={<Icon slug="qq" />}
+									href={getShareUrl(
+										"https://connect.qq.com/widget/shareqq/index.html",
+										{ title: actionIntentText, url: actionIntentUrl },
+									)}
+								/>
 								<SocialButton icon={<Icon slug="qzone" />} $iconSize={20} />
-								<SocialButton icon={<Icon slug="sinaweibo" />} $iconSize={22} />
+								<SocialButton
+									icon={<Icon slug="sinaweibo" />}
+									$iconSize={22}
+									href={getShareUrl(
+										"https://share.weibo.com/share/share.php",
+										{ title: actionIntentText, url: actionIntentUrl },
+									)}
+								/>
 								<SocialButton icon={<Icon slug="douban" />} />
 								<SocialButton
 									icon={<Icon slug="xiaohongshu" />}
@@ -213,24 +223,21 @@ const FloatButtons = () => {
 									icon={<Icon slug="x" />}
 									href={getShareUrl(
 										"https://x.com/intent/tweet",
-										actionIntentText,
+										{ text: actionIntentText, url: actionIntentUrl },
 									)}
 								/>
 								<SocialButton
 									icon={<Icon slug="bluesky" />}
 									href={getShareUrl(
 										"https://bsky.app/intent/compose",
-										actionIntentText,
-										{
-											urlInText: true,
-										},
+										{ text: [actionIntentText, actionIntentUrl].join("\n") },
 									)}
 								/>
 								<SocialButton
 									icon={<Icon slug="threads" />}
 									href={getShareUrl(
 										"https://www.threads.net/intent/post",
-										actionIntentText,
+										{ text: actionIntentText, url: actionIntentUrl },
 									)}
 								/>
 								<MastodonButton

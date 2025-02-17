@@ -106,16 +106,14 @@ export const getUnpkgCdnUrl = (version: string, slug: string) =>
 
 export const getShareUrl = (
 	base: string,
-	actionIntentText: string,
-	options: { urlInText?: boolean } = {},
+	parameters?: Record<string, string>,
 ) => {
-	const { urlInText } = options;
 	const shareUrl = new URL(base);
-	shareUrl.searchParams.set(
-		"text",
-		actionIntentText + (urlInText ? `\n${actionIntentUrl}` : ""),
-	);
-	if (!urlInText) shareUrl.searchParams.set("url", actionIntentUrl);
+	if (parameters) {
+		Object.entries(parameters).forEach(([key, value]) =>
+			shareUrl.searchParams.set(key, value)
+		);
+	}
 	return shareUrl.toString();
 };
 

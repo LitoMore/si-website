@@ -1,13 +1,6 @@
 // @deno-types="@types/react"
 import { lazy, Suspense } from "react";
-import {
-	Button,
-	ConfigProvider,
-	Dropdown,
-	Flex,
-	Modal as AntModal,
-	theme,
-} from "antd";
+import { Button, ConfigProvider, Dropdown, Flex, Modal, theme } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useColorMode, useIcons, useSelectedIcon } from "#atom";
 import { useCopyText, useI18n, useSizes } from "#hooks";
@@ -159,7 +152,7 @@ const DownloadImage = ({ icon }: { icon: Icon }) => {
 	);
 };
 
-const Modal = () => {
+export default function SiModal() {
 	const [icon, setSelectedIcon] = useSelectedIcon();
 	const { isMobileSize } = useSizes();
 	const [colorMode] = useColorMode();
@@ -175,14 +168,11 @@ const Modal = () => {
 				}
 				: undefined}
 		>
-			<AntModal
+			<Modal
 				centered
 				destroyOnClose
 				closeIcon={isMobileSize}
 				open={Boolean(icon)}
-				onCancel={() => {
-					setSelectedIcon(undefined);
-				}}
 				footer={icon
 					? (
 						<Flex vertical gap={5} justify="center" align="center">
@@ -202,13 +192,14 @@ const Modal = () => {
 						</Flex>
 					)
 					: []}
+				onCancel={() => {
+					setSelectedIcon(undefined);
+				}}
 			>
 				<Suspense fallback={<LoadingOutlined />}>
-					{<ModalContent icon={icon} />}
+					<ModalContent icon={icon} />
 				</Suspense>
-			</AntModal>
+			</Modal>
 		</ConfigProvider>
 	);
-};
-
-export default Modal;
+}
