@@ -59,6 +59,7 @@
 		"react-router": "npm:react-router@^7.1.5",
 		"react-virtualized": "npm:react-virtualized@^9.22.6",
 		"react-virtuoso": "npm:react-virtuoso@^4.12.5",
+		"rollup-plugin-visualizer": "npm:rollup-plugin-visualizer@^5.14.0",
 		"simple-icons": "npm:simple-icons@^14.5.0",
 		"styled-components": "npm:styled-components@^6.1.15",
 		"svg2pdf.js": "npm:svg2pdf.js@^2.3.0",

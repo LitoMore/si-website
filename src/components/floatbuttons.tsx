@@ -11,8 +11,9 @@ import Draggable from "react-draggable";
 import { useIcons, useLanguageCode } from "#atom";
 import { linkRel } from "#constants";
 import { useColorScheme, useI18n, useSizes } from "#hooks";
-import { formatMastodonUrl, getShareUrl } from "#utils";
+import { getShareUrl } from "#utils";
 import { LanguageCode } from "#types";
+import isPublicDomain from "../vendor/is-public-domain.ts";
 
 const SocialButton = styled(FloatButton).attrs({
 	target: "_blank",
@@ -57,6 +58,29 @@ const MastodonButton = (
 	const space = 25;
 	const expandLeft = x + middleX > 0;
 	const moveX = baseX + ((baseX - space) * (expandLeft ? 1 : -1));
+
+	const formatMastodonUrl = (
+		instanceUrl: string,
+		actionIntentText: string,
+	) => {
+		let url: URL;
+		instanceUrl = "https://" + instanceUrl.trim().replace(/^https?:\/\//, "");
+		try {
+			url = new URL(instanceUrl);
+		} catch {
+			return "";
+		}
+		const { host, hostname } = url;
+		if (!isPublicDomain(hostname)) return "";
+		const shareUrl = getShareUrl(
+			`https://${host}/share`,
+			actionIntentText,
+			{
+				urlInText: true,
+			},
+		);
+		return shareUrl;
+	};
 
 	const instanceUrl = formatMastodonUrl(mastodonInstance, actionIntentText);
 
