@@ -14,6 +14,7 @@ import { useColorScheme, useI18n, useSizes } from "#hooks";
 import { getShareUrl } from "#utils";
 import { LanguageCode } from "#types";
 import isPublicDomain from "../vendor/is-public-domain.ts";
+import { ac } from "../../dist/assets/index-UUPtD6Wu.js";
 
 const SocialButton = styled(FloatButton).attrs({
 	target: "_blank",
@@ -223,7 +224,13 @@ const FloatButtons = () => {
 										{ title: actionIntentText, url: actionIntentUrl },
 									)}
 								/>
-								<SocialButton icon={<Icon slug="douban" />} />
+								<SocialButton
+									icon={<Icon slug="douban" />}
+									href={getShareUrl(
+										"https://www.douban.com/recommend/",
+										{ title: actionIntentText, url: actionIntentUrl },
+									)}
+								/>
 								<SocialButton
 									icon={<Icon slug="xiaohongshu" />}
 									$iconSize={30}
