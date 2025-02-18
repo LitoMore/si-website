@@ -14,7 +14,6 @@ import { useColorScheme, useI18n, useSizes } from "#hooks";
 import { getShareUrl } from "#utils";
 import { LanguageCode } from "#types";
 import isPublicDomain from "../vendor/is-public-domain.ts";
-import { ac } from "../../dist/assets/index-UUPtD6Wu.js";
 
 const SocialButton = styled(FloatButton).attrs({
 	target: "_blank",
@@ -24,6 +23,13 @@ const SocialButton = styled(FloatButton).attrs({
     ${(props) =>
 	props.$iconSize ? `width: ${props.$iconSize}px !important;` : ""}
   }
+`;
+
+const FloatGroup = styled.div<{ $expandTop: boolean }>`
+	${(props) =>
+	props.$expandTop ? "" : `.ant-float-btn-group-wrap {
+		flex-direction: column-reverse;
+	}`}
 `;
 
 const Icon = ({ slug }: { slug: string }) => {
@@ -182,8 +188,9 @@ const FloatButtons = () => {
 			}}
 			onStop={() => setIsDragging(false)}
 		>
-			<div
+			<FloatGroup
 				ref={floatButtonsRef}
+				$expandTop
 				style={{
 					position: "fixed",
 					margin: "64px 10px 10px 10px",
@@ -195,7 +202,13 @@ const FloatButtons = () => {
 				}}
 			>
 				<FloatButton.Group
-					style={{ position: "relative", top: 0, right: 0, bottom: 0, left: 0 }}
+					style={{
+						position: "relative",
+						top: 0,
+						right: 0,
+						bottom: 0,
+						left: 0,
+					}}
 					trigger="click"
 					icon={<ShareAltOutlined style={{ transform: "translateX(-1px)" }} />}
 					placement={expandTop ? "top" : "bottom"}
@@ -279,7 +292,7 @@ const FloatButtons = () => {
 						}}
 					/>
 				</FloatButton.Group>
-			</div>
+			</FloatGroup>
 		</Draggable>
 	);
 };
