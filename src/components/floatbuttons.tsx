@@ -56,6 +56,7 @@ const MastodonButton = (
 	const [inputVisible, setInputVisible] = useState(false);
 	const [mastodonInstance, setMastodonInstance] = useState("");
 	const { innerWidth } = useSizes();
+	const { isDark } = useColorScheme();
 	const { i18n } = useI18n();
 
 	const [x] = position;
@@ -117,7 +118,11 @@ const MastodonButton = (
 						<Button
 							style={{
 								borderRadius: "0 6px 6px 0",
-								backgroundColor: instanceUrl ? undefined : "#eee",
+								backgroundColor: instanceUrl
+									? undefined
+									: isDark
+									? "#141414"
+									: "#eee",
 							}}
 							type="primary"
 							disabled={!instanceUrl}
