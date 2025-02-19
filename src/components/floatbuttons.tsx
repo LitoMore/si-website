@@ -18,11 +18,23 @@ import isPublicDomain from "../vendor/is-public-domain.ts";
 const SocialButton = styled(FloatButton).attrs({
 	target: "_blank",
 	rel: "noopener nofollow noreferrer",
-})<{ $iconSize?: number }>`
+})<{ $iconSize?: number; $isDark?: boolean; $hoverActive?: boolean }>`
   .ant-float-btn-icon {
     ${(props) =>
 	props.$iconSize ? `width: ${props.$iconSize}px !important;` : ""}
   }
+
+	${(props) =>
+	props.$hoverActive
+		? (`color-scheme: only ${props.$isDark ? "light" : "dark"};`)
+		: ""}
+
+	${(props) =>
+	props.$hoverActive !== undefined
+		? `
+			&:hover { color-scheme: only ${props.$isDark ? "light" : "dark"} }
+		`
+		: ""}
 `;
 
 const FloatGroup = styled.div<{ $expandTop: boolean }>`
@@ -32,13 +44,21 @@ const FloatGroup = styled.div<{ $expandTop: boolean }>`
 	}`}
 `;
 
-const Icon = ({ slug, color }: { slug: string; color?: string }) => {
+const Icon = (
+	{ slug, color, colorHover }: {
+		slug: string;
+		color?: string;
+		colorHover?: string;
+	},
+) => {
 	const { isDark, iconFg } = useColorScheme();
 	return (
 		<img
 			style={{ transform: "translateY(1px)" }}
 			src={`https://cdn.simpleicons.org/${
-				[slug, isDark ? iconFg.slice(1) : color].filter((x) => Boolean(x)).join(
+				[slug, isDark ? iconFg.slice(1) : [color, colorHover]].flat().filter((
+					x,
+				) => Boolean(x)).join(
 					"/",
 				)
 			}`}
@@ -93,7 +113,8 @@ const MastodonButton = (
 
 	return (
 		<SocialButton
-			icon={<Icon slug="mastodon" color={iconFg.slice(1)} />}
+			$hoverActive={showInput}
+			icon={<Icon slug="mastodon" color={iconFg.slice(1)} colorHover="_" />}
 			description={showInput && (
 				<Flex
 					style={{
@@ -271,7 +292,10 @@ const FloatButtons = () => {
 									)}
 								/>
 								<SocialButton
-									icon={<Icon slug="bluesky" color={iconColor} />}
+									$hoverActive={false}
+									icon={
+										<Icon slug="bluesky" color={iconColor} colorHover="_" />
+									}
 									href={getShareUrl(
 										"https://bsky.app/intent/compose",
 										{ text: [actionIntentText, actionIntentUrl].join("\n") },
