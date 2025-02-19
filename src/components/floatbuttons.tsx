@@ -32,13 +32,15 @@ const FloatGroup = styled.div<{ $expandTop: boolean }>`
 	}`}
 `;
 
-const Icon = ({ slug }: { slug: string }) => {
-	const { isLight, iconFg } = useColorScheme();
+const Icon = ({ slug, color }: { slug: string; color?: string }) => {
+	const { isDark, iconFg } = useColorScheme();
 	return (
 		<img
 			style={{ transform: "translateY(1px)" }}
-			src={`https://cdn.simpleicons.org/${slug}/${
-				isLight ? "_" : iconFg.slice(1)
+			src={`https://cdn.simpleicons.org/${
+				[slug, isDark ? iconFg.slice(1) : color].filter((x) => Boolean(x)).join(
+					"/",
+				)
 			}`}
 		/>
 	);
@@ -56,7 +58,7 @@ const MastodonButton = (
 	const [inputVisible, setInputVisible] = useState(false);
 	const [mastodonInstance, setMastodonInstance] = useState("");
 	const { innerWidth } = useSizes();
-	const { isDark } = useColorScheme();
+	const { isDark, iconFg } = useColorScheme();
 	const { i18n } = useI18n();
 
 	const [x] = position;
@@ -91,7 +93,7 @@ const MastodonButton = (
 
 	return (
 		<SocialButton
-			icon={<Icon slug="mastodon" />}
+			icon={<Icon slug="mastodon" color={iconFg.slice(1)} />}
 			description={showInput && (
 				<Flex
 					style={{
@@ -156,6 +158,7 @@ const FloatButtons = () => {
 	const [position, setPosition] = useState<Position>([0, 0]);
 	const [icons] = useIcons();
 	const [languageCode] = useLanguageCode();
+	const { iconFg } = useColorScheme();
 	const { innerHeight } = useSizes();
 	const { i18n, gettext } = useI18n();
 
@@ -181,6 +184,8 @@ const FloatButtons = () => {
 			color="#fff"
 		/>
 	);
+
+	const iconColor = iconFg.slice(1);
 
 	return (
 		<Draggable
@@ -259,21 +264,21 @@ const FloatButtons = () => {
 						: (
 							<>
 								<SocialButton
-									icon={<Icon slug="x" />}
+									icon={<Icon slug="x" color={iconColor} />}
 									href={getShareUrl(
 										"https://x.com/intent/tweet",
 										{ text: actionIntentText, url: actionIntentUrl },
 									)}
 								/>
 								<SocialButton
-									icon={<Icon slug="bluesky" />}
+									icon={<Icon slug="bluesky" color={iconColor} />}
 									href={getShareUrl(
 										"https://bsky.app/intent/compose",
 										{ text: [actionIntentText, actionIntentUrl].join("\n") },
 									)}
 								/>
 								<SocialButton
-									icon={<Icon slug="threads" />}
+									icon={<Icon slug="threads" color={iconColor} />}
 									href={getShareUrl(
 										"https://www.threads.net/intent/post",
 										{ text: actionIntentText, url: actionIntentUrl },

@@ -1,6 +1,5 @@
 // @deno-types="@types/react"
 import { CSSProperties } from "react";
-import { actionIntentUrl } from "#constants";
 import {
 	BitmapFormat,
 	BrightnessMode,
