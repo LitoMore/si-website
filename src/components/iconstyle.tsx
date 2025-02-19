@@ -10,7 +10,7 @@ const IconStyle = () => {
 	return (
 		<Radio.Group
 			block
-			defaultValue={"icon"}
+			defaultValue="icon"
 			value={iconStyle}
 			optionType="button"
 			buttonStyle="solid"
@@ -18,13 +18,13 @@ const IconStyle = () => {
 				setIconStyle(event.target.value);
 			}}
 		>
-			<Radio.Button value={"icon"}>
+			<Radio.Button value="icon">
 				Icon{" "}
 				<Tooltip title={i18n.settings.contrastTooltip}>
 					<QuestionCircleOutlined />
 				</Tooltip>
 			</Radio.Button>
-			<Radio.Button value={"badge"}>
+			<Radio.Button value="badge">
 				Badge{" "}
 				<Tooltip title={i18n.settings.contrastTooltip}>
 					<QuestionCircleOutlined />
