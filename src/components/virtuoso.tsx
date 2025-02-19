@@ -1,5 +1,5 @@
 // @deno-types="@types/react"
-import { forwardRef, memo } from "react";
+import { ComponentPropsWithoutRef, forwardRef, memo } from "react";
 import { VirtuosoGrid } from "react-virtuoso";
 import { Card } from "#components";
 import { Icon } from "#types";
@@ -20,7 +20,10 @@ const Virtuoso = memo((
 			data={icons}
 			overscan={200}
 			components={{
-				List: forwardRef(({ children, style, ...props }, ref) => (
+				List: forwardRef<HTMLDivElement, ComponentPropsWithoutRef<"div">>((
+					{ children, style, ...props },
+					ref,
+				) => (
 					<div
 						ref={ref}
 						{...props}

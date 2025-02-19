@@ -1,5 +1,5 @@
 /// <reference lib="deno.ns" />
-import { defineConfig } from "vite";
+import { defineConfig, PluginOption } from "vite";
 import deno from "@deno/vite-plugin";
 import react from "@vitejs/plugin-react-swc";
 import { visualizer } from "rollup-plugin-visualizer";
@@ -9,7 +9,7 @@ const baseUrl = Deno.env.get("VITE_BASE_URL");
 export default defineConfig({
 	base: baseUrl ? `/${baseUrl}` : undefined,
 	plugins: [
-		deno(),
+		deno() as PluginOption,
 		react({ plugins: [["@swc/plugin-styled-components", {}]] }),
 		visualizer(),
 	],

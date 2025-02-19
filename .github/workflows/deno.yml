@@ -1,0 +1,12 @@
+name: Deno
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Deno
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+      - run: |
+          deno task test
+          deno task build

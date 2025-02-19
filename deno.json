@@ -6,7 +6,7 @@
 		"preview": "deno run -A --node-modules-dir npm:vite preview",
 		"serve": "deno run --allow-net --allow-read jsr:@std/http@1/file-server dist/",
 		"deploy": "touch package.json && gh-pages -d dist && rm package.json",
-		"vitest": "vitest"
+		"test": "deno fmt --check && deno lint && deno check src *.ts"
 	},
 	"fmt": {
 		"useTabs": true
