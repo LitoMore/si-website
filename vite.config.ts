@@ -5,14 +5,15 @@ import react from "@vitejs/plugin-react-swc";
 import { visualizer } from "rollup-plugin-visualizer";
 
 const baseUrl = Deno.env.get("VITE_BASE_URL");
+const enableVisualizer = Deno.env.get("VITE_ENABLE_VISUALIZER");
 
 export default defineConfig({
 	base: baseUrl ? `/${baseUrl}` : undefined,
 	plugins: [
 		deno() as PluginOption,
 		react({ plugins: [["@swc/plugin-styled-components", {}]] }),
-		visualizer(),
-	],
+		enableVisualizer ? visualizer() : undefined,
+	].filter((x) => Boolean(x)),
 	build: {
 		rollupOptions: {
 			output: {
