@@ -12,6 +12,7 @@ import {
 import { colorForBackground } from "./vendor/make-badge-color.ts";
 import { getIconSlug } from "./vendor/simple-icons-sdk.ts";
 
+export { colorForBackground } from "./vendor/make-badge-color.ts";
 export { getIconSlug } from "./vendor/simple-icons-sdk.ts";
 
 export const getLatestVersion = async (packageName: string) => {
