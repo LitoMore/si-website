@@ -61,7 +61,7 @@
 		"react-virtualized": "npm:react-virtualized@^9.22.6",
 		"react-virtuoso": "npm:react-virtuoso@^4.12.5",
 		"rollup-plugin-visualizer": "npm:rollup-plugin-visualizer@^5.14.0",
-		"simple-icons": "npm:simple-icons@^14.7.0",
+		"simple-icons": "npm:simple-icons@^14.8.0",
 		"styled-components": "npm:styled-components@^6.1.15",
 		"svg2pdf.js": "npm:svg2pdf.js@^2.4.0",
 		"tlds": "npm:tlds@^1.255.0",

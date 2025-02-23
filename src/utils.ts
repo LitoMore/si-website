@@ -122,6 +122,7 @@ export const searcherKeySelector = (icon: Icon) =>
 		icon.title,
 		icon.slug,
 		icon.aliases?.aka,
+		icon.aliases?.old,
 		icon.aliases?.dup?.map((duplicate) => duplicate.title),
 		Object.values(icon.aliases?.loc ?? {}),
 	]
