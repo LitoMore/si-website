@@ -38,7 +38,6 @@ export default defineConfig({
 			"#i18n": "/src/i18n/_index.ts",
 			"#types": "/src/types.ts",
 			"#utils": "/src/utils.ts",
-			"#utilsx": "/src/utilsx.tsx",
 		},
 	},
 });

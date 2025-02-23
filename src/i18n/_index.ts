@@ -1,5 +1,5 @@
 import { useLanguageCode } from "#atom";
-import { gettext } from "#utilsx";
+import { gettext } from "#utils";
 import en from "./en.i18n.ts";
 import zh from "./zh.i18n.ts";
 
