@@ -2,7 +2,7 @@
   "version": "4",
   "specifiers": {
     "npm:@ant-design/icons@^5.6.1": "5.6.1_react@19.0.0_react-dom@19.0.0__react@19.0.0",
-    "npm:@ant-design/v5-patch-for-react-19@^1.0.3": "1.0.3_antd@5.24.2__react@19.0.0__react-dom@19.0.0___react@19.0.0__dayjs@1.11.13_react@19.0.0_react-dom@19.0.0__react@19.0.0",
+    "npm:@ant-design/v5-patch-for-react-19@^1.0.3": "1.0.3_antd@5.24.3__react@19.0.0__react-dom@19.0.0___react@19.0.0__dayjs@1.11.13_react@19.0.0_react-dom@19.0.0__react@19.0.0",
     "npm:@deno/vite-plugin@^1.0.4": "1.0.4_vite@6.2.0__@types+node@22.5.4_@types+node@22.5.4",
     "npm:@swc/plugin-styled-components@7": "7.0.0",
     "npm:@testing-library/dom@^10.4.0": "10.4.0",
@@ -19,7 +19,7 @@
     "npm:@vitejs/plugin-react-swc@^3.8.0": "3.8.0_vite@6.2.0__@types+node@22.5.4_@types+node@22.5.4",
     "npm:@vitejs/plugin-react@^4.3.4": "4.3.4_vite@6.2.0__@types+node@22.5.4_@babel+core@7.26.9_@types+node@22.5.4",
     "npm:@vitest/browser@^3.0.7": "3.0.7_playwright@1.50.1_vitest@3.0.7__@types+node@22.5.4__@vitest+browser@3.0.7__playwright@1.50.1__vite@6.2.0___@types+node@22.5.4_@testing-library+dom@10.4.0_msw@2.7.3__@types+node@22.5.4_vite@6.2.0__@types+node@22.5.4_@types+node@22.5.4",
-    "npm:antd@^5.24.2": "5.24.2_react@19.0.0_react-dom@19.0.0__react@19.0.0_dayjs@1.11.13",
+    "npm:antd@^5.24.3": "5.24.3_react@19.0.0_react-dom@19.0.0__react@19.0.0_dayjs@1.11.13",
     "npm:copy-text-to-clipboard@^3.2.0": "3.2.0",
     "npm:css-color-converter@2": "2.0.0",
     "npm:es-toolkit@^1.32.0": "1.32.0",
@@ -117,7 +117,7 @@
         "throttle-debounce"
       ]
     },
-    "@ant-design/v5-patch-for-react-19@1.0.3_antd@5.24.2__react@19.0.0__react-dom@19.0.0___react@19.0.0__dayjs@1.11.13_react@19.0.0_react-dom@19.0.0__react@19.0.0": {
+    "@ant-design/v5-patch-for-react-19@1.0.3_antd@5.24.3__react@19.0.0__react-dom@19.0.0___react@19.0.0__dayjs@1.11.13_react@19.0.0_react-dom@19.0.0__react@19.0.0": {
       "integrity": "sha512-iWfZuSUl5kuhqLUw7jJXUQFMMkM7XpW7apmKzQBQHU0cpifYW4A79xIBt9YVO5IBajKpPG5UKP87Ft7Yrw1p/w==",
       "dependencies": [
         "antd",
@@ -982,8 +982,8 @@
     "ansi-styles@5.2.0": {
       "integrity": "sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA=="
     },
-    "antd@5.24.2_react@19.0.0_react-dom@19.0.0__react@19.0.0_dayjs@1.11.13": {
-      "integrity": "sha512-7Z9HsE3ZIK3sE/WuUqii3w7Gl1IJuRL21sDUTtkN95JS5KhRYP8ISv7m/HxsJ3Mn/yxgojBCgLPJ212+Dn+aPw==",
+    "antd@5.24.3_react@19.0.0_react-dom@19.0.0__react@19.0.0_dayjs@1.11.13": {
+      "integrity": "sha512-H5fopyOVRAnegfwLuEdjhPR+l5z3/lo4aQyDsgIYhfmeBcRgN/XNkefVxzRHNuWHeYr9E9LbyxEQcMF91sy5lg==",
       "dependencies": [
         "@ant-design/colors",
         "@ant-design/cssinjs",
@@ -1942,8 +1942,8 @@
         "react-is@18.3.1"
       ]
     },
-    "rc-virtual-list@3.18.3_react@19.0.0_react-dom@19.0.0__react@19.0.0": {
-      "integrity": "sha512-s1/bZQY2uwnmgXYeXxJkk2cSTz1cdUPDCrxAq/y1WQM115HilFFIvLi+JVFfkD4xCq3TZxGM17FQH4NLesWfwg==",
+    "rc-virtual-list@3.18.4_react@19.0.0_react-dom@19.0.0__react@19.0.0": {
+      "integrity": "sha512-qkurwgc4Je4xJaYe1DprDl2fwtfEZcuC4UhsJRiX2YZ6wSZAUPQXH/lIX+ZRtNEWmz3pzSBQ7NX3Csjp0wCtcg==",
       "dependencies": [
         "@babel/runtime",
         "classnames",
@@ -2515,7 +2515,7 @@
       "npm:@vitejs/plugin-react-swc@^3.8.0",
       "npm:@vitejs/plugin-react@^4.3.4",
       "npm:@vitest/browser@^3.0.7",
-      "npm:antd@^5.24.2",
+      "npm:antd@^5.24.3",
       "npm:copy-text-to-clipboard@^3.2.0",
       "npm:css-color-converter@2",
       "npm:es-toolkit@^1.32.0",

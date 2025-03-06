@@ -42,7 +42,7 @@
 		"@vitejs/plugin-react": "npm:@vitejs/plugin-react@^4.3.4",
 		"@vitejs/plugin-react-swc": "npm:@vitejs/plugin-react-swc@^3.8.0",
 		"@vitest/browser": "npm:@vitest/browser@^3.0.7",
-		"antd": "npm:antd@^5.24.2",
+		"antd": "npm:antd@^5.24.3",
 		"copy-text-to-clipboard": "npm:copy-text-to-clipboard@^3.2.0",
 		"css-color-converter": "npm:css-color-converter@^2.0.0",
 		"es-toolkit": "npm:es-toolkit@^1.32.0",
