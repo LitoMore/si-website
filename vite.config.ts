@@ -11,7 +11,7 @@ export default defineConfig({
 	base: baseUrl ? `/${baseUrl}` : undefined,
 	plugins: [
 		deno() as PluginOption,
-		react({ plugins: [["@swc/plugin-styled-components", {}]] }),
+		react({ plugins: [["@swc/plugin-styled-components", {}]] }) as PluginOption,
 		enableVisualizer ? visualizer() : undefined,
 	].filter((x) => Boolean(x)),
 	build: {
@@ -24,9 +24,6 @@ export default defineConfig({
 				},
 			},
 		},
-	},
-	optimizeDeps: {
-		exclude: ["pdfkit", "blob-stream"],
 	},
 	resolve: {
 		alias: {
