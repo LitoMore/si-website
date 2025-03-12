@@ -117,7 +117,7 @@ export const getShareUrl = (
 	return shareUrl.toString();
 };
 
-export const searcherKeySelector = (icon: Icon) =>
+export const searcherKeySelector = (icon: Icon): string[] =>
 	[
 		icon.title,
 		icon.slug,
@@ -130,7 +130,7 @@ export const searcherKeySelector = (icon: Icon) =>
 			: undefined,
 	]
 		.flat()
-		.filter((x) => Boolean(x));
+		.filter((x): x is string => Boolean(x));
 
 export const getAliases = (icon?: Icon) => {
 	if (!icon) return [];
