@@ -46,6 +46,12 @@ const translation: Internationalization = {
 		line3:
 			"您可以通过 {Open Collective|https://opencollective.com/simple-icons} 来赞助支持我们。",
 	},
+	preview: {
+		uploadSvg: "上传预览",
+		downloadSvg: "下载 SVG",
+		savePreview: "保存截图至本地",
+		copyScreenshot: "复制截图至剪贴板",
+	},
 	share: {
 		share: "分享",
 		actionIntentText: "Simple Icons: 拥有超过 {} 个知名品牌的 SVG 图标合集",

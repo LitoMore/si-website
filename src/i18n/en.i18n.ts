@@ -47,6 +47,12 @@ const translation: Internationalization = {
 		line3:
 			"Kindly supported by your donations at {Open Collective|https://opencollective.com/simple-icons}.",
 	},
+	preview: {
+		uploadSvg: "Upload SVG",
+		downloadSvg: "Download SVG",
+		savePreview: "Save Preview",
+		copyScreenshot: "Copy Screenshot",
+	},
 	share: {
 		share: "Share",
 		actionIntentText:

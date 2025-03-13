@@ -1,4 +1,5 @@
 import { Badge, Flex, Popover } from "antd";
+import { useLocation } from "react-router";
 import { SettingOutlined } from "@ant-design/icons";
 import { useBrightnessMode, useCardSize, useColorMode } from "#atom";
 import {
@@ -13,11 +14,13 @@ import { BrightnessMode, CardSize, ColorMode } from "#types";
 import { Control } from "./controls.tsx";
 
 const Settings = () => {
+	const { pathname } = useLocation();
 	const [brightnessMode] = useBrightnessMode();
 	const [cardSize] = useCardSize();
 	const [colorMode] = useColorMode();
 	const { iconFg } = useColorScheme();
 
+	const isPreview = pathname === "/preview";
 	const settingsChanged = brightnessMode !== BrightnessMode.SimpleIcons ||
 		cardSize !== CardSize.Small || colorMode !== ColorMode.Contrast;
 
@@ -26,10 +29,10 @@ const Settings = () => {
 			trigger="hover"
 			content={
 				<Flex vertical gap={10}>
-					<CardsizeSlider />
+					{!isPreview && <CardsizeSlider />}
 					<ColorThemes />
-					<DisplayColor />
-					<Brightness />
+					{!isPreview && <DisplayColor />}
+					{!isPreview && <Brightness />}
 					<Reset />
 				</Flex>
 			}

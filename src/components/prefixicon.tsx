@@ -1,11 +1,15 @@
 import { useIcons } from "#atom";
 import { brightThreshold } from "#constants";
 import { useColorScheme } from "#hooks";
-import { getMaskStyles } from "#utils";
+import { getMaskStyles, normalizeColor } from "#utils";
 import { Icon } from "#types";
 
 const PrefixIcon = (
-	{ icon, style }: { icon?: Icon; style: "color" | "icon" },
+	{ icon, style, color }: {
+		icon?: Icon;
+		style: "color" | "icon";
+		color?: string;
+	},
 ) => {
 	const [{ version }] = useIcons();
 	const { isLight } = useColorScheme();
@@ -22,7 +26,7 @@ const PrefixIcon = (
 					? "0 0 5px 0 rgba(0, 0, 0, 0.25)"
 					: undefined,
 				backgroundColor: style === "color"
-					? `#${icon.hex ?? "000000"}`
+					? `#${normalizeColor(color) ?? icon.hex ?? "000000"}`
 					: undefined,
 				...(style === "icon" ? getMaskStyles(version, icon, isLight) : {}),
 				filter: style === "icon" && icon.brightness > brightThreshold

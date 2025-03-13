@@ -45,6 +45,12 @@ export type Internationalization = {
 		line2: string;
 		line3: string;
 	};
+	preview: {
+		uploadSvg: string;
+		downloadSvg: string;
+		savePreview: string;
+		copyScreenshot: string;
+	};
 	share: {
 		actionIntentText: string;
 		share: string;

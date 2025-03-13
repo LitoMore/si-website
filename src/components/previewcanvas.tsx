@@ -6,22 +6,30 @@ import { Image, Layer, Rect, Stage, Text } from "react-konva";
 import useImage from "use-image";
 import { useIcons } from "#atom";
 import { usePreviewImage } from "#hooks";
-import { getSimpleIconsCdnUrl } from "#utils";
+import { getSimpleIconsCdnUrl, getSvg, getSvgDataUri } from "#utils";
 import { Icon } from "#types";
 
-const PreviewCanvas = ({ icon }: { icon: Icon }) => {
+const PreviewCanvas = ({ icon, color }: { icon: Icon; color: string }) => {
+	const [svg, setSvg] = useState("");
+	const [titleHeight, setTitleHeight] = useState(0);
 	const textColor = icon.relativeColor === "#fff" ? "#333" : "#fff";
 	const [icons] = useIcons();
 	const [siSimage] = useImage(
 		`https://cdn.simpleicons.org/simpleicons/${textColor.slice(1)}`,
 	);
-	const [images] = usePreviewImage(getSimpleIconsCdnUrl(icon.slug));
-	const [titleHeight, setTitleHeight] = useState(0);
+	const [images] = usePreviewImage(
+		svg ? getSvgDataUri(svg, color) : getSimpleIconsCdnUrl(icon.slug),
+	);
 	const titleRef = useRef<Konva.default.Text>(null);
 
 	useEffect(() => {
 		setTitleHeight(titleRef.current?.height() ?? 0);
 	}, [icon.title]);
+
+	useEffect(() => {
+		// [TODO] Add loading status
+		getSvg(icons.version, icon.slug).then((svg) => setSvg(svg));
+	}, [icons.version, icon.slug]);
 
 	useEffect(() => {
 		if (siSimage) {
@@ -35,8 +43,20 @@ const PreviewCanvas = ({ icon }: { icon: Icon }) => {
 	const baseTextY = 170;
 	const titleFontSize = 24;
 	const textFontSize = 14;
-	const fontFamily =
-		'-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
+	const fontFamily = [
+		"--apple-system",
+		"BlinkMacSystemFont",
+		'"Segoe UI"',
+		"Roboto",
+		'"Helvetica Neue"',
+		"Arial",
+		'"Noto Sans"',
+		"sans-serif",
+		'"Apple Color Emoji"',
+		'"Segoe UI Emoji"',
+		'"Segoe UI Symbol"',
+		'"Noto Color Emoji"',
+	].join(",");
 
 	const textProps = {
 		fill: textColor,

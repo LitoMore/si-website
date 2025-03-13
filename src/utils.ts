@@ -61,6 +61,28 @@ export const getSvg = async (simpleIconsVersion: string, slug: string) => {
 
 export const getSvgPath = (svg: string) => svg.split('"')[7];
 
+export const normalizeColor = (style?: string) => {
+	if (style && /^([a-f\d]{3,4}|[a-f\d]{6}|[a-f\d]{8})$/i.test(style)) {
+		if (style.length === 6 || style.length === 8) return style;
+		if (style.length === 3 || style.length === 4) {
+			return style
+				.split("")
+				.map((char) => char + char)
+				.join("");
+		}
+	}
+	return undefined;
+};
+
+export const getSvgDataUri = (svg: string, color?: string) => {
+	const hexColor = normalizeColor(color);
+	return `data:image/svg+xml;base64,${
+		btoa(
+			hexColor ? svg.replace("<svg ", `<svg fill="#${hexColor}" `) : svg,
+		)
+	}`;
+};
+
 export const getMaskStyles = (
 	version: string,
 	icon: Icon,
