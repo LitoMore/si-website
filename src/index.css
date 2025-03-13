@@ -56,7 +56,7 @@ div[data-testid="virtuoso-scroller"]::-webkit-scrollbar {
 	overflow: hidden;
 	cursor: pointer;
 	user-select: none;
-	/* transition: transform 0.2s; */
+	transition: transform 0.2s;
 }
 
 /* .icon:hover {

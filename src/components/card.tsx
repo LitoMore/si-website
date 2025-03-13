@@ -11,7 +11,7 @@ import { ColorMode, Icon } from "#types";
 
 const Card = ({ icon, style }: { icon: Icon; style?: CSSProperties }) => {
 	const [{ version }] = useIcons();
-	const [, setSelectedIcon] = useSelectedIcon();
+	const [selectedIcon, setSelectedIcon] = useSelectedIcon();
 	const [colorMode] = useColorMode();
 	const { cardPixels } = useSizes();
 	const { isLight, isDark, galleryFg, contrast } = useColorScheme();
@@ -34,6 +34,9 @@ const Card = ({ icon, style }: { icon: Icon; style?: CSSProperties }) => {
 				borderRight: `${borderWidth}px solid ${borderColor}`,
 				borderBottom: isLight ? 0 : `${borderWidth}px solid ${borderColor}`,
 				filter: applyContrast ? contrast : undefined,
+				transform: selectedIcon?.slug === icon.slug
+					? "translateY(-2px)"
+					: undefined,
 			}}
 			onClick={() => setSelectedIcon(icon)}
 		>
