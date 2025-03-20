@@ -67,7 +67,7 @@ const PreviewCanvas = ({ icon, color }: { icon: Icon; color: string }) => {
 	};
 
 	return (
-		<Stage width={720} height={400}>
+		<Stage id="icon-canvas" width={720} height={400}>
 			<Layer>
 				<Rect
 					width={720}

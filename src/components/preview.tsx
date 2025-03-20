@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Button, Divider, Flex, Input } from "antd";
 import {
 	CopyOutlined,
-	DownloadOutlined,
 	LoadingOutlined,
 	SaveOutlined,
 	UploadOutlined,
@@ -13,6 +12,7 @@ import { useI18n } from "#hooks";
 import PrefixIcon from "./prefixicon.tsx";
 import AutoComplete from "./autocomplete.tsx";
 import Canvas from "./previewcanvas.tsx";
+import DownloadImage from "./downloadimage.tsx";
 
 const Card = styled(Flex)`
 	padding: 20px;
@@ -62,31 +62,47 @@ const Preview = () => {
 						onChange={(e) => setColor(e.target.value)}
 					/>
 				</Flex>
-				{icon ? <Canvas icon={icon} color={color} /> : (
-					<Flex
-						align="center"
-						justify="center"
-						style={{ width: 720, height: 400 }}
-					>
-						<LoadingOutlined spin style={{ fontSize: 48, opacity: 0.5 }} />
-					</Flex>
-				)}
-				<Divider style={{ margin: 0 }} />
-				<Flex gap={8}>
-					<Button type="default" icon={<UploadOutlined />}>
-						{i18n.preview.uploadSvg}
-					</Button>
-					<div style={{ flex: 1 }} />
-					<Button type="default" icon={<DownloadOutlined />}>
-						{i18n.preview.downloadSvg}
-					</Button>
-					<Button type="default" icon={<SaveOutlined />}>
-						{i18n.preview.savePreview}
-					</Button>
-					<Button type="default" icon={<CopyOutlined />}>
-						{i18n.preview.copyScreenshot}
-					</Button>
-				</Flex>
+				{icon
+					? (
+						<>
+							<Canvas icon={icon} color={color} />
+							<Divider style={{ margin: 0 }} />
+							<Flex gap={8}>
+								<Button type="default" icon={<UploadOutlined />}>
+									{i18n.preview.uploadSvg}
+								</Button>
+								<div style={{ flex: 1 }} />
+								<DownloadImage showIcon icon={icon} />
+								<Button
+									type="default"
+									icon={<SaveOutlined />}
+									onClick={() => {
+										const canvas = globalThis.document.querySelector("canvas");
+										if (!canvas) return;
+										canvas.toBlob((blob) => {
+											if (!blob) return;
+											const item = new ClipboardItem({ "image/png": blob });
+											navigator.clipboard.write([item]);
+										});
+									}}
+								>
+									{i18n.preview.savePreview}
+								</Button>
+								<Button type="default" icon={<CopyOutlined />}>
+									{i18n.preview.copyScreenshot}
+								</Button>
+							</Flex>
+						</>
+					)
+					: (
+						<Flex
+							align="center"
+							justify="center"
+							style={{ width: 720, height: 400 }}
+						>
+							<LoadingOutlined spin style={{ fontSize: 48, opacity: 0.5 }} />
+						</Flex>
+					)}
 			</Card>
 		</Flex>
 	);
