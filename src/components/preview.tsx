@@ -14,6 +14,7 @@ import AutoComplete from "./autocomplete.tsx";
 import Canvas from "./previewcanvas.tsx";
 import DownloadImage from "./downloadimage.tsx";
 
+// deno-fmt-ignore
 const Card = styled(Flex)`
 	padding: 20px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
@@ -22,6 +23,7 @@ const Card = styled(Flex)`
 	background-color: #fff;
 `;
 
+// deno-fmt-ignore
 const ColorInput = styled(Input)`
 	width: 150px;
 	padding-left: 5px;

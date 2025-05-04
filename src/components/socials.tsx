@@ -5,6 +5,7 @@ import { styled } from "styled-components";
 import { linkRel } from "#constants";
 import { useColorScheme } from "#hooks";
 
+// deno-fmt-ignore
 const Link = styled.a`
   display: block;
   width: 24px;

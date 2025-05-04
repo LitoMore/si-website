@@ -5,10 +5,12 @@ import { useSizes } from "#hooks";
 import Settings from "./settings.tsx";
 import Translations from "./translations.tsx";
 
+// deno-fmt-ignore
 export const ControlTitle = styled(Divider)`
 	margin: 0 !important;
 `;
 
+// deno-fmt-ignore
 export const Control = styled.div`
   width: 30px;
   height: 30px;
