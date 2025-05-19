@@ -125,7 +125,7 @@ export default function SiModal() {
 		>
 			<Modal
 				centered
-				destroyOnClose
+				destroyOnHidden
 				closeIcon={isMobileSize}
 				open={Boolean(icon)}
 				footer={icon
