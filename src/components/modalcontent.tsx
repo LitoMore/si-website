@@ -16,7 +16,6 @@ import { ColorMode, Icon } from "#types";
 
 const previewImageSize = 300;
 
-// deno-fmt-ignore
 const Image = styled(AntImage).attrs<{ $color?: string }>(
 	(props) => ({
 		width: "100%",
@@ -41,13 +40,11 @@ const Image = styled(AntImage).attrs<{ $color?: string }>(
 	${(props) => props.$contrast ? `filter: ${props.$contrast};` : ""}
 `;
 
-// deno-fmt-ignore
 export const Title = styled.div`
-  color: #aaa;
-  margin-top: 10px;
+	color: #aaa;
+	margin-top: 10px;
 `;
 
-// deno-fmt-ignore
 const Text = styled(Typography.Text).attrs((props) => ({
 	copyable: props.copyable ?? true,
 }))`
@@ -57,7 +54,6 @@ const Text = styled(Typography.Text).attrs((props) => ({
 	}
 `;
 
-// deno-fmt-ignore
 const Tag = styled(AntTag)<{ $textColor?: string }>`
 	margin-right: 0;
 	color: ${(props) => props.$textColor} !important;
@@ -66,7 +62,6 @@ const Tag = styled(AntTag)<{ $textColor?: string }>`
 	}
 `;
 
-// deno-fmt-ignore
 const Link = styled(Typography.Link).attrs({
 	copyable: true,
 	target: "_blank",

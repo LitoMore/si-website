@@ -35,7 +35,7 @@ const SocialButton = styled(FloatButton).attrs({
 			&:hover { color-scheme: only ${props.$isDark ? "light" : "dark"} }
 		`
 		: ""}
-`;
+`; // deno-fmt-ignore-line
 
 const FloatGroup = styled.div<{ $expandTop: boolean }>`
 	${(props) =>

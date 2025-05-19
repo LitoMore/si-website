@@ -5,18 +5,17 @@ import { styled } from "styled-components";
 import { linkRel } from "#constants";
 import { useColorScheme } from "#hooks";
 
-// deno-fmt-ignore
 const Link = styled.a`
-  display: block;
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-  box-sizing: content-box;
-  padding: 5px;
-  border-radius: 6px;
-  &:hover {
-    background-color: rgba(0,0,0,0.06);
-  }
+	display: block;
+	width: 24px;
+	height: 24px;
+	flex-shrink: 0;
+	box-sizing: content-box;
+	padding: 5px;
+	border-radius: 6px;
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.06);
+	}
 `;
 
 const Social = (
