@@ -10,7 +10,7 @@ const translation: Internationalization = {
 		download: "Download",
 		guidelines: "Guidelines",
 		license: "License",
-		source: "Size",
+		source: "Source",
 		sourceAndGuidelines: "Source & Guidelines",
 		svgColored: "Colored SVG",
 		svgPlain: "Plain SVG",
