@@ -2277,6 +2277,8 @@
       "npm:react-draggable@^4.4.6",
       "npm:react-konva@^19.0.3",
       "npm:react-router@^7.6.0",
+      "npm:react-virtualized@^9.22.6",
+      "npm:react-virtuoso@^4.12.7",
       "npm:react@^19.1.0",
       "npm:rollup-plugin-visualizer@^5.14.0",
       "npm:simple-icons@^14.14.0",

@@ -1,32 +1,49 @@
 // @deno-types="@types/react"
-import { memo } from "react";
-import { VirtuosoMasonry } from "@virtuoso.dev/masonry";
+import { ComponentPropsWithoutRef, forwardRef, memo } from "react";
+import { VirtuosoGrid } from "react-virtuoso";
 import { Card } from "#components";
 import { Icon } from "#types";
 
 const Virtuoso = memo((
-	{ icons, galleryHeight, galleryMargin, iconsPerRow }: {
+	{ icons, galleryHeight, galleryMargin }: {
 		icons: Icon[];
 		galleryHeight: string;
 		galleryMargin: number;
-		iconsPerRow: number;
 	},
 ) => {
 	return (
-		<VirtuosoMasonry
-			columnCount={iconsPerRow}
+		<VirtuosoGrid
+			style={{
+				height: galleryHeight,
+				margin: `0 ${galleryMargin}px`,
+			}}
 			data={icons}
-			style={{ height: galleryHeight, margin: `0 ${galleryMargin}px` }}
-			ItemContent={({ data }) => (
-				data
-					? (
-						<Card
-							key={data.slug}
-							icon={data}
-							style={{ marginBottom: 5 }}
-						/>
-					)
-					: null
+			overscan={200}
+			components={{
+				List: forwardRef<HTMLDivElement, ComponentPropsWithoutRef<"div">>((
+					{ children, style, ...props },
+					ref,
+				) => (
+					<div
+						ref={ref}
+						{...props}
+						style={{
+							...style,
+							display: "flex",
+							flexWrap: "wrap",
+							gap: 5,
+							margin: `10px 0`,
+						}}
+					>
+						{children}
+					</div>
+				)),
+			}}
+			itemContent={(_index, icon) => (
+				<Card
+					key={icon.slug}
+					icon={icon}
+				/>
 			)}
 		/>
 	);

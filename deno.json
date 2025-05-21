@@ -52,6 +52,8 @@
 		"react-draggable": "npm:react-draggable@^4.4.6",
 		"react-konva": "npm:react-konva@^19.0.3",
 		"react-router": "npm:react-router@^7.6.0",
+		"react-virtualized": "npm:react-virtualized@^9.22.6",
+		"react-virtuoso": "npm:react-virtuoso@^4.12.7",
 		"rollup-plugin-visualizer": "npm:rollup-plugin-visualizer@^5.14.0",
 		"simple-icons": "npm:simple-icons@^14.14.0",
 		"styled-components": "npm:styled-components@^6.1.18",

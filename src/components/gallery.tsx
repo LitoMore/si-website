@@ -8,15 +8,21 @@ import { useSizes } from "#hooks";
 import Empty from "./empty.tsx";
 import Loading from "./loading.tsx";
 
+// const Virutalized = lazy(() => import("./virtualized.tsx"));
 const Virtuoso = lazy(() => import("./virtuoso.tsx"));
+// const VirutalScroll = lazy(() => import("./virtualscroll.tsx"));
 
-const Gallery = () => {
+const Gallery = (
+	// { mode }: { mode?: "virtualized" | "virtuoso" | "virtualscroll" },
+) => {
 	const [icons] = useIcons();
 	const [filteredIcons] = useFilteredIcons();
 	const {
-		iconsPerRow,
+		// innerWidth,
+		// iconsPerRow,
 		galleryHeight,
 		galleryMargin,
+		// cardPixels,
 	} = useSizes();
 
 	if (icons.data.length === 0) {
@@ -27,12 +33,35 @@ const Gallery = () => {
 		return <Empty />;
 	}
 
+	// if (mode === "virtualscroll") {
+	// 	return (
+	// 		<VirutalScroll
+	// 			icons={filteredIcons}
+	// 			innerWidth={innerWidth}
+	// 			cardPixels={cardPixels}
+	// 			galleryHeight={galleryHeight}
+	// 			iconsPerRow={iconsPerRow}
+	// 		/>
+	// 	);
+	// }
+
+	// if (mode === "virtualized") {
+	// 	return (
+	// 		<Virutalized
+	// 			icons={filteredIcons}
+	// 			innerWidth={innerWidth}
+	// 			galleryHeight={galleryHeight}
+	// 			cardPixels={cardPixels}
+	// 			iconsPerRow={iconsPerRow}
+	// 		/>
+	// 	);
+	// }
+
 	return (
 		<Virtuoso
 			icons={filteredIcons}
 			galleryHeight={galleryHeight}
 			galleryMargin={galleryMargin}
-			iconsPerRow={iconsPerRow}
 		/>
 	);
 };
