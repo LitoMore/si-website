@@ -20,6 +20,7 @@ html, body {
 div[data-testid="virtuoso-scroller"] {
 	-ms-overflow-style: none;
 	scrollbar-width: none;
+	padding-top: 10px;
 }
 
 div[data-testid="virtuoso-scroller"]::-webkit-scrollbar {

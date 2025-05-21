@@ -1,5 +1,5 @@
 // @deno-types="@types/react"
-import { CSSProperties, ReactNode } from "react";
+import { createElement, CSSProperties, Fragment, ReactNode } from "react";
 import {
 	BitmapFormat,
 	BrightnessMode,
@@ -313,18 +313,24 @@ export function gettext(
 	const pattern = /({[^}]*})/g;
 	const parts = template.split(pattern);
 	let i = 0;
-	const parsedParts = parts.map((part) => {
+	const parsedParts = parts.map((part, partIndex) => {
 		const partMatch = /^{[^}]*}$/.exec(part);
 		if (partMatch) {
 			const replacer = replacers[i < replacers.length - 1 ? i++ : i];
 			if (!replacer) return part;
 			if (part.includes("|")) {
 				const [...values] = part.slice(1, -1).split("|");
-				return typeof replacer === "string" ? replacer : replacer(...values);
+				return typeof replacer === "string" ? replacer : createElement(
+					Fragment,
+					{ key: `key-${partIndex}` },
+					replacer(...values),
+				);
 			}
-			return typeof replacer === "string"
-				? replacer
-				: replacer(part.slice(1, -1));
+			return typeof replacer === "string" ? replacer : createElement(
+				Fragment,
+				{ key: `key-${partIndex}` },
+				replacer(part.slice(1, -1)),
+			);
 		}
 		return part;
 	}).filter((x) => Boolean(x));
