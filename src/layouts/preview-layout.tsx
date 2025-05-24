@@ -1,4 +1,3 @@
-// @deno-types="@types/react"
 import { memo } from "react";
 import { Flex, Layout } from "antd";
 import Preview from "../components/preview.tsx";

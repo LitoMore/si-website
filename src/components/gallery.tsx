@@ -1,7 +1,6 @@
 /*
  * [INFO] We don't use styled-components for child components due to performance reasons.
  */
-// @deno-types="@types/react"
 import { lazy } from "react";
 import { useFilteredIcons, useIcons } from "#atom";
 import { useSizes } from "#hooks";

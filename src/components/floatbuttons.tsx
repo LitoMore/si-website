@@ -1,4 +1,3 @@
-// @deno-types="@types/react"
 import { RefObject, useEffect, useRef, useState } from "react";
 import { Button, Flex, FloatButton, Input, QRCode, Space } from "antd";
 import {

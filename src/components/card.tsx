@@ -1,7 +1,6 @@
 /*
  * [INFO] We don't use styled-components for this component due to performance reasons.
  */
-// @deno-types="@types/react"
 import { CSSProperties } from "react";
 import { useColorMode, useIcons, useSelectedIcon } from "#atom";
 import { brightThreshold, darkThreshold } from "#constants";

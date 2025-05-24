@@ -1,4 +1,3 @@
-// @deno-types="@types/react"
 import { ComponentPropsWithoutRef, forwardRef, memo } from "react";
 import { VirtuosoGrid } from "react-virtuoso";
 import { Card } from "#components";

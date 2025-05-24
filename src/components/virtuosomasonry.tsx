@@ -1,4 +1,3 @@
-// @deno-types="@types/react"
 import { memo } from "react";
 import { VirtuosoMasonry } from "@virtuoso.dev/masonry";
 import { Card } from "#components";

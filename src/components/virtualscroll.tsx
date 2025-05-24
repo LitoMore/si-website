@@ -1,4 +1,3 @@
-// // @deno-types="@types/react"
 // import { memo } from "react";
 // // import { VirtualScroller } from "primereact/virtualscroller";
 // import { Card } from "#components";

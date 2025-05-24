@@ -1,4 +1,3 @@
-// @deno-types="@types/react"
 import { lazy, Suspense } from "react";
 import { Button, ConfigProvider, Dropdown, Flex, Modal, theme } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";

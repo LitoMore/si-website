@@ -1,4 +1,3 @@
-// @deno-types="@types/react"
 import { memo } from "react";
 import { Layout } from "antd";
 import { Gallery, Header, Modal } from "#components";

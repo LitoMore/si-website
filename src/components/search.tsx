@@ -1,4 +1,3 @@
-// @deno-types="@types/react"
 import { useEffect, useRef, useState } from "react";
 import { Input, InputRef } from "antd";
 import { useFilteredIcons, useIcons, useSearchText } from "#atom";

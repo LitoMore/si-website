@@ -1,4 +1,3 @@
-// @deno-types="@types/react"
 import { useEffect } from "react";
 import { AutoComplete, Flex } from "antd";
 import {

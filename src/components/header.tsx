@@ -1,4 +1,3 @@
-// @deno-types="@types/react"
 import { lazy } from "react";
 import { Flex, Layout } from "antd";
 import { Apps, Search } from "#components";

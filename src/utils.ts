@@ -1,4 +1,3 @@
-// @deno-types="@types/react"
 import { createElement, CSSProperties, Fragment, ReactNode } from "react";
 import {
 	BitmapFormat,

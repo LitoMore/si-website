@@ -1,6 +1,4 @@
-// @deno-types="@types/react"
 import { memo } from "react";
-// @deno-types="@types/react-virtualized"
 import { AutoSizer, Collection } from "react-virtualized";
 import { Card } from "#components";
 import { Icon } from "#types";

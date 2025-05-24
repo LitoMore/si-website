@@ -1,4 +1,3 @@
-// @deno-types="@types/react"
 import { useEffect, useMemo, useState } from "react";
 import { App } from "antd";
 import copyTextToClipboard from "copy-text-to-clipboard";

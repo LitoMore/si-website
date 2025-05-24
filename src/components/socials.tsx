@@ -1,4 +1,3 @@
-// @deno-types="@types/react"
 import { ReactNode } from "react";
 import { Flex } from "antd";
 import { styled } from "styled-components";

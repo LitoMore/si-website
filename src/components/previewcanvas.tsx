@@ -1,4 +1,3 @@
-// @deno-types="@types/react"
 import { useEffect, useRef, useState } from "react";
 import Konva from "konva";
 import { Image, Layer, Rect, Stage, Text } from "react-konva";
