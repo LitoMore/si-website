@@ -117,3 +117,12 @@ div[data-testid="virtuoso-scroller"]::-webkit-scrollbar {
 		--si-card-bg-dark: #333;
 	}
 } */
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

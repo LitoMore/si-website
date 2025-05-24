@@ -1,6 +1,6 @@
 import { Badge, Flex, Popover } from "antd";
 import { useLocation } from "react-router";
-import { SettingOutlined } from "@ant-design/icons";
+import { IconSettings } from "@tabler/icons-react";
 import { useBrightnessMode, useCardSize, useColorMode } from "#atom";
 import {
 	Brightness,
@@ -39,7 +39,7 @@ const Settings = () => {
 		>
 			<Badge offset={[-6, 6]} color="#0cf" dot={settingsChanged}>
 				<Control
-					as={SettingOutlined}
+					as={IconSettings}
 					style={{ color: iconFg }}
 				/>
 			</Badge>

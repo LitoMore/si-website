@@ -6,10 +6,10 @@ import {
 	Tag as AntTag,
 	Typography,
 } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import { IconLoader2 } from "@tabler/icons-react";
 import { styled } from "styled-components";
 import { useColorMode } from "#atom";
-import { brightThreshold, darkThreshold } from "#constants";
+import { brightThreshold, darkThreshold, spinning } from "#constants";
 import { useColorScheme, useI18n, useSizes } from "#hooks";
 import { getAliases, tidyLink } from "#utils";
 import { ColorMode, Icon } from "#types";
@@ -28,7 +28,7 @@ const Image = styled(AntImage).attrs<{ $color?: string }>(
 					color: props.$color,
 				}}
 			>
-				<LoadingOutlined />
+				<IconLoader2 style={spinning} />
 			</Flex>
 		),
 	}),

@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import { Socials } from "#components";
 import { useSizes } from "#hooks";
 import Settings from "./settings.tsx";
+import ThridParty from "./thirdparty.tsx";
 import Translations from "./translations.tsx";
 
 export const ControlTitle = styled(Divider)`
@@ -10,8 +11,8 @@ export const ControlTitle = styled(Divider)`
 `;
 
 export const Control = styled.div`
-	width: 30px;
-	height: 30px;
+	width: 32px;
+	height: 32px;
 	font-size: 24px;
 	display: flex;
 	align-items: center;
@@ -31,6 +32,7 @@ const Controls = () => {
 			<Flex align="center">
 				<Settings />
 				<Translations />
+				<ThridParty />
 			</Flex>
 		)
 		: (
@@ -38,6 +40,7 @@ const Controls = () => {
 				<Flex align="center">
 					<Settings />
 					<Translations />
+					<ThridParty />
 				</Flex>
 				<Divider type="vertical" />
 				<Socials />

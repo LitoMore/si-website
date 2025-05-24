@@ -1,5 +1,5 @@
 import { Radio, Tooltip } from "antd";
-import { QuestionCircleOutlined } from "@ant-design/icons";
+import { IconHelp } from "@tabler/icons-react";
 import { useIconStyle } from "#atom";
 import { useI18n } from "#hooks";
 
@@ -21,13 +21,13 @@ const IconStyle = () => {
 			<Radio.Button value="icon">
 				Icon{" "}
 				<Tooltip title={i18n.settings.contrastTooltip}>
-					<QuestionCircleOutlined />
+					<IconHelp />
 				</Tooltip>
 			</Radio.Button>
 			<Radio.Button value="badge">
 				Badge{" "}
 				<Tooltip title={i18n.settings.contrastTooltip}>
-					<QuestionCircleOutlined />
+					<IconHelp />
 				</Tooltip>
 			</Radio.Button>
 		</Radio.Group>

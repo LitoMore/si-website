@@ -1,10 +1,6 @@
 import { RefObject, useEffect, useRef, useState } from "react";
 import { Button, Flex, FloatButton, Input, QRCode, Space } from "antd";
-import {
-	CheckOutlined,
-	LinkOutlined,
-	ShareAltOutlined,
-} from "@ant-design/icons";
+import { IconCheck, IconLink, IconShare, IconX } from "@tabler/icons-react";
 import { styled } from "styled-components";
 import Draggable from "react-draggable";
 import { useIcons, useLanguageCode } from "#atom";
@@ -188,6 +184,7 @@ const FloatButtons = () => {
 		}
 	}, [linkCopied]);
 
+	const tablerIconOffset = { transform: "translate(-1px, 1px)" };
 	const headerHeight = 54;
 	const middleY = (innerHeight - headerHeight - 30) / 2;
 	const expandTop = position[1] + middleY > 0;
@@ -240,8 +237,9 @@ const FloatButtons = () => {
 						left: 0,
 					}}
 					trigger="click"
-					icon={<ShareAltOutlined style={{ transform: "translateX(-1px)" }} />}
+					icon={<IconShare size={18} style={tablerIconOffset} />}
 					placement={expandTop ? "top" : "bottom"}
+					closeIcon={<IconX size={20} style={tablerIconOffset} />}
 				>
 					{languageCode === LanguageCode.Chinese
 						? (
@@ -315,8 +313,8 @@ const FloatButtons = () => {
 						)}
 					<FloatButton
 						icon={linkCopied
-							? <CheckOutlined style={{ color: "green" }} />
-							: <LinkOutlined />}
+							? <IconCheck size={20} color="green" style={tablerIconOffset} />
+							: <IconLink size={20} style={tablerIconOffset} />}
 						onClick={async () => {
 							await globalThis.navigator.clipboard.writeText(
 								globalThis.location.href,

@@ -1,5 +1,6 @@
 import { Flex } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import { IconLoader2 } from "@tabler/icons-react";
+import { spinning } from "#constants";
 import { useSizes } from "#hooks";
 
 const Loading = () => {
@@ -13,7 +14,7 @@ const Loading = () => {
 			gap={20}
 			style={{ height: galleryHeight }}
 		>
-			<LoadingOutlined style={{ color: "#0cf", fontSize: 48 }} spin />
+			<IconLoader2 color="#0cf" style={spinning} />
 		</Flex>
 	);
 };

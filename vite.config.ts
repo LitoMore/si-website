@@ -27,7 +27,9 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
+			"@tabler/icons-react": "@tabler/icons-react/dist/esm/icons/index.mjs",
 			"#atom": "/src/atom.ts",
+			"#data": "/src/data/index.ts",
 			"#components": "/src/components/index.ts",
 			"#constants": "/src/constants.ts",
 			"#context": "/src/context.tsx",

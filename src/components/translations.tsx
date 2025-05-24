@@ -1,5 +1,6 @@
 import { Dropdown } from "antd";
-import { CheckOutlined, TranslationOutlined } from "@ant-design/icons";
+import { IconCheck } from "@tabler/icons-react";
+import { IconLanguage } from "@tabler/icons-react";
 import { useLanguageCode } from "#atom";
 import { useColorScheme } from "#hooks";
 import { translations } from "#i18n";
@@ -16,14 +17,14 @@ const Translations = () => {
 				items: Object.entries(translations).map(([k, v]) => ({
 					key: k,
 					label: v.languageName,
-					extra: languageCode === k ? <CheckOutlined /> : null,
+					extra: languageCode === k ? <IconCheck size={16} /> : null,
 					onClick: () => {
 						setLanguageCode(k as LanguageCode);
 					},
 				})),
 			}}
 		>
-			<Control as={TranslationOutlined} style={{ color: iconFg }} />
+			<Control as={IconLanguage} style={{ color: iconFg }} />
 		</Dropdown>
 	);
 };

@@ -1,7 +1,8 @@
 import { lazy, Suspense } from "react";
 import { Button, ConfigProvider, Dropdown, Flex, Modal, theme } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import { IconLoader2 } from "@tabler/icons-react";
 import { useColorMode, useIcons, useSelectedIcon } from "#atom";
+import { spinning } from "#constants";
 import { useCopyText, useI18n, useSizes } from "#hooks";
 import {
 	getJsdelivrCdnUrl,
@@ -150,7 +151,13 @@ export default function SiModal() {
 					setSelectedIcon(undefined);
 				}}
 			>
-				<Suspense fallback={<LoadingOutlined />}>
+				<Suspense
+					fallback={
+						<Flex align="center" justify="center">
+							<IconLoader2 style={spinning} />
+						</Flex>
+					}
+				>
 					<ModalContent icon={icon} />
 				</Suspense>
 			</Modal>

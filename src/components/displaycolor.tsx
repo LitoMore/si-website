@@ -1,5 +1,5 @@
 import { Flex, Radio, Tooltip } from "antd";
-import { QuestionCircleOutlined } from "@ant-design/icons";
+import { IconHelp } from "@tabler/icons-react";
 import { useColorMode } from "#atom";
 import { useI18n } from "#hooks";
 import { ColorMode } from "#types";
@@ -20,18 +20,18 @@ const DisplayColor = () => {
 			}}
 		>
 			<Radio.Button value={ColorMode.Contrast}>
-				<Flex justify="center" gap={5}>
+				<Flex align="center" justify="center" gap={5}>
 					{i18n.settings.contrast}
 					<Tooltip title={i18n.settings.contrastTooltip}>
-						<QuestionCircleOutlined />
+						<IconHelp size={16} />
 					</Tooltip>
 				</Flex>
 			</Radio.Button>
 			<Radio.Button value={ColorMode.Actual}>
-				<Flex justify="center" gap={5}>
+				<Flex align="center" justify="center" gap={5}>
 					{i18n.settings.actual}
 					<Tooltip title={i18n.settings.actualTooltip}>
-						<QuestionCircleOutlined />
+						<IconHelp size={16} />
 					</Tooltip>
 				</Flex>
 			</Radio.Button>

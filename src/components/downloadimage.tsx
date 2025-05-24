@@ -1,5 +1,5 @@
 import { Button, Dropdown, Flex } from "antd";
-import { DownloadOutlined } from "@ant-design/icons";
+import { IconDownload } from "@tabler/icons-react";
 import { useIcons } from "#atom";
 import { useI18n } from "#hooks";
 import { downloadBitmap, downloadPdf, downloadSvg } from "#utils";
@@ -43,7 +43,7 @@ const DownloadImage = (
 
 	return (
 		<Dropdown placement="bottom" menu={{ items }}>
-			<Button color="default" icon={showIcon && <DownloadOutlined />}>
+			<Button color="default" icon={showIcon && <IconDownload size={16} />}>
 				{i18n.modal.download}
 			</Button>
 		</Dropdown>

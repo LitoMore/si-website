@@ -1,5 +1,7 @@
 export const linkRel = "noopener nofollow noreferrer";
 
+export const spinning = { animation: "spin 1s linear infinite" };
+
 export const mobileWidth = 435;
 
 export const unicodeStartAt = 0xea01;

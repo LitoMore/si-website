@@ -1,5 +1,5 @@
 import { Flex, Radio, Tooltip } from "antd";
-import { QuestionCircleOutlined } from "@ant-design/icons";
+import { IconHelp } from "@tabler/icons-react";
 import { useBrightnessMode } from "#atom";
 import { BrightnessMode } from "#types";
 
@@ -18,18 +18,18 @@ const Brightness = () => {
 			}}
 		>
 			<Radio.Button value={BrightnessMode.SimpleIcons}>
-				<Flex justify="center" gap={5}>
+				<Flex align="center" justify="center" gap={5}>
 					Luminance
 					<Tooltip title="This uses the Simple Icons' get-relative-luminance function.">
-						<QuestionCircleOutlined />
+						<IconHelp size={16} />
 					</Tooltip>
 				</Flex>
 			</Radio.Button>
 			<Radio.Button value={BrightnessMode.ShieldsIo}>
-				<Flex justify="center" gap={5}>
+				<Flex align="center" justify="center" gap={5}>
 					Brightness{" "}
 					<Tooltip title="This uses shields.io's brightness function.">
-						<QuestionCircleOutlined />
+						<IconHelp size={16} />
 					</Tooltip>
 				</Flex>
 			</Radio.Button>

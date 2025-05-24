@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { Button, Divider, Flex, Input } from "antd";
 import {
-	CopyOutlined,
-	LoadingOutlined,
-	SaveOutlined,
-	UploadOutlined,
-} from "@ant-design/icons";
+	IconCopy,
+	IconDownload,
+	IconLoader2,
+	IconUpload,
+} from "@tabler/icons-react";
 import { styled } from "styled-components";
 import { useIcons, useSelectedIcon } from "#atom";
+import { spinning } from "#constants";
 import { useI18n } from "#hooks";
 import PrefixIcon from "./prefixicon.tsx";
 import AutoComplete from "./autocomplete.tsx";
@@ -68,14 +69,14 @@ const Preview = () => {
 							<Canvas icon={icon} color={color} />
 							<Divider style={{ margin: 0 }} />
 							<Flex gap={8}>
-								<Button type="default" icon={<UploadOutlined />}>
+								<Button type="default" icon={<IconUpload size={16} />}>
 									{i18n.preview.uploadSvg}
 								</Button>
 								<div style={{ flex: 1 }} />
 								<DownloadImage showIcon icon={icon} />
 								<Button
 									type="default"
-									icon={<SaveOutlined />}
+									icon={<IconDownload size={16} />}
 									onClick={() => {
 										const canvas = globalThis.document.querySelector("canvas");
 										if (!canvas) return;
@@ -88,7 +89,7 @@ const Preview = () => {
 								>
 									{i18n.preview.savePreview}
 								</Button>
-								<Button type="default" icon={<CopyOutlined />}>
+								<Button type="default" icon={<IconCopy size={16} />}>
 									{i18n.preview.copyScreenshot}
 								</Button>
 							</Flex>
@@ -100,7 +101,7 @@ const Preview = () => {
 							justify="center"
 							style={{ width: 720, height: 400 }}
 						>
-							<LoadingOutlined spin style={{ fontSize: 48, opacity: 0.5 }} />
+							<IconLoader2 size={32} style={{ ...spinning, opacity: 0.5 }} />
 						</Flex>
 					)}
 			</Card>
