@@ -3,7 +3,7 @@ import { IconPuzzle } from "@tabler/icons-react";
 import { useColorTheme } from "#atom";
 import { linkRel } from "#constants";
 import { thirdParties } from "#data";
-import { useColorScheme } from "#hooks";
+import { useColorScheme, useI18n, useSizes } from "#hooks";
 import { getColorScheme } from "#utils";
 import { Control } from "./controls.tsx";
 
@@ -36,8 +36,10 @@ const Item = (
 );
 
 const ThirdParty = () => {
+	const { isMobileSize } = useSizes();
 	const [colorTheme] = useColorTheme();
 	const { iconFg } = useColorScheme();
+	const { i18n } = useI18n();
 
 	return (
 		<Dropdown
@@ -48,20 +50,20 @@ const ThirdParty = () => {
 				items: [{
 					key: "extensions",
 					type: "group",
-					label: "Extensions",
+					label: i18n.thirdParties.extensions,
 					children: thirdParties.extensions.map((x) => ({
 						key: x.name,
 						label: <Item icon={x.icon} label={x.name} url={x.url} />,
-						extra: x.authorName,
+						extra: isMobileSize ? undefined : x.authorName,
 					})),
 				}, {
 					key: "libraries",
 					type: "group",
-					label: "Libraries",
+					label: i18n.thirdParties.libraries,
 					children: thirdParties.libraries.map((x) => ({
 						key: x.name,
 						label: <Item icon={x.icon} label={x.name} url={x.url} />,
-						extra: x.authorName,
+						extra: isMobileSize ? undefined : x.authorName,
 					})),
 				}],
 			}}

@@ -34,6 +34,10 @@ const translation: Internationalization = {
 		themeLight: "Light",
 		zoom: "Zoom",
 	},
+	thirdParties: {
+		extensions: "Extensions",
+		libraries: "Libraries",
+	},
 	footer: {
 		iconMissing: "Icon missing?",
 		iconOutdated: "Icon outdated?",

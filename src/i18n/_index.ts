@@ -35,6 +35,10 @@ export type Internationalization = {
 		themeLight: string;
 		zoom: string;
 	};
+	thirdParties: {
+		extensions: string;
+		libraries: string;
+	};
 	footer: {
 		iconMissing: string;
 		iconOutdated: string;

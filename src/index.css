@@ -102,21 +102,9 @@ div[data-testid="virtuoso-scroller"]::-webkit-scrollbar {
 	transition: background 0.4s;
 }
 
-/* .ant-layout-content {
-	color: var(--si-gallery-fg);
-	background-color: var(--si-gallery-bg);
-} */
-
-/* @media (prefers-color-scheme: dark) {
-	:root {
-		--si-header-fg-dark: #eee;
-		--si-header-bg-dark: #111;
-		--si-gallery-bg-dark: #2c2c2c;
-		--si-gallery-fg-dark: #f5f5f5;
-		--si-card-fg-dark: #fff;
-		--si-card-bg-dark: #333;
-	}
-} */
+.ant-dropdown-menu {
+	max-height: calc(100vh - 60px);
+}
 
 @keyframes spin {
 	0% {

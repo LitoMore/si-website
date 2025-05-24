@@ -33,6 +33,10 @@ const translation: Internationalization = {
 		themeLight: "亮色主题",
 		zoom: "缩放",
 	},
+	thirdParties: {
+		extensions: "扩展",
+		libraries: "三方库",
+	},
 	footer: {
 		iconMissing: "缺少图标？",
 		iconOutdated: "有图标过时了吗？",
