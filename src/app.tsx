@@ -14,7 +14,6 @@ import { BrightnessMode, ColorTheme } from "#types";
 
 const DefaultLayout = lazy(() => import("./layouts/default-layout.tsx"));
 const PreviewLayout = lazy(() => import("./layouts/preview-layout.tsx"));
-
 const FloatButtons = lazy(() => import("./components/floatbuttons.tsx"));
 
 const App = () => {
