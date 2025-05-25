@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Konva from "konva";
 import { Image, Layer, Rect, Stage, Text } from "react-konva";
-// @deno-types="../vendor/types/use-image.d.ts"
 import useImage from "use-image";
 import { useIcons } from "#atom";
 import { usePreviewImage } from "#hooks";

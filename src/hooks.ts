@@ -3,7 +3,6 @@ import { App } from "antd";
 import copyTextToClipboard from "copy-text-to-clipboard";
 import { useMediaQuery, useWindowSize } from "@uidotdev/usehooks";
 import { Searcher } from "fast-fuzzy";
-// @deno-types="./vendor/types/use-image.d.ts"
 import useImage from "use-image";
 import { useCardSize, useColorTheme, useIcons } from "#atom";
 import { mobileWidth } from "#constants";

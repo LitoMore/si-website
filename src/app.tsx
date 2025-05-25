@@ -1,4 +1,3 @@
-// @deno-types="@types/react"
 import { lazy, useEffect } from "react";
 import { Route, Routes, useSearchParams } from "react-router";
 import { App as Ant, ConfigProvider, theme } from "antd";
