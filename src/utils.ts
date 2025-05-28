@@ -30,8 +30,11 @@ export const getIconsData = async (
 ) => {
 	const [major] = simpleIconsVersion.split(".");
 	const isNewFormat = Number(major) >= 14;
+	const isNewDataFolder = Number(major) >= 15;
 	const response = await fetch(
-		`https://cdn.jsdelivr.net/npm/simple-icons@${simpleIconsVersion}/_data/simple-icons.json`,
+		`https://cdn.jsdelivr.net/npm/simple-icons@${simpleIconsVersion}/${
+			isNewDataFolder ? "data" : "_data"
+		}/simple-icons.json`,
 	);
 	const json = await response.json();
 	const iconsData = (isNewFormat ? json : json.icons) as IconData[];
