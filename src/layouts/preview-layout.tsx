@@ -1,7 +1,7 @@
-import { memo } from "react";
-import { Flex, Layout } from "antd";
-import Preview from "../components/preview.tsx";
-import Controls from "../components/controls.tsx";
+import {memo} from 'react';
+import {Flex, Layout} from 'antd';
+import Controls from '../components/controls.js';
+import Preview from '../components/preview.js';
 
 export default memo(() => (
 	<Layout>
@@ -9,7 +9,7 @@ export default memo(() => (
 		<Flex
 			align="center"
 			justify="center"
-			style={{ position: "fixed", top: 0, right: 0, padding: 10 }}
+			style={{position: 'fixed', top: 0, right: 0, padding: 10}}
 		>
 			<Controls />
 		</Flex>

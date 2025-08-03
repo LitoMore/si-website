@@ -1,11 +1,11 @@
-import { IconData } from "./vendor/simple-icons-sdk.ts";
+import {type IconData} from './vendor/simple-icons-sdk.ts';
 
-export type { IconData } from "./vendor/simple-icons-sdk.ts";
-export { type Internationalization, LanguageCode } from "#i18n";
+export type {IconData} from './vendor/simple-icons-sdk.ts';
+export {type Internationalization, LanguageCode} from '#i18n';
 
 export enum PageLayout {
-	Default = "default",
-	Previewer = "previewer",
+	Default = 'default',
+	Previewer = 'previewer',
 }
 
 export enum CardSize {
@@ -15,25 +15,25 @@ export enum CardSize {
 }
 
 export enum ColorTheme {
-	Auto = "auto",
-	Light = "light",
-	Dark = "dark",
+	Auto = 'auto',
+	Light = 'light',
+	Dark = 'dark',
 }
 
 export enum ColorMode {
-	Actual = "actual",
-	Contrast = "contrast",
+	Actual = 'actual',
+	Contrast = 'contrast',
 }
 
 export enum BrightnessMode {
-	SimpleIcons = "simpleicons",
-	ShieldsIo = "shieldsio",
+	SimpleIcons = 'simpleicons',
+	ShieldsIo = 'shieldsio',
 }
 
 export enum BitmapFormat {
-	PNG = "png",
-	JPG = "jpg",
-	WebP = "webp",
+	PNG = 'png',
+	JPG = 'jpg',
+	WebP = 'webp',
 }
 
 export type JsDelivrNpmResponse = {
@@ -60,11 +60,11 @@ export type IconsData = {
 };
 
 export enum BadgeStyle {
-	Flat = "flat",
-	Social = "social",
-	Plastic = "plastic",
-	FlatSquare = "flat-square",
-	ForTheBadge = "for-the-badge",
+	Flat = 'flat',
+	Social = 'social',
+	Plastic = 'plastic',
+	FlatSquare = 'flat-square',
+	ForTheBadge = 'for-the-badge',
 }
 
 export type ImageElement = {
@@ -73,4 +73,4 @@ export type ImageElement = {
 	x: number;
 };
 
-export type ImageState = "loaded" | "loading" | "failed";
+export type ImageState = 'loaded' | 'loading' | 'failed';

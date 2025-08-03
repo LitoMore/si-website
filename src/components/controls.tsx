@@ -1,10 +1,10 @@
-import { Divider, Flex } from "antd";
-import { styled } from "styled-components";
-import { Socials } from "#components";
-import { useSizes } from "#hooks";
-import Settings from "./settings.tsx";
-import ThridParty from "./thirdparty.tsx";
-import Translations from "./translations.tsx";
+import {Divider, Flex} from 'antd';
+import {styled} from 'styled-components';
+import {Socials} from '#components';
+import {useSizes} from '#hooks';
+import Settings from './settings.js';
+import ThridParty from './thirdparty.js';
+import Translations from './translations.js';
 
 export const ControlTitle = styled(Divider)`
 	margin: 0 !important;
@@ -25,27 +25,25 @@ export const Control = styled.div`
 	}
 `;
 
-const Controls = () => {
-	const { isMobileSize } = useSizes();
-	return isMobileSize
-		? (
+function Controls() {
+	const {isMobileSize} = useSizes();
+	return isMobileSize ? (
+		<Flex align="center">
+			<Settings />
+			<Translations />
+			<ThridParty />
+		</Flex>
+	) : (
+		<>
 			<Flex align="center">
 				<Settings />
 				<Translations />
 				<ThridParty />
 			</Flex>
-		)
-		: (
-			<>
-				<Flex align="center">
-					<Settings />
-					<Translations />
-					<ThridParty />
-				</Flex>
-				<Divider type="vertical" />
-				<Socials />
-			</>
-		);
-};
+			<Divider type="vertical" />
+			<Socials />
+		</>
+	);
+}
 
 export default Controls;

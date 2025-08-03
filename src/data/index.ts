@@ -1,1 +1,1 @@
-export { default as thirdParties } from "./third-party.ts";
+export {default as thirdParties} from './third-party.js';

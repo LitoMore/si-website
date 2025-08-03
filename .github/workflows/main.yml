@@ -1,4 +1,4 @@
-name: Deno
+name: Node
 on: [push]
 jobs:
   build:
@@ -6,7 +6,8 @@ jobs:
     name: Deno
     steps:
       - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v2
+      - uses: actions/setup-node@v4
       - run: |
-          deno task test
-          deno task build
+          npm ci
+          npm run test
+          npm run build

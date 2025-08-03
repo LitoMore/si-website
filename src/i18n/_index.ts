@@ -1,7 +1,7 @@
-import { useLanguageCode } from "#atom";
-import { gettext } from "#utils";
-import en from "./en.i18n.ts";
-import zh from "./zh.i18n.ts";
+import {useLanguageCode} from '#atom';
+import {gettext} from '#utils';
+import en from './en.i18n.js';
+import zh from './zh.i18n.js';
 
 export type Internationalization = {
 	languageName: string;
@@ -63,8 +63,8 @@ export type Internationalization = {
 };
 
 export enum LanguageCode {
-	Chinese = "zh",
-	English = "en",
+	Chinese = 'zh',
+	English = 'en',
 	// French = "fr",
 	// Japanese = "ja",
 	// Ukrainian = "uk",
@@ -80,5 +80,5 @@ export const translations: Record<LanguageCode, Internationalization> = {
 
 export const useI18n = () => {
 	const [languageCode] = useLanguageCode();
-	return { i18n: translations[languageCode], gettext };
+	return {i18n: translations[languageCode], gettext};
 };

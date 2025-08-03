@@ -1,12 +1,12 @@
-import { Flex } from "antd";
-// import { CaretDownOutlined, EyeOutlined } from "@ant-design/icons";
+import {Flex} from 'antd';
+// Import { CaretDownOutlined, EyeOutlined } from "@ant-design/icons";
 // import { useNavigate } from "react-router";
-import { useColorScheme } from "#hooks";
-// import { PageLayout } from "#types";
+import {useColorScheme} from '#hooks';
+// Import { PageLayout } from "#types";
 
-const Apps = () => {
-	// const navigate = useNavigate();
-	const { iconFg } = useColorScheme();
+function Apps() {
+	// Const navigate = useNavigate();
+	const {iconFg} = useColorScheme();
 
 	return (
 		// <Dropdown
@@ -22,15 +22,15 @@ const Apps = () => {
 		<Flex>
 			<img
 				alt="Simple Icons"
-				src={`https://cdn.simpleicons.org/simpleicons/${
-					iconFg.slice(1)
-				}?viewbox=auto`}
-				style={{ width: 24, height: 24 }}
+				src={`https://cdn.simpleicons.org/simpleicons/${iconFg.slice(
+					1,
+				)}?viewbox=auto`}
+				style={{width: 24, height: 24}}
 			/>
 			{/* <CaretDownOutlined style={{ fontSize: 12 }} /> */}
 		</Flex>
 		// </Dropdown>
 	);
-};
+}
 
 export default Apps;

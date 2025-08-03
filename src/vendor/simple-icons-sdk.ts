@@ -4,7 +4,7 @@ type SpdxLicense = {
 };
 
 type CustomLicense = {
-	type: "custom";
+	type: 'custom';
 	url: string;
 };
 
@@ -28,40 +28,40 @@ export type IconData = {
 	source: string;
 	slug?: string;
 	guidelines?: string;
-	license?: Omit<SpdxLicense, "url"> | CustomLicense;
+	license?: Omit<SpdxLicense, 'url'> | CustomLicense;
 	aliases?: Aliases;
 };
 
-const TITLE_TO_SLUG_REPLACEMENTS: Record<string, string> = {
-	"+": "plus",
-	".": "dot",
-	"&": "and",
-	đ: "d",
-	ħ: "h",
-	ı: "i",
-	ĸ: "k",
-	ŀ: "l",
-	ł: "l",
-	ß: "ss",
-	ŧ: "t",
+const titleToSlugReplacements: Record<string, string> = {
+	/* eslint-disable @typescript-eslint/naming-convention */
+	'+': 'plus',
+	'.': 'dot',
+	'&': 'and',
+	/* eslint-enable @typescript-eslint/naming-convention */
+	đ: 'd',
+	ħ: 'h',
+	ı: 'i',
+	ĸ: 'k',
+	ŀ: 'l',
+	ł: 'l',
+	ß: 'ss',
+	ŧ: 't',
 };
 
-const TITLE_TO_SLUG_CHARS_REGEX = new RegExp(
-	`[${Object.keys(TITLE_TO_SLUG_REPLACEMENTS).join("")}]`,
-	"g",
+const titleToSlugCharsRegex = new RegExp(
+	`[${Object.keys(titleToSlugReplacements).join('')}]`,
+	'g',
 );
 
-const TITLE_TO_SLUG_RANGE_REGEX = /[^a-z\d]/g;
+const titleToSlugChartsRange = /[^a-z\d]/g;
 
 const titleToSlug = (title: string) =>
 	title
 		.toLowerCase()
-		.replace(
-			TITLE_TO_SLUG_CHARS_REGEX,
-			(char) => TITLE_TO_SLUG_REPLACEMENTS[char],
-		)
-		.normalize("NFD")
-		.replace(TITLE_TO_SLUG_RANGE_REGEX, "");
+		// eslint-disable-next-line unicorn/prefer-string-replace-all
+		.replace(titleToSlugCharsRegex, (char) => titleToSlugReplacements[char]!)
+		.normalize('NFD')
+		.replaceAll(titleToSlugChartsRange, '');
 
 export const getIconSlug = (icon: IconData) =>
-	icon.slug || titleToSlug(icon.title);
+	icon.slug ?? titleToSlug(icon.title);

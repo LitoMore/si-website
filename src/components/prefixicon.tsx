@@ -1,18 +1,20 @@
-import { useIcons } from "#atom";
-import { brightThreshold } from "#constants";
-import { useColorScheme } from "#hooks";
-import { getMaskStyles, normalizeColor } from "#utils";
-import { Icon } from "#types";
+import {useIcons} from '#atom';
+import {brightThreshold} from '#constants';
+import {useColorScheme} from '#hooks';
+import {type Icon} from '#types';
+import {getMaskStyles, normalizeColor} from '#utils';
 
-const PrefixIcon = (
-	{ icon, style, color }: {
-		icon?: Icon;
-		style: "color" | "icon";
-		color?: string;
-	},
-) => {
-	const [{ version }] = useIcons();
-	const { isLight } = useColorScheme();
+function PrefixIcon({
+	icon,
+	color,
+	iconStyle,
+}: {
+	readonly icon?: Icon;
+	readonly color?: string;
+	readonly iconStyle: 'color' | 'icon';
+}) {
+	const [{version}] = useIcons();
+	const {isLight} = useColorScheme();
 	if (!icon) return null;
 
 	return (
@@ -21,20 +23,21 @@ const PrefixIcon = (
 				width: 20,
 				height: 20,
 				marginRight: 4,
-				borderRadius: style === "color" ? 4 : undefined,
-				boxShadow: style === "color"
-					? "0 0 5px 0 rgba(0, 0, 0, 0.25)"
-					: undefined,
-				backgroundColor: style === "color"
-					? `#${normalizeColor(color) ?? icon.hex ?? "000000"}`
-					: undefined,
-				...(style === "icon" ? getMaskStyles(version, icon, isLight) : {}),
-				filter: style === "icon" && icon.brightness > brightThreshold
-					? "var(--si-contrast)"
-					: undefined,
+				borderRadius: iconStyle === 'color' ? 4 : undefined,
+				boxShadow:
+					iconStyle === 'color' ? '0 0 5px 0 rgba(0, 0, 0, 0.25)' : undefined,
+				backgroundColor:
+					iconStyle === 'color'
+						? `#${normalizeColor(color) ?? icon.hex ?? '000000'}`
+						: undefined,
+				...(iconStyle === 'icon' ? getMaskStyles(version, icon, isLight) : {}),
+				filter:
+					iconStyle === 'icon' && icon.brightness > brightThreshold
+						? 'var(--si-contrast)'
+						: undefined,
 			}}
 		/>
 	);
-};
+}
 
 export default PrefixIcon;

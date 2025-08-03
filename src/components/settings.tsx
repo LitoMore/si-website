@@ -1,32 +1,33 @@
-import { Badge, Flex, Popover } from "antd";
-import { useLocation } from "react-router";
-import { IconSettings } from "@tabler/icons-react";
-import { useBrightnessMode, useCardSize, useColorMode } from "#atom";
+import {IconSettings} from '@tabler/icons-react';
+import {Badge, Flex, Popover} from 'antd';
+import {useLocation} from 'react-router';
+import {useBrightnessMode, useCardSize, useColorMode} from '#atom';
 import {
 	Brightness,
 	CardsizeSlider,
 	ColorThemes,
 	DisplayColor,
 	Reset,
-} from "#components";
-import { useColorScheme } from "#hooks";
-import { BrightnessMode, CardSize, ColorMode } from "#types";
-import { Control } from "./controls.tsx";
+} from '#components';
+import {useColorScheme} from '#hooks';
+import {BrightnessMode, CardSize, ColorMode} from '#types';
+import {Control} from './controls.js';
 
-const Settings = () => {
-	const { pathname } = useLocation();
+function Settings() {
+	const {pathname} = useLocation();
 	const [brightnessMode] = useBrightnessMode();
 	const [cardSize] = useCardSize();
 	const [colorMode] = useColorMode();
-	const { iconFg } = useColorScheme();
+	const {iconFg} = useColorScheme();
 
-	const isPreview = pathname === "/preview";
-	const settingsChanged = brightnessMode !== BrightnessMode.SimpleIcons ||
-		cardSize !== CardSize.Small || colorMode !== ColorMode.Contrast;
+	const isPreview = pathname === '/preview';
+	const settingsChanged =
+		brightnessMode !== BrightnessMode.SimpleIcons ||
+		cardSize !== CardSize.Small ||
+		colorMode !== ColorMode.Contrast;
 
 	return (
 		<Popover
-			trigger="hover"
 			content={
 				<Flex vertical gap={10}>
 					{!isPreview && <CardsizeSlider />}
@@ -36,15 +37,13 @@ const Settings = () => {
 					<Reset />
 				</Flex>
 			}
+			trigger="hover"
 		>
-			<Badge offset={[-6, 6]} color="#0cf" dot={settingsChanged}>
-				<Control
-					as={IconSettings}
-					style={{ color: iconFg }}
-				/>
+			<Badge color="#0cf" dot={settingsChanged} offset={[-6, 6]}>
+				<Control as={IconSettings} style={{color: iconFg}} />
 			</Badge>
 		</Popover>
 	);
-};
+}
 
 export default Settings;

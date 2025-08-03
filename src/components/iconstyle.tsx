@@ -1,37 +1,37 @@
-import { Radio, Tooltip } from "antd";
-import { IconHelp } from "@tabler/icons-react";
-import { useIconStyle } from "#atom";
-import { useI18n } from "#hooks";
+import {IconHelp} from '@tabler/icons-react';
+import {Radio, Tooltip} from 'antd';
+import {useIconStyle} from '#atom';
+import {useI18n} from '#hooks';
 
-const IconStyle = () => {
+function IconStyle() {
 	const [iconStyle, setIconStyle] = useIconStyle();
-	const { i18n } = useI18n();
+	const {i18n} = useI18n();
 
 	return (
 		<Radio.Group
 			block
-			defaultValue="icon"
-			value={iconStyle}
-			optionType="button"
 			buttonStyle="solid"
+			defaultValue="icon"
+			optionType="button"
+			value={iconStyle}
 			onChange={(event) => {
-				setIconStyle(event.target.value);
+				setIconStyle(event.target.value as 'icon' | 'badge');
 			}}
 		>
 			<Radio.Button value="icon">
-				Icon{" "}
+				Icon{' '}
 				<Tooltip title={i18n.settings.contrastTooltip}>
 					<IconHelp />
 				</Tooltip>
 			</Radio.Button>
 			<Radio.Button value="badge">
-				Badge{" "}
+				Badge{' '}
 				<Tooltip title={i18n.settings.contrastTooltip}>
 					<IconHelp />
 				</Tooltip>
 			</Radio.Button>
 		</Radio.Group>
 	);
-};
+}
 
 export default IconStyle;

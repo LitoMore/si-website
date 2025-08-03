@@ -1,23 +1,30 @@
 /*
  * [INFO] We don't use styled-components for this component due to performance reasons.
  */
-import { CSSProperties } from "react";
-import { useColorMode, useIcons, useSelectedIcon } from "#atom";
-import { brightThreshold, darkThreshold } from "#constants";
-import { useColorScheme, useSizes } from "#hooks";
-import { getMaskStyles } from "#utils";
-import { ColorMode, Icon } from "#types";
+import {type CSSProperties} from 'react';
+import {useColorMode, useIcons, useSelectedIcon} from '#atom';
+import {brightThreshold, darkThreshold} from '#constants';
+import {useColorScheme, useSizes} from '#hooks';
+import {ColorMode, type Icon} from '#types';
+import {getMaskStyles} from '#utils';
 
-const Card = ({ icon, style }: { icon: Icon; style?: CSSProperties }) => {
-	const [{ version }] = useIcons();
+function Card({
+	icon,
+	style,
+}: {
+	readonly icon: Icon;
+	readonly style?: CSSProperties;
+}) {
+	const [{version}] = useIcons();
 	const [selectedIcon, setSelectedIcon] = useSelectedIcon();
 	const [colorMode] = useColorMode();
-	const { cardPixels } = useSizes();
-	const { isLight, isDark, galleryFg, contrast } = useColorScheme();
+	const {cardPixels} = useSizes();
+	const {isLight, isDark, galleryFg, contrast} = useColorScheme();
 	const hexColor = `#${icon.hex}`;
 	const borderColor = isLight ? hexColor : galleryFg;
 	const borderWidth = isLight ? 2 : 1;
-	const a11yFriendly = (isLight && icon.brightness <= brightThreshold) ||
+	const a11yFriendly =
+		(isLight && icon.brightness <= brightThreshold) ||
 		(isDark && icon.brightness > darkThreshold);
 	const applyContrast = colorMode === ColorMode.Contrast && !a11yFriendly;
 
@@ -33,16 +40,14 @@ const Card = ({ icon, style }: { icon: Icon; style?: CSSProperties }) => {
 				borderRight: `${borderWidth}px solid ${borderColor}`,
 				borderBottom: isLight ? 0 : `${borderWidth}px solid ${borderColor}`,
 				filter: applyContrast ? contrast : undefined,
-				transform: selectedIcon?.slug === icon.slug
-					? "translateY(-2px)"
-					: undefined,
+				transform:
+					selectedIcon?.slug === icon.slug ? 'translateY(-2px)' : undefined,
 			}}
-			onClick={() => setSelectedIcon(icon)}
+			onClick={() => {
+				setSelectedIcon(icon);
+			}}
 		>
-			<div
-				className="icon-image"
-				style={getMaskStyles(version, icon, true)}
-			/>
+			<div className="icon-image" style={getMaskStyles(version, icon, true)} />
 			<div className="icon-title">{icon.title}</div>
 			<div
 				className="icon-color"
@@ -54,11 +59,11 @@ const Card = ({ icon, style }: { icon: Icon; style?: CSSProperties }) => {
 			>
 				{hexColor}
 				{colorMode === ColorMode.Actual
-					? " " + icon.brightness.toFixed(2)
+					? ' ' + icon.brightness.toFixed(2)
 					: null}
 			</div>
 		</div>
 	);
-};
+}
 
 export default Card;

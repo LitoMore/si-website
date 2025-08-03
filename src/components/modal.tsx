@@ -1,39 +1,37 @@
-import { lazy, Suspense } from "react";
-import { Button, ConfigProvider, Dropdown, Flex, Modal, theme } from "antd";
-import { IconLoader2 } from "@tabler/icons-react";
-import { useColorMode, useIcons, useSelectedIcon } from "#atom";
-import { spinning } from "#constants";
-import { useCopyText, useI18n, useSizes } from "#hooks";
+import {Suspense, lazy} from 'react';
+import {IconLoader2} from '@tabler/icons-react';
+import {Button, ConfigProvider, Dropdown, Flex, Modal, theme} from 'antd';
+import {useColorMode, useIcons, useSelectedIcon} from '#atom';
+import {spinning} from '#constants';
+import {useCopyText, useI18n, useSizes} from '#hooks';
+import {ColorMode, type Icon} from '#types';
 import {
 	getJsdelivrCdnUrl,
 	getSimpleIconsCdnUrl,
 	getSvg,
 	getSvgPath,
 	getUnpkgCdnUrl,
-} from "#utils";
-import { ColorMode, Icon } from "#types";
-import DownloadImage from "./downloadimage.tsx";
+} from '#utils';
+import DownloadImage from './downloadimage.js';
 
-const ModalContent = lazy(() => import("./modalcontent.tsx"));
+const ModalContent = lazy(async () => import('./modalcontent.js'));
 
-const CopySvgButtons = ({ icon }: { icon: Icon }) => {
-	const [{ version }] = useIcons();
-	const { i18n } = useI18n();
+function CopySvgButtons({icon}: {readonly icon: Icon}) {
+	const [{version}] = useIcons();
+	const {i18n} = useI18n();
 	const copyText = useCopyText();
 
-	const copySvg = async (
-		options?: { colored?: boolean; path?: boolean },
-	) => {
+	const copySvg = async (options?: {colored?: boolean; path?: boolean}) => {
 		const svg = await getSvg(version, icon.slug);
 
 		if (options?.path) {
 			const path = getSvgPath(svg);
-			copyText(i18n.modal.svgPath, path);
+			if (path) copyText(i18n.modal.svgPath, path);
 			return;
 		}
 
 		if (options?.colored) {
-			const colored = svg.replace("<svg ", `<svg fill="#${icon.hex}" `);
+			const colored = svg.replace('<svg ', `<svg fill="#${icon.hex}" `);
 			copyText(i18n.modal.svgColored, colored);
 			return;
 		}
@@ -41,16 +39,20 @@ const CopySvgButtons = ({ icon }: { icon: Icon }) => {
 		copyText(i18n.modal.svgPlain, svg);
 	};
 
-	const items = [{
-		type: i18n.modal.svgPlain,
-		onClick: () => copySvg(),
-	}, {
-		type: i18n.modal.svgColored,
-		onClick: () => copySvg({ colored: true }),
-	}, {
-		type: i18n.modal.svgPath,
-		onClick: () => copySvg({ path: true }),
-	}].map((x) => ({
+	const items = [
+		{
+			type: i18n.modal.svgPlain,
+			onClick: async () => copySvg(),
+		},
+		{
+			type: i18n.modal.svgColored,
+			onClick: async () => copySvg({colored: true}),
+		},
+		{
+			type: i18n.modal.svgPath,
+			onClick: async () => copySvg({path: true}),
+		},
+	].map((x) => ({
 		key: x.type,
 		label: (
 			<Flex key={x.type} onClick={x.onClick}>
@@ -60,30 +62,28 @@ const CopySvgButtons = ({ icon }: { icon: Icon }) => {
 	}));
 
 	return (
-		<Dropdown placement="bottom" menu={{ items }}>
-			<Button color="default">
-				{i18n.modal.copy} SVG
-			</Button>
+		<Dropdown menu={{items}} placement="bottom">
+			<Button color="default">{i18n.modal.copy} SVG</Button>
 		</Dropdown>
 	);
-};
+}
 
-const CdnButtons = ({ icon }: { icon: Icon }) => {
-	const [{ version }] = useIcons();
-	const { i18n } = useI18n();
+function CdnButtons({icon}: {readonly icon: Icon}) {
+	const [{version}] = useIcons();
+	const {i18n} = useI18n();
 	const copyText = useCopyText();
 
 	const items = [
 		{
-			title: "cdn.simpleicons.org",
+			title: 'cdn.simpleicons.org',
 			link: getSimpleIconsCdnUrl(icon.slug),
 		},
 		{
-			title: "jsDelivr",
+			title: 'jsDelivr',
 			link: getJsdelivrCdnUrl(version, icon.slug),
 		},
 		{
-			title: "unpkg",
+			title: 'unpkg',
 			link: getUnpkgCdnUrl(version, icon.slug),
 		},
 	].map((x) => ({
@@ -91,7 +91,9 @@ const CdnButtons = ({ icon }: { icon: Icon }) => {
 		label: (
 			<Flex
 				key={x.title}
-				onClick={() => copyText(x.title, x.link)}
+				onClick={() => {
+					copyText(x.title, x.link);
+				}}
 			>
 				{x.title}
 			</Flex>
@@ -99,43 +101,44 @@ const CdnButtons = ({ icon }: { icon: Icon }) => {
 	}));
 
 	return (
-		<Dropdown placement="bottom" menu={{ items }}>
-			<Button color="default">
-				{i18n.modal.copy} CDN
-			</Button>
+		<Dropdown menu={{items}} placement="bottom">
+			<Button color="default">{i18n.modal.copy} CDN</Button>
 		</Dropdown>
 	);
-};
+}
 
 export default function SiModal() {
 	const [icon, setSelectedIcon] = useSelectedIcon();
-	const { isMobileSize } = useSizes();
+	const {isMobileSize} = useSizes();
 	const [colorMode] = useColorMode();
-	const { i18n } = useI18n();
+	const {i18n} = useI18n();
 	const copyText = useCopyText();
-	const isDarkIcon = icon?.relativeColor === "#fff";
+	const isDarkIcon = icon?.relativeColor === '#fff';
 
 	return (
 		<ConfigProvider
-			theme={colorMode === ColorMode.Actual
-				? {
-					algorithm: isDarkIcon ? theme.defaultAlgorithm : theme.darkAlgorithm,
-				}
-				: undefined}
+			theme={
+				colorMode === ColorMode.Actual
+					? {
+							algorithm: isDarkIcon
+								? theme.defaultAlgorithm
+								: theme.darkAlgorithm,
+						}
+					: undefined
+			}
 		>
 			<Modal
 				centered
 				destroyOnHidden
 				closeIcon={isMobileSize}
-				open={Boolean(icon)}
-				footer={icon
-					? (
-						<Flex vertical gap={5} justify="center" align="center">
+				footer={
+					icon ? (
+						<Flex vertical align="center" gap={5} justify="center">
 							<Flex wrap gap={5} justify="center">
 								<Button
 									color="default"
 									onClick={() => {
-										copyText("slug", icon.slug);
+										copyText('slug', icon.slug);
 									}}
 								>
 									{i18n.modal.copy} Slug
@@ -145,8 +148,11 @@ export default function SiModal() {
 								<DownloadImage icon={icon} />
 							</Flex>
 						</Flex>
+					) : (
+						[]
 					)
-					: []}
+				}
+				open={Boolean(icon)}
 				onCancel={() => {
 					setSelectedIcon(undefined);
 				}}

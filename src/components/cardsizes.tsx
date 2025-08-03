@@ -1,35 +1,32 @@
-import { Flex, Slider } from "antd";
-import { IconZoomIn, IconZoomOut } from "@tabler/icons-react";
-import { useCardSize } from "#atom";
-import { mobileWidth } from "#constants";
-import { useColorScheme, useSizes } from "#hooks";
-import { CardSize } from "#types";
+import {IconZoomIn, IconZoomOut} from '@tabler/icons-react';
+import {Flex, Slider} from 'antd';
+import {useCardSize} from '#atom';
+import {mobileWidth} from '#constants';
+import {useColorScheme, useSizes} from '#hooks';
+import {CardSize} from '#types';
 
-const CardsizeSlider = () => {
-	const { cardPixels, innerWidth } = useSizes();
+function CardsizeSlider() {
+	const {cardPixels, innerWidth} = useSizes();
 	const [, setCardSize] = useCardSize();
-	const { iconFg } = useColorScheme();
+	const {iconFg} = useColorScheme();
 	if (innerWidth < mobileWidth) return null;
 
 	return (
-		<Flex gap={10} align="center">
+		<Flex align="center" gap={10}>
 			<IconZoomOut color={iconFg} size={18} />
 			<Slider
-				tooltip={{ open: false }}
-				style={{ width: 300 }}
-				step={25}
-				value={cardPixels}
 				defaultValue={cardPixels}
-				min={CardSize.Small}
 				max={CardSize.Large}
+				min={CardSize.Small}
+				step={25}
+				style={{width: 300}}
+				tooltip={{open: false}}
+				value={cardPixels}
 				onChange={setCardSize}
 			/>
-			<IconZoomIn
-				color={iconFg}
-				size={20}
-			/>
+			<IconZoomIn color={iconFg} size={20} />
 		</Flex>
 	);
-};
+}
 
 export default CardsizeSlider;

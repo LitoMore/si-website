@@ -1,46 +1,36 @@
-import { memo } from "react";
-import { AutoSizer, Collection } from "react-virtualized";
-import { Card } from "#components";
-import { Icon } from "#types";
+import {memo} from 'react';
+import {AutoSizer, Collection} from 'react-virtualized';
+import {Card} from '#components';
+import {type Icon} from '#types';
 
 const Virutalized = memo(
-	(
-		{
-			icons,
-			iconsPerRow,
-			cardPixels,
-			innerWidth,
-			galleryHeight,
-		}: {
-			icons: Icon[];
-			iconsPerRow: number;
-			cardPixels: number;
-			innerWidth: number;
-			galleryHeight: string;
-		},
-	) => {
+	({
+		icons,
+		iconsPerRow,
+		cardPixels,
+		innerWidth,
+		galleryHeight,
+	}: {
+		readonly icons: Icon[];
+		readonly iconsPerRow: number;
+		readonly cardPixels: number;
+		readonly innerWidth: number;
+		readonly galleryHeight: string;
+	}) => {
 		return (
 			<AutoSizer
 				className="asb"
-				style={{ height: galleryHeight, width: innerWidth }}
+				style={{height: galleryHeight, width: innerWidth}}
 			>
-				{({ height, width }) => {
+				{({height, width}) => {
 					return (
 						<Collection
-							width={width}
-							height={height}
 							cellCount={icons.length}
-							cellRenderer={({ index, style }) => {
+							cellRenderer={({index, style}) => {
 								const icon = icons[index];
-								return (
-									<Card
-										key={icon.slug}
-										style={style}
-										icon={icon}
-									/>
-								);
+								return <Card key={icon.slug} icon={icon} style={style} />;
 							}}
-							cellSizeAndPositionGetter={({ index }) => {
+							cellSizeAndPositionGetter={({index}) => {
 								const isFirstTwoLines = index < (iconsPerRow - 1) * 2;
 								const line = Math.floor(
 									index / (isFirstTwoLines ? iconsPerRow - 1 : iconsPerRow),
@@ -68,6 +58,8 @@ const Virutalized = memo(
 									height: cardPixels,
 								};
 							}}
+							height={height}
+							width={width}
 						/>
 					);
 				}}
