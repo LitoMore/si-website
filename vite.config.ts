@@ -1,7 +1,8 @@
 import process from 'node:process';
+import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import {visualizer} from 'rollup-plugin-visualizer';
-import {type PluginOption, defineConfig} from 'vite';
+import {defineConfig} from 'vite';
 
 const baseUrl = process.env['VITE_BASE_URL'];
 const enableVisualizer = process.env['VITE_ENABLE_VISUALIZER'];
@@ -16,7 +17,8 @@ export default defineConfig({
 					'babel-plugin-styled-components',
 				],
 			},
-		}) as PluginOption,
+		}),
+		tailwindcss(),
 		enableVisualizer ? visualizer() : undefined,
 	].filter(Boolean),
 	build: {

@@ -1,6 +1,6 @@
 import {type RefObject, useEffect, useRef, useState} from 'react';
 import {IconCheck, IconLink, IconShare, IconX} from '@tabler/icons-react';
-import {Button, Flex, FloatButton, Input, QRCode, Space} from 'antd';
+import {Button, FloatButton, Input, QRCode, Space} from 'antd';
 import Draggable from 'react-draggable';
 import {styled} from 'styled-components';
 import {useIcons, useLanguageCode} from '#atom';
@@ -114,15 +114,11 @@ function MastodonButton({
 			$hoverActive={showInput}
 			description={
 				showInput ? (
-					<Flex
+					<div
+						className="box-shadow-[0 6px 16px 0 rgba(0, 0, 0, 0.08),0 3px 6px -4px rgba(0, 0, 0, 0.12),0 9px 28px 8px rgba(0, 0, 0, 0.05)] absolute h-8 rounded-md"
 						style={{
-							position: 'absolute',
 							width: buttonWidth,
-							height: 32,
 							transform: `translate(${moveX}px, -18px)`,
-							borderRadius: 6,
-							boxShadow:
-								'0 6px 16px 0 rgba(0, 0, 0, 0.08),0 3px 6px -4px rgba(0, 0, 0, 0.12),0 9px 28px 8px rgba(0, 0, 0, 0.05)',
 							opacity: inputVisible ? 1 : 0,
 							transition: 'opacity 0.2s, transform 0.2s',
 						}}
@@ -139,11 +135,11 @@ function MastodonButton({
 								}}
 							/>
 							<Button
+								className="rounded-r-md"
 								disabled={!instanceUrl}
 								href={instanceUrl}
 								rel={instanceUrl ? linkRel : undefined}
 								style={{
-									borderRadius: '0 6px 6px 0',
 									backgroundColor: instanceUrl
 										? undefined
 										: isDark
@@ -156,7 +152,7 @@ function MastodonButton({
 								{i18n.share.share}
 							</Button>
 						</Space.Compact>
-					</Flex>
+					</div>
 				) : null
 			}
 			icon={<Icon color={iconFg.slice(1)} colorHover="_" slug="mastodon" />}

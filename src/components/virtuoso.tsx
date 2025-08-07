@@ -20,12 +20,9 @@ function Virtuoso({
 						<div
 							ref={ref}
 							{...props}
+							className="m-[10px_0] flex flex-wrap gap-[5px]"
 							style={{
 								...style,
-								display: 'flex',
-								flexWrap: 'wrap',
-								gap: 5,
-								margin: `10px 0`,
 							}}
 						>
 							{children}

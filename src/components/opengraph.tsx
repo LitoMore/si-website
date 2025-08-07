@@ -1,5 +1,5 @@
 function OpenGraph() {
-	return <div className="" />;
+	return <div className="h-screen w-full">test</div>;
 }
 
 export default OpenGraph;

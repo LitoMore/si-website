@@ -1,5 +1,5 @@
 import {IconZoomIn, IconZoomOut} from '@tabler/icons-react';
-import {Flex, Slider} from 'antd';
+import {Slider} from 'antd';
 import {useCardSize} from '#atom';
 import {mobileWidth} from '#constants';
 import {useColorScheme, useSizes} from '#hooks';
@@ -12,7 +12,7 @@ function CardsizeSlider() {
 	if (innerWidth < mobileWidth) return null;
 
 	return (
-		<Flex align="center" gap={10}>
+		<div className="flex justify-center gap-[10px]">
 			<IconZoomOut color={iconFg} size={18} />
 			<Slider
 				defaultValue={cardPixels}
@@ -25,7 +25,7 @@ function CardsizeSlider() {
 				onChange={setCardSize}
 			/>
 			<IconZoomIn color={iconFg} size={20} />
-		</Flex>
+		</div>
 	);
 }
 

@@ -1,5 +1,5 @@
 import {IconHelp} from '@tabler/icons-react';
-import {Flex, Radio, Tooltip} from 'antd';
+import {Radio, Tooltip} from 'antd';
 import {useBrightnessMode} from '#atom';
 import {BrightnessMode} from '#types';
 
@@ -18,20 +18,20 @@ function Brightness() {
 			}}
 		>
 			<Radio.Button value={BrightnessMode.SimpleIcons}>
-				<Flex align="center" gap={5} justify="center">
+				<div className="items-center justify-center gap-[5px]">
 					Luminance
 					<Tooltip title="This uses the Simple Icons' get-relative-luminance function.">
 						<IconHelp size={16} />
 					</Tooltip>
-				</Flex>
+				</div>
 			</Radio.Button>
 			<Radio.Button value={BrightnessMode.ShieldsIo}>
-				<Flex align="center" gap={5} justify="center">
+				<div className="items-center justify-center gap-[5px]">
 					Brightness{' '}
 					<Tooltip title="This uses shields.io's brightness function.">
 						<IconHelp size={16} />
 					</Tooltip>
-				</Flex>
+				</div>
 			</Radio.Button>
 		</Radio.Group>
 	);

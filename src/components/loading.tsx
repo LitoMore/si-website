@@ -1,6 +1,5 @@
 import {IconLoader2} from '@tabler/icons-react';
 import {Flex} from 'antd';
-import {spinning} from '#constants';
 import {useSizes} from '#hooks';
 
 function Loading() {
@@ -8,13 +7,10 @@ function Loading() {
 
 	return (
 		<Flex
-			vertical
-			align="center"
-			gap={20}
-			justify="center"
+			className="flex flex-col items-center justify-center gap-5"
 			style={{height: galleryHeight}}
 		>
-			<IconLoader2 color="#0cf" style={spinning} />
+			<IconLoader2 className="animate-spin" color="#0cf" />
 		</Flex>
 	);
 }

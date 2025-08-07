@@ -8,7 +8,6 @@ import {
 import {Button, Divider, Flex, Input} from 'antd';
 import {styled} from 'styled-components';
 import {useIcons, useSelectedIcon} from '#atom';
-import {spinning} from '#constants';
 import {useI18n} from '#hooks';
 import AutoComplete from './autocomplete.js';
 import DownloadImage from './downloadimage.js';
@@ -46,7 +45,7 @@ function Preview() {
 	}, [icon]);
 
 	return (
-		<Flex align="center" justify="center" style={{height: '100vh'}}>
+		<div className="flex h-screen items-center justify-center">
 			<Card vertical gap={8}>
 				<Flex gap={8}>
 					<AutoComplete />
@@ -93,14 +92,14 @@ function Preview() {
 				) : (
 					<Flex
 						align="center"
+						className="h-[400px] w-[720px] animate-spin"
 						justify="center"
-						style={{width: 720, height: 400}}
 					>
-						<IconLoader2 size={32} style={{...spinning, opacity: 0.5}} />
+						<IconLoader2 className="opacity-50" size={32} />
 					</Flex>
 				)}
 			</Card>
-		</Flex>
+		</div>
 	);
 }
 

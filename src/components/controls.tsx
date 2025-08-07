@@ -6,10 +6,6 @@ import Settings from './settings.js';
 import ThridParty from './thirdparty.js';
 import Translations from './translations.js';
 
-export const ControlTitle = styled(Divider)`
-	margin: 0 !important;
-`;
-
 export const Control = styled.div`
 	width: 32px;
 	height: 32px;

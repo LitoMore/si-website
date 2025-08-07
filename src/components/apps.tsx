@@ -22,10 +22,10 @@ function Apps() {
 		<Flex>
 			<img
 				alt="Simple Icons"
+				className="h-6 w-6"
 				src={`https://cdn.simpleicons.org/simpleicons/${iconFg.slice(
 					1,
 				)}?viewbox=auto`}
-				style={{width: 24, height: 24}}
 			/>
 			{/* <CaretDownOutlined style={{ fontSize: 12 }} /> */}
 		</Flex>

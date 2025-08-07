@@ -7,15 +7,7 @@ import {getColorScheme} from '#utils';
 import {Control} from './controls.js';
 
 function Icon({url}: {readonly url: string}) {
-	return (
-		<img
-			src={url}
-			style={{
-				width: 20,
-				height: 20,
-			}}
-		/>
-	);
+	return <img className="h-[20px] w-[20px]" src={url} />;
 }
 
 function Item({
@@ -29,9 +21,9 @@ function Item({
 }) {
 	return (
 		<a
+			className="flex items-center gap-[8px]"
 			href={url}
 			rel="noopener nofollow noreferrer"
-			style={{display: 'flex', alignItems: 'center', gap: 8}}
 			target="_blank"
 		>
 			<Icon url={icon} />

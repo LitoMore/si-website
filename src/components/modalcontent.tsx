@@ -38,7 +38,7 @@ const Image = styled(AntImage).attrs<{$color?: string}>((props) => ({
 	${(props) => (props.$contrast ? `filter: ${props.$contrast};` : '')}
 `;
 
-export const Title = styled.div`
+const Title = styled.div`
 	color: #aaa;
 	margin-top: 10px;
 `;

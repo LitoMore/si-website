@@ -21,10 +21,7 @@ function EmptyView() {
 
 	return (
 		<Flex
-			vertical
-			align="center"
-			gap={20}
-			justify="center"
+			className="flex flex-col items-center justify-center gap-5"
 			style={{height: galleryHeight}}
 		>
 			<Empty
@@ -32,41 +29,36 @@ function EmptyView() {
 				image={Empty.PRESENTED_IMAGE_SIMPLE}
 				style={{marginBlock: 'unset'}}
 			/>
-			<Flex wrap gap={20} justify="center">
-				<Flex vertical align="center" justify="center">
+			<div className="flex flex-wrap justify-center gap-5">
+				<div className="flex flex-col items-center justify-center">
 					<strong style={{color: emptyFg}}>{i18n.footer.iconMissing}</strong>
 					<Link href="https://github.com/simple-icons/simple-icons/issues/new?assignees=&labels=new+icon&template=icon_request.yml">
 						{i18n.footer.submitRequest}
 					</Link>
-				</Flex>
+				</div>
 
-				<Flex vertical align="center" justify="center">
+				<div className="flex flex-col items-center justify-center">
 					<strong style={{color: emptyFg}}>{i18n.footer.iconOutdated}</strong>
 					<Link href="https://github.com/simple-icons/simple-icons/issues/new?assignees=&labels=icon+outdated&template=icon_update.yml">
 						{i18n.footer.reportOutdated}
 					</Link>
-				</Flex>
-			</Flex>
-			<Flex
-				vertical
-				align="center"
-				justify="center"
-				style={{maxWidth: 800, padding: 20}}
-			>
-				<Flex vertical style={{color: emptyFg, textAlign: 'center'}}>
+				</div>
+			</div>
+			<div className="flex max-w-[800px] flex-col items-center justify-center p-5">
+				<div className="flex flex-col text-center" style={{color: emptyFg}}>
 					<div>{gettext(i18n.footer.line1, [linkRenderer])}</div>
 					<div>{gettext(i18n.footer.line2, [linkRenderer])}</div>
 					<div>{gettext(i18n.footer.line3, [linkRenderer])}</div>
-				</Flex>
-				<Flex style={{marginTop: 40}}>
+				</div>
+				<div className="mt-10 flex">
 					<Link
 						$color={isLight ? '#878787' : '#737373'}
 						href="https://github.com/LitoMore/si-website"
 					>
 						{i18n.footer.madeWithLove}
 					</Link>
-				</Flex>
-			</Flex>
+				</div>
+			</div>
 		</Flex>
 	);
 }

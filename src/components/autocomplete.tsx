@@ -31,6 +31,7 @@ function Autocomplete() {
 	return (
 		<AutoComplete
 			allowClear
+			className="w-full"
 			options={filteredIcons.map((icon) => ({
 				key: icon.slug,
 				label: (
@@ -44,7 +45,6 @@ function Autocomplete() {
 			}))}
 			placeholder={i18n.search.searchByBrand}
 			prefix={<PrefixIcon icon={selectedIcon} iconStyle="icon" />}
-			style={{width: '100%'}}
 			value={searchText}
 			onChange={(value) => {
 				setSearchText(value.trim());

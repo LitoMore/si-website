@@ -61,13 +61,8 @@ function Search() {
 			suffix={
 				isInputFocused || isMobileSize ? null : (
 					<span
+						className="rounded-1 mr-[-7px] bg-black/6 p-1 leading-[1] text-black/45"
 						style={{
-							padding: 4,
-							marginRight: -7,
-							borderRadius: 4,
-							color: 'rgba(0, 0, 0, 0.45)',
-							backgroundColor: 'rgba(0,0,0,0.06)',
-							lineHeight: 1,
 							filter: isDark ? 'invert(1)' : undefined,
 						}}
 					>

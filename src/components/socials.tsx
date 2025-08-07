@@ -1,21 +1,7 @@
 import {type ReactNode} from 'react';
 import {Flex} from 'antd';
-import {styled} from 'styled-components';
 import {linkRel} from '#constants';
 import {useColorScheme} from '#hooks';
-
-const Link = styled.a`
-	display: block;
-	width: 24px;
-	height: 24px;
-	flex-shrink: 0;
-	box-sizing: content-box;
-	padding: 5px;
-	border-radius: 6px;
-	&:hover {
-		background-color: rgba(0, 0, 0, 0.06);
-	}
-`;
 
 function Social({
 	icon,
@@ -26,7 +12,13 @@ function Social({
 }) {
 	const {isLight, iconFg} = useColorScheme();
 	return (
-		<Link href={link} rel={linkRel} target="_blank">
+		// eslint-disable-next-line react/jsx-no-target-blank
+		<a
+			className="box-content! block h-6 w-6 shrink-0 rounded-md p-[5px] hover:bg-black/6"
+			href={link}
+			rel={linkRel}
+			target="_blank"
+		>
 			{typeof icon === 'string' ? (
 				<img
 					alt={icon}
@@ -37,7 +29,7 @@ function Social({
 			) : (
 				icon
 			)}
-		</Link>
+		</a>
 	);
 }
 

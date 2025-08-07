@@ -19,10 +19,8 @@ function PrefixIcon({
 
 	return (
 		<div
+			className="mr-1 h-1 w-5"
 			style={{
-				width: 20,
-				height: 20,
-				marginRight: 4,
 				borderRadius: iconStyle === 'color' ? 4 : undefined,
 				boxShadow:
 					iconStyle === 'color' ? '0 0 5px 0 rgba(0, 0, 0, 0.25)' : undefined,

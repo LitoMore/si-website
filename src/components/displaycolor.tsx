@@ -1,5 +1,5 @@
 import {IconHelp} from '@tabler/icons-react';
-import {Flex, Radio, Tooltip} from 'antd';
+import {Radio, Tooltip} from 'antd';
 import {useColorMode} from '#atom';
 import {useI18n} from '#hooks';
 import {ColorMode} from '#types';
@@ -20,20 +20,20 @@ function DisplayColor() {
 			}}
 		>
 			<Radio.Button value={ColorMode.Contrast}>
-				<Flex align="center" gap={5} justify="center">
+				<div className="flex items-center justify-center gap-[5px]">
 					{i18n.settings.contrast}
 					<Tooltip title={i18n.settings.contrastTooltip}>
 						<IconHelp size={16} />
 					</Tooltip>
-				</Flex>
+				</div>
 			</Radio.Button>
 			<Radio.Button value={ColorMode.Actual}>
-				<Flex align="center" gap={5} justify="center">
+				<div className="flex items-center justify-center gap-[5px]">
 					{i18n.settings.actual}
 					<Tooltip title={i18n.settings.actualTooltip}>
 						<IconHelp size={16} />
 					</Tooltip>
-				</Flex>
+				</div>
 			</Radio.Button>
 		</Radio.Group>
 	);
