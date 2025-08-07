@@ -8,7 +8,7 @@ import Empty from './empty.js';
 import Loading from './loading.js';
 
 // Const Virutalized = lazy(() => import("./virtualized.tsx"));
-const Virtuoso = lazy(async () => import('./virtuoso.tsx'));
+const Virtuoso = lazy(async () => import('./virtuoso.js'));
 // Const VirutalScroll = lazy(() => import("./virtualscroll.tsx"));
 
 function Gallery() {

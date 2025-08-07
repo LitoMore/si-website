@@ -1,9 +1,8 @@
-import {memo} from 'react';
 import {Flex, Layout} from 'antd';
 import Controls from '../components/controls.js';
 import Preview from '../components/preview.js';
 
-export default memo(() => (
+export default function PreviewLayout() {
 	<Layout>
 		<Preview />
 		<Flex
@@ -13,5 +12,5 @@ export default memo(() => (
 		>
 			<Controls />
 		</Flex>
-	</Layout>
-));
+	</Layout>;
+}

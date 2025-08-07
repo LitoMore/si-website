@@ -1,5 +1,5 @@
 import process from 'node:process';
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import {visualizer} from 'rollup-plugin-visualizer';
 import {type PluginOption, defineConfig} from 'vite';
 
@@ -9,7 +9,14 @@ const enableVisualizer = process.env['VITE_ENABLE_VISUALIZER'];
 export default defineConfig({
 	base: baseUrl ? `/${baseUrl}` : undefined,
 	plugins: [
-		react({plugins: [['@swc/plugin-styled-components', {}]]}) as PluginOption,
+		react({
+			babel: {
+				plugins: [
+					'babel-plugin-react-compiler',
+					'babel-plugin-styled-components',
+				],
+			},
+		}) as PluginOption,
 		enableVisualizer ? visualizer() : undefined,
 	].filter(Boolean),
 	build: {

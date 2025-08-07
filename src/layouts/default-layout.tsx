@@ -1,8 +1,7 @@
-import {memo} from 'react';
 import {Layout} from 'antd';
 import {Gallery, Header, Modal} from '#components';
 
-export default memo(() => {
+export default function DefaultLayout() {
 	return (
 		<Layout>
 			<Header />
@@ -12,4 +11,4 @@ export default memo(() => {
 			<Modal />
 		</Layout>
 	);
-});
+}

@@ -13,6 +13,7 @@ import {type BrightnessMode, ColorTheme} from '#types';
 import {getColorScheme, getIconsData, getLatestVersion} from '#utils';
 
 const DefaultLayout = lazy(async () => import('./layouts/default-layout.js'));
+const OgLayout = lazy(async () => import('./layouts/og-layout.js'));
 const PreviewLayout = lazy(async () => import('./layouts/preview-layout.js'));
 const FloatButtons = lazy(async () => import('./components/floatbuttons.js'));
 
@@ -77,6 +78,7 @@ function App() {
 			>
 				<Routes>
 					<Route index element={<DefaultLayout />} />
+					<Route element={<OgLayout />} path="og" />
 					<Route element={<PreviewLayout />} path="preview" />
 				</Routes>
 				{isMobileSize ? null : <FloatButtons />}
