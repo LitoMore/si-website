@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {AutoComplete, Flex} from 'antd';
+import {AutoComplete} from 'antd';
 import {
 	useFilteredIcons,
 	useIcons,
@@ -35,10 +35,10 @@ function Autocomplete() {
 			options={filteredIcons.map((icon) => ({
 				key: icon.slug,
 				label: (
-					<Flex align="center" gap={8}>
+					<div className="flex justify-center gap-2">
 						<PrefixIcon key={icon.slug} icon={icon} iconStyle="icon" />
 						<span>{icon.title}</span>
-					</Flex>
+					</div>
 				),
 				value: icon.title,
 				icon,

@@ -1,6 +1,6 @@
 import {Suspense, lazy} from 'react';
 import {IconLoader2} from '@tabler/icons-react';
-import {Button, ConfigProvider, Dropdown, Flex, Modal, theme} from 'antd';
+import {Button, ConfigProvider, Dropdown, Modal, theme} from 'antd';
 import {useColorMode, useIcons, useSelectedIcon} from '#atom';
 import {spinning} from '#constants';
 import {useCopyText, useI18n, useSizes} from '#hooks';
@@ -55,9 +55,9 @@ function CopySvgButtons({icon}: {readonly icon: Icon}) {
 	].map((x) => ({
 		key: x.type,
 		label: (
-			<Flex key={x.type} onClick={x.onClick}>
+			<div key={x.type} className="flex" onClick={x.onClick}>
 				{x.type}
-			</Flex>
+			</div>
 		),
 	}));
 
@@ -89,14 +89,15 @@ function CdnButtons({icon}: {readonly icon: Icon}) {
 	].map((x) => ({
 		key: x.title,
 		label: (
-			<Flex
+			<div
 				key={x.title}
+				className="flex"
 				onClick={() => {
 					copyText(x.title, x.link);
 				}}
 			>
 				{x.title}
-			</Flex>
+			</div>
 		),
 	}));
 
@@ -133,8 +134,8 @@ export default function SiModal() {
 				closeIcon={isMobileSize}
 				footer={
 					icon ? (
-						<Flex vertical align="center" gap={5} justify="center">
-							<Flex wrap gap={5} justify="center">
+						<div className="flex flex-col items-center justify-center gap-[5px]">
+							<div className="flex flex-wrap justify-center gap-[5px]">
 								<Button
 									color="default"
 									onClick={() => {
@@ -146,8 +147,8 @@ export default function SiModal() {
 								<CopySvgButtons icon={icon} />
 								<CdnButtons icon={icon} />
 								<DownloadImage icon={icon} />
-							</Flex>
-						</Flex>
+							</div>
+						</div>
 					) : (
 						[]
 					)
@@ -159,9 +160,9 @@ export default function SiModal() {
 			>
 				<Suspense
 					fallback={
-						<Flex align="center" justify="center">
+						<div className="flex items-center justify-center">
 							<IconLoader2 style={spinning} />
-						</Flex>
+						</div>
 					}
 				>
 					<ModalContent icon={icon} />

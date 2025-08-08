@@ -5,7 +5,7 @@ import {
 	IconLoader2,
 	IconUpload,
 } from '@tabler/icons-react';
-import {Button, Divider, Flex, Input} from 'antd';
+import {Button, Divider, Input} from 'antd';
 import {useIcons, useSelectedIcon} from '#atom';
 import {useI18n} from '#hooks';
 import AutoComplete from './autocomplete.js';
@@ -30,7 +30,7 @@ function Preview() {
 	return (
 		<div className="flex h-screen items-center justify-center">
 			<div className="flex flex-col gap-2 rounded-[5px] bg-white p-5 shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)]">
-				<Flex gap={8}>
+				<div className="flex gap-8">
 					<AutoComplete />
 					<Input
 						className="input-uppercase w-[150px] pl-[5px]"
@@ -41,16 +41,16 @@ function Preview() {
 							setColor(event.target.value);
 						}}
 					/>
-				</Flex>
+				</div>
 				{icon ? (
 					<>
 						<Canvas color={color} icon={icon} />
-						<Divider style={{margin: 0}} />
-						<Flex gap={8}>
+						<Divider className="m-0" />
+						<div className="flex gap-2">
 							<Button icon={<IconUpload size={16} />} type="default">
 								{i18n.preview.uploadSvg}
 							</Button>
-							<div style={{flex: 1}} />
+							<div className="flex-[1]" />
 							<DownloadImage isShowIcon icon={icon} />
 							<Button
 								icon={<IconDownload size={16} />}
@@ -71,16 +71,12 @@ function Preview() {
 							<Button icon={<IconCopy size={16} />} type="default">
 								{i18n.preview.copyScreenshot}
 							</Button>
-						</Flex>
+						</div>
 					</>
 				) : (
-					<Flex
-						align="center"
-						className="h-[400px] w-[720px] animate-spin"
-						justify="center"
-					>
+					<div className="flex h-[400px] w-[720px] animate-spin items-center justify-center">
 						<IconLoader2 className="opacity-50" size={32} />
-					</Flex>
+					</div>
 				)}
 			</div>
 		</div>

@@ -1,5 +1,4 @@
 import {type ReactNode} from 'react';
-import {Flex} from 'antd';
 import {linkRel} from '#constants';
 import {useColorScheme} from '#hooks';
 
@@ -35,13 +34,13 @@ function Social({
 
 function Socials() {
 	return (
-		<Flex>
+		<div className="flex">
 			<Social
 				icon="github"
 				link="https://github.com/simple-icons/simple-icons"
 			/>
 			<Social icon="discord" link="https://discord.gg/vUXFa7t5xJ" />
-		</Flex>
+		</div>
 	);
 }
 

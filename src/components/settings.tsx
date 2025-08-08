@@ -36,7 +36,7 @@ function Settings() {
 					<Reset />
 				</div>
 			}
-			trigger="hover"
+			trigger="click"
 		>
 			<Badge color="#0cf" dot={settingsChanged} offset={[-6, 6]}>
 				<IconSettings className="control" style={{color: iconFg}} />

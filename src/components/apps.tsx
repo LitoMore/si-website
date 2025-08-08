@@ -1,4 +1,3 @@
-import {Flex} from 'antd';
 // Import { CaretDownOutlined, EyeOutlined } from "@ant-design/icons";
 // import { useNavigate } from "react-router";
 import {useColorScheme} from '#hooks';
@@ -19,7 +18,7 @@ function Apps() {
 		// 		}],
 		// 	}}
 		// >
-		<Flex>
+		<div className="flex">
 			<img
 				alt="Simple Icons"
 				className="h-6 w-6"
@@ -28,7 +27,7 @@ function Apps() {
 				)}?viewbox=auto`}
 			/>
 			{/* <CaretDownOutlined style={{ fontSize: 12 }} /> */}
-		</Flex>
+		</div>
 		// </Dropdown>
 	);
 }

@@ -18,7 +18,7 @@ function Brightness() {
 			}}
 		>
 			<Radio.Button value={BrightnessMode.SimpleIcons}>
-				<div className="items-center justify-center gap-[5px]">
+				<div className="flex items-center justify-center gap-[5px]">
 					Luminance
 					<Tooltip title="This uses the Simple Icons' get-relative-luminance function.">
 						<IconHelp size={16} />
@@ -26,7 +26,7 @@ function Brightness() {
 				</div>
 			</Radio.Button>
 			<Radio.Button value={BrightnessMode.ShieldsIo}>
-				<div className="items-center justify-center gap-[5px]">
+				<div className="flex items-center justify-center gap-[5px]">
 					Brightness{' '}
 					<Tooltip title="This uses shields.io's brightness function.">
 						<IconHelp size={16} />

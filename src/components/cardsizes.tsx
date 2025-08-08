@@ -15,11 +15,11 @@ function CardsizeSlider() {
 		<div className="flex justify-center gap-[10px]">
 			<IconZoomOut color={iconFg} size={18} />
 			<Slider
+				className="w-[300px]"
 				defaultValue={cardPixels}
 				max={CardSize.Large}
 				min={CardSize.Small}
 				step={25}
-				style={{width: 300}}
 				tooltip={{open: false}}
 				value={cardPixels}
 				onChange={setCardSize}

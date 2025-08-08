@@ -1,5 +1,5 @@
 import {IconDownload} from '@tabler/icons-react';
-import {Button, Dropdown, Flex} from 'antd';
+import {Button, Dropdown} from 'antd';
 import {useIcons} from '#atom';
 import {useI18n} from '#hooks';
 import {BitmapFormat, type Icon} from '#types';
@@ -46,9 +46,9 @@ function DownloadImage({
 	].map((x) => ({
 		key: x.format,
 		label: (
-			<Flex key={x.format} onClick={x.onClick}>
+			<div key={x.format} className="flex" onClick={x.onClick}>
 				{x.format}
-			</Flex>
+			</div>
 		),
 	}));
 
