@@ -4,7 +4,6 @@ import {useColorTheme} from '#atom';
 import {thirdParties} from '#data';
 import {useColorScheme, useI18n, useSizes} from '#hooks';
 import {getColorScheme} from '#utils';
-import {Control} from './controls.js';
 
 function Icon({url}: {readonly url: string}) {
 	return <img className="h-[20px] w-[20px]" src={url} />;
@@ -68,7 +67,7 @@ function ThirdParty() {
 				colorScheme: getColorScheme(colorTheme),
 			}}
 		>
-			<Control as={IconPuzzle} style={{color: iconFg}} />
+			<IconPuzzle className="control" style={{color: iconFg}} />
 		</Dropdown>
 	);
 }

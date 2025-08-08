@@ -1,75 +1,10 @@
 import {IconLoader2} from '@tabler/icons-react';
-import {
-	Image as AntImage,
-	Tag as AntTag,
-	Col,
-	Flex,
-	Row,
-	Typography,
-} from 'antd';
-import {styled} from 'styled-components';
+import {Col, Image, Row, Tag, Typography} from 'antd';
 import {useColorMode} from '#atom';
-import {brightThreshold, darkThreshold, spinning} from '#constants';
+import {brightThreshold, darkThreshold, linkRel, spinning} from '#constants';
 import {useColorScheme, useI18n, useSizes} from '#hooks';
 import {ColorMode, type Icon} from '#types';
 import {getAliases, tidyLink} from '#utils';
-
-const previewImageSize = 300;
-
-const Image = styled(AntImage).attrs<{$color?: string}>((props) => ({
-	width: '100%',
-	preview: false,
-	placeholder: (
-		<Flex
-			justify="center"
-			style={{
-				fontSize: 30,
-				color: props.$color,
-			}}
-		>
-			<IconLoader2 style={spinning} />
-		</Flex>
-	),
-}))<{$contrast?: string}>`
-	padding: 10px;
-	max-height: ${previewImageSize}px;
-	height: auto;
-	transition: height 0.5s;
-	${(props) => (props.$contrast ? `filter: ${props.$contrast};` : '')}
-`;
-
-const Title = styled.div`
-	color: #aaa;
-	margin-top: 10px;
-`;
-
-const Text = styled(Typography.Text).attrs((props) => ({
-	copyable: props.copyable ?? true,
-}))`
-	margin: 0;
-	& [data-icon='copy'] {
-		color: #aaa;
-	}
-`;
-
-const Tag = styled(AntTag)<{$textColor?: string}>`
-	margin-right: 0;
-	color: ${(props) => props.$textColor} !important;
-	& [data-icon='copy'] {
-		color: #aaa;
-	}
-`;
-
-const Link = styled(Typography.Link).attrs({
-	copyable: true,
-	target: '_blank',
-	rel: 'noopener nofollow noreferrer',
-})`
-	margin: 0;
-	& [data-icon='copy'] {
-		color: #aaa;
-	}
-`;
 
 function ModalContent({icon}: {readonly icon?: Icon}) {
 	const {isMobileSize} = useSizes();
@@ -90,79 +25,121 @@ function ModalContent({icon}: {readonly icon?: Icon}) {
 	return (
 		<Row gutter={16}>
 			<Col sm={16} xs={24}>
-				<Flex align="center" justify="center" style={{height: '100%'}}>
+				<div className="flex h-full items-center justify-center">
 					<Image
-						$color={hexColor}
-						$contrast={$contrast}
+						className="h-auto max-h-[300px] p-2.5 transition-[height] duration-500"
+						placeholder={
+							<div
+								className="flex justify-center text-[30px]"
+								style={{
+									color: hexColor,
+								}}
+							>
+								<IconLoader2 style={spinning} />
+							</div>
+						}
+						preview={false}
 						src={`https://cdn.simpleicons.org/${icon.slug}?viewbox=auto`}
+						style={{
+							filter: $contrast,
+						}}
+						width="100%"
 					/>
-				</Flex>
+				</div>
 			</Col>
 
 			<Col sm={8} xs={24}>
-				<Flex vertical>
-					<Title>{i18n.modal.title}</Title>
-					<Text>{icon.title}</Text>
-				</Flex>
+				<div className="flex flex-col">
+					<div className="modal-title">{i18n.modal.title}</div>
+					<Typography.Text copyable className="modal-text">
+						{icon.title}
+					</Typography.Text>
+				</div>
 
 				{aliases.length > 0 && (
-					<Flex vertical>
-						<Title>{i18n.modal.aliases}</Title>
-						<Flex gap="small">
+					<div className="flex flex-col">
+						<Typography.Text copyable className="modal-title">
+							{i18n.modal.aliases}
+						</Typography.Text>
+						<div className="flex gap-2">
 							{aliases.map((alias) => (
-								<Text key={alias}>{alias}</Text>
+								<div key={alias} className="modal-text">
+									{alias}
+								</div>
 							))}
-						</Flex>
-					</Flex>
+						</div>
+					</div>
 				)}
 
-				<Flex vertical>
-					<Title>{i18n.modal.color}</Title>
+				<div className="flex flex-col">
+					<div className="modal-title">{i18n.modal.color}</div>
 					<div>
-						<Text copyable={{text: hexColor}}>
-							<Tag $textColor={icon.relativeColor} color={hexColor}>
+						<Typography.Text className="modal-text" copyable={{text: hexColor}}>
+							<Tag
+								className="gray-copy mr-0"
+								color={hexColor}
+								style={{color: icon.relativeColor}}
+							>
 								{hexColor}
 							</Tag>
-						</Text>
+						</Typography.Text>
 					</div>
-				</Flex>
+				</div>
 
-				<Flex vertical>
-					<Title>
+				<div className="flex flex-col">
+					<div className="modal-title">
 						{icon.source === icon.guidelines
 							? i18n.modal.sourceAndGuidelines
 							: i18n.modal.source}
-					</Title>
-					<Link ellipsis={!isMobileSize} href={icon.source}>
+					</div>
+					<Typography.Link
+						copyable
+						className="gray-copy m-0"
+						ellipsis={!isMobileSize}
+						href={icon.source}
+						rel={linkRel}
+						target="_blank"
+					>
 						{tidyLink(icon.source)}
-					</Link>
-				</Flex>
+					</Typography.Link>
+				</div>
 
 				{icon.source !== icon.guidelines && icon.guidelines ? (
-					<Flex vertical>
-						<Title>{i18n.modal.guidelines}</Title>
-						<Link ellipsis={!isMobileSize} href={icon.guidelines}>
+					<div className="flex flex-col">
+						<div className="modal-title">{i18n.modal.guidelines}</div>
+						<Typography.Link
+							copyable
+							className="gray-copy m-0"
+							ellipsis={!isMobileSize}
+							href={icon.guidelines}
+							rel={linkRel}
+							target="_blank"
+						>
 							{tidyLink(icon.guidelines)}
-						</Link>
-					</Flex>
+						</Typography.Link>
+					</div>
 				) : null}
 
 				{icon.license ? (
-					<Flex vertical>
-						<Title>{i18n.modal.license}</Title>
-						<Link
+					<div className="flex flex-col">
+						<div className="modal-title">{i18n.modal.license}</div>
+						<Typography.Link
+							copyable
+							className="gray-copy m-0"
 							ellipsis={!isMobileSize}
 							href={
 								'url' in icon.license
 									? icon.license.url
 									: `https://spdx.org/licenses/${icon.license.type}`
 							}
+							rel={linkRel}
+							target="_blank"
 						>
 							{'url' in icon.license
 								? tidyLink(icon.license.url)
 								: icon.license.type}
-						</Link>
-					</Flex>
+						</Typography.Link>
+					</div>
 				) : null}
 			</Col>
 		</Row>

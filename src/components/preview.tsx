@@ -6,29 +6,12 @@ import {
 	IconUpload,
 } from '@tabler/icons-react';
 import {Button, Divider, Flex, Input} from 'antd';
-import {styled} from 'styled-components';
 import {useIcons, useSelectedIcon} from '#atom';
 import {useI18n} from '#hooks';
 import AutoComplete from './autocomplete.js';
 import DownloadImage from './downloadimage.js';
 import PrefixIcon from './prefixicon.js';
 import Canvas from './previewcanvas.js';
-
-const Card = styled(Flex)`
-	padding: 20px;
-	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
-	border-radius: 5px;
-	width: 760px;
-	background-color: #fff;
-`;
-
-const ColorInput = styled(Input)`
-	width: 150px;
-	padding-left: 5px;
-	input:not(:placeholder-shown) {
-		text-transform: uppercase;
-	}
-`;
 
 function Preview() {
 	const [color, setColor] = useState('000000');
@@ -46,10 +29,11 @@ function Preview() {
 
 	return (
 		<div className="flex h-screen items-center justify-center">
-			<Card vertical gap={8}>
+			<div className="flex flex-col gap-2 rounded-[5px] bg-white p-5 shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)]">
 				<Flex gap={8}>
 					<AutoComplete />
-					<ColorInput
+					<Input
+						className="input-uppercase w-[150px] pl-[5px]"
 						placeholder="Color"
 						prefix={<PrefixIcon color={color} icon={icon} iconStyle="color" />}
 						value={color}
@@ -98,7 +82,7 @@ function Preview() {
 						<IconLoader2 className="opacity-50" size={32} />
 					</Flex>
 				)}
-			</Card>
+			</div>
 		</div>
 	);
 }

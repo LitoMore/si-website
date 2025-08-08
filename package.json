@@ -8,7 +8,6 @@
 	"devDependencies": {
 		"@ant-design/v5-patch-for-react-19": "^1.0.3",
 		"@sindresorhus/tsconfig": "^7.0.0",
-		"@swc/plugin-styled-components": "^9.0.3",
 		"@tabler/icons-react": "^3.34.1",
 		"@tailwindcss/vite": "^4.1.11",
 		"@types/node": "^24.2.0",
@@ -21,7 +20,6 @@
 		"@vitejs/plugin-react-swc": "^4.0.0",
 		"antd": "^5.26.7",
 		"babel-plugin-react-compiler": "^19.1.0-rc.2",
-		"babel-plugin-styled-components": "^2.1.4",
 		"color-sorter": "^7.0.0",
 		"color-string": "^2.0.1",
 		"copy-text-to-clipboard": "^3.2.0",
@@ -47,7 +45,6 @@
 		"react-virtuoso": "^4.13.0",
 		"rollup-plugin-visualizer": "^6.0.3",
 		"simple-icons": "^15.9.0",
-		"styled-components": "^6.1.19",
 		"svg2pdf.js": "^2.5.0",
 		"tailwindcss": "^4.1.11",
 		"tlds": "^1.259.0",

@@ -1,41 +1,25 @@
-import {Divider, Flex} from 'antd';
-import {styled} from 'styled-components';
+import {Divider} from 'antd';
 import {Socials} from '#components';
 import {useSizes} from '#hooks';
 import Settings from './settings.js';
 import ThridParty from './thirdparty.js';
 import Translations from './translations.js';
 
-export const Control = styled.div`
-	width: 32px;
-	height: 32px;
-	font-size: 24px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 5px;
-	color: var(--si-header-fg);
-	border-radius: 6px;
-	&:hover {
-		background-color: rgba(0, 0, 0, 0.06);
-	}
-`;
-
 function Controls() {
 	const {isMobileSize} = useSizes();
 	return isMobileSize ? (
-		<Flex align="center">
+		<div className="flex justify-center">
 			<Settings />
 			<Translations />
 			<ThridParty />
-		</Flex>
+		</div>
 	) : (
 		<>
-			<Flex align="center">
+			<div className="flex justify-center">
 				<Settings />
 				<Translations />
 				<ThridParty />
-			</Flex>
+			</div>
 			<Divider type="vertical" />
 			<Socials />
 		</>

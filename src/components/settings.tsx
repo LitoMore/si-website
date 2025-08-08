@@ -1,5 +1,5 @@
 import {IconSettings} from '@tabler/icons-react';
-import {Badge, Flex, Popover} from 'antd';
+import {Badge, Popover} from 'antd';
 import {useLocation} from 'react-router';
 import {useBrightnessMode, useCardSize, useColorMode} from '#atom';
 import {
@@ -11,7 +11,6 @@ import {
 } from '#components';
 import {useColorScheme} from '#hooks';
 import {BrightnessMode, CardSize, ColorMode} from '#types';
-import {Control} from './controls.js';
 
 function Settings() {
 	const {pathname} = useLocation();
@@ -29,18 +28,18 @@ function Settings() {
 	return (
 		<Popover
 			content={
-				<Flex vertical gap={10}>
+				<div className="flex flex-col gap-[10px]">
 					{!isPreview && <CardsizeSlider />}
 					<ColorThemes />
 					{!isPreview && <DisplayColor />}
 					{!isPreview && <Brightness />}
 					<Reset />
-				</Flex>
+				</div>
 			}
 			trigger="hover"
 		>
 			<Badge color="#0cf" dot={settingsChanged} offset={[-6, 6]}>
-				<Control as={IconSettings} style={{color: iconFg}} />
+				<IconSettings className="control" style={{color: iconFg}} />
 			</Badge>
 		</Popover>
 	);

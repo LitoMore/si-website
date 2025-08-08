@@ -2,44 +2,12 @@ import {type RefObject, useEffect, useRef, useState} from 'react';
 import {IconCheck, IconLink, IconShare, IconX} from '@tabler/icons-react';
 import {Button, FloatButton, Input, QRCode, Space} from 'antd';
 import Draggable from 'react-draggable';
-import {styled} from 'styled-components';
 import {useIcons, useLanguageCode} from '#atom';
 import {actionIntentUrl, linkRel} from '#constants';
 import {useColorScheme, useI18n, useSizes} from '#hooks';
 import {LanguageCode} from '#types';
 import {getShareUrl} from '#utils';
 import isPublicDomain from '../vendor/is-public-domain.js';
-
-const SocialButton = styled(FloatButton).attrs({
-	target: '_blank',
-	rel: 'noopener nofollow noreferrer',
-})<{$iconSize?: number; $isDark?: boolean; $hoverActive?: boolean}>`
-	.ant-float-btn-icon {
-		${(props) =>
-			props.$iconSize ? `width: ${props.$iconSize}px !important;` : ''}
-	}
-
-	${(props) =>
-		props.$hoverActive
-			? `color-scheme: only ${props.$isDark ? 'light' : 'dark'};`
-			: ''}
-
-	${(props) =>
-		props.$hoverActive === undefined
-			? ''
-			: `
-			&:hover { color-scheme: only ${props.$isDark ? 'light' : 'dark'} }
-		`}
-`; // Deno-fmt-ignore-line
-
-const FloatGroup = styled.div<{$expandTop: boolean}>`
-	${(props) =>
-		props.$expandTop
-			? ''
-			: `.ant-float-btn-group-wrap {
-		flex-direction: column-reverse;
-	}`}
-`;
 
 function Icon({
 	slug,
@@ -110,8 +78,8 @@ function MastodonButton({
 	const instanceUrl = formatMastodonUrl(mastodonInstance, actionIntentText);
 
 	return (
-		<SocialButton
-			$hoverActive={showInput}
+		<FloatButton
+			className={showInput ? (isDark ? 'light' : 'dark') : undefined}
 			description={
 				showInput ? (
 					<div
@@ -156,6 +124,9 @@ function MastodonButton({
 				) : null
 			}
 			icon={<Icon color={iconFg.slice(1)} colorHover="_" slug="mastodon" />}
+			// @ts-expect-error: Missing type definition for `rel`
+			rel={linkRel}
+			target="_blank"
 			onClick={() => {
 				if (showInput) {
 					setInputVisible(false);
@@ -227,9 +198,9 @@ function FloatButtons() {
 				setIsDragging(false);
 			}}
 		>
-			<FloatGroup
+			<div
 				ref={floatButtonsRef}
-				$expandTop
+				className="social-reverse"
 				style={{
 					position: 'fixed',
 					margin: '64px 10px 10px 10px',
@@ -255,62 +226,83 @@ function FloatButtons() {
 				>
 					{languageCode === LanguageCode.Chinese ? (
 						<>
-							<SocialButton
-								$iconSize={20}
+							<FloatButton
+								className="social-icon [--social-icon-width:20px]"
 								icon={<Icon slug="wechat" />}
 								tooltip={qrcode}
 							/>
-							<SocialButton
+							<FloatButton
 								href={getShareUrl(
 									'https://connect.qq.com/widget/shareqq/index.html',
 									{title: actionIntentText, url: actionIntentUrl},
 								)}
 								icon={<Icon slug="qq" />}
+								// @ts-expect-error: Missing type definition for `rel`
+								rel={linkRel}
+								target="_blank"
 							/>
-							{/* <SocialButton icon={<Icon slug="qzone" />} $iconSize={20} /> */}
-							<SocialButton
-								$iconSize={22}
+							{/* <FloatButton icon={<Icon slug="qzone" />} $iconSize={20} /> */}
+							<FloatButton
+								className="social-icon [--social-icon-width:22px]"
 								href={getShareUrl('https://share.weibo.com/share/share.php', {
 									title: actionIntentText,
 									url: actionIntentUrl,
 								})}
 								icon={<Icon slug="sinaweibo" />}
+								// @ts-expect-error: Missing type definition for `rel`
+								rel={linkRel}
+								target="_blank"
 							/>
-							<SocialButton
+							<FloatButton
 								href={getShareUrl('https://www.douban.com/recommend/', {
 									title: actionIntentText,
 									url: actionIntentUrl,
 								})}
 								icon={<Icon slug="douban" />}
+								// @ts-expect-error: Missing type definition for `rel`
+								rel={linkRel}
+								target="_blank"
 							/>
-							<SocialButton
-								$iconSize={30}
+							<FloatButton
+								className="social-icon [--social-icon-width:30px]"
 								icon={<Icon slug="xiaohongshu" />}
+								// @ts-expect-error: Missing type definition for `rel`
+								rel={linkRel}
+								target="_blank"
 								tooltip={qrcode}
 							/>
 						</>
 					) : (
 						<>
-							<SocialButton
+							<FloatButton
 								href={getShareUrl('https://x.com/intent/tweet', {
 									text: actionIntentText,
 									url: actionIntentUrl,
 								})}
 								icon={<Icon color={iconColor} slug="x" />}
+								// @ts-expect-error: Missing type definition for `rel`
+								rel={linkRel}
+								target="_blank"
 							/>
-							<SocialButton
-								$hoverActive={false}
+							<FloatButton
+								className="color-scheme-only-dark"
 								href={getShareUrl('https://bsky.app/intent/compose', {
 									text: [actionIntentText, actionIntentUrl].join('\n'),
 								})}
 								icon={<Icon color={iconColor} colorHover="_" slug="bluesky" />}
+								// @ts-expect-error: Missing type definition for `rel`
+								rel={linkRel}
+								target="_blank"
 							/>
-							<SocialButton
+							<FloatButton
 								href={getShareUrl('https://www.threads.net/intent/post', {
 									text: actionIntentText,
 									url: actionIntentUrl,
 								})}
 								icon={<Icon color={iconColor} slug="threads" />}
+								// @ts-expect-error: Missing type definition for `rel`
+								rel={linkRel}
+								target="_blank"
 							/>
 							<MastodonButton
 								actionIntentText={actionIntentText}
@@ -326,6 +318,9 @@ function FloatButtons() {
 								<IconLink size={20} style={tablerIconOffset} />
 							)
 						}
+						// @ts-expect-error: Missing type definition for `rel`
+						rel={linkRel}
+						target="_blank"
 						onClick={async () => {
 							await globalThis.navigator.clipboard.writeText(
 								globalThis.location.href,
@@ -334,7 +329,7 @@ function FloatButtons() {
 						}}
 					/>
 				</FloatButton.Group>
-			</FloatGroup>
+			</div>
 		</Draggable>
 	);
 }

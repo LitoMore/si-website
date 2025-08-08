@@ -4,7 +4,6 @@ import {useLanguageCode} from '#atom';
 import {useColorScheme} from '#hooks';
 import {translations} from '#i18n';
 import {type LanguageCode} from '#types';
-import {Control} from './controls.js';
 
 function Translations() {
 	const [languageCode, setLanguageCode] = useLanguageCode();
@@ -24,7 +23,7 @@ function Translations() {
 				})),
 			}}
 		>
-			<Control as={IconLanguage} style={{color: iconFg}} />
+			<IconLanguage className="control" style={{color: iconFg}} />
 		</Dropdown>
 	);
 }
