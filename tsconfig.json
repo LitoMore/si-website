@@ -1,7 +1,6 @@
 {
 	"extends": "@sindresorhus/tsconfig",
 	"compilerOptions": {
-		"jsx": "react-jsx",
 		"paths": {
 			"#atom": ["./src/atom.ts"],
 			"#data": ["./src/data/index.ts"],
