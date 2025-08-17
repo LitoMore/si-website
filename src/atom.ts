@@ -49,3 +49,15 @@ export const useLanguageCode = () => useAtom(languageCode);
 
 const colorTheme = atomWithStorage('colorTheme', 'auto' as ColorTheme);
 export const useColorTheme = () => useAtom(colorTheme);
+
+const openGraphWith = atom(800);
+export const useOpenGraphWidth = () => useAtom(openGraphWith);
+
+const openGraphHeight = atom(600);
+export const useOpenGraphHeight = () => useAtom(openGraphHeight);
+
+const openGraphSize = atom(20);
+export const useOpenGraphSize = () => useAtom(openGraphSize);
+
+const openGraphGap = atom(20);
+export const useOpenGraphGap = () => useAtom(openGraphGap);

@@ -1,3 +1,4 @@
+import {type ReactNode} from 'react';
 import {Divider} from 'antd';
 import {Socials} from '#components';
 import {useSizes} from '#hooks';
@@ -5,7 +6,7 @@ import Settings from './settings.js';
 import ThridParty from './thirdparty.js';
 import Translations from './translations.js';
 
-function Controls() {
+function Controls({extraSettings}: {readonly extraSettings?: ReactNode}) {
 	const {isMobileSize} = useSizes();
 	return isMobileSize ? (
 		<div className="flex justify-center">
@@ -16,7 +17,7 @@ function Controls() {
 	) : (
 		<>
 			<div className="flex justify-center">
-				<Settings />
+				<Settings extraSettings={extraSettings} />
 				<Translations />
 				<ThridParty />
 			</div>

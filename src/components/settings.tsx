@@ -1,3 +1,4 @@
+import {type ReactNode} from 'react';
 import {IconSettings} from '@tabler/icons-react';
 import {Badge, Popover} from 'antd';
 import {useLocation} from 'react-router';
@@ -12,14 +13,17 @@ import {
 import {useColorScheme} from '#hooks';
 import {BrightnessMode, CardSize, ColorMode} from '#types';
 
-function Settings() {
+function Settings({extraSettings}: {readonly extraSettings?: ReactNode}) {
 	const {pathname} = useLocation();
 	const [brightnessMode] = useBrightnessMode();
 	const [cardSize] = useCardSize();
 	const [colorMode] = useColorMode();
 	const {iconFg} = useColorScheme();
 
+	const isOpenGraph = pathname === '/og';
 	const isPreview = pathname === '/preview';
+	const isMain = !isOpenGraph && !isPreview;
+
 	const settingsChanged =
 		brightnessMode !== BrightnessMode.SimpleIcons ||
 		cardSize !== CardSize.Small ||
@@ -29,11 +33,12 @@ function Settings() {
 		<Popover
 			content={
 				<div className="flex flex-col gap-[10px]">
-					{!isPreview && <CardsizeSlider />}
+					{isMain ? <CardsizeSlider /> : null}
 					<ColorThemes />
-					{!isPreview && <DisplayColor />}
-					{!isPreview && <Brightness />}
-					<Reset />
+					{isMain ? <DisplayColor /> : null}
+					{isMain ? <Brightness /> : null}
+					{extraSettings}
+					{isMain ? <Reset /> : null}
 				</div>
 			}
 			trigger="click"
