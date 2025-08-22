@@ -50,14 +50,14 @@ export const useLanguageCode = () => useAtom(languageCode);
 const colorTheme = atomWithStorage('colorTheme', 'auto' as ColorTheme);
 export const useColorTheme = () => useAtom(colorTheme);
 
-const openGraphWith = atom(800);
-export const useOpenGraphWidth = () => useAtom(openGraphWith);
+const openGraphWidth = atomWithStorage('openGraphWidth', 800);
+export const useOpenGraphWidth = () => useAtom(openGraphWidth);
 
-const openGraphHeight = atom(600);
+const openGraphHeight = atomWithStorage('openGraphHeight', 600);
 export const useOpenGraphHeight = () => useAtom(openGraphHeight);
 
-const openGraphSize = atom(20);
+const openGraphSize = atomWithStorage('openGraphSize', 20);
 export const useOpenGraphSize = () => useAtom(openGraphSize);
 
-const openGraphGap = atom(20);
+const openGraphGap = atomWithStorage('openGraphGap', 20);
 export const useOpenGraphGap = () => useAtom(openGraphGap);
