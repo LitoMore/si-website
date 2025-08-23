@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {Layout} from 'antd';
+import BackHome from '../components/backhome.js';
 import Controls from '../components/controls.js';
 import OpenGraph from '../components/opengraph.js';
 import OpenGraphSettings from '../components/opengraphsettings.js';
@@ -10,6 +11,7 @@ export default function OgLayout() {
 	return (
 		<Layout>
 			<OpenGraph seed={seed} />
+			<BackHome />
 			<div className="fixed top-0 right-0 flex items-center justify-center p-[10px]">
 				<Controls
 					extraSettings={
