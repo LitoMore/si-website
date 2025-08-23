@@ -1,3 +1,5 @@
+import {type OpenGraphImage} from '#types';
+
 export const linkRel = 'noopener nofollow noreferrer';
 
 export const spinning = {animation: 'spin 1s linear infinite'};
@@ -13,3 +15,10 @@ export const brightThreshold = 0.65;
 export const darkThreshold = 0.05;
 
 export const actionIntentUrl = 'https://simpleicons.org';
+
+export const defaultOpenGraphImage: OpenGraphImage = {
+	width: 800,
+	height: 600,
+	size: 20,
+	gap: 20,
+};

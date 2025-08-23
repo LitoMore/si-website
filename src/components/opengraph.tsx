@@ -1,29 +1,25 @@
+import {useEffect, useState} from 'react';
 import shuffle from 'array-shuffle';
 import {Image, Layer, Rect, Stage} from 'react-konva';
-import {
-	useIcons,
-	useOpenGraphGap,
-	useOpenGraphHeight,
-	useOpenGraphSize,
-	useOpenGraphWidth,
-} from '#atom';
+import {useIcons, useOpenGraphImage} from '#atom';
 
-function OpenGraph({onSubmit}: {readonly onSubmit?: () => void}) {
-	const [width] = useOpenGraphWidth();
-	const [height] = useOpenGraphHeight();
-	const [size] = useOpenGraphSize();
-	const [gap] = useOpenGraphGap();
+function OpenGraph({seed}: {readonly seed: number}) {
+	const [{data}] = useIcons();
+	const [{width, height, size, gap}] = useOpenGraphImage();
+	const [shuffled, setShuffled] = useState(data);
 
 	const baseRatio = 2;
 
-	const [{data}] = useIcons();
-	const shuffled = shuffle(
-		data.filter(
-			(icon) =>
-				icon.slug !== 'simpleicons' &&
-				(icon.brightness > 0.1 || icon.hex === '000000'),
-		),
-	);
+	useEffect(() => {
+		const shuffledData = shuffle(
+			data.filter(
+				(icon) =>
+					icon.slug !== 'simpleicons' &&
+					(icon.brightness > 0.1 || icon.hex === '000000'),
+			),
+		);
+		setShuffled(shuffledData);
+	}, [seed, data]);
 
 	const rows = Math.floor((height - gap) / (size + gap));
 	const columns = Math.floor((width - gap) / (size + gap));
@@ -40,7 +36,6 @@ function OpenGraph({onSubmit}: {readonly onSubmit?: () => void}) {
 		const iconColumnIndex = index % columns;
 		const x = gap + paddingLeft + iconColumnIndex * (size + gap);
 		const y = gap + paddingTop + iconRowIndex * (size + gap);
-		if (index === 0) console.log({x, y});
 		return {x, y};
 	};
 

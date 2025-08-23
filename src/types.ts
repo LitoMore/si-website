@@ -1,6 +1,6 @@
-import {type IconData} from './vendor/simple-icons-sdk.ts';
+import {type IconData} from './vendor/simple-icons-sdk.js';
 
-export type {IconData} from './vendor/simple-icons-sdk.ts';
+export type {IconData} from './vendor/simple-icons-sdk.js';
 export {type Internationalization, LanguageCode} from '#i18n';
 
 export enum PageLayout {
@@ -74,3 +74,10 @@ export type ImageElement = {
 };
 
 export type ImageState = 'loaded' | 'loading' | 'failed';
+
+export type OpenGraphImage = {
+	width: number;
+	height: number;
+	size: number;
+	gap: number;
+};

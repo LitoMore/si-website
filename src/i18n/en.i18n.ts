@@ -57,6 +57,15 @@ const translation: Internationalization = {
 		savePreview: 'Save Preview',
 		copyScreenshot: 'Copy Screenshot',
 	},
+	openGraph: {
+		width: 'W',
+		height: 'H',
+		size: 'Size',
+		gap: 'Gap',
+		shuffleIcons: 'Shuffle Icons',
+		apply: 'Apply',
+		reset: 'Reset',
+	},
 	share: {
 		share: 'Share',
 		actionIntentText:

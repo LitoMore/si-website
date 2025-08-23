@@ -1,59 +1,103 @@
-import {Input} from 'antd';
-import {
-	useOpenGraphGap,
-	useOpenGraphHeight,
-	useOpenGraphSize,
-	useOpenGraphWidth,
-} from '#atom';
+import {useState} from 'react';
+import {Button, Input} from 'antd';
+import {useOpenGraphImage} from '#atom';
+import {defaultOpenGraphImage} from '#constants';
+import {useI18n} from '#hooks';
 
-function OpenGraphSettings() {
-	const [width, setWidth] = useOpenGraphWidth();
-	const [height, setHeight] = useOpenGraphHeight();
-	const [size, setSize] = useOpenGraphSize();
-	const [gap, setGap] = useOpenGraphGap();
+function OpenGraphSettings({onShuffle}: {readonly onShuffle?: () => void}) {
+	const [openGraphImage, setOpenGraphImage] = useOpenGraphImage();
+	const [og, setOg] = useState(openGraphImage);
+	const {i18n} = useI18n();
 
 	return (
 		<>
 			<div className="flex gap-1">
 				<Input
-					className="w-[100px]!"
+					className="max-w-[150px]!"
 					placeholder="Width"
+					suffix={
+						<span className="text-gray-400 select-none">
+							{i18n.openGraph.width}
+						</span>
+					}
 					type="number"
-					value={width}
+					value={og.width}
 					onChange={(event) => {
-						setWidth(Number(event.target.value));
+						setOg({...og, width: Number(event.target.value)});
 					}}
 				/>
 				<Input
-					className="w-[100px]!"
+					className="max-w-[150px]!"
 					placeholder="Height"
+					suffix={
+						<span className="text-gray-400 select-none">
+							{i18n.openGraph.height}
+						</span>
+					}
 					type="number"
-					value={height}
+					value={og.height}
 					onChange={(event) => {
-						setHeight(Number(event.target.value));
+						setOg({...og, height: Number(event.target.value)});
 					}}
 				/>
 			</div>
 			<div className="flex gap-1">
 				<Input
-					className="w-[100px]!"
+					className="max-w-[150px]!"
 					placeholder="Width"
+					suffix={
+						<span className="text-gray-400 select-none">
+							{i18n.openGraph.size}
+						</span>
+					}
 					type="number"
-					value={size}
+					value={og.size}
 					onChange={(event) => {
-						setSize(Number(event.target.value));
+						setOg({...og, size: Number(event.target.value)});
 					}}
 				/>
 				<Input
-					className="w-[100px]!"
+					className="max-w-[150px]!"
 					placeholder="Height"
+					suffix={
+						<span className="text-gray-400 select-none">
+							{i18n.openGraph.gap}
+						</span>
+					}
 					type="number"
-					value={gap}
+					value={og.gap}
 					onChange={(event) => {
-						setGap(Number(event.target.value));
+						setOg({...og, gap: Number(event.target.value)});
 					}}
 				/>
 			</div>
+			<Button
+				autoInsertSpace
+				className="border-0! bg-linear-to-r! from-cyan-500! to-blue-500!"
+				type="primary"
+				onClick={onShuffle}
+			>
+				{i18n.openGraph.shuffleIcons}
+			</Button>
+			<Button
+				autoInsertSpace={false}
+				type="primary"
+				onClick={() => {
+					setOpenGraphImage(og);
+				}}
+			>
+				{i18n.openGraph.apply}
+			</Button>
+			<Button
+				autoInsertSpace={false}
+				type="default"
+				onClick={() => {
+					setOg(defaultOpenGraphImage);
+					setOpenGraphImage(defaultOpenGraphImage);
+				}}
+			>
+				{i18n.openGraph.reset}
+			</Button>
 		</>
 	);
 }

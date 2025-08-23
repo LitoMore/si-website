@@ -1,6 +1,7 @@
 {
 	"extends": "@sindresorhus/tsconfig",
 	"compilerOptions": {
+		"erasableSyntaxOnly": false,
 		"paths": {
 			"#atom": ["./src/atom.ts"],
 			"#data": ["./src/data/index.ts"],

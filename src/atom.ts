@@ -3,6 +3,7 @@
  */
 import {atom, useAtom} from 'jotai';
 import {atomWithStorage} from 'jotai/utils';
+import {defaultOpenGraphImage} from '#constants';
 import {
 	type BadgeStyle,
 	type BrightnessMode,
@@ -50,14 +51,5 @@ export const useLanguageCode = () => useAtom(languageCode);
 const colorTheme = atomWithStorage('colorTheme', 'auto' as ColorTheme);
 export const useColorTheme = () => useAtom(colorTheme);
 
-const openGraphWidth = atomWithStorage('openGraphWidth', 800);
-export const useOpenGraphWidth = () => useAtom(openGraphWidth);
-
-const openGraphHeight = atomWithStorage('openGraphHeight', 600);
-export const useOpenGraphHeight = () => useAtom(openGraphHeight);
-
-const openGraphSize = atomWithStorage('openGraphSize', 20);
-export const useOpenGraphSize = () => useAtom(openGraphSize);
-
-const openGraphGap = atomWithStorage('openGraphGap', 20);
-export const useOpenGraphGap = () => useAtom(openGraphGap);
+const openGraphImage = atomWithStorage('openGraph', defaultOpenGraphImage);
+export const useOpenGraphImage = () => useAtom(openGraphImage);

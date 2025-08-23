@@ -55,6 +55,15 @@ export type Internationalization = {
 		savePreview: string;
 		copyScreenshot: string;
 	};
+	openGraph: {
+		width: string;
+		height: string;
+		size: string;
+		gap: string;
+		shuffleIcons: string;
+		apply: string;
+		reset: string;
+	};
 	share: {
 		actionIntentText: string;
 		share: string;

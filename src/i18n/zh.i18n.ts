@@ -56,6 +56,15 @@ const translation: Internationalization = {
 		savePreview: '保存截图至本地',
 		copyScreenshot: '复制截图至剪贴板',
 	},
+	openGraph: {
+		width: '宽',
+		height: '高',
+		size: '尺寸',
+		gap: '间距',
+		shuffleIcons: '重随图标',
+		apply: '应用画布',
+		reset: '恢复默认',
+	},
 	share: {
 		share: '分享',
 		actionIntentText: 'Simple Icons: 拥有超过 {} 个知名品牌的 SVG 图标合集',
