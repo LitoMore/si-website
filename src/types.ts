@@ -6,6 +6,7 @@ export {type Internationalization, LanguageCode} from '#i18n';
 export enum PageLayout {
 	Default = 'default',
 	Previewer = 'previewer',
+	OpenGraph = 'og',
 }
 
 export enum CardSize {
