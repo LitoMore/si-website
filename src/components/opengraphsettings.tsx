@@ -9,6 +9,10 @@ function OpenGraphSettings({onShuffle}: {readonly onShuffle?: () => void}) {
 	const [og, setOg] = useState(openGraphImage);
 	const {i18n} = useI18n();
 
+	const onPressEnter = () => {
+		setOpenGraphImage(og);
+	};
+
 	return (
 		<>
 			<div className="flex gap-1">
@@ -25,6 +29,7 @@ function OpenGraphSettings({onShuffle}: {readonly onShuffle?: () => void}) {
 					onChange={(event) => {
 						setOg({...og, width: Number(event.target.value)});
 					}}
+					onPressEnter={onPressEnter}
 				/>
 				<Input
 					className="max-w-[150px]!"
@@ -39,6 +44,7 @@ function OpenGraphSettings({onShuffle}: {readonly onShuffle?: () => void}) {
 					onChange={(event) => {
 						setOg({...og, height: Number(event.target.value)});
 					}}
+					onPressEnter={onPressEnter}
 				/>
 			</div>
 			<div className="flex gap-1">
@@ -55,6 +61,7 @@ function OpenGraphSettings({onShuffle}: {readonly onShuffle?: () => void}) {
 					onChange={(event) => {
 						setOg({...og, size: Number(event.target.value)});
 					}}
+					onPressEnter={onPressEnter}
 				/>
 				<Input
 					className="max-w-[150px]!"
@@ -69,6 +76,7 @@ function OpenGraphSettings({onShuffle}: {readonly onShuffle?: () => void}) {
 					onChange={(event) => {
 						setOg({...og, gap: Number(event.target.value)});
 					}}
+					onPressEnter={onPressEnter}
 				/>
 			</div>
 			<Button
