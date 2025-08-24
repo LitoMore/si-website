@@ -31,11 +31,12 @@ function Autocomplete() {
 	return (
 		<AutoComplete
 			allowClear
+			autoFocus
 			className="w-full"
 			options={filteredIcons.map((icon) => ({
 				key: icon.slug,
 				label: (
-					<div className="flex justify-center gap-2">
+					<div className="flex gap-2">
 						<PrefixIcon key={icon.slug} icon={icon} iconStyle="icon" />
 						<span>{icon.title}</span>
 					</div>
@@ -48,6 +49,10 @@ function Autocomplete() {
 			value={searchText}
 			onChange={(value) => {
 				setSearchText(value.trim());
+			}}
+			onClear={() => {
+				setSearchText('');
+				setSelectedIcon(undefined);
 			}}
 			onSelect={(value, option) => {
 				setSearchText(value.trim());
