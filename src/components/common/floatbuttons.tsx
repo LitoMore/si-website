@@ -46,7 +46,7 @@ function MastodonButton({
 	const [inputVisible, setInputVisible] = useState(false);
 	const [mastodonInstance, setMastodonInstance] = useState('');
 	const {innerWidth} = useSizes();
-	const {isDark, iconFg} = useColorScheme();
+	const {isDark} = useColorScheme();
 	const {i18n} = useI18n();
 
 	const [x] = position;
@@ -103,7 +103,7 @@ function MastodonButton({
 								}}
 							/>
 							<Button
-								className="rounded-r-md"
+								className="rounded-l-none!"
 								disabled={!instanceUrl}
 								href={instanceUrl}
 								rel={instanceUrl ? linkRel : undefined}
@@ -123,7 +123,7 @@ function MastodonButton({
 					</div>
 				) : null
 			}
-			icon={<Icon color={iconFg.slice(1)} colorHover="_" slug="mastodon" />}
+			icon={<Icon colorHover="_" slug="mastodon" />}
 			// @ts-expect-error: Missing type definition for `rel`
 			rel={linkRel}
 			target="_blank"
@@ -151,7 +151,6 @@ function FloatButtons() {
 	const [position, setPosition] = useState<Position>([0, 0]);
 	const [icons] = useIcons();
 	const [languageCode] = useLanguageCode();
-	const {iconFg} = useColorScheme();
 	const {innerHeight} = useSizes();
 	const {i18n, gettext} = useI18n();
 
@@ -180,8 +179,6 @@ function FloatButtons() {
 			value={actionIntentUrl}
 		/>
 	);
-
-	const iconColor = iconFg.slice(1);
 
 	return (
 		<Draggable
@@ -279,7 +276,7 @@ function FloatButtons() {
 									text: actionIntentText,
 									url: actionIntentUrl,
 								})}
-								icon={<Icon color={iconColor} slug="x" />}
+								icon={<Icon slug="x" />}
 								// @ts-expect-error: Missing type definition for `rel`
 								rel={linkRel}
 								target="_blank"
@@ -289,7 +286,7 @@ function FloatButtons() {
 								href={getShareUrl('https://bsky.app/intent/compose', {
 									text: [actionIntentText, actionIntentUrl].join('\n'),
 								})}
-								icon={<Icon color={iconColor} colorHover="_" slug="bluesky" />}
+								icon={<Icon colorHover="_" slug="bluesky" />}
 								// @ts-expect-error: Missing type definition for `rel`
 								rel={linkRel}
 								target="_blank"
@@ -299,7 +296,7 @@ function FloatButtons() {
 									text: actionIntentText,
 									url: actionIntentUrl,
 								})}
-								icon={<Icon color={iconColor} slug="threads" />}
+								icon={<Icon slug="threads" />}
 								// @ts-expect-error: Missing type definition for `rel`
 								rel={linkRel}
 								target="_blank"
