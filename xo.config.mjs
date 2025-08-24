@@ -1,3 +1,5 @@
+import perfectionist from 'eslint-plugin-perfectionist';
+
 const xoConifg = [
 	{
 		languageOptions: {
@@ -62,6 +64,14 @@ const xoConifg = [
 					reservedFirst: true,
 				},
 			],
+		},
+	},
+	{
+		files: ['**/*.i18n.ts'],
+		plugins: {perfectionist},
+		rules: {
+			'perfectionist/sort-object-types': 'error',
+			'perfectionist/sort-objects': 'error',
 		},
 	},
 ];

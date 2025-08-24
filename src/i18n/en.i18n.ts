@@ -1,6 +1,19 @@
 import {type Internationalization} from '#types';
 
 const translation: Internationalization = {
+	footer: {
+		iconMissing: 'Icon missing?',
+		iconOutdated: 'Icon outdated?',
+		line1:
+			'A {CC0|https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md} project maintained by the {Simple Icons contributors|https://github.com/simple-icons/simple-icons/graphs/contributors}.',
+		line2:
+			'Use {GitHub|https://github.com/simple-icons/simple-icons} for requests, corrections and contributions.',
+		line3:
+			'Kindly supported by your donations at {Open Collective|https://opencollective.com/simple-icons}.',
+		madeWithLove: 'Made with ❤️ on GitHub',
+		reportOutdated: 'Report outdated icon',
+		submitRequest: 'Submit a request',
+	},
 	languageName: 'English',
 	modal: {
 		aliases: 'Aliases',
@@ -13,9 +26,24 @@ const translation: Internationalization = {
 		source: 'Source',
 		sourceAndGuidelines: 'Source & Guidelines',
 		svgColored: 'Colored SVG',
-		svgPlain: 'Plain SVG',
 		svgPath: 'Path Only',
+		svgPlain: 'Plain SVG',
 		title: 'Title',
+	},
+	openGraph: {
+		apply: 'Apply',
+		gap: 'Gap',
+		height: 'H',
+		reset: 'Reset',
+		shuffleIcons: 'Shuffle Icons',
+		size: 'Size',
+		width: 'W',
+	},
+	preview: {
+		copyScreenshot: 'Copy Screenshot',
+		downloadSvg: 'Download SVG',
+		savePreview: 'Save Preview',
+		uploadSvg: 'Upload SVG',
 	},
 	search: {
 		noIconsFound: 'No icons found',
@@ -34,43 +62,15 @@ const translation: Internationalization = {
 		themeLight: 'Light',
 		zoom: 'Zoom',
 	},
+	share: {
+		actionIntentText:
+			'Simple Icons: More than {} SVG icons for popular brands.',
+		share: 'Share',
+		yourMastodonInstance: 'Your Mastodon instance',
+	},
 	thirdParties: {
 		extensions: 'Extensions',
 		libraries: 'Libraries',
-	},
-	footer: {
-		iconMissing: 'Icon missing?',
-		iconOutdated: 'Icon outdated?',
-		submitRequest: 'Submit a request',
-		reportOutdated: 'Report outdated icon',
-		madeWithLove: 'Made with ❤️ on GitHub',
-		line1:
-			'A {CC0|https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md} project maintained by the {Simple Icons contributors|https://github.com/simple-icons/simple-icons/graphs/contributors}.',
-		line2:
-			'Use {GitHub|https://github.com/simple-icons/simple-icons} for requests, corrections and contributions.',
-		line3:
-			'Kindly supported by your donations at {Open Collective|https://opencollective.com/simple-icons}.',
-	},
-	preview: {
-		uploadSvg: 'Upload SVG',
-		downloadSvg: 'Download SVG',
-		savePreview: 'Save Preview',
-		copyScreenshot: 'Copy Screenshot',
-	},
-	openGraph: {
-		width: 'W',
-		height: 'H',
-		size: 'Size',
-		gap: 'Gap',
-		shuffleIcons: 'Shuffle Icons',
-		apply: 'Apply',
-		reset: 'Reset',
-	},
-	share: {
-		share: 'Share',
-		actionIntentText:
-			'Simple Icons: More than {} SVG icons for popular brands.',
-		yourMastodonInstance: 'Your Mastodon instance',
 	},
 };
 

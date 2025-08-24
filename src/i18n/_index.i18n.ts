@@ -4,6 +4,16 @@ import en from './en.i18n.js';
 import zh from './zh.i18n.js';
 
 export type Internationalization = {
+	footer: {
+		iconMissing: string;
+		iconOutdated: string;
+		line1: string;
+		line2: string;
+		line3: string;
+		madeWithLove: string;
+		reportOutdated: string;
+		submitRequest: string;
+	};
 	languageName: string;
 	modal: {
 		aliases: string;
@@ -16,9 +26,24 @@ export type Internationalization = {
 		source: string;
 		sourceAndGuidelines: string;
 		svgColored: string;
-		svgPlain: string;
 		svgPath: string;
+		svgPlain: string;
 		title: string;
+	};
+	openGraph: {
+		apply: string;
+		gap: string;
+		height: string;
+		reset: string;
+		shuffleIcons: string;
+		size: string;
+		width: string;
+	};
+	preview: {
+		copyScreenshot: string;
+		downloadSvg: string;
+		savePreview: string;
+		uploadSvg: string;
 	};
 	search: {
 		noIconsFound: string;
@@ -35,39 +60,14 @@ export type Internationalization = {
 		themeLight: string;
 		zoom: string;
 	};
-	thirdParties: {
-		extensions: string;
-		libraries: string;
-	};
-	footer: {
-		iconMissing: string;
-		iconOutdated: string;
-		submitRequest: string;
-		reportOutdated: string;
-		madeWithLove: string;
-		line1: string;
-		line2: string;
-		line3: string;
-	};
-	preview: {
-		uploadSvg: string;
-		downloadSvg: string;
-		savePreview: string;
-		copyScreenshot: string;
-	};
-	openGraph: {
-		width: string;
-		height: string;
-		size: string;
-		gap: string;
-		shuffleIcons: string;
-		apply: string;
-		reset: string;
-	};
 	share: {
 		actionIntentText: string;
 		share: string;
 		yourMastodonInstance: string;
+	};
+	thirdParties: {
+		extensions: string;
+		libraries: string;
 	};
 };
 
@@ -83,11 +83,11 @@ export enum LanguageCode {
 }
 
 export const translations: Record<LanguageCode, Internationalization> = {
-	[LanguageCode.English]: en,
 	[LanguageCode.Chinese]: zh,
+	[LanguageCode.English]: en,
 };
 
 export const useI18n = () => {
 	const [languageCode] = useLanguageCode();
-	return {i18n: translations[languageCode], gettext};
+	return {gettext, i18n: translations[languageCode]};
 };

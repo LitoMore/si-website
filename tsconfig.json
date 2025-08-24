@@ -9,7 +9,7 @@
 			"#constants": ["./src/constants.ts"],
 			"#context": ["./src/context.tsx"],
 			"#hooks": ["./src/hooks.ts"],
-			"#i18n": ["./src/i18n/_index.ts"],
+			"#i18n": ["./src/i18n/_index.i18n.ts"],
 			"#types": ["./src/types.ts"],
 			"#utils": ["./src/utils.ts"]
 		}

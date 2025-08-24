@@ -1,6 +1,19 @@
 import {type Internationalization} from '#types';
 
 const translation: Internationalization = {
+	footer: {
+		iconMissing: '缺少图标？',
+		iconOutdated: '有图标过时了吗？',
+		line1:
+			'此项目基于 {CC0|https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md} 许可证，并由 {Simple Icons 贡献者们|https://github.com/simple-icons/simple-icons/graphs/contributors} 维护。',
+		line2:
+			'请通过 {GitHub|https://github.com/simple-icons/simple-icons} 来提交图标相关请求、更正及其它贡献。',
+		line3:
+			'您可以通过 {Open Collective|https://opencollective.com/simple-icons} 来赞助支持我们。',
+		madeWithLove: '我们在 GitHub 上用 ❤️ 发电',
+		reportOutdated: '上报过时图标',
+		submitRequest: '请求新增图标',
+	},
 	languageName: '中文',
 	modal: {
 		aliases: '别名',
@@ -13,9 +26,24 @@ const translation: Internationalization = {
 		source: '出处',
 		sourceAndGuidelines: '出处 & 设计指南',
 		svgColored: '彩色 SVG',
-		svgPlain: '黑白 SVG',
 		svgPath: '仅路径',
+		svgPlain: '黑白 SVG',
 		title: '名称',
+	},
+	openGraph: {
+		apply: '应用画布',
+		gap: '间距',
+		height: '高',
+		reset: '恢复默认',
+		shuffleIcons: '重随图标',
+		size: '尺寸',
+		width: '宽',
+	},
+	preview: {
+		copyScreenshot: '复制截图至剪贴板',
+		downloadSvg: '下载 SVG',
+		savePreview: '保存截图至本地',
+		uploadSvg: '上传预览',
 	},
 	search: {
 		noIconsFound: '暂无数据',
@@ -33,42 +61,14 @@ const translation: Internationalization = {
 		themeLight: '亮色主题',
 		zoom: '缩放',
 	},
+	share: {
+		actionIntentText: 'Simple Icons: 拥有超过 {} 个知名品牌的 SVG 图标合集',
+		share: '分享',
+		yourMastodonInstance: 'Mastodon 实例地址',
+	},
 	thirdParties: {
 		extensions: '扩展',
 		libraries: '三方库',
-	},
-	footer: {
-		iconMissing: '缺少图标？',
-		iconOutdated: '有图标过时了吗？',
-		submitRequest: '请求新增图标',
-		reportOutdated: '上报过时图标',
-		madeWithLove: '我们在 GitHub 上用 ❤️ 发电',
-		line1:
-			'此项目基于 {CC0|https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md} 许可证，并由 {Simple Icons 贡献者们|https://github.com/simple-icons/simple-icons/graphs/contributors} 维护。',
-		line2:
-			'请通过 {GitHub|https://github.com/simple-icons/simple-icons} 来提交图标相关请求、更正及其它贡献。',
-		line3:
-			'您可以通过 {Open Collective|https://opencollective.com/simple-icons} 来赞助支持我们。',
-	},
-	preview: {
-		uploadSvg: '上传预览',
-		downloadSvg: '下载 SVG',
-		savePreview: '保存截图至本地',
-		copyScreenshot: '复制截图至剪贴板',
-	},
-	openGraph: {
-		width: '宽',
-		height: '高',
-		size: '尺寸',
-		gap: '间距',
-		shuffleIcons: '重随图标',
-		apply: '应用画布',
-		reset: '恢复默认',
-	},
-	share: {
-		share: '分享',
-		actionIntentText: 'Simple Icons: 拥有超过 {} 个知名品牌的 SVG 图标合集',
-		yourMastodonInstance: 'Mastodon 实例地址',
 	},
 };
 
