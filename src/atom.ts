@@ -1,6 +1,3 @@
-/**
- * [INFO] Here used the `value as EnumType` as a workaround to fix a possibly undefined issue.
- */
 import {atom, useAtom} from 'jotai';
 import {atomWithStorage} from 'jotai/utils';
 import {defaultOpenGraphImage} from '#constants';

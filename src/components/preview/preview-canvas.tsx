@@ -1,11 +1,12 @@
 import {useEffect, useRef, useState} from 'react';
 import type Konva from 'konva';
-import {Image, Layer, Rect, Stage, Text} from 'react-konva';
+import {Layer, Rect, Stage, Text} from 'react-konva';
 import useImage from 'use-image';
 import {useIcons} from '#atom';
 import {usePreviewImage} from '#hooks';
 import {type Icon} from '#types';
-import {getSimpleIconsCdnUrl, getSvg, getSvgDataUri} from '#utils';
+import {getJsdelivrCdnUrl, getSvg, getSvgDataUri} from '#utils';
+import MaskedIcon from '#components/canvas/masked-icon.js';
 
 function PreviewCanvas({
 	icon,
@@ -18,11 +19,11 @@ function PreviewCanvas({
 	const [titleHeight, setTitleHeight] = useState(0);
 	const textColor = icon.relativeColor === '#fff' ? '#333' : '#fff';
 	const [icons] = useIcons();
-	const [siSimage] = useImage(
-		`https://cdn.simpleicons.org/simpleicons/${textColor.slice(1)}`,
-	);
+	const [siSimage] = useImage(getJsdelivrCdnUrl(icons.version, 'simpleicons'));
 	const [images] = usePreviewImage(
-		svg ? getSvgDataUri(svg, color) : getSimpleIconsCdnUrl(icon.slug),
+		svg
+			? getSvgDataUri(svg, color)
+			: getJsdelivrCdnUrl(icons.version, icon.slug),
 	);
 	const titleRef = useRef<Konva.default.Text>(null);
 
@@ -104,7 +105,7 @@ function PreviewCanvas({
 					x={baseTextX}
 					y={baseTextY + titleHeight + 2}
 				/>
-				<Image image={siSimage} x={baseTextX - 4} y={330} />
+
 				<Text
 					{...textProps}
 					lineHeight={1.25}
@@ -115,10 +116,30 @@ function PreviewCanvas({
 					x={baseTextX + 36}
 					y={330}
 				/>
+			</Layer>
+			<Layer>
+				<MaskedIcon
+					backgroundColor={icon.relativeColor}
+					foregroundColor={textColor}
+					image={siSimage}
+					size={32}
+					x={baseTextX - 4}
+					y={330}
+				/>
+			</Layer>
+			<Layer>
 				{images.map((image) => {
 					if (!image) return null;
 					return (
-						<Image key={image.size} image={image.element} x={image.x} y={10} />
+						<MaskedIcon
+							key={`${icon.slug}-${image.size}`}
+							backgroundColor={icon.relativeColor}
+							foregroundColor={`#${icon.hex}`}
+							image={image.element}
+							size={image.size}
+							x={image.x}
+							y={10}
+						/>
 					);
 				})}
 			</Layer>

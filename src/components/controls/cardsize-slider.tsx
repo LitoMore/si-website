@@ -12,7 +12,7 @@ function CardsizeSlider() {
 	if (innerWidth < mobileWidth) return null;
 
 	return (
-		<div className="flex justify-center gap-[10px]">
+		<div className="flex items-center justify-center gap-[10px]">
 			<IconZoomOut color={iconFg} size={18} />
 			<Slider
 				className="w-[300px]"

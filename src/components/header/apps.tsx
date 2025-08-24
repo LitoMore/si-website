@@ -32,7 +32,7 @@ function Apps() {
 				],
 			}}
 		>
-			<div className="flex items-center justify-center">
+			<div className="flex cursor-pointer items-center justify-center">
 				<img
 					alt="Simple Icons"
 					className="h-6 w-6"

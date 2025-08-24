@@ -54,7 +54,7 @@
 	}
 
 	.control {
-		@apply flex h-8 w-8 items-center justify-center rounded-md p-[5px] text-2xl text-[--si-header-fg] hover:bg-black/6;
+		@apply flex h-8 w-8 cursor-pointer items-center justify-center rounded-md p-[5px] text-2xl text-[--si-header-fg] hover:bg-black/6;
 	}
 }
 

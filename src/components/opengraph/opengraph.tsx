@@ -1,10 +1,11 @@
-import {Fragment, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import shuffle from 'array-shuffle';
-import {Image, Layer, Rect, Stage} from 'react-konva';
+import {Layer, Rect, Stage} from 'react-konva';
 import {useIcons, useOpenGraphImage} from '#atom';
 import {brightThreshold} from '#constants';
 import {useColorScheme} from '#hooks';
 import {getJsdelivrCdnUrl} from '#utils';
+import MaskedIcon from '#components/canvas/masked-icon.js';
 
 function OpenGraph({seed}: {readonly seed: number}) {
 	const [{width, height, size, gap}] = useOpenGraphImage();
@@ -96,53 +97,24 @@ function OpenGraph({seed}: {readonly seed: number}) {
 							const iconColor = `#${icon.hex === '000000' ? (isLight ? '222' : 'ddd') : icon.hex}`;
 							const {x, y} = getIconPosition(index);
 							return (
-								<Fragment key={icon.slug}>
-									<Rect
-										fill={fillColor}
-										height={size}
-										width={size}
-										x={x}
-										y={y}
-									/>
-									<Image
-										globalCompositeOperation="xor"
-										image={image}
-										x={x}
-										y={y}
-									/>
-									<Rect
-										fill={iconColor}
-										globalCompositeOperation="xor"
-										height={size}
-										width={size}
-										x={x}
-										y={y}
-									/>
-								</Fragment>
+								<MaskedIcon
+									key={icon.slug}
+									backgroundColor={fillColor}
+									foregroundColor={iconColor}
+									image={image}
+									size={size}
+									x={x}
+									y={y}
+								/>
 							);
 						})}
 					</Layer>
 					<Layer>
-						<Rect
-							fill={fillColor}
-							height={centerIconSize}
-							width={centerIconSize}
-							x={centerIconX}
-							y={centerIconY}
-						/>
-						<Image
-							globalCompositeOperation="xor"
-							height={centerIconSize}
+						<MaskedIcon
+							backgroundColor={fillColor}
+							foregroundColor={centerIconColor}
 							image={siImage}
-							width={centerIconSize}
-							x={centerIconX}
-							y={centerIconY}
-						/>
-						<Rect
-							fill={centerIconColor}
-							globalCompositeOperation="xor"
-							height={centerIconSize}
-							width={centerIconSize}
+							size={centerIconSize}
 							x={centerIconX}
 							y={centerIconY}
 						/>
