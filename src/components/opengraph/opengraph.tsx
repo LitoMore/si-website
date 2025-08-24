@@ -85,7 +85,7 @@ function OpenGraph({seed}: {readonly seed: number}) {
 
 	return (
 		<div className="flex h-screen w-full items-center justify-center">
-			<div className="border border-white" style={{width, height}}>
+			<div className="box-content! border border-white" style={{width, height}}>
 				<Stage height={height} width={width}>
 					<Layer>
 						<Rect fill={fillColor} height={height} width={width} />
