@@ -14,6 +14,10 @@ export type Internationalization = {
 		reportOutdated: string;
 		submitRequest: string;
 	};
+	header: {
+		iconPreviewer: string;
+		openGraphGenerator: string;
+	};
 	languageName: string;
 	modal: {
 		aliases: string;

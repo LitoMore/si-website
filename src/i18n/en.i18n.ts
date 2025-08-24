@@ -14,6 +14,10 @@ const translation: Internationalization = {
 		reportOutdated: 'Report outdated icon',
 		submitRequest: 'Submit a request',
 	},
+	header: {
+		iconPreviewer: 'Icon Previewer',
+		openGraphGenerator: 'OpenGraph Generator',
+	},
 	languageName: 'English',
 	modal: {
 		aliases: 'Aliases',

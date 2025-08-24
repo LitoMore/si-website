@@ -5,12 +5,13 @@ import {
 } from '@tabler/icons-react';
 import {Dropdown} from 'antd';
 import {useNavigate} from 'react-router';
-import {useColorScheme} from '#hooks';
+import {useColorScheme, useI18n} from '#hooks';
 import {PageLayout} from '#types';
 
 function Apps() {
 	const navigate = useNavigate();
 	const {iconFg} = useColorScheme();
+	const {i18n} = useI18n();
 
 	return (
 		<Dropdown
@@ -19,13 +20,13 @@ function Apps() {
 					{
 						key: PageLayout.Previewer,
 						icon: <IconEyeglass />,
-						label: <span>Icon Previewer</span>,
+						label: <span>{i18n.header.iconPreviewer}</span>,
 						onClick: async () => navigate('preview'),
 					},
 					{
 						key: PageLayout.OpenGraph,
 						icon: <IconGrid4x4 />,
-						label: <span>OpenGraph Generator</span>,
+						label: <span>{i18n.header.openGraphGenerator}</span>,
 						onClick: async () => navigate('og'),
 					},
 				],

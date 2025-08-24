@@ -14,6 +14,10 @@ const translation: Internationalization = {
 		reportOutdated: '上报过时图标',
 		submitRequest: '请求新增图标',
 	},
+	header: {
+		iconPreviewer: '图标预览器',
+		openGraphGenerator: '分享图生成器',
+	},
 	languageName: '中文',
 	modal: {
 		aliases: '别名',
