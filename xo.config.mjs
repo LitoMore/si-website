@@ -1,6 +1,6 @@
 import perfectionist from 'eslint-plugin-perfectionist';
 
-const xoConifg = [
+const xoConfig = [
 	{
 		languageOptions: {
 			parserOptions: {
@@ -77,4 +77,4 @@ const xoConifg = [
 	},
 ];
 
-export default xoConifg;
+export default xoConfig;
