@@ -41,7 +41,7 @@ function Settings({extraSettings}: {readonly extraSettings?: ReactNode}) {
 					{isMain ? <Reset /> : null}
 				</div>
 			}
-			trigger="hover"
+			trigger="click"
 		>
 			<Badge color="#0cf" dot={settingsChanged} offset={[-6, 6]}>
 				<IconSettings className="control" style={{color: iconFg}} />

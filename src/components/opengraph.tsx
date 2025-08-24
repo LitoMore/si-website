@@ -2,10 +2,13 @@ import {useEffect, useState} from 'react';
 import shuffle from 'array-shuffle';
 import {Image, Layer, Rect, Stage} from 'react-konva';
 import {useIcons, useOpenGraphImage} from '#atom';
+import {brightThreshold} from '#constants';
+import {useColorScheme} from '#hooks';
 
 function OpenGraph({seed}: {readonly seed: number}) {
-	const [{data}] = useIcons();
 	const [{width, height, size, gap}] = useOpenGraphImage();
+	const {isDark} = useColorScheme();
+	const [{data}] = useIcons();
 	const [shuffled, setShuffled] = useState(data);
 
 	const baseRatio = 2;
@@ -15,11 +18,14 @@ function OpenGraph({seed}: {readonly seed: number}) {
 			data.filter(
 				(icon) =>
 					icon.slug !== 'simpleicons' &&
-					(icon.brightness > 0.1 || icon.hex === '000000'),
+					((isDark
+						? icon.brightness <= brightThreshold
+						: icon.brightness > 0.1) ||
+						icon.hex === '000000'),
 			),
 		);
 		setShuffled(shuffledData);
-	}, [seed, data]);
+	}, [seed, data, isDark]);
 
 	const rows = Math.floor((height - gap) / (size + gap));
 	const columns = Math.floor((width - gap) / (size + gap));
@@ -58,13 +64,13 @@ function OpenGraph({seed}: {readonly seed: number}) {
 	);
 
 	const siImage = new globalThis.Image();
-	siImage.src = 'https://cdn.simpleicons.org/simpleicons/fff';
+	siImage.src = `https://cdn.simpleicons.org/simpleicons/${isDark ? '000' : 'fff'}`;
 	siImage.width = size * ratio + gap * (ratio - 1);
 	siImage.height = size * ratio + gap * (ratio - 1);
 
 	const images = icons.map((icon) => {
 		const image = new globalThis.Image();
-		image.src = `https://cdn.simpleicons.org/${icon.slug}${icon.hex === '000000' ? '/ddd' : ''}`;
+		image.src = `https://cdn.simpleicons.org/${icon.slug}${icon.hex === '000000' ? (isDark ? '/222' : '/ddd') : ''}`;
 		image.width = size;
 		image.height = size;
 		return {image, icon};
@@ -75,7 +81,11 @@ function OpenGraph({seed}: {readonly seed: number}) {
 			<div style={{width, height}}>
 				<Stage height={height} width={width}>
 					<Layer>
-						<Rect fill="#000" height={height} width={width} />
+						<Rect
+							fill={isDark ? '#fff' : '#000'}
+							height={height}
+							width={width}
+						/>
 						{images.map(({image, icon}, index) => {
 							if (ignoredIndexes.has(index)) return null;
 							const {x, y} = getIconPosition(index);

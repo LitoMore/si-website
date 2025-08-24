@@ -19,6 +19,6 @@ export const actionIntentUrl = 'https://simpleicons.org';
 export const defaultOpenGraphImage: OpenGraphImage = {
 	width: 800,
 	height: 600,
-	size: 20,
-	gap: 20,
+	size: 24,
+	gap: 24,
 };
