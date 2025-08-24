@@ -3,10 +3,10 @@ import type Konva from 'konva';
 import {Layer, Rect, Stage, Text} from 'react-konva';
 import useImage from 'use-image';
 import {useIcons} from '#atom';
+import MaskedIcon from '#components/canvas/masked-icon.js';
 import {usePreviewImage} from '#hooks';
 import {type Icon} from '#types';
 import {getJsdelivrCdnUrl, getSvg, getSvgDataUri} from '#utils';
-import MaskedIcon from '#components/canvas/masked-icon.js';
 
 function PreviewCanvas({
 	icon,

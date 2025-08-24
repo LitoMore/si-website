@@ -2,10 +2,10 @@ import {useEffect, useState} from 'react';
 import shuffle from 'array-shuffle';
 import {Layer, Rect, Stage} from 'react-konva';
 import {useIcons, useOpenGraphImage} from '#atom';
+import MaskedIcon from '#components/canvas/masked-icon.js';
 import {brightThreshold} from '#constants';
 import {useColorScheme} from '#hooks';
 import {getJsdelivrCdnUrl} from '#utils';
-import MaskedIcon from '#components/canvas/masked-icon.js';
 
 function OpenGraph({seed}: {readonly seed: number}) {
 	const [{width, height, size, gap}] = useOpenGraphImage();

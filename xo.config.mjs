@@ -36,12 +36,7 @@ const xoConfig = [
 							position: 'before',
 						},
 						{
-							pattern: '#**',
-							group: 'parent',
-							position: 'before',
-						},
-						{
-							pattern: '#*/**',
+							pattern: '#{*,*/**/*.js}',
 							group: 'parent',
 							position: 'before',
 						},
