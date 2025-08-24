@@ -8,10 +8,10 @@ import {
 import {Button, Divider, Input} from 'antd';
 import {useIcons, useSelectedIcon} from '#atom';
 import {useI18n} from '#hooks';
+import DownloadImage from '../common/downloadimage.js';
 import AutoComplete from './autocomplete.js';
-import DownloadImage from './downloadimage.js';
 import PrefixIcon from './prefixicon.js';
-import Canvas from './previewcanvas.js';
+import Canvas from './preview-canvas.js';
 
 function Preview() {
 	const [color, setColor] = useState('000000');

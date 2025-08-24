@@ -3,15 +3,13 @@ import {IconSettings} from '@tabler/icons-react';
 import {Badge, Popover} from 'antd';
 import {useLocation} from 'react-router';
 import {useBrightnessMode, useCardSize, useColorMode} from '#atom';
-import {
-	Brightness,
-	CardsizeSlider,
-	ColorThemes,
-	DisplayColor,
-	Reset,
-} from '#components';
 import {useColorScheme} from '#hooks';
 import {BrightnessMode, CardSize, ColorMode} from '#types';
+import Brightness from './brightness.js';
+import CardsizeSlider from './cardsize-slider.js';
+import ColorThemes from './color-themes.js';
+import DisplayColor from './display-color.js';
+import Reset from './reset.js';
 
 function Settings({extraSettings}: {readonly extraSettings?: ReactNode}) {
 	const {pathname} = useLocation();
@@ -41,7 +39,7 @@ function Settings({extraSettings}: {readonly extraSettings?: ReactNode}) {
 					{isMain ? <Reset /> : null}
 				</div>
 			}
-			trigger="click"
+			trigger="hover"
 		>
 			<Badge color="#0cf" dot={settingsChanged} offset={[-6, 6]}>
 				<IconSettings className="control" style={{color: iconFg}} />

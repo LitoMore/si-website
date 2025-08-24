@@ -1,9 +1,9 @@
 import {useState} from 'react';
 import {Layout} from 'antd';
-import BackHome from '../components/backhome.js';
-import Controls from '../components/controls.js';
-import OpenGraph from '../components/opengraph.js';
-import OpenGraphSettings from '../components/opengraphsettings.js';
+import Controls from '#components/controls/controls.js';
+import BackHome from '#components/header/backhome.js';
+import OpenGraphSettings from '#components/opengraph/opengraph-settings.js';
+import OpenGraph from '#components/opengraph/opengraph.js';
 
 export default function OgLayout() {
 	const [seed, setSeed] = useState(0);

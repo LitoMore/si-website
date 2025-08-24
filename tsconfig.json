@@ -5,13 +5,14 @@
 		"paths": {
 			"#atom": ["./src/atom.ts"],
 			"#data": ["./src/data/index.ts"],
-			"#components": ["./src/components/index.ts"],
+			"#components/*": ["./src/components/*"],
 			"#constants": ["./src/constants.ts"],
 			"#context": ["./src/context.tsx"],
 			"#hooks": ["./src/hooks.ts"],
 			"#i18n": ["./src/i18n/_index.i18n.ts"],
 			"#types": ["./src/types.ts"],
-			"#utils": ["./src/utils.ts"]
+			"#utils": ["./src/utils.ts"],
+			"#vendor/*": ["./src/vendor/*"]
 		}
 	}
 }

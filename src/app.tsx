@@ -12,10 +12,12 @@ import {useColorScheme, useSizes} from '#hooks';
 import {type BrightnessMode, ColorTheme} from '#types';
 import {getColorScheme, getIconsData, getLatestVersion} from '#utils';
 
+/* eslint-disable prettier/prettier */
 const DefaultLayout = lazy(async () => import('./layouts/default-layout.js'));
-const OgLayout = lazy(async () => import('./layouts/og-layout.js'));
+const OpenGraphLayout = lazy(async () => import('./layouts/opengraph-layout.js'));
 const PreviewLayout = lazy(async () => import('./layouts/preview-layout.js'));
-const FloatButtons = lazy(async () => import('./components/floatbuttons.js'));
+const FloatButtons = lazy(async () => import('#components/common/floatbuttons.js'));
+/* eslint-enable prettier/prettier */
 
 function App() {
 	const [searchParameters, setSearchParameters] = useSearchParams();
@@ -78,7 +80,7 @@ function App() {
 			>
 				<Routes>
 					<Route index element={<DefaultLayout />} />
-					<Route element={<OgLayout />} path="og" />
+					<Route element={<OpenGraphLayout />} path="og" />
 					<Route element={<PreviewLayout />} path="preview" />
 				</Routes>
 				{isMobileSize ? null : <FloatButtons />}

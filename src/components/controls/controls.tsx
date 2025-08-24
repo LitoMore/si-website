@@ -1,8 +1,8 @@
 import {type ReactNode} from 'react';
 import {Divider} from 'antd';
-import {Socials} from '#components';
 import {useSizes} from '#hooks';
 import Settings from './settings.js';
+import Socials from './socials.js';
 import ThridParty from './thirdparty.js';
 import Translations from './translations.js';
 

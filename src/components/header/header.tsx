@@ -1,9 +1,10 @@
 import {lazy} from 'react';
 import {Layout} from 'antd';
-import {Apps, Search} from '#components';
 import {useColorScheme, useSizes} from '#hooks';
+import Apps from './apps.js';
+import Search from './search.js';
 
-const Controls = lazy(async () => import('./controls.js'));
+const Controls = lazy(async () => import('../controls/controls.js'));
 
 function Header() {
 	const {padding} = useSizes();

@@ -7,7 +7,7 @@ import {actionIntentUrl, linkRel} from '#constants';
 import {useColorScheme, useI18n, useSizes} from '#hooks';
 import {LanguageCode} from '#types';
 import {getShareUrl} from '#utils';
-import isPublicDomain from '../vendor/is-public-domain.js';
+import isPublicDomain from '#vendor/is-public-domain.js';
 
 function Icon({
 	slug,

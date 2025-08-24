@@ -1,6 +1,6 @@
 import {AutoSizer, Collection} from 'react-virtualized';
-import {Card} from '#components';
 import {type Icon} from '#types';
+import Card from './card.js';
 
 function Virutalized({
 	icons,

@@ -1,6 +1,6 @@
 import {VirtuosoMasonry} from '@virtuoso.dev/masonry';
-import {Card} from '#components';
 import {type Icon} from '#types';
+import Card from './card.js';
 
 function Virtuoso({
 	icons,

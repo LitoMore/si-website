@@ -1,7 +1,7 @@
 import {type ComponentPropsWithoutRef, forwardRef} from 'react';
 import {VirtuosoGrid} from 'react-virtuoso';
-import {Card} from '#components';
 import {type Icon} from '#types';
+import Card from './card.js';
 
 function Virtuoso({
 	icons,

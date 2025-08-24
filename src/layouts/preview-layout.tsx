@@ -1,7 +1,7 @@
 import {Layout} from 'antd';
-import BackHome from '../components/backhome.js';
-import Controls from '../components/controls.js';
-import Preview from '../components/preview.js';
+import Controls from '#components/controls/controls.js';
+import BackHome from '#components/header/backhome.js';
+import Preview from '#components/preview/preview.js';
 
 export default function PreviewLayout() {
 	return (
