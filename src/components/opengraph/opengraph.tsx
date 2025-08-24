@@ -1,14 +1,15 @@
-import {useEffect, useState} from 'react';
+import {Fragment, useEffect, useState} from 'react';
 import shuffle from 'array-shuffle';
 import {Image, Layer, Rect, Stage} from 'react-konva';
 import {useIcons, useOpenGraphImage} from '#atom';
 import {brightThreshold} from '#constants';
 import {useColorScheme} from '#hooks';
+import {getJsdelivrCdnUrl} from '#utils';
 
 function OpenGraph({seed}: {readonly seed: number}) {
 	const [{width, height, size, gap}] = useOpenGraphImage();
 	const {isDark} = useColorScheme();
-	const [{data}] = useIcons();
+	const [{data, version}] = useIcons();
 	const [shuffled, setShuffled] = useState(data);
 
 	const baseRatio = 2;
@@ -64,39 +65,86 @@ function OpenGraph({seed}: {readonly seed: number}) {
 	);
 
 	const siImage = new globalThis.Image();
-	siImage.src = `https://cdn.simpleicons.org/simpleicons/${isDark ? '000' : 'fff'}`;
+	siImage.src = getJsdelivrCdnUrl(version, 'simpleicons');
 	siImage.width = size * ratio + gap * (ratio - 1);
 	siImage.height = size * ratio + gap * (ratio - 1);
 
 	const images = icons.map((icon) => {
 		const image = new globalThis.Image();
-		image.src = `https://cdn.simpleicons.org/${icon.slug}${icon.hex === '000000' ? (isDark ? '/222' : '/ddd') : ''}`;
+		image.src = getJsdelivrCdnUrl(version, icon.slug);
 		image.width = size;
 		image.height = size;
 		return {image, icon};
 	});
+
+	const fillColor = isDark ? '#fff' : '#000';
+	const centerIconX = mainIconPosition.x - (isOddColumn ? (size + gap) / 2 : 0);
+	const centerIconY = mainIconPosition.y;
+	const centerIconSize = size * ratio + gap * (ratio - 1);
+	const centerIconColor = isDark ? '#000' : '#fff';
 
 	return (
 		<div className="flex h-screen w-full items-center justify-center">
 			<div style={{width, height}}>
 				<Stage height={height} width={width}>
 					<Layer>
-						<Rect
-							fill={isDark ? '#fff' : '#000'}
-							height={height}
-							width={width}
-						/>
+						<Rect fill={fillColor} height={height} width={width} />
+					</Layer>
+					<Layer>
 						{images.map(({image, icon}, index) => {
 							if (ignoredIndexes.has(index)) return null;
+							const iconColor = `#${icon.hex === '000000' ? (isDark ? '222' : 'ddd') : icon.hex}`;
 							const {x, y} = getIconPosition(index);
-							return <Image key={icon.slug} image={image} x={x} y={y} />;
+							return (
+								<Fragment key={icon.slug}>
+									<Rect
+										fill={fillColor}
+										height={size}
+										width={size}
+										x={x}
+										y={y}
+									/>
+									<Image
+										globalCompositeOperation="xor"
+										image={image}
+										x={x}
+										y={y}
+									/>
+									<Rect
+										fill={iconColor}
+										globalCompositeOperation="xor"
+										height={size}
+										width={size}
+										x={x}
+										y={y}
+									/>
+								</Fragment>
+							);
 						})}
+					</Layer>
+					<Layer>
+						<Rect
+							fill={fillColor}
+							height={centerIconSize}
+							width={centerIconSize}
+							x={centerIconX}
+							y={centerIconY}
+						/>
 						<Image
-							height={size * ratio + gap * (ratio - 1)}
+							globalCompositeOperation="xor"
+							height={centerIconSize}
 							image={siImage}
-							width={size * ratio + gap * (ratio - 1)}
-							x={mainIconPosition.x - (isOddColumn ? (size + gap) / 2 : 0)}
-							y={mainIconPosition.y}
+							width={centerIconSize}
+							x={centerIconX}
+							y={centerIconY}
+						/>
+						<Rect
+							fill={centerIconColor}
+							globalCompositeOperation="xor"
+							height={centerIconSize}
+							width={centerIconSize}
+							x={centerIconX}
+							y={centerIconY}
 						/>
 					</Layer>
 				</Stage>
