@@ -8,7 +8,7 @@ import {getJsdelivrCdnUrl} from '#utils';
 
 function OpenGraph({seed}: {readonly seed: number}) {
 	const [{width, height, size, gap}] = useOpenGraphImage();
-	const {isDark} = useColorScheme();
+	const {isLight} = useColorScheme();
 	const [{data, version}] = useIcons();
 	const [shuffled, setShuffled] = useState(data);
 
@@ -19,14 +19,14 @@ function OpenGraph({seed}: {readonly seed: number}) {
 			data.filter(
 				(icon) =>
 					icon.slug !== 'simpleicons' &&
-					((isDark
+					((isLight
 						? icon.brightness <= brightThreshold
 						: icon.brightness > 0.1) ||
 						icon.hex === '000000'),
 			),
 		);
 		setShuffled(shuffledData);
-	}, [seed, data, isDark]);
+	}, [seed, data, isLight]);
 
 	const rows = Math.floor((height - gap) / (size + gap));
 	const columns = Math.floor((width - gap) / (size + gap));
@@ -77,15 +77,15 @@ function OpenGraph({seed}: {readonly seed: number}) {
 		return {image, icon};
 	});
 
-	const fillColor = isDark ? '#fff' : '#000';
+	const fillColor = isLight ? '#fff' : '#000';
 	const centerIconX = mainIconPosition.x - (isOddColumn ? (size + gap) / 2 : 0);
 	const centerIconY = mainIconPosition.y;
 	const centerIconSize = size * ratio + gap * (ratio - 1);
-	const centerIconColor = isDark ? '#000' : '#fff';
+	const centerIconColor = isLight ? '#000' : '#fff';
 
 	return (
 		<div className="flex h-screen w-full items-center justify-center">
-			<div style={{width, height}}>
+			<div className="border border-white" style={{width, height}}>
 				<Stage height={height} width={width}>
 					<Layer>
 						<Rect fill={fillColor} height={height} width={width} />
@@ -93,7 +93,7 @@ function OpenGraph({seed}: {readonly seed: number}) {
 					<Layer>
 						{images.map(({image, icon}, index) => {
 							if (ignoredIndexes.has(index)) return null;
-							const iconColor = `#${icon.hex === '000000' ? (isDark ? '222' : 'ddd') : icon.hex}`;
+							const iconColor = `#${icon.hex === '000000' ? (isLight ? '222' : 'ddd') : icon.hex}`;
 							const {x, y} = getIconPosition(index);
 							return (
 								<Fragment key={icon.slug}>
