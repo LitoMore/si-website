@@ -72,6 +72,7 @@ const xoConifg = [
 		rules: {
 			'perfectionist/sort-object-types': 'error',
 			'perfectionist/sort-objects': 'error',
+			'perfectionist/sort-enums': 'error',
 		},
 	},
 ];
