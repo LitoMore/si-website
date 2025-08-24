@@ -1,5 +1,6 @@
 {
-  "useTabs": true,
+	"useTabs": true,
 	"bracketSpacing": false,
-  "plugins": ["prettier-plugin-css-order", "prettier-plugin-tailwindcss"]
+	"singleQuote": true,
+	"plugins": ["prettier-plugin-css-order", "prettier-plugin-tailwindcss"]
 }

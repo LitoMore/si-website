@@ -12,7 +12,7 @@ import {
 	getSvgPath,
 	getUnpkgCdnUrl,
 } from '#utils';
-import DownloadImage from '../common/downloadimage.js';
+import DownloadImage from '../download/downloadimage.js';
 
 const ModalContent = lazy(async () => import('./modalcontent.js'));
 

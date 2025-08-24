@@ -2,18 +2,18 @@ import {useEffect, useState} from 'react';
 import shuffle from 'array-shuffle';
 import {Layer, Rect, Stage} from 'react-konva';
 import {useIcons, useOpenGraphImage} from '#atom';
-import MaskedIcon from '#components/canvas/masked-icon.js';
 import {brightThreshold} from '#constants';
 import {useColorScheme} from '#hooks';
 import {getJsdelivrCdnUrl} from '#utils';
+import MaskedIcon from '../canvas/masked-icon.js';
+
+const centerIconRatio = 2;
 
 function OpenGraph({seed}: {readonly seed: number}) {
 	const [{width, height, size, gap}] = useOpenGraphImage();
 	const {isLight} = useColorScheme();
 	const [{data, version}] = useIcons();
 	const [shuffled, setShuffled] = useState(data);
-
-	const baseRatio = 2;
 
 	useEffect(() => {
 		const shuffledData = shuffle(
@@ -47,7 +47,7 @@ function OpenGraph({seed}: {readonly seed: number}) {
 		return {x, y};
 	};
 
-	const ratio = (rows % 2) + baseRatio;
+	const ratio = (rows % 2) + centerIconRatio;
 	const isOddColumn = (columns - ratio) % 2 === 1;
 	const mainIconPositionRow = Math.ceil((rows - ratio) / 2);
 	const mainIconPositionColumn = Math.ceil((columns - ratio) / 2);
@@ -66,9 +66,10 @@ function OpenGraph({seed}: {readonly seed: number}) {
 	);
 
 	const siImage = new globalThis.Image();
+	const siImageSize = size * ratio + gap * (ratio - 1);
 	siImage.src = getJsdelivrCdnUrl(version, 'simpleicons');
-	siImage.width = size * ratio + gap * (ratio - 1);
-	siImage.height = size * ratio + gap * (ratio - 1);
+	siImage.width = siImageSize;
+	siImage.height = siImageSize;
 
 	const images = icons.map((icon) => {
 		const image = new globalThis.Image();
@@ -81,7 +82,7 @@ function OpenGraph({seed}: {readonly seed: number}) {
 	const fillColor = isLight ? '#fff' : '#000';
 	const centerIconX = mainIconPosition.x - (isOddColumn ? (size + gap) / 2 : 0);
 	const centerIconY = mainIconPosition.y;
-	const centerIconSize = size * ratio + gap * (ratio - 1);
+	const centerIconSize = siImageSize;
 	const centerIconColor = isLight ? '#000' : '#fff';
 
 	return (

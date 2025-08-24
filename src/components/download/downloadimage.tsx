@@ -3,7 +3,7 @@ import {Button, Dropdown} from 'antd';
 import {useIcons} from '#atom';
 import {useI18n} from '#hooks';
 import {BitmapFormat, type Icon} from '#types';
-import {downloadBitmap, downloadPdf, downloadSvg} from '#utils';
+import {downloadBitmap, downloadPdf, downloadSvg} from './_utils.js';
 
 function DownloadImage({
 	icon,

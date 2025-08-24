@@ -1,5 +1,5 @@
 import {useLanguageCode} from '#atom';
-import {gettext} from '#utils';
+import {gettext} from './_utils.i18n.js';
 import en from './en.i18n.js';
 import zh from './zh.i18n.js';
 
