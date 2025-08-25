@@ -1,12 +1,13 @@
 import {useEffect, useRef, useState} from 'react';
 import type Konva from 'konva';
-import {Layer, Rect, Stage, Text} from 'react-konva';
+import {Layer, Rect, Stage} from 'react-konva';
 import useImage from 'use-image';
 import {useIcons} from '#atom';
 import {usePreviewImage} from '#hooks';
 import {type Icon} from '#types';
 import {getJsdelivrCdnUrl, getSvg, getSvgDataUri} from '#utils';
 import MaskedIcon from '../canvas/masked-icon.js';
+import PreviewText from '../canvas/preview-text.js';
 
 function PreviewCanvas({
 	icon,
@@ -32,7 +33,6 @@ function PreviewCanvas({
 	}, [icon.title]);
 
 	useEffect(() => {
-		// [TODO] Add loading status
 		(async () => {
 			const svg = await getSvg(icons.version, icon.slug);
 			setSvg(svg);
@@ -83,38 +83,16 @@ function PreviewCanvas({
 					height={384}
 					width={720}
 				/>
-				<Text
-					ref={titleRef}
-					{...textProps}
-					fontSize={titleFontSize}
-					text={icon.title}
-					width={textBoxWidth}
+				<PreviewText
+					icon={icon}
+					iconsTotal={icons.data.length}
+					textBoxWidth={textBoxWidth}
+					textProps={textProps}
+					titleFontSize={titleFontSize}
+					titleHeight={titleHeight}
+					titleRef={titleRef}
 					x={baseTextX}
 					y={baseTextY}
-				/>
-				<Text
-					{...textProps}
-					lineHeight={1.25}
-					text={[
-						`${icon.slug}.svg`,
-						'',
-						`Brand: ${icon.title}`,
-						`Color: #${icon.hex}`,
-					].join('\n')}
-					width={textBoxWidth}
-					x={baseTextX}
-					y={baseTextY + titleHeight + 2}
-				/>
-
-				<Text
-					{...textProps}
-					lineHeight={1.25}
-					text={[
-						`${icons.data.length} SVG brand icons`,
-						'available at simpleicons.org',
-					].join('\n')}
-					x={baseTextX + 36}
-					y={330}
 				/>
 			</Layer>
 			<Layer>

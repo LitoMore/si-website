@@ -22,9 +22,8 @@ export default defineConfig({
 		rollupOptions: {
 			output: {
 				manualChunks(id) {
-					if (id.includes('rc-field-form')) {
-						return 'rc-field-form';
-					}
+					if (id.includes('rc-field-form')) return 'rc-field-form';
+					return undefined;
 				},
 			},
 		},

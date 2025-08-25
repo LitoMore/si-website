@@ -17,22 +17,27 @@ function PrefixIcon({
 	const {isLight} = useColorScheme();
 	if (!icon) return null;
 
+	const borderRadius = iconStyle === 'color' ? 4 : undefined;
+	const boxShadow =
+		iconStyle === 'color' ? '0 0 5px 0 rgba(0, 0, 0, 0.25)' : undefined;
+	const backgroundColor =
+		iconStyle === 'color'
+			? `#${normalizeColor(color) ?? icon.hex ?? '000000'}`
+			: undefined;
+	const filter =
+		iconStyle === 'icon' && icon.brightness > brightThreshold
+			? 'var(--si-contrast)'
+			: undefined;
+
 	return (
 		<div
 			className="mr-1 h-5 w-5"
 			style={{
-				borderRadius: iconStyle === 'color' ? 4 : undefined,
-				boxShadow:
-					iconStyle === 'color' ? '0 0 5px 0 rgba(0, 0, 0, 0.25)' : undefined,
-				backgroundColor:
-					iconStyle === 'color'
-						? `#${normalizeColor(color) ?? icon.hex ?? '000000'}`
-						: undefined,
+				borderRadius,
+				boxShadow,
+				backgroundColor,
 				...(iconStyle === 'icon' ? getMaskStyles(version, icon, isLight) : {}),
-				filter:
-					iconStyle === 'icon' && icon.brightness > brightThreshold
-						? 'var(--si-contrast)'
-						: undefined,
+				filter,
 			}}
 		/>
 	);
