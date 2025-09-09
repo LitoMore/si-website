@@ -22,7 +22,7 @@ function PreivewText({
 	x,
 	y,
 }: {
-	readonly titleRef: Ref<Konva.default.Text>;
+	readonly titleRef: Ref<Konva.Text>;
 	readonly textProps: TextProps;
 	readonly titleFontSize: number;
 	readonly titleHeight: number;

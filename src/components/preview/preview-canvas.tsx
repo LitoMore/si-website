@@ -26,7 +26,7 @@ function PreviewCanvas({
 			? getSvgDataUri(svg, color)
 			: getJsdelivrCdnUrl(icons.version, icon.slug),
 	);
-	const titleRef = useRef<Konva.default.Text>(null);
+	const titleRef = useRef<Konva.Text>(null);
 
 	useEffect(() => {
 		setTitleHeight(titleRef.current?.height() ?? 0);
