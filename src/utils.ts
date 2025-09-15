@@ -1,5 +1,6 @@
 import {type CSSProperties} from 'react';
 import {
+	type BitmapFormat,
 	BrightnessMode,
 	CardSize,
 	ColorTheme,
@@ -12,6 +13,8 @@ import {getIconSlug} from './vendor/simple-icons-sdk.js';
 
 export {colorForBackground} from './vendor/make-badge-color.js';
 export {getIconSlug} from './vendor/simple-icons-sdk.js';
+
+export const pixelRatio = globalThis.devicePixelRatio || 1;
 
 export const getLatestVersion = async (packageName: string) => {
 	const response = await fetch(
@@ -223,4 +226,61 @@ export const getIconsInRows = (icons: Icon[], iconsPerRow: number) => {
 	}
 
 	return iconsInRows;
+};
+
+export const copyFromCanvas = (
+	canvas: HTMLCanvasElement,
+	format: BitmapFormat,
+) => {
+	canvas.toBlob((blob) => {
+		if (!blob) return;
+		const item = new ClipboardItem({[`image/${format}`]: blob});
+		void navigator.clipboard.write([item]);
+	});
+};
+
+export const downloadFromCanvas = (
+	canvas: HTMLCanvasElement,
+	format: BitmapFormat,
+) => {
+	canvas.toBlob((blob) => {
+		if (!blob) return;
+		const link = document.createElement('a');
+		link.href = URL.createObjectURL(blob);
+		link.download = `image.${format}`;
+		link.click();
+	});
+};
+
+export const getImageCanvas = async (
+	imageSource: string,
+	width: number,
+	height: number,
+	options?: {
+		imageWidth?: number;
+		imageHeight?: number;
+	},
+): Promise<{canvas: HTMLCanvasElement; context: CanvasRenderingContext2D}> => {
+	const image = new Image();
+	if (options?.imageWidth !== undefined) image.width = options.imageWidth;
+	if (options?.imageHeight !== undefined) image.height = options.imageHeight;
+	image.src = imageSource;
+	const canvas = document.createElement('canvas');
+	const context = canvas.getContext('2d')!;
+	return new Promise((resolve, reject) => {
+		image.addEventListener('load', () => {
+			const drawWidth = width * pixelRatio;
+			const drawHeight = height * pixelRatio;
+			canvas.width = drawWidth;
+			canvas.height = drawHeight;
+			canvas.style.width = `${width}px`;
+			canvas.style.height = `${height}px`;
+			context.scale(pixelRatio, pixelRatio);
+			context.drawImage(image, 0, 0, width, height);
+			resolve({canvas, context});
+		});
+		image.addEventListener('error', () => {
+			reject(new Error(`Failed to load image`));
+		});
+	});
 };

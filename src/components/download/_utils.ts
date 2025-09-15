@@ -1,5 +1,5 @@
 import {type BitmapFormat} from '#types';
-import {getSvg} from '#utils';
+import {downloadFromCanvas, getImageCanvas, getSvg} from '#utils';
 
 export const downloadSvg = async (
 	version: string,
@@ -61,26 +61,16 @@ export const downloadBitmap = async (
 ) => {
 	let svg = await getSvg(version, slug);
 	svg = svg.replace('<svg ', `<svg fill="#${hex}" `);
-	const canvas = document.createElement('canvas');
-	const ctx = canvas.getContext('2d')!;
-	const ratio = globalThis.devicePixelRatio || 1;
-	canvas.width = size * ratio;
-	canvas.height = size * ratio;
-	canvas.style.width = size + 'px';
-	canvas.style.height = size + 'px';
-	ctx.scale(ratio, ratio);
-	const img = new Image();
-	img.width = size;
-	img.height = size;
-	img.addEventListener('load', () => {
-		ctx.drawImage(img, 0, 0, size, size);
-		const pngUrl = canvas.toDataURL(`image/${format}`);
-		const link = document.createElement('a');
-		link.href = pngUrl;
-		link.download = `${slug}.png`;
-		link.click();
-	});
-
 	// eslint-disable-next-line no-restricted-globals
-	img.src = `data:image/svg+xml;base64,${btoa(svg)}`;
+	const imageSource = `data:image/svg+xml;base64,${btoa(svg)}`;
+	const {canvas} = await getImageCanvas(imageSource, size, size, {
+		imageWidth: size,
+		imageHeight: size,
+	});
+	// Const imageUrl = canvas.toDataURL(`image/${format}`);
+	// const link = document.createElement('a');
+	// link.href = imageUrl;
+	// link.download = `${slug}.${format}`;
+	// link.click();
+	downloadFromCanvas(canvas, format);
 };

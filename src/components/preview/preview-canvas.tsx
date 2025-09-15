@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import {type RefObject, useEffect, useRef, useState} from 'react';
 import type Konva from 'konva';
 import {Layer, Rect, Stage} from 'react-konva';
 import useImage from 'use-image';
@@ -12,9 +12,12 @@ import PreviewText from '../canvas/preview-text.js';
 function PreviewCanvas({
 	icon,
 	color,
+	stageRef,
 }: {
 	readonly icon: Icon;
 	readonly color: string;
+	// eslint-disable-next-line @typescript-eslint/no-restricted-types
+	readonly stageRef: RefObject<Konva.Stage | null>;
 }) {
 	const [svg, setSvg] = useState('');
 	const [titleHeight, setTitleHeight] = useState(0);
@@ -41,6 +44,7 @@ function PreviewCanvas({
 
 	useEffect(() => {
 		if (siSimage) {
+			siSimage.crossOrigin = 'anonymous';
 			siSimage.width = 32;
 			siSimage.height = 32;
 		}
@@ -75,7 +79,7 @@ function PreviewCanvas({
 	};
 
 	return (
-		<Stage height={400} id="icon-canvas" width={720}>
+		<Stage ref={stageRef} height={400} id="icon-canvas" width={720}>
 			<Layer>
 				<Rect
 					cornerRadius={5}

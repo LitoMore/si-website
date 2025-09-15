@@ -72,6 +72,7 @@ export const usePreviewImage = (
 	source: string,
 ): [[ImageElement, ImageElement, ImageElement, ImageElement], ImageState] => {
 	const [image, state] = useImage(source);
+	if (image) image.crossOrigin = 'anonymous';
 	const [image24, setImage24] = useState<HTMLImageElement>();
 	const [image78, setImage78] = useState<HTMLImageElement>();
 	const [image134, setImage134] = useState<HTMLImageElement>();
