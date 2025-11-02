@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import shuffle from 'array-shuffle';
+import {arrayToShuffled} from 'array-shuffle';
 import {Layer, Rect, Stage} from 'react-konva';
 import {useIcons, useOpenGraphImage} from '#atom';
 import {brightThreshold} from '#constants';
@@ -16,7 +16,7 @@ function OpenGraph({seed}: {readonly seed: number}) {
 	const [shuffled, setShuffled] = useState(data);
 
 	useEffect(() => {
-		const shuffledData = shuffle(
+		const shuffledData = arrayToShuffled(
 			data.filter(
 				(icon) =>
 					icon.slug !== 'simpleicons' &&
