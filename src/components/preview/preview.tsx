@@ -60,7 +60,7 @@ function Preview() {
 							<Button icon={<IconUpload size={16} />} type="default">
 								{i18n.preview.uploadSvg}
 							</Button>
-							<div className="flex-[1]" />
+							<div className="flex-1" />
 							<DownloadImage isShowIcon icon={icon} />
 							<Button
 								icon={<IconDownload size={16} />}

@@ -11,7 +11,7 @@ function Header() {
 	const {headerBg} = useColorScheme();
 
 	return (
-		<Layout.Header className="text-6 sticky top-0 z-1 h-auto! w-full p-0! leading-[1] shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)]">
+		<Layout.Header className="text-6 sticky top-0 z-1 h-auto! w-full p-0! leading-none shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)]">
 			<div
 				className="flex items-center justify-center gap-[5px]"
 				style={{
