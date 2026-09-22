@@ -1,15 +1,15 @@
-import {IconLoader2} from '@tabler/icons-react';
-import {Col, Image, Row, Tag, Typography} from 'antd';
-import {useColorMode} from '#atom';
-import {brightThreshold, darkThreshold, linkRel, spinning} from '#constants';
+import {Col, Row, Tag, Typography} from 'antd';
+import {useColorMode, useIcons} from '#atom';
+import {brightThreshold, darkThreshold, linkRel} from '#constants';
 import {useColorScheme, useI18n, useSizes} from '#hooks';
 import {ColorMode, type Icon} from '#types';
-import {getAliases, tidyLink} from '#utils';
+import {getAliases, getMaskStyles, tidyLink} from '#utils';
 
 function ModalContent({icon}: {readonly icon?: Icon}) {
 	const {isMobileSize} = useSizes();
 	const [colorMode] = useColorMode();
 	const {contrast, isLight, isDark} = useColorScheme();
+	const [{version}] = useIcons();
 	const {i18n} = useI18n();
 	if (!icon) return null;
 
@@ -26,24 +26,12 @@ function ModalContent({icon}: {readonly icon?: Icon}) {
 		<Row gutter={16}>
 			<Col sm={16} xs={24}>
 				<div className="flex h-full items-center justify-center">
-					<Image
-						className="h-auto max-h-[300px] p-2.5 transition-[height] duration-500"
-						placeholder={
-							<div
-								className="flex justify-center text-[30px]"
-								style={{
-									color: hexColor,
-								}}
-							>
-								<IconLoader2 style={spinning} />
-							</div>
-						}
-						preview={false}
-						src={`https://cdn.simpleicons.org/${icon.slug}?viewbox=auto`}
+					<div
+						className="size-75"
 						style={{
+							...getMaskStyles(version, icon, isLight),
 							filter: $contrast,
 						}}
-						width="100%"
 					/>
 				</div>
 			</Col>

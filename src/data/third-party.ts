@@ -38,7 +38,7 @@ export default {
 		{
 			name: 'Kando icon theme',
 			url: 'https://kando.menu/icon-themes#built-in-icon-themes',
-			icon: 'https://brands.deno.dev/kando/000/fff',
+			icon: 'https://cdn.simpleicons.org/kando/000/fff',
 			authorName: '@Schneegans',
 			authorUrl: 'https://github.com/Schneegans',
 		},
