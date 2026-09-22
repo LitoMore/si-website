@@ -3,7 +3,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Deno
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
