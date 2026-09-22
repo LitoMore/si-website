@@ -88,7 +88,7 @@ export enum LanguageCode {
 
 export const translations: Record<LanguageCode, Internationalization> = {
 	// The order here decides the order in the language switcher.
-	/* eslint-disable perfectionist/sort-objects */
+	/* eslint-disable perfectionist/sort-objects -- The order here decides the order in the language switcher. */
 	[LanguageCode.English]: en,
 	[LanguageCode.Chinese]: zh,
 	/* eslint-enable perfectionist/sort-objects */

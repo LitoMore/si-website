@@ -1,22 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="icon" type="image/svg+xml" href="/simpleicons-icon.svg" />
-		<link rel="shortcut icon" href="/simpleicons-icon.png">
-		<link rel="apple-touch-icon" href="/simpleicons-icon.png">
-		<link rel="apple-touch-startup-image" href="/simpleicons-icon.png">
 		<meta
+			content="width=device-width, initial-scale=1, viewport-fit=cover"
 			name="viewport"
-			content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
-		>
-		<meta name="mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-title" content="Simple Icons">
-		<meta name="apple-mobile-web-app-status-bar-style" content="default">
-		<meta name="theme-color" content="#ffffff">
-		<meta name="format-detection" content="telephone=no">
-		<meta name="msapplication-tap-highlight" content="no">
+		/>
 		<title>Simple Icons</title>
 		<style>
 			@keyframes animate {
@@ -32,26 +21,26 @@
 			}
 
 			.logo {
+				animation: animate 3s ease-in-out infinite;
 				width: 100px;
 				height: 100px;
-				animation: animate 3s ease-in-out infinite;
 			}
 
 			#cover {
 				display: flex;
-				opacity: 1;
-				justify-content: center;
-				align-items: center;
-				z-index: 10000;
 				position: fixed;
 				top: 0;
 				left: 0;
+				justify-content: center;
+				align-items: center;
+				opacity: 1;
+				z-index: 10000;
+				transition: opacity 0.5s;
+				background-color: #333;
 				width: 100vw;
 				height: 100vh;
 				color: #eee;
-				background-color: #333;
 				font-family: monospace;
-				transition: opacity 0.5s;
 			}
 
 			#cover svg path {
@@ -69,6 +58,24 @@
 			}
 			*/
 		</style>
+		<meta
+			content="Browse, customize, and download free SVG icons for popular brands."
+			name="description"
+		/>
+		<meta content="Simple Icons" property="og:title" />
+		<meta content="website" property="og:type" />
+		<meta content="https://icons.litomore.me/" property="og:url" />
+		<meta content="https://icons.litomore.me/og.png" property="og:image" />
+		<link type="image/svg+xml" href="/simpleicons-icon.svg" rel="icon" />
+		<link href="/simpleicons-icon.png" rel="shortcut icon" />
+		<link href="/simpleicons-icon.png" rel="apple-touch-icon" />
+		<link href="/simpleicons-icon.png" rel="apple-touch-startup-image" />
+		<meta content="yes" name="mobile-web-app-capable" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="Simple Icons" name="apple-mobile-web-app-title" />
+		<meta content="default" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+		<meta content="no" name="msapplication-tap-highlight" />
 	</head>
 	<body>
 		<div id="root"></div>

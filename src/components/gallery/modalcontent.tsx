@@ -15,12 +15,12 @@ function ModalContent({icon}: {readonly icon?: Icon}) {
 
 	const aliases = getAliases(icon);
 	const hexColor = `#${icon.hex}`;
-	const a11yFriendly =
+	const isA11yFriendly =
 		(isLight && icon.brightness <= brightThreshold) ||
 		(isDark && icon.brightness > darkThreshold);
 
 	const $contrast =
-		colorMode === ColorMode.Contrast && !a11yFriendly ? contrast : undefined;
+		!isA11yFriendly && colorMode === ColorMode.Contrast ? contrast : undefined;
 
 	return (
 		<Row gutter={16}>

@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useMemo} from 'react';
 import {arrayToShuffled} from 'array-shuffle';
 import {Layer, Rect, Stage} from 'react-konva';
 import {useIcons, useOpenGraphImage} from '#atom';
@@ -9,25 +9,24 @@ import MaskedIcon from '../canvas/masked-icon.js';
 
 const centerIconRatio = 2;
 
-function OpenGraph({seed}: {readonly seed: number}) {
+function OpenGraph() {
 	const [{width, height, size, gap}] = useOpenGraphImage();
 	const {isLight} = useColorScheme();
 	const [{data, version}] = useIcons();
-	const [shuffled, setShuffled] = useState(data);
-
-	useEffect(() => {
-		const shuffledData = arrayToShuffled(
-			data.filter(
-				(icon) =>
-					icon.slug !== 'simpleicons' &&
-					((isLight
-						? icon.brightness <= brightThreshold
-						: icon.brightness > 0.1) ||
-						icon.hex === '000000'),
+	const shuffled = useMemo(
+		() =>
+			arrayToShuffled(
+				data.filter(
+					(icon) =>
+						icon.slug !== 'simpleicons' &&
+						((isLight
+							? icon.brightness <= brightThreshold
+							: icon.brightness > 0.1) ||
+							icon.hex === '000000'),
+				),
 			),
-		);
-		setShuffled(shuffledData);
-	}, [seed, data, isLight]);
+		[data, isLight],
+	);
 
 	const rows = Math.floor((height - gap) / (size + gap));
 	const columns = Math.floor((width - gap) / (size + gap));

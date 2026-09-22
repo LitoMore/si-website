@@ -23,10 +23,10 @@ function Card({
 	const hexColor = `#${icon.hex}`;
 	const borderColor = isLight ? hexColor : galleryFg;
 	const borderWidth = isLight ? 2 : 1;
-	const a11yFriendly =
+	const isA11yFriendly =
 		(isLight && icon.brightness <= brightThreshold) ||
 		(isDark && icon.brightness > darkThreshold);
-	const applyContrast = colorMode === ColorMode.Contrast && !a11yFriendly;
+	const isApplyContrast = colorMode === ColorMode.Contrast && !isA11yFriendly;
 
 	return (
 		<div
@@ -39,7 +39,7 @@ function Card({
 				borderLeft: `${borderWidth}px solid ${borderColor}`,
 				borderRight: `${borderWidth}px solid ${borderColor}`,
 				borderBottom: isLight ? 0 : `${borderWidth}px solid ${borderColor}`,
-				filter: applyContrast ? contrast : undefined,
+				filter: isApplyContrast ? contrast : undefined,
 				transform:
 					selectedIcon?.slug === icon.slug ? 'translateY(-2px)' : undefined,
 			}}

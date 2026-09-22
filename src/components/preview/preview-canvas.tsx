@@ -37,17 +37,20 @@ function PreviewCanvas({
 
 	useEffect(() => {
 		(async () => {
-			const svg = await getSvg(icons.version, icon.slug);
-			setSvg(svg);
+			const svg_ = await getSvg(icons.version, icon.slug);
+			setSvg(svg_);
 		})();
 	}, [icons.version, icon.slug]);
 
 	useEffect(() => {
-		if (siSimage) {
-			siSimage.crossOrigin = 'anonymous';
-			siSimage.width = 32;
-			siSimage.height = 32;
+		if (!siSimage) {
+			return;
 		}
+
+		// eslint-disable-next-line react-hooks/immutability
+		siSimage.crossOrigin = 'anonymous';
+		siSimage.width = 32;
+		siSimage.height = 32;
 	}, [siSimage]);
 
 	const textBoxWidth = 300;

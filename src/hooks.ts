@@ -72,6 +72,7 @@ export const usePreviewImage = (
 	source: string,
 ): [[ImageElement, ImageElement, ImageElement, ImageElement], ImageState] => {
 	const [image, state] = useImage(source);
+	// eslint-disable-next-line react-hooks/immutability
 	if (image) image.crossOrigin = 'anonymous';
 	const [image24, setImage24] = useState<HTMLImageElement>();
 	const [image78, setImage78] = useState<HTMLImageElement>();
@@ -79,12 +80,14 @@ export const usePreviewImage = (
 	const [image364, setImage364] = useState<HTMLImageElement>();
 
 	useEffect(() => {
-		if (image) {
-			setImage24(cloneImagetoSize(image, 24));
-			setImage78(cloneImagetoSize(image, 64));
-			setImage134(cloneImagetoSize(image, 134));
-			setImage364(cloneImagetoSize(image, 364));
+		if (!image) {
+			return;
 		}
+
+		setImage24(cloneImagetoSize(image, 24));
+		setImage78(cloneImagetoSize(image, 64));
+		setImage134(cloneImagetoSize(image, 134));
+		setImage364(cloneImagetoSize(image, 364));
 	}, [image]);
 
 	return [

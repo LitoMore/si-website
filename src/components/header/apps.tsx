@@ -8,7 +8,7 @@ import {useNavigate} from 'react-router';
 import {useColorScheme, useI18n} from '#hooks';
 import {PageLayout} from '#types';
 
-function Apps() {
+export default function Apps() {
 	const navigate = useNavigate();
 	const {iconFg} = useColorScheme();
 	const {i18n} = useI18n();
@@ -21,13 +21,17 @@ function Apps() {
 						key: PageLayout.Previewer,
 						icon: <IconEyeglass />,
 						label: <span>{i18n.header.iconPreviewer}</span>,
-						onClick: async () => navigate('preview'),
+						onClick() {
+							void navigate('preview');
+						},
 					},
 					{
 						key: PageLayout.OpenGraph,
 						icon: <IconGrid4x4 />,
 						label: <span>{i18n.header.openGraphGenerator}</span>,
-						onClick: async () => navigate('og'),
+						onClick() {
+							void navigate('og');
+						},
 					},
 				],
 			}}
@@ -45,5 +49,3 @@ function Apps() {
 		</Dropdown>
 	);
 }
-
-export default Apps;

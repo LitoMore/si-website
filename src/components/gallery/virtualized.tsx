@@ -20,47 +20,45 @@ function Virutalized({
 			className="asb"
 			style={{height: galleryHeight, width: innerWidth}}
 		>
-			{({height, width}) => {
-				return (
-					<Collection
-						cellCount={icons.length}
-						cellRenderer={({index, style}) => {
-							const icon = icons[index];
-							return <Card key={icon.slug} icon={icon} style={style} />;
-						}}
-						cellSizeAndPositionGetter={({index}) => {
-							const isFirstTwoLines = index < (iconsPerRow - 1) * 2;
-							const line = Math.floor(
-								index / (isFirstTwoLines ? iconsPerRow - 1 : iconsPerRow),
-							);
-							const column =
-								(index % (isFirstTwoLines ? iconsPerRow - 1 : iconsPerRow)) +
-								(isFirstTwoLines ? 2 : 0);
-							const paddingLeft = Math.floor(
-								(innerWidth - (iconsPerRow * (cardPixels + 5) - 5)) / 2,
-							);
+			{({height, width}) => (
+				<Collection
+					cellCount={icons.length}
+					cellRenderer={({index, style}) => {
+						const icon = icons[index];
+						return <Card key={icon.slug} icon={icon} style={style} />;
+					}}
+					cellSizeAndPositionGetter={({index}) => {
+						const isFirstTwoLines = index < (iconsPerRow - 1) * 2;
+						const line = Math.floor(
+							index / (isFirstTwoLines ? iconsPerRow - 1 : iconsPerRow),
+						);
+						const column =
+							(index % (isFirstTwoLines ? iconsPerRow - 1 : iconsPerRow)) +
+							(isFirstTwoLines ? 2 : 0);
+						const paddingLeft = Math.floor(
+							(innerWidth - (iconsPerRow * (cardPixels + 5) - 5)) / 2,
+						);
 
-							if (index === 0) {
-								return {
-									x: paddingLeft + (cardPixels * 2 + 5),
-									y: 10,
-									width: innerWidth,
-									height: 10,
-								};
-							}
-
+						if (index === 0) {
 							return {
-								x: paddingLeft + column * (cardPixels + 5),
-								y: 10 + line * (cardPixels + 5),
-								width: cardPixels,
-								height: cardPixels,
+								x: paddingLeft + (cardPixels * 2 + 5),
+								y: 10,
+								width: innerWidth,
+								height: 10,
 							};
-						}}
-						height={height}
-						width={width}
-					/>
-				);
-			}}
+						}
+
+						return {
+							x: paddingLeft + column * (cardPixels + 5),
+							y: 10 + line * (cardPixels + 5),
+							width: cardPixels,
+							height: cardPixels,
+						};
+					}}
+					height={height}
+					width={width}
+				/>
+			)}
 		</AutoSizer>
 	);
 }

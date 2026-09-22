@@ -7,7 +7,7 @@ export const downloadSvg = async (
 	hex?: string,
 ) => {
 	let svg = await getSvg(version, slug);
-	if (hex) svg = svg.replace('<svg ', `<svg fill="#${hex}" `);
+	if (hex) svg = svg.replace('<svg ', () => `<svg fill="#${hex}" `);
 	// eslint-disable-next-line no-restricted-globals
 	const url = `data:image/svg+xml;base64,${btoa(svg)}`;
 	const a = document.createElement('a');
@@ -24,7 +24,7 @@ export const downloadPdf = async (version: string, slug: string) => {
 	const {jsPDF: JsPdf} = await import('jspdf');
 	await import('svg2pdf.js');
 	const svgString = await getSvg(version, slug);
-	const svgPath = svgString.split('"')[7];
+	const svgPath = svgString.split('"', 8)[7];
 	if (!svgPath) return;
 
 	const ns = 'http://www.w3.org/2000/svg';
@@ -60,7 +60,7 @@ export const downloadBitmap = async (
 	// eslint-disable-next-line max-params
 ) => {
 	let svg = await getSvg(version, slug);
-	svg = svg.replace('<svg ', `<svg fill="#${hex}" `);
+	svg = svg.replace('<svg ', () => `<svg fill="#${hex}" `);
 	// eslint-disable-next-line no-restricted-globals
 	const imageSource = `data:image/svg+xml;base64,${btoa(svg)}`;
 	const {canvas} = await getImageCanvas(imageSource, size, size, {

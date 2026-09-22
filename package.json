@@ -1,16 +1,32 @@
 {
 	"name": "si-website",
 	"version": "1.0.0",
-	"author": "LitoMore",
-	"homepage": "https://icons.litomore.me",
+	"private": true,
 	"description": "WIP - The Simple Icons new website",
+	"license": "MIT",
+	"repository": "https://github.com/LitoMore/si-website",
+	"homepage": "https://icons.litomore.me",
+	"author": "LitoMore",
 	"type": "module",
-	"keywords": [],
+	"engines": {
+		"node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+	},
+	"scripts": {
+		"dev": "vite",
+		"test": "xo",
+		"build": "vite build",
+		"deps": "VITE_ENABLE_VISUALIZER=true npm run build",
+		"pages": "VITE_BASE_URL='si-website' npm run build",
+		"preview": "vite preview",
+		"serve": "vite serve dist/",
+		"deploy": "gh-pages -d dist"
+	},
 	"devDependencies": {
 		"@ant-design/v5-patch-for-react-19": "^1.0.3",
+		"@eslint/compat": "^2.1.1",
 		"@sindresorhus/tsconfig": "^8.1.0",
 		"@tabler/icons-react": "^3.36.1",
-		"@tailwindcss/vite": "^4.1.18",
+		"@tailwindcss/vite": "^4.3.3",
 		"@types/node": "^25.2.3",
 		"@types/react": "^19.2.14",
 		"@types/react-dom": "^19.2.3",
@@ -26,6 +42,7 @@
 		"copy-text-to-clipboard": "^3.2.2",
 		"css-color-converter": "^2.0.0",
 		"es-toolkit": "^1.44.0",
+		"eslint-config-prettier": "^10.1.8",
 		"eslint-config-xo-react": "^0.29.0",
 		"eslint-plugin-perfectionist": "^5.5.0",
 		"fast-fuzzy": "^1.12.0",
@@ -33,7 +50,7 @@
 		"jspdf": "^4.1.0",
 		"konva": "^10.2.0",
 		"prettier-plugin-css-order": "^2.2.0",
-		"prettier-plugin-tailwindcss": "^0.7.2",
+		"prettier-plugin-tailwindcss": "^0.8.1",
 		"react": "^19.2.4",
 		"react-dom": "^19.2.4",
 		"react-draggable": "^4.5.0",
@@ -44,23 +61,11 @@
 		"rollup-plugin-visualizer": "^6.0.5",
 		"simple-icons": "^16.9.0",
 		"svg2pdf.js": "^2.7.0",
-		"tailwindcss": "^4.1.18",
+		"tailwindcss": "^4.3.3",
 		"tlds": "^1.261.0",
-		"typescript": "^5.9.3",
+		"typescript": "^6.0.3",
 		"use-image": "^1.1.4",
 		"vite": "^7.3.1",
-		"xo": "^1.2.3"
-	},
-	"scripts": {
-		"dev": "vite",
-		"test": "xo",
-		"build": "vite build",
-		"deps": "VITE_ENABLE_VISUALIZER=true npm run build",
-		"pages": "VITE_BASE_URL='si-website' npm run build",
-		"preview": "vite preview",
-		"serve": "vite serve dist/",
-		"deploy": "gh-pages -d dist"
-	},
-	"repository": "https://github.com/LitoMore/si-website",
-	"license": "MIT"
+		"xo": "^5.0.1"
+	}
 }

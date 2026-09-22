@@ -11,7 +11,7 @@ import Loading from './loading.js';
 const Virtuoso = lazy(async () => import('./virtuoso.js'));
 // Const VirutalScroll = lazy(() => import("./virtualscroll.tsx"));
 
-function Gallery() {
+export default function Gallery() {
 	const [icons] = useIcons();
 	const [filteredIcons] = useFilteredIcons();
 	const {
@@ -62,5 +62,3 @@ function Gallery() {
 		/>
 	);
 }
-
-export default Gallery;

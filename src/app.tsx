@@ -12,7 +12,7 @@ import {useColorScheme, useSizes} from '#hooks';
 import {type BrightnessMode, ColorTheme} from '#types';
 import {getColorScheme, getIconsData, getLatestVersion} from '#utils';
 
-/* eslint-disable prettier/prettier */
+/* eslint-disable prettier/prettier -- I want to make the code more readable */
 const DefaultLayout = lazy(async () => import('./layouts/default-layout.js'));
 const OpenGraphLayout = lazy(async () => import('./layouts/opengraph-layout.js'));
 const PreviewLayout = lazy(async () => import('./layouts/preview-layout.js'));
@@ -39,9 +39,9 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		const loadIconsData = async (brightnessMode: BrightnessMode) => {
+		const loadIconsData = async (brightnessMode_: BrightnessMode) => {
 			const latestVersion = await getLatestVersion('simple-icons');
-			const allIcons = await getIconsData(latestVersion, brightnessMode);
+			const allIcons = await getIconsData(latestVersion, brightnessMode_);
 			setIcons({data: allIcons, version: latestVersion});
 			setFilteredIcons(allIcons);
 		};
@@ -50,13 +50,14 @@ function App() {
 	}, [brightnessMode, setIcons, setFilteredIcons]);
 
 	useEffect(() => {
-		if (icons.data.length > 0 && searchParameters.has('slug')) {
-			const slug = searchParameters.get('slug');
-			if (slug) {
-				const icon = icons.data.find((icon) => icon.slug === slug);
-				if (icon) setSelectedIcon(icon);
-			}
+		if (!(icons.data.length > 0 && searchParameters.has('slug'))) {
+			return;
 		}
+
+		const slug = searchParameters.get('slug');
+		if (!slug) return;
+		const icon = icons.data.find((icon) => icon.slug === slug);
+		if (icon) setSelectedIcon(icon);
 	}, [icons.data, searchParameters, setSelectedIcon]);
 
 	useEffect(() => {

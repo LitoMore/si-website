@@ -1,6 +1,6 @@
 /**
- * https://github.com/badges/shields/blob/master/badge-maker/lib/color.js
- * CC0-1.0 license
+ https://github.com/badges/shields/blob/master/badge-maker/lib/color.js
+ CC0-1.0 license
  */
 import colorString from 'color-string';
 import {memoize} from 'es-toolkit';
@@ -16,12 +16,13 @@ function brightness(color: string) {
 const memoizedGetRelativeLuminance = memoize(getRelativeLuminance);
 const memoizedBrightness = memoize(brightness);
 
+// eslint-disable-next-line unicorn/consistent-boolean-name
 export function colorForBackground(color: string, luminance?: boolean) {
 	if (luminance) {
-		const luminance = memoizedGetRelativeLuminance(color);
+		const luminance_ = memoizedGetRelativeLuminance(color);
 		return {
-			brightness: luminance,
-			relativeColor: luminance < 0.4 ? '#fff' : '#333',
+			brightness: luminance_,
+			relativeColor: luminance_ < 0.4 ? '#fff' : '#333',
 		};
 	}
 

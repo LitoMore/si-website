@@ -9,7 +9,7 @@ import {
 import {useI18n, useSearcher} from '#hooks';
 import PrefixIcon from './prefixicon.js';
 
-function Autocomplete() {
+export default function Autocomplete() {
 	const [icons] = useIcons();
 	const [searchText, setSearchText] = useSearchText();
 	const searcher = useSearcher();
@@ -19,10 +19,10 @@ function Autocomplete() {
 
 	useEffect(() => {
 		const searchIcon = () => {
-			const filteredIcons = searchText
+			const filteredIcons_ = searchText
 				? searcher.search(searchText)
 				: icons.data;
-			setFilteredIcons(filteredIcons);
+			setFilteredIcons(filteredIcons_);
 		};
 
 		searchIcon();
@@ -61,5 +61,3 @@ function Autocomplete() {
 		/>
 	);
 }
-
-export default Autocomplete;

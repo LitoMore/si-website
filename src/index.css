@@ -30,7 +30,7 @@
 	}
 
 	.icon {
-		@apply box-border flex cursor-pointer flex-col items-center gap-[5px] overflow-hidden rounded pt-[5px] transition-transform duration-200 select-none;
+		@apply box-border flex cursor-pointer flex-col items-center gap-1.25 overflow-hidden rounded pt-1.25 transition-transform duration-200 select-none;
 	}
 
 	.social-icon {
@@ -54,7 +54,7 @@
 	}
 
 	.control {
-		@apply flex h-8 w-8 cursor-pointer items-center justify-center rounded-md p-[5px] text-2xl text-(--si-header-fg) hover:bg-black/6;
+		@apply flex h-8 w-8 cursor-pointer items-center justify-center rounded-md p-1.25 text-2xl text-(--si-header-fg) hover:bg-black/6;
 	}
 }
 

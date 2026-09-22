@@ -34,7 +34,7 @@ export function Badge({
 		badgeUrl.searchParams.set(key, value);
 	}
 
-	return <img src={badgeUrl.toString()} />;
+	return <img src={badgeUrl.href} />;
 }
 
 export function IconOnlyBadge({

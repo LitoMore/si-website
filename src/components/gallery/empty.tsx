@@ -16,7 +16,7 @@ const linkRenderer = (text: string, href: string) =>
 		text
 	);
 
-function EmptyView() {
+export default function EmptyView() {
 	const {galleryHeight} = useSizes();
 	const {emptyFg, isLight} = useColorScheme();
 	const {i18n, gettext} = useI18n();
@@ -54,7 +54,7 @@ function EmptyView() {
 					</Typography.Link>
 				</div>
 			</div>
-			<div className="flex max-w-[800px] flex-col items-center justify-center p-5">
+			<div className="flex max-w-200 flex-col items-center justify-center p-5">
 				<div className="flex flex-col text-center" style={{color: emptyFg}}>
 					<div>{gettext(i18n.footer.line1, [linkRenderer])}</div>
 					<div>{gettext(i18n.footer.line2, [linkRenderer])}</div>
@@ -78,5 +78,3 @@ function EmptyView() {
 		</div>
 	);
 }
-
-export default EmptyView;

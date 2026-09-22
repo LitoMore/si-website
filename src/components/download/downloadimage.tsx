@@ -46,7 +46,13 @@ function DownloadImage({
 	].map((x) => ({
 		key: x.format,
 		label: (
-			<div key={x.format} className="flex" onClick={x.onClick}>
+			<div
+				key={x.format}
+				className="flex"
+				onClick={() => {
+					void x.onClick();
+				}}
+			>
 				{x.format}
 			</div>
 		),

@@ -10,9 +10,9 @@ export default function OgLayout() {
 
 	return (
 		<Layout>
-			<OpenGraph seed={seed} />
+			<OpenGraph key={seed} />
 			<BackHome />
-			<div className="fixed top-0 right-0 flex items-center justify-center p-[10px]">
+			<div className="fixed top-0 right-0 flex items-center justify-center p-2.5">
 				<Controls
 					extraSettings={
 						<OpenGraphSettings

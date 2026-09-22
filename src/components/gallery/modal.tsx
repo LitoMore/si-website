@@ -31,7 +31,7 @@ function CopySvgButtons({icon}: {readonly icon: Icon}) {
 		}
 
 		if (options?.colored) {
-			const colored = svg.replace('<svg ', `<svg fill="#${icon.hex}" `);
+			const colored = svg.replace('<svg ', () => `<svg fill="#${icon.hex}" `);
 			copyText(i18n.modal.svgColored, colored);
 			return;
 		}
@@ -55,7 +55,13 @@ function CopySvgButtons({icon}: {readonly icon: Icon}) {
 	].map((x) => ({
 		key: x.type,
 		label: (
-			<div key={x.type} className="flex" onClick={x.onClick}>
+			<div
+				key={x.type}
+				className="flex"
+				onClick={() => {
+					void x.onClick();
+				}}
+			>
 				{x.type}
 			</div>
 		),
@@ -134,8 +140,8 @@ export default function SiModal() {
 				closeIcon={isMobileSize}
 				footer={
 					icon ? (
-						<div className="flex flex-col items-center justify-center gap-[5px]">
-							<div className="flex flex-wrap justify-center gap-[5px]">
+						<div className="flex flex-col items-center justify-center gap-1.25">
+							<div className="flex flex-wrap justify-center gap-1.25">
 								<Button
 									color="default"
 									onClick={() => {

@@ -33,11 +33,9 @@ export type IconData = {
 };
 
 const titleToSlugReplacements: Record<string, string> = {
-	/* eslint-disable @typescript-eslint/naming-convention */
 	'+': 'plus',
 	'.': 'dot',
 	'&': 'and',
-	/* eslint-enable @typescript-eslint/naming-convention */
 	đ: 'd',
 	ħ: 'h',
 	ı: 'i',
@@ -49,16 +47,17 @@ const titleToSlugReplacements: Record<string, string> = {
 };
 
 const titleToSlugCharsRegex = new RegExp(
+	// eslint-disable-next-line regexp/sort-character-class-elements
 	`[${Object.keys(titleToSlugReplacements).join('')}]`,
 	'g',
 );
 
-const titleToSlugChartsRange = /[^a-z\d]/g;
+const titleToSlugChartsRange = /[^\da-z]/g;
 
 const titleToSlug = (title: string) =>
 	title
 		.toLowerCase()
-		// eslint-disable-next-line unicorn/prefer-string-replace-all
+
 		.replace(titleToSlugCharsRegex, (char) => titleToSlugReplacements[char]!)
 		.normalize('NFD')
 		.replaceAll(titleToSlugChartsRange, '');

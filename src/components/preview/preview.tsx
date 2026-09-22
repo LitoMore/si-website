@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import {
 	IconCopy,
 	IconDownload,
@@ -23,7 +23,6 @@ import Canvas from './preview-canvas.js';
 
 function Preview() {
 	const {message} = App.useApp();
-	const [color, setColor] = useState('000000');
 	const [icons] = useIcons();
 	const [selectedIcon] = useSelectedIcon();
 	const {i18n} = useI18n();
@@ -31,11 +30,13 @@ function Preview() {
 
 	const fallbackIcon = icons.data.find((icon) => icon.slug === 'simpleicons');
 	const icon = selectedIcon ?? fallbackIcon;
+	const [previousIcon, setPreviousIcon] = useState(icon);
+	const [color, setColor] = useState(icon?.hex ?? '000000');
 
-	useEffect(() => {
-		if (!icon?.hex) return;
-		setColor(icon.hex);
-	}, [icon]);
+	if (icon !== previousIcon) {
+		setPreviousIcon(icon);
+		if (icon?.hex) setColor(icon.hex);
+	}
 
 	return (
 		<div className="flex h-screen items-center justify-center">
@@ -43,7 +44,7 @@ function Preview() {
 				<div className="flex gap-8">
 					<AutoComplete />
 					<Input
-						className="input-uppercase w-[150px] pl-[5px]"
+						className="input-uppercase w-37.5 pl-1.25"
 						placeholder="Color"
 						prefix={<PrefixIcon color={color} icon={icon} iconStyle="color" />}
 						value={color}
@@ -65,12 +66,16 @@ function Preview() {
 							<Button
 								icon={<IconDownload size={16} />}
 								type="default"
-								onClick={async () => {
-									if (stageRef.current) {
+								onClick={() => {
+									(async () => {
+										if (!stageRef.current) {
+											return;
+										}
+
 										const dataUrl = stageRef.current.toDataURL({pixelRatio});
 										const {canvas} = await getImageCanvas(dataUrl, 720, 400);
 										downloadFromCanvas(canvas, BitmapFormat.PNG);
-									}
+									})();
 								}}
 							>
 								{i18n.preview.savePreview}
@@ -78,13 +83,17 @@ function Preview() {
 							<Button
 								icon={<IconCopy size={16} />}
 								type="default"
-								onClick={async () => {
-									if (stageRef.current) {
+								onClick={() => {
+									(async () => {
+										if (!stageRef.current) {
+											return;
+										}
+
 										const dataUrl = stageRef.current.toDataURL({pixelRatio});
 										const {canvas} = await getImageCanvas(dataUrl, 720, 400);
 										copyFromCanvas(canvas, BitmapFormat.PNG);
 										void message.success('Copied to clipboard');
-									}
+									})();
 								}}
 							>
 								{i18n.preview.copyScreenshot}
@@ -92,7 +101,7 @@ function Preview() {
 						</div>
 					</>
 				) : (
-					<div className="flex h-[400px] w-[720px] animate-spin items-center justify-center">
+					<div className="flex h-100 w-180 animate-spin items-center justify-center">
 						<IconLoader2 className="opacity-50" size={32} />
 					</div>
 				)}

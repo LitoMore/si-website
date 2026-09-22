@@ -17,7 +17,7 @@ function OpenGraphSettings({onShuffle}: {readonly onShuffle?: () => void}) {
 		<>
 			<div className="flex gap-1">
 				<Input
-					className="max-w-[150px]!"
+					className="max-w-37.5!"
 					placeholder="Width"
 					suffix={
 						<span className="text-gray-400 select-none">
@@ -32,7 +32,7 @@ function OpenGraphSettings({onShuffle}: {readonly onShuffle?: () => void}) {
 					onPressEnter={onPressEnter}
 				/>
 				<Input
-					className="max-w-[150px]!"
+					className="max-w-37.5!"
 					placeholder="Height"
 					suffix={
 						<span className="text-gray-400 select-none">
@@ -49,7 +49,7 @@ function OpenGraphSettings({onShuffle}: {readonly onShuffle?: () => void}) {
 			</div>
 			<div className="flex gap-1">
 				<Input
-					className="max-w-[150px]!"
+					className="max-w-37.5!"
 					placeholder="Width"
 					suffix={
 						<span className="text-gray-400 select-none">
@@ -64,7 +64,7 @@ function OpenGraphSettings({onShuffle}: {readonly onShuffle?: () => void}) {
 					onPressEnter={onPressEnter}
 				/>
 				<Input
-					className="max-w-[150px]!"
+					className="max-w-37.5!"
 					placeholder="Height"
 					suffix={
 						<span className="text-gray-400 select-none">

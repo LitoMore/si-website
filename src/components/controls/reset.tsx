@@ -3,20 +3,20 @@ import {useBrightnessMode, useCardSize, useColorMode} from '#atom';
 import {useI18n} from '#hooks';
 import {BrightnessMode, CardSize, ColorMode} from '#types';
 
-function Reset() {
+export default function Reset() {
 	const [brightnessMode, setBrightnessMode] = useBrightnessMode();
 	const [cardSize, setCardSize] = useCardSize();
 	const [colorMode, setColorMode] = useColorMode();
 	const {i18n} = useI18n();
 
-	const settingsChanged =
+	const isSettingsChanged =
 		brightnessMode !== BrightnessMode.SimpleIcons ||
 		cardSize !== CardSize.Small ||
 		colorMode !== ColorMode.Contrast;
 
 	return (
 		<Button
-			disabled={!settingsChanged}
+			disabled={!isSettingsChanged}
 			onClick={() => {
 				setBrightnessMode(BrightnessMode.SimpleIcons);
 				setCardSize(CardSize.Small);
@@ -27,5 +27,3 @@ function Reset() {
 		</Button>
 	);
 }
-
-export default Reset;

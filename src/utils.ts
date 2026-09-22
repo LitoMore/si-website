@@ -30,7 +30,7 @@ export const getIconsData = async (
 	simpleIconsVersion: string,
 	brightnessMode: BrightnessMode,
 ) => {
-	const [major] = simpleIconsVersion.split('.');
+	const [major] = simpleIconsVersion.split('.', 1);
 	const isNewFormat = Number(major) >= 14;
 	const isNewDataFolder = Number(major) >= 15;
 	const response = await fetch(
@@ -40,6 +40,7 @@ export const getIconsData = async (
 	);
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const json = await response.json();
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	const iconsData = (isNewFormat ? json : json.icons) as IconData[];
 	return iconsData.map((icon, index) => {
 		const {relativeColor, brightness} = colorForBackground(
@@ -63,10 +64,10 @@ export const getSvg = async (simpleIconsVersion: string, slug: string) => {
 	return svg;
 };
 
-export const getSvgPath = (svg: string) => svg.split('"')[7];
+export const getSvgPath = (svg: string) => svg.split('"', 8)[7];
 
 export const normalizeColor = (style?: string) => {
-	if (style && /^([a-f\d]{3,4}|[a-f\d]{6}|[a-f\d]{8})$/i.test(style)) {
+	if (style && /^[\da-f]{3,4}|[\da-f]{6}$/i.test(style)) {
 		if (style.length === 6 || style.length === 8) return style;
 		if (style.length === 3 || style.length === 4) {
 			return [...style].map((char) => char + char).join('');
@@ -80,7 +81,7 @@ export const getSvgDataUri = (svg: string, color?: string) => {
 	const hexColor = normalizeColor(color);
 	// eslint-disable-next-line no-restricted-globals
 	return `data:image/svg+xml;base64,${btoa(
-		hexColor ? svg.replace('<svg ', `<svg fill="#${hexColor}" `) : svg,
+		hexColor ? svg.replace('<svg ', () => `<svg fill="#${hexColor}" `) : svg,
 	)}`;
 };
 
@@ -90,7 +91,7 @@ export const getMaskStyles = (
 	isLight: boolean,
 ): CSSProperties => ({
 	backgroundColor: isLight ? `#${icon.hex}` : 'var(--si-gallery-fg-dark)',
-	/* eslint-disable @typescript-eslint/naming-convention */
+	/* eslint-disable @typescript-eslint/naming-convention -- Allow using Webkit-prefixed CSS properties */
 	WebkitMaskImage: `url(https://cdn.jsdelivr.net/npm/simple-icons@${version}/icons/${icon.slug}.svg)`,
 	WebkitMaskSize: 'contain',
 	WebkitMaskRepeat: 'no-repeat',
@@ -98,19 +99,17 @@ export const getMaskStyles = (
 	/* eslint-enable @typescript-eslint/naming-convention */
 });
 
-export const getColorVariables = (isDark: boolean) => {
-	return {
-		iconFg: isDark ? '#eee' : '#111',
-		headerFg: isDark ? 'var(--si-header-fg-dark)' : 'var(--si-header-fg)',
-		headerBg: isDark ? 'var(--si-header-bg-dark)' : 'var(--si-header-bg)',
-		galleryFg: isDark ? 'var(--si-gallery-fg-dark)' : 'var(--si-gallery-fg)',
-		galleryBg: isDark ? 'var(--si-gallery-bg-dark)' : 'var(--si-gallery-bg)',
-		cardFg: isDark ? 'var(--si-card-fg-dark)' : 'var(--si-card-fg)',
-		cardBg: isDark ? 'var(--si-card-bg-dark)' : 'var(--si-card-bg)',
-		emptyFg: isDark ? 'var(--si-empty-fg-dark)' : 'var(--si-empty-fg)',
-		contrast: isDark ? 'var(--si-contrast-dark)' : 'var(--si-contrast)',
-	};
-};
+export const getColorVariables = (isDark: boolean) => ({
+	iconFg: isDark ? '#eee' : '#111',
+	headerFg: isDark ? 'var(--si-header-fg-dark)' : 'var(--si-header-fg)',
+	headerBg: isDark ? 'var(--si-header-bg-dark)' : 'var(--si-header-bg)',
+	galleryFg: isDark ? 'var(--si-gallery-fg-dark)' : 'var(--si-gallery-fg)',
+	galleryBg: isDark ? 'var(--si-gallery-bg-dark)' : 'var(--si-gallery-bg)',
+	cardFg: isDark ? 'var(--si-card-fg-dark)' : 'var(--si-card-fg)',
+	cardBg: isDark ? 'var(--si-card-bg-dark)' : 'var(--si-card-bg)',
+	emptyFg: isDark ? 'var(--si-empty-fg-dark)' : 'var(--si-empty-fg)',
+	contrast: isDark ? 'var(--si-contrast-dark)' : 'var(--si-contrast)',
+});
 
 export const getSimpleIconsCdnUrl = (
 	slug: string,
@@ -119,7 +118,7 @@ export const getSimpleIconsCdnUrl = (
 	const url = new URL(`https://cdn.simpleicons.org/${slug}`);
 	if (options?.autoViewbox) url.searchParams.set('viewbox', 'auto');
 	if (options?.size) url.searchParams.set('size', String(options.size));
-	return url.toString();
+	return url.href;
 };
 
 export const getJsdelivrCdnUrl = (version: string, slug: string) =>
@@ -138,7 +137,7 @@ export const getShareUrl = (
 			shareUrl.searchParams.set(key, value);
 	}
 
-	return shareUrl.toString();
+	return shareUrl.href;
 };
 
 export const searcherKeySelector = (icon: Icon): string[] =>
@@ -161,9 +160,10 @@ export const getAliases = (icon?: Icon) => {
 	const aka = icon.aliases?.aka ?? [];
 	const old = icon.aliases?.old ?? [];
 	const dup =
-		icon.aliases?.dup
-			?.map((d) => [d.title, ...Object.values(d.loc ?? {})])
-			.flat() ?? [];
+		icon.aliases?.dup?.flatMap((d) => [
+			d.title,
+			...Object.values(d.loc ?? {}),
+		]) ?? [];
 	const loc = Object.values(icon.aliases?.loc ?? {});
 	return [...new Set([...aka, ...old, ...dup, ...loc])];
 };
@@ -190,7 +190,7 @@ export const makeBadge = (icon: Icon) => {
 	const badgeUrl = new URL(staticBadgeBaseUrl + badgeContent);
 	badgeUrl.searchParams.set('logo', icon.slug);
 	badgeUrl.searchParams.set('logoColor', icon.relativeColor.slice(1));
-	return badgeUrl.toString();
+	return badgeUrl.href;
 };
 
 export const cardSizeToPixels = (

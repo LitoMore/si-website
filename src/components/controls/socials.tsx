@@ -13,7 +13,7 @@ function Social({
 	return (
 		// eslint-disable-next-line react/jsx-no-target-blank
 		<a
-			className="box-content! block h-6 w-6 shrink-0 rounded-md p-[5px] hover:bg-black/6"
+			className="box-content! block h-6 w-6 shrink-0 rounded-md p-1.25 hover:bg-black/6"
 			href={link}
 			rel={linkRel}
 			target="_blank"
@@ -32,7 +32,7 @@ function Social({
 	);
 }
 
-function Socials() {
+export default function Socials() {
 	return (
 		<div className="flex">
 			<Social
@@ -43,5 +43,3 @@ function Socials() {
 		</div>
 	);
 }
-
-export default Socials;

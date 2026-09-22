@@ -5,17 +5,17 @@ import {mobileWidth} from '#constants';
 import {useColorScheme, useSizes} from '#hooks';
 import {CardSize} from '#types';
 
-function CardsizeSlider() {
+export default function CardsizeSlider() {
 	const {cardPixels, innerWidth} = useSizes();
 	const [, setCardSize] = useCardSize();
 	const {iconFg} = useColorScheme();
 	if (innerWidth < mobileWidth) return null;
 
 	return (
-		<div className="flex items-center justify-center gap-[10px]">
+		<div className="flex items-center justify-center gap-2.5">
 			<IconZoomOut color={iconFg} size={18} />
 			<Slider
-				className="w-[300px]"
+				className="w-75"
 				defaultValue={cardPixels}
 				max={CardSize.Large}
 				min={CardSize.Small}
@@ -28,5 +28,3 @@ function CardsizeSlider() {
 		</div>
 	);
 }
-
-export default CardsizeSlider;

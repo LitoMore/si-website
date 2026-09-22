@@ -1,7 +1,7 @@
 import {IconLoader2} from '@tabler/icons-react';
 import {useSizes} from '#hooks';
 
-function Loading() {
+export default function Loading() {
 	const {galleryHeight} = useSizes();
 
 	return (
@@ -13,5 +13,3 @@ function Loading() {
 		</div>
 	);
 }
-
-export default Loading;

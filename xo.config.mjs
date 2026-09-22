@@ -1,20 +1,24 @@
+import {fixupConfigRules} from '@eslint/compat';
+import prettier from 'eslint-config-prettier';
+import xoReact from 'eslint-config-xo-react';
 import perfectionist from 'eslint-plugin-perfectionist';
 
+/**
+@type {import('xo').FlatXoConfig}
+*/
 const xoConfig = [
+	...fixupConfigRules(xoReact),
+	// XO applies its Prettier compatibility rules before custom configs.
+	prettier,
 	{
-		languageOptions: {
-			parserOptions: {
-				ecmaFeatures: {
-					jsx: true,
-				},
-			},
-		},
+		ignores: ['**/src/index.css'],
 	},
 	{
 		prettier: true,
-		react: true,
 		rules: {
 			'react/react-in-jsx-scope': 'off',
+			'require-unicode-regexp': 'off',
+			'@typescript-eslint/strict-boolean-expressions': 'off',
 			'sort-imports': [
 				'error',
 				{

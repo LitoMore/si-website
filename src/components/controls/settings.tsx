@@ -22,7 +22,7 @@ function Settings({extraSettings}: {readonly extraSettings?: ReactNode}) {
 	const isPreview = pathname === '/preview';
 	const isMain = !isOpenGraph && !isPreview;
 
-	const settingsChanged =
+	const isSettingsChanged =
 		brightnessMode !== BrightnessMode.SimpleIcons ||
 		cardSize !== CardSize.Small ||
 		colorMode !== ColorMode.Contrast;
@@ -30,7 +30,7 @@ function Settings({extraSettings}: {readonly extraSettings?: ReactNode}) {
 	return (
 		<Popover
 			content={
-				<div className="flex flex-col gap-[10px]">
+				<div className="flex flex-col gap-2.5">
 					{isMain ? <CardsizeSlider /> : null}
 					<ColorThemes />
 					{isMain ? <DisplayColor /> : null}
@@ -41,7 +41,7 @@ function Settings({extraSettings}: {readonly extraSettings?: ReactNode}) {
 			}
 			trigger="hover"
 		>
-			<Badge color="#0cf" dot={settingsChanged} offset={[-6, 6]}>
+			<Badge color="#0cf" dot={isSettingsChanged} offset={[-6, 6]}>
 				<IconSettings className="control" style={{color: iconFg}} />
 			</Badge>
 		</Popover>

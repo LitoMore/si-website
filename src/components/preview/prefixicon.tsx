@@ -36,7 +36,7 @@ function PrefixIcon({
 				borderRadius,
 				boxShadow,
 				backgroundColor,
-				...(iconStyle === 'icon' ? getMaskStyles(version, icon, isLight) : {}),
+				...(iconStyle === 'icon' && getMaskStyles(version, icon, isLight)),
 				filter,
 			}}
 		/>

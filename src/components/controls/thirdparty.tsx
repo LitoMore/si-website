@@ -6,7 +6,7 @@ import {useColorScheme, useI18n, useSizes} from '#hooks';
 import {getColorScheme} from '#utils';
 
 function Icon({url}: {readonly url: string}) {
-	return <img className="h-[20px] w-[20px]" src={url} />;
+	return <img className="h-5 w-5" src={url} />;
 }
 
 function Item({
@@ -20,7 +20,7 @@ function Item({
 }) {
 	return (
 		<a
-			className="flex items-center gap-[8px]"
+			className="flex items-center gap-2"
 			href={url}
 			rel="noopener nofollow noreferrer"
 			target="_blank"
@@ -31,7 +31,7 @@ function Item({
 	);
 }
 
-function ThirdParty() {
+export default function ThirdParty() {
 	const {isMobileSize} = useSizes();
 	const [colorTheme] = useColorTheme();
 	const {iconFg} = useColorScheme();
@@ -71,5 +71,3 @@ function ThirdParty() {
 		</Dropdown>
 	);
 }
-
-export default ThirdParty;

@@ -7,12 +7,22 @@ export function gettext(
 	template: string,
 	replacers: string[] | Replacer[],
 ): string | ReactNode[] {
-	const pattern = /({[^}]*})/g;
-	const parts = template.split(pattern);
+	const parts: string[] = [];
+	let cursor = 0;
+	while (cursor < template.length) {
+		const start = template.indexOf('{', cursor);
+		if (start === -1) break;
+		const end = template.indexOf('}', start + 1);
+		if (end === -1) break;
+		parts.push(template.slice(cursor, start), template.slice(start, end + 1));
+		cursor = end + 1;
+	}
+
+	parts.push(template.slice(cursor));
 	let i = 0;
 	const parsedParts = parts
 		.map((part, partIndex) => {
-			const partMatch = /^{[^}]*}$/.exec(part);
+			const partMatch = /^\{[^}]*\}$/.exec(part);
 			if (partMatch) {
 				const replacer = replacers[i < replacers.length - 1 ? i++ : i];
 				if (!replacer) return part;
@@ -40,9 +50,7 @@ export function gettext(
 		})
 		.filter(Boolean);
 
-	if (parsedParts.every((part) => typeof part === 'string')) {
-		return parsedParts.join('');
-	}
-
-	return parsedParts;
+	return parsedParts.every((part) => typeof part === 'string')
+		? parsedParts.join('')
+		: parsedParts;
 }

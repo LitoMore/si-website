@@ -25,13 +25,15 @@ function Search() {
 				inputRef.current?.focus({cursor: 'all'});
 			}
 
-			if (event.key === 'Escape') {
-				event.preventDefault();
-				if (inputRef.current?.input?.value) {
-					setSearchText('');
-				} else {
-					inputRef.current?.blur();
-				}
+			if (event.key !== 'Escape') {
+				return;
+			}
+
+			event.preventDefault();
+			if (inputRef.current?.input?.value) {
+				setSearchText('');
+			} else {
+				inputRef.current?.blur();
 			}
 		};
 
@@ -61,15 +63,12 @@ function Search() {
 			suffix={
 				isInputFocused || isMobileSize ? null : (
 					<span
-						className="mr-[-7px] rounded bg-black/6 p-1 leading-none text-black/45"
+						className="-mr-1.75 rounded bg-black/6 p-1 leading-none text-black/45"
 						style={{
 							filter: isDark ? 'invert(1)' : undefined,
 						}}
 					>
-						{`${
-							// eslint-disable-next-line @typescript-eslint/no-deprecated
-							globalThis.navigator.platform.includes('Mac') ? '⌘' : 'CTRL + '
-						}K`}
+						{`${navigator.platform.includes('Mac') ? '⌘' : 'CTRL + '}K`}
 					</span>
 				)
 			}

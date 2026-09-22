@@ -1,8 +1,8 @@
 import tlds from 'tlds';
 
 /**
- * https://github.com/sindresorhus/is-public-domain
- * MIT license
+ https://github.com/sindresorhus/is-public-domain
+ MIT license
  */
 export default function isPublicDomain(domain: string) {
 	if (typeof domain !== 'string') {
@@ -17,5 +17,5 @@ export default function isPublicDomain(domain: string) {
 	const tld = parts.pop();
 
 	// Avoid domain handle only
-	return tld && parts.length > 0 && tlds.includes(tld);
+	return Boolean(tld && parts.length > 0 && tlds.includes(tld));
 }

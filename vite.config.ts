@@ -22,8 +22,7 @@ export default defineConfig({
 		rollupOptions: {
 			output: {
 				manualChunks(id) {
-					if (id.includes('rc-field-form')) return 'rc-field-form';
-					return undefined;
+					return id.includes('rc-field-form') ? 'rc-field-form' : undefined;
 				},
 			},
 		},
@@ -31,7 +30,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs',
-			/* eslint-disable @typescript-eslint/naming-convention */
+
 			'#atom': '/src/atom.ts',
 			'#data': '/src/data/index.ts',
 			'#components': '/src/components',
@@ -42,7 +41,6 @@ export default defineConfig({
 			'#types': '/src/types.ts',
 			'#utils': '/src/utils.ts',
 			'#vendor': '/src/vendor',
-			/* eslint-enable @typescript-eslint/naming-convention */
 		},
 	},
 });

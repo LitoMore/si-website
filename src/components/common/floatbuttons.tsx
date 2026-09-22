@@ -54,10 +54,13 @@ function MastodonButton({
 	const buttonWidth = 250;
 	const baseX = buttonWidth / -2;
 	const space = 25;
-	const expandLeft = x + middleX > 0;
-	const moveX = baseX + (baseX - space) * (expandLeft ? 1 : -1);
+	const isExpandLeft = x + middleX > 0;
+	const moveX = baseX + (baseX - space) * (isExpandLeft ? 1 : -1);
 
-	const formatMastodonUrl = (instanceUrl: string, actionIntentText: string) => {
+	const formatMastodonUrl = (
+		instanceUrl: string,
+		actionIntentText_: string,
+	) => {
 		let url: URL;
 		instanceUrl = 'https://' + instanceUrl.trim().replace(/^https?:\/\//, '');
 		try {
@@ -69,7 +72,7 @@ function MastodonButton({
 		const {host, hostname} = url;
 		if (!isPublicDomain(hostname)) return '';
 		const shareUrl = getShareUrl(`https://${host}/share`, {
-			text: actionIntentText,
+			text: actionIntentText_,
 			url: actionIntentUrl,
 		});
 		return shareUrl;
@@ -165,7 +168,7 @@ function FloatButtons() {
 	const tablerIconOffset = {transform: 'translate(-1px, 1px)'};
 	const headerHeight = 54;
 	const middleY = (innerHeight - headerHeight - 30) / 2;
-	const expandTop = position[1] + middleY > 0;
+	const isExpandTop = position[1] + middleY > 0;
 
 	const actionIntentText = gettext(i18n.share.actionIntentText, [
 		(Math.floor(icons.data.length / 100) * 100).toString(),
@@ -183,7 +186,7 @@ function FloatButtons() {
 	return (
 		<Draggable
 			bounds="body"
-			nodeRef={floatButtonsRef as RefObject<HTMLDivElement>}
+			nodeRef={floatButtonsRef}
 			onDrag={(_, data) => {
 				setPosition([data.x, data.y]);
 				setIsDragging(true);
@@ -211,7 +214,7 @@ function FloatButtons() {
 				<FloatButton.Group
 					closeIcon={<IconX size={20} style={tablerIconOffset} />}
 					icon={<IconShare size={18} style={tablerIconOffset} />}
-					placement={expandTop ? 'top' : 'bottom'}
+					placement={isExpandTop ? 'top' : 'bottom'}
 					style={{
 						position: 'relative',
 						top: 0,
@@ -318,11 +321,11 @@ function FloatButtons() {
 						// @ts-expect-error: Missing type definition for `rel`
 						rel={linkRel}
 						target="_blank"
-						onClick={async () => {
-							await globalThis.navigator.clipboard.writeText(
-								globalThis.location.href,
-							);
-							setLinkCopied(true);
+						onClick={() => {
+							(async () => {
+								await navigator.clipboard.writeText(globalThis.location.href);
+								setLinkCopied(true);
+							})();
 						}}
 					/>
 				</FloatButton.Group>
