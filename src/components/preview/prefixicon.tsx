@@ -1,6 +1,4 @@
 import {useIcons} from '#atom';
-import {brightThreshold} from '#constants';
-import {useColorScheme} from '#hooks';
 import {type Icon} from '#types';
 import {getMaskStyles, normalizeColor} from '#utils';
 
@@ -14,7 +12,6 @@ function PrefixIcon({
 	readonly iconStyle: 'color' | 'icon';
 }) {
 	const [{version}] = useIcons();
-	const {isLight} = useColorScheme();
 	if (!icon) return null;
 
 	const borderRadius = iconStyle === 'color' ? 4 : undefined;
@@ -23,21 +20,16 @@ function PrefixIcon({
 	const backgroundColor =
 		iconStyle === 'color'
 			? `#${normalizeColor(color) ?? icon.hex ?? '000000'}`
-			: undefined;
-	const filter =
-		iconStyle === 'icon' && icon.brightness > brightThreshold
-			? 'var(--si-contrast)'
-			: undefined;
+			: 'currentColor';
 
 	return (
 		<div
-			className="mr-1 h-5 w-5"
+			className="h-[21px] w-[21px] shrink-0"
 			style={{
+				...(iconStyle === 'icon' && getMaskStyles(version, icon, true)),
 				borderRadius,
 				boxShadow,
 				backgroundColor,
-				...(iconStyle === 'icon' && getMaskStyles(version, icon, isLight)),
-				filter,
 			}}
 		/>
 	);

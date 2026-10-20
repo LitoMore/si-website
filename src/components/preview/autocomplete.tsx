@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {Autocomplete as BaseAutocomplete} from '@base-ui/react/autocomplete';
+import {useSurfaceTheme} from '#components/ui/theme.js';
 import {useI18n, useSearcher} from '#hooks';
 import {type Icon} from '#types';
 import PrefixIcon from './prefixicon.js';
@@ -17,6 +18,7 @@ export default function Autocomplete({
 }) {
 	const searcher = useSearcher();
 	const {i18n} = useI18n();
+	const theme = useSurfaceTheme();
 	const [showMore, setShowMore] = useState(false);
 	const matches =
 		title.trim().length < 2
@@ -44,24 +46,28 @@ export default function Autocomplete({
 			<BaseAutocomplete.Input
 				className="preview-brand-input"
 				id="preview-brand"
+				spellCheck={false}
 			/>
 			<BaseAutocomplete.Portal>
-				<BaseAutocomplete.Positioner className="ui-positioner" sideOffset={4}>
+				<BaseAutocomplete.Positioner
+					align="start"
+					className="preview-suggestions-positioner"
+					sideOffset={8}
+				>
 					<BaseAutocomplete.Popup
-						className="ui-menu ui-autocomplete-popup"
+						className="preview-brand-suggestions"
 						data-ui-overlay="autocomplete"
+						data-ui-theme={theme}
 					>
-						<BaseAutocomplete.List className="ui-autocomplete-list">
+						<BaseAutocomplete.List>
 							{(icon: Icon) => (
 								<BaseAutocomplete.Item
 									key={icon.slug}
-									className="ui-menu-item"
+									className="preview-suggestion"
 									value={icon}
 								>
-									<span className="preview-suggestion">
-										<PrefixIcon icon={icon} iconStyle="icon" />
-										<bdi>{icon.title}</bdi>
-									</span>
+									<PrefixIcon icon={icon} iconStyle="icon" />
+									<bdi>{icon.title}</bdi>
 								</BaseAutocomplete.Item>
 							)}
 						</BaseAutocomplete.List>
