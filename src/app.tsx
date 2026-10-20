@@ -77,6 +77,8 @@ function App() {
 			<ConfigProvider
 				theme={{
 					algorithm: colorScheme === ColorTheme.Dark ? darkTheme : lightTheme,
+					token:
+						colorScheme === ColorTheme.Light ? {colorBgLayout: '#fff'} : {},
 				}}
 			>
 				<Routes>
