@@ -6,9 +6,9 @@ import {
 	IconDownload,
 	IconUpload,
 } from '@tabler/icons-react';
-import {App} from 'antd';
 import {siSimpleicons} from 'simple-icons';
 import {useIcons, useSelectedIcon} from '#atom';
+import {message} from '#components/ui/feedback.js';
 import {useI18n, useSearcher} from '#hooks';
 import {type Icon} from '#types';
 import {getSvg} from '#utils';
@@ -40,7 +40,6 @@ export default function Preview() {
 }
 
 function PreviewEditor({initialIcon}: {readonly initialIcon?: Icon}) {
-	const {message} = App.useApp();
 	const {i18n} = useI18n();
 	const labels = i18n.preview;
 	const [icons] = useIcons();
@@ -79,12 +78,12 @@ function PreviewEditor({initialIcon}: {readonly initialIcon?: Icon}) {
 				}
 
 				setLoading(false);
-				void message.error(labels.loadError);
+				message.error(labels.loadError);
 			});
 		return () => {
 			isActive = false;
 		};
-	}, [initialIcon, icons.version, labels.loadError, message]);
+	}, [initialIcon, icons.version, labels.loadError]);
 
 	const selectIcon = async (icon: Icon) => {
 		const request = ++requestRef.current;
@@ -99,7 +98,7 @@ function PreviewEditor({initialIcon}: {readonly initialIcon?: Icon}) {
 			if (!nextPath) throw new Error('Missing SVG path');
 			if (request === requestRef.current) setPath(nextPath);
 		} catch {
-			if (request === requestRef.current) void message.error(labels.loadError);
+			if (request === requestRef.current) message.error(labels.loadError);
 		} finally {
 			if (request === requestRef.current) setLoading(false);
 		}
@@ -140,7 +139,7 @@ function PreviewEditor({initialIcon}: {readonly initialIcon?: Icon}) {
 			setInvalidFile(false);
 		} catch {
 			setInvalidFile(true);
-			void message.error(labels.invalidFile);
+			message.error(labels.invalidFile);
 			setTimeout(() => {
 				setInvalidFile(false);
 			}, 1500);
@@ -161,7 +160,7 @@ function PreviewEditor({initialIcon}: {readonly initialIcon?: Icon}) {
 				}, 1000);
 			} else downloadBlob(await blob, `${previewSlug(title)}.png`);
 		} catch {
-			void message.error(labels.exportError);
+			message.error(labels.exportError);
 		}
 	};
 

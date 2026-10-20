@@ -10,6 +10,8 @@ const enableVisualizer = process.env['VITE_ENABLE_VISUALIZER'];
 
 export default defineConfig({
 	base: baseUrl ? `/${baseUrl}` : undefined,
+	server: {host: '127.0.0.1', port: 5173, strictPort: true},
+	preview: {host: '127.0.0.1', port: 5173, strictPort: true},
 	plugins: [
 		react({
 			babel: {
@@ -19,15 +21,6 @@ export default defineConfig({
 		tailwindcss(),
 		enableVisualizer ? visualizer() : undefined,
 	].filter(Boolean),
-	build: {
-		rollupOptions: {
-			output: {
-				manualChunks(id) {
-					return id.includes('rc-field-form') ? 'rc-field-form' : undefined;
-				},
-			},
-		},
-	},
 	resolve: {
 		alias: {
 			'@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs',

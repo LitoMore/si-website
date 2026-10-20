@@ -1,10 +1,13 @@
 import {useEffect, useMemo, useRef, useState} from 'react';
 import {IconCopy, IconDownload, IconRefresh} from '@tabler/icons-react';
-import {Alert, App, Button, Select, Spin, Tooltip} from 'antd';
 import {arrayToShuffled} from 'array-shuffle';
 import {type Stage as KonvaStage} from 'konva/lib/Stage.js';
 import {Layer, Rect, Stage} from 'react-konva';
 import {useIcons, useOpenGraphImage} from '#atom';
+import {Button} from '#components/ui/button.js';
+import {Alert, Spinner, message} from '#components/ui/feedback.js';
+import {Select} from '#components/ui/form.js';
+import {Tooltip} from '#components/ui/popover.js';
 import {brightThreshold, defaultOpenGraphImage} from '#constants';
 import {useColorScheme, useI18n} from '#hooks';
 import {getJsdelivrCdnUrl} from '#utils';
@@ -30,7 +33,6 @@ function OpenGraph() {
 	const {isLight} = useColorScheme();
 	const {i18n, gettext} = useI18n();
 	const labels = i18n.openGraph;
-	const {message} = App.useApp();
 	const [{data, version}] = useIcons();
 	const [seed, setSeed] = useState(0);
 	const [loadAttempt, setLoadAttempt] = useState(0);
@@ -132,16 +134,16 @@ function OpenGraph() {
 				await navigator.clipboard.write([
 					new ClipboardItem({'image/png': blob}),
 				]);
-				void message.success(labels.copied);
+				message.success(labels.copied);
 			} else {
 				downloadBlob(
 					await blob,
 					`simple-icons-og-${width}x${height}.${format}`,
 				);
-				void message.success(labels.downloaded);
+				message.success(labels.downloaded);
 			}
 		} catch {
-			void message.error(shouldCopy ? labels.copyError : labels.exportError);
+			message.error(shouldCopy ? labels.copyError : labels.exportError);
 		} finally {
 			setBusy(undefined);
 		}
@@ -159,7 +161,6 @@ function OpenGraph() {
 					<div className="og-preview-toolbar">
 						<h2>{labels.preview}</h2>
 						<Button
-							autoInsertSpace={false}
 							disabled={Boolean(busy)}
 							icon={<IconRefresh size={16} />}
 							onClick={() => {
@@ -230,12 +231,11 @@ function OpenGraph() {
 													{labels.retry}
 												</Button>
 											}
-											message={labels.loadError}
-											type="error"
+											title={labels.loadError}
 										/>
 									) : (
 										<>
-											<Spin />
+											<Spinner />
 											<span>{labels.loading}</span>
 										</>
 									)}
@@ -267,13 +267,12 @@ function OpenGraph() {
 							/>
 						</div>
 						<Button
-							block
-							autoInsertSpace={false}
+							isBlock
 							disabled={!isReady || Boolean(busy)}
 							icon={<IconDownload size={17} />}
-							loading={busy === 'download'}
+							isLoading={busy === 'download'}
 							size="large"
-							type="primary"
+							variant="primary"
 							onClick={() => {
 								void exportImage(false);
 							}}
@@ -281,13 +280,12 @@ function OpenGraph() {
 							{gettext(labels.download, [openGraphFormatLabel(format)])}
 						</Button>
 						<Tooltip title={canCopy ? undefined : labels.clipboardUnavailable}>
-							<span>
+							<span className="w-full">
 								<Button
-									block
-									autoInsertSpace={false}
+									isBlock
 									disabled={!isReady || !canCopy || Boolean(busy)}
 									icon={<IconCopy size={17} />}
-									loading={busy === 'copy'}
+									isLoading={busy === 'copy'}
 									size="large"
 									onClick={() => {
 										void exportImage(true);

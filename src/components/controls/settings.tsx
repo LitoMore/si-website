@@ -1,10 +1,11 @@
 import {type ReactNode} from 'react';
 import {IconSettings} from '@tabler/icons-react';
-import {Badge, Popover} from 'antd';
 import {useLocation} from 'react-router';
 import {useBrightnessMode, useCardSize, useColorMode} from '#atom';
-import {useColorScheme} from '#hooks';
+import {Popover} from '#components/ui/popover.js';
+import {useColorScheme, useI18n} from '#hooks';
 import {BrightnessMode, CardSize, ColorMode} from '#types';
+import componentLabels from '../../i18n/ui.js';
 import Brightness from './brightness.js';
 import CardsizeSlider from './cardsize-slider.js';
 import ColorThemes from './color-themes.js';
@@ -12,6 +13,7 @@ import DisplayColor from './display-color.js';
 import Reset from './reset.js';
 
 function Settings({extraSettings}: {readonly extraSettings?: ReactNode}) {
+	const {languageCode} = useI18n();
 	const {pathname} = useLocation();
 	const [brightnessMode] = useBrightnessMode();
 	const [cardSize] = useCardSize();
@@ -39,11 +41,16 @@ function Settings({extraSettings}: {readonly extraSettings?: ReactNode}) {
 					{isMain ? <Reset /> : null}
 				</div>
 			}
-			trigger="hover"
+			label={componentLabels[languageCode].global.settings}
 		>
-			<Badge color="#0cf" dot={isSettingsChanged} offset={[-6, 6]}>
-				<IconSettings className="control" style={{color: iconFg}} />
-			</Badge>
+			<button
+				aria-label={componentLabels[languageCode].global.settings}
+				className="ui-settings-trigger control"
+				type="button"
+			>
+				<IconSettings aria-hidden style={{color: iconFg}} />
+				{isSettingsChanged ? <span className="ui-settings-dot" /> : null}
+			</button>
 		</Popover>
 	);
 }

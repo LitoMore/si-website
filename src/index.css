@@ -33,18 +33,6 @@
 		@apply box-border flex cursor-pointer flex-col items-center gap-1.25 overflow-hidden rounded pt-1.25 transition-transform duration-200 select-none;
 	}
 
-	.social-icon {
-		.ant-float-btn-icon {
-			@apply w-(--social-icon-width)!;
-		}
-	}
-
-	.social-reverse {
-		.ant-float-btn-group-wrap {
-			@apply flex-col-reverse;
-		}
-	}
-
 	.icon-title {
 		@apply px-0.5 text-center text-xs leading-[1.2] wrap-break-word;
 	}
@@ -64,7 +52,7 @@ body {
 	padding: 0;
 	overflow: hidden;
 	font-family:
-		apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+		-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
 		Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
 		'Segoe UI Symbol', 'Noto Color Emoji';
 }
@@ -110,12 +98,4 @@ input[type='number']::-webkit-outer-spin-button {
 	--si-card-bg-dark: #333;
 	--si-empty-fg-dark: #ffffff73;
 	--si-contrast-dark: contrast(0.65) brightness(2);
-}
-
-.ant-layout {
-	transition: background 0.4s;
-}
-
-.ant-dropdown-menu {
-	max-height: calc(100vh - 60px);
 }

@@ -25,7 +25,9 @@ function Virutalized({
 					cellCount={icons.length}
 					cellRenderer={({index, style}) => {
 						const icon = icons[index];
-						return <Card key={icon.slug} icon={icon} style={style} />;
+						return icon ? (
+							<Card key={icon.slug} icon={icon} style={style} />
+						) : null;
 					}}
 					cellSizeAndPositionGetter={({index}) => {
 						const isFirstTwoLines = index < (iconsPerRow - 1) * 2;

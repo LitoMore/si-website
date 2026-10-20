@@ -5,7 +5,9 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import {createServer} from 'vite';
 
 const server = await createServer({
+	cacheDir: 'node_modules/.vite-tests/i18n.test',
 	server: {middlewareMode: true, watch: null, hmr: false, ws: false},
+	optimizeDeps: {noDiscovery: true, include: []},
 	appType: 'custom',
 });
 after(() => server.close());
@@ -13,7 +15,7 @@ const {LanguageCode, resolveLanguageCode, translations} =
 	await server.ssrLoadModule('/src/i18n/_index.i18n.ts');
 const {gettext} = await server.ssrLoadModule('/src/i18n/_utils.i18n.ts');
 const {default: componentLocales} =
-	await server.ssrLoadModule('/src/i18n/antd.ts');
+	await server.ssrLoadModule('/src/i18n/ui.ts');
 
 function flatten(value, prefix = '') {
 	return Object.fromEntries(
@@ -83,10 +85,6 @@ test('the language menu has one region-neutral Traditional Chinese option', () =
 		Object.keys(translations).filter((code) => code.startsWith('zh')),
 		['zh', 'zh-Hant'],
 	);
-	assert.deepEqual(
-		Object.keys(componentLocales).toSorted(compare),
-		Object.keys(translations).toSorted(compare),
-	);
 });
 
 test('stored choices remain valid and unsupported values fall back to English', () => {
@@ -110,10 +108,16 @@ test('stored choices remain valid and unsupported values fall back to English', 
 	);
 });
 
-test('component locale exports contain usable translated labels', () => {
+test('component labels cover all languages and preserve translated close actions', () => {
+	assert.deepEqual(
+		Object.keys(componentLocales).toSorted(compare),
+		Object.keys(translations).toSorted(compare),
+	);
 	assert.ok(
-		Object.values(componentLocales).every(
-			(locale) => typeof locale.locale === 'string',
+		Object.values(componentLocales).every((locale) =>
+			Object.values(locale.global).every(
+				(label) => typeof label === 'string' && label.trim(),
+			),
 		),
 	);
 	assert.equal(

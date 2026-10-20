@@ -1,6 +1,7 @@
 import {useState} from 'react';
-import {Button, InputNumber} from 'antd';
 import {useOpenGraphImage} from '#atom';
+import {Button} from '#components/ui/button.js';
+import {NumberInput} from '#components/ui/form.js';
 import {defaultOpenGraphImage} from '#constants';
 import {useI18n} from '#hooks';
 import {isValidOpenGraphImage} from './utils.js';
@@ -8,7 +9,7 @@ import {isValidOpenGraphImage} from './utils.js';
 function OpenGraphSettings() {
 	const [openGraphImage, setOpenGraphImage] = useOpenGraphImage();
 	const [og, setOg] = useState(openGraphImage);
-	const {i18n} = useI18n();
+	const {i18n, languageCode} = useI18n();
 	const labels = i18n.openGraph;
 	const isValid = isValidOpenGraphImage(og);
 	const fields = [
@@ -30,13 +31,12 @@ function OpenGraphSettings() {
 				{fields.map(({key, label, min, max}) => (
 					<div key={key} className="og-field">
 						<label htmlFor={`og-${key}`}>{label}</label>
-						<InputNumber
-							aria-describedby={isValid ? undefined : 'og-validation'}
+						<NumberInput
+							description={isValid ? undefined : 'og-validation'}
 							id={`og-${key}`}
+							locale={languageCode}
 							max={max}
 							min={min}
-							precision={0}
-							suffix="px"
 							value={og[key] || (key === 'gap' ? 0 : null)}
 							onChange={(value) => {
 								setOg({...og, [key]: value ?? NaN});
@@ -51,12 +51,11 @@ function OpenGraphSettings() {
 				</p>
 			)}
 			<div className="og-settings-actions">
-				<Button autoInsertSpace={false} disabled={!isValid} htmlType="submit">
+				<Button disabled={!isValid} type="submit">
 					{labels.apply}
 				</Button>
 				<Button
-					autoInsertSpace={false}
-					type="text"
+					variant="text"
 					onClick={() => {
 						setOg(defaultOpenGraphImage);
 						setOpenGraphImage(defaultOpenGraphImage);

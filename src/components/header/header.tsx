@@ -1,5 +1,4 @@
 import {lazy} from 'react';
-import {Layout} from 'antd';
 import {useColorScheme, useSizes} from '#hooks';
 import Apps from './apps.js';
 import Search from './search.js';
@@ -11,7 +10,7 @@ export default function Header() {
 	const {headerBg} = useColorScheme();
 
 	return (
-		<Layout.Header className="text-6 sticky top-0 z-1 h-auto! w-full p-0! leading-none shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)]">
+		<header className="text-6 sticky top-0 z-1 h-auto! w-full p-0! leading-none shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)]">
 			<div
 				className="flex items-center justify-center gap-1.25"
 				style={{
@@ -23,6 +22,6 @@ export default function Header() {
 				<Search />
 				<Controls />
 			</div>
-		</Layout.Header>
+		</header>
 	);
 }

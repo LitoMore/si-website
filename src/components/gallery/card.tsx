@@ -29,7 +29,8 @@ function Card({
 	const isApplyContrast = colorMode === ColorMode.Contrast && !isA11yFriendly;
 
 	return (
-		<div
+		<button
+			aria-label={icon.title}
 			className="icon"
 			style={{
 				...style,
@@ -43,15 +44,20 @@ function Card({
 				transform:
 					selectedIcon?.slug === icon.slug ? 'translateY(-2px)' : undefined,
 			}}
+			type="button"
 			onClick={() => {
 				setSelectedIcon(icon);
 			}}
 		>
-			<div className="icon-image" style={getMaskStyles(version, icon, true)} />
-			<div className="icon-title" dir="auto">
+			<span
+				aria-hidden
+				className="icon-image"
+				style={getMaskStyles(version, icon, true)}
+			/>
+			<span className="icon-title" dir="auto">
 				{icon.title}
-			</div>
-			<div
+			</span>
+			<span
 				className="icon-color"
 				dir="ltr"
 				style={{
@@ -64,8 +70,8 @@ function Card({
 				{colorMode === ColorMode.Actual
 					? ' ' + icon.brightness.toFixed(2)
 					: null}
-			</div>
-		</div>
+			</span>
+		</button>
 	);
 }
 

@@ -1,10 +1,10 @@
 import {useEffect, useMemo, useState} from 'react';
 import {useMediaQuery, useWindowSize} from '@uidotdev/usehooks';
-import {App} from 'antd';
 import copyTextToClipboard from 'copy-text-to-clipboard';
 import {Searcher} from 'fast-fuzzy';
 import useImage from 'use-image';
 import {useCardSize, useColorTheme, useIcons} from '#atom';
+import {message} from '#components/ui/feedback.js';
 import {mobileWidth} from '#constants';
 import {useI18n} from '#i18n';
 import {CardSize, ColorTheme, type ImageElement, type ImageState} from '#types';
@@ -18,11 +18,10 @@ import {
 export {useI18n} from '#i18n';
 
 export const useCopyText = () => {
-	const {message} = App.useApp();
 	const {i18n, gettext} = useI18n();
 	return (title: string, text: string) => {
-		copyTextToClipboard(text);
-		void message.success(gettext(i18n.modal.copied, [title]));
+		if (!copyTextToClipboard(text)) return;
+		message.success(gettext(i18n.modal.copied, [title]));
 	};
 };
 

@@ -1,5 +1,4 @@
 import {type ReactNode} from 'react';
-import {Divider} from 'antd';
 import {useSizes} from '#hooks';
 import Settings from './settings.js';
 import Socials from './socials.js';
@@ -21,7 +20,7 @@ function Controls({extraSettings}: {readonly extraSettings?: ReactNode}) {
 				<Translations />
 				<ThridParty />
 			</div>
-			<Divider type="vertical" />
+			<span aria-hidden className="ui-divider" />
 			<Socials />
 		</>
 	);

@@ -3,7 +3,9 @@ import {after, test} from 'node:test';
 import {createServer} from 'vite';
 
 const server = await createServer({
+	cacheDir: 'node_modules/.vite-tests/opengraph.test',
 	server: {middlewareMode: true, watch: null, hmr: false, ws: false},
+	optimizeDeps: {noDiscovery: true, include: []},
 	appType: 'custom',
 });
 after(() => server.close());

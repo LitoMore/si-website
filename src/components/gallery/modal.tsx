@@ -1,8 +1,7 @@
-import {Suspense, lazy} from 'react';
-import {IconLoader2} from '@tabler/icons-react';
-import {Button, ConfigProvider, Dropdown, Modal, theme} from 'antd';
 import {useColorMode, useIcons, useSelectedIcon} from '#atom';
-import {spinning} from '#constants';
+import {Button} from '#components/ui/button.js';
+import {Dialog} from '#components/ui/dialog.js';
+import {Dropdown} from '#components/ui/dropdown.js';
 import {useCopyText, useI18n, useSizes} from '#hooks';
 import {ColorMode, type Icon} from '#types';
 import {
@@ -12,9 +11,9 @@ import {
 	getSvgPath,
 	getUnpkgCdnUrl,
 } from '#utils';
+import componentLabels from '../../i18n/ui.js';
 import DownloadImage from '../download/downloadimage.js';
-
-const ModalContent = lazy(async () => import('./modalcontent.js'));
+import ModalContent from './modalcontent.js';
 
 function CopySvgButtons({icon}: {readonly icon: Icon}) {
 	const [{version}] = useIcons();
@@ -54,22 +53,15 @@ function CopySvgButtons({icon}: {readonly icon: Icon}) {
 		},
 	].map((x) => ({
 		key: x.type,
-		label: (
-			<div
-				key={x.type}
-				className="flex"
-				onClick={() => {
-					void x.onClick();
-				}}
-			>
-				{x.type}
-			</div>
-		),
+		label: x.type,
+		onClick() {
+			void x.onClick();
+		},
 	}));
 
 	return (
-		<Dropdown menu={{items}} placement="bottom">
-			<Button color="default">{gettext(i18n.modal.copy, ['SVG'])}</Button>
+		<Dropdown align="center" items={items}>
+			<Button>{gettext(i18n.modal.copy, ['SVG'])}</Button>
 		</Dropdown>
 	);
 }
@@ -94,22 +86,15 @@ function CdnButtons({icon}: {readonly icon: Icon}) {
 		},
 	].map((x) => ({
 		key: x.title,
-		label: (
-			<div
-				key={x.title}
-				className="flex"
-				onClick={() => {
-					copyText(x.title, x.link);
-				}}
-			>
-				{x.title}
-			</div>
-		),
+		label: x.title,
+		onClick() {
+			copyText(x.title, x.link);
+		},
 	}));
 
 	return (
-		<Dropdown menu={{items}} placement="bottom">
-			<Button color="default">{gettext(i18n.modal.copy, ['CDN'])}</Button>
+		<Dropdown align="center" items={items}>
+			<Button>{gettext(i18n.modal.copy, ['CDN'])}</Button>
 		</Dropdown>
 	);
 }
@@ -118,62 +103,48 @@ export default function SiModal() {
 	const [icon, setSelectedIcon] = useSelectedIcon();
 	const {isMobileSize} = useSizes();
 	const [colorMode] = useColorMode();
-	const {i18n, gettext} = useI18n();
+	const {i18n, gettext, languageCode} = useI18n();
 	const copyText = useCopyText();
 	const isDarkIcon = icon?.relativeColor === '#fff';
 
 	return (
-		<ConfigProvider
+		<Dialog
+			closeLabel={componentLabels[languageCode].global.close}
+			footer={
+				icon ? (
+					<div className="flex flex-col items-center justify-center gap-1.25">
+						<div className="flex flex-wrap justify-center gap-1.25">
+							<Button
+								onClick={() => {
+									copyText('slug', icon.slug);
+								}}
+							>
+								{gettext(i18n.modal.copy, ['Slug'])}
+							</Button>
+							<CopySvgButtons icon={icon} />
+							<CdnButtons icon={icon} />
+							<DownloadImage icon={icon} />
+						</div>
+					</div>
+				) : (
+					[]
+				)
+			}
+			isCloseVisible={isMobileSize}
+			isOpen={Boolean(icon)}
 			theme={
 				colorMode === ColorMode.Actual
-					? {
-							algorithm: isDarkIcon
-								? theme.defaultAlgorithm
-								: theme.darkAlgorithm,
-						}
+					? isDarkIcon
+						? 'light'
+						: 'dark'
 					: undefined
 			}
+			title={icon?.title ?? i18n.modal.title}
+			onOpenChange={(isOpen) => {
+				if (!isOpen) setSelectedIcon(undefined);
+			}}
 		>
-			<Modal
-				centered
-				destroyOnHidden
-				closeIcon={isMobileSize}
-				footer={
-					icon ? (
-						<div className="flex flex-col items-center justify-center gap-1.25">
-							<div className="flex flex-wrap justify-center gap-1.25">
-								<Button
-									color="default"
-									onClick={() => {
-										copyText('slug', icon.slug);
-									}}
-								>
-									{gettext(i18n.modal.copy, ['Slug'])}
-								</Button>
-								<CopySvgButtons icon={icon} />
-								<CdnButtons icon={icon} />
-								<DownloadImage icon={icon} />
-							</div>
-						</div>
-					) : (
-						[]
-					)
-				}
-				open={Boolean(icon)}
-				onCancel={() => {
-					setSelectedIcon(undefined);
-				}}
-			>
-				<Suspense
-					fallback={
-						<div className="flex items-center justify-center">
-							<IconLoader2 style={spinning} />
-						</div>
-					}
-				>
-					<ModalContent icon={icon} />
-				</Suspense>
-			</Modal>
-		</ConfigProvider>
+			<ModalContent icon={icon} />
+		</Dialog>
 	);
 }

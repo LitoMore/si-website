@@ -1,17 +1,16 @@
 import {lazy, useEffect} from 'react';
-import {App as Ant, ConfigProvider, theme} from 'antd';
 import {Route, Routes, useSearchParams} from 'react-router';
 import {
 	useBrightnessMode,
-	useColorTheme,
 	useFilteredIcons,
 	useIcons,
 	useSelectedIcon,
 } from '#atom';
+import {MessageProvider} from '#components/ui/feedback.js';
+import {UiProvider} from '#components/ui/theme.js';
 import {useColorScheme, useI18n, useSizes} from '#hooks';
 import {type BrightnessMode, ColorTheme, LanguageCode} from '#types';
-import {getColorScheme, getIconsData, getLatestVersion} from '#utils';
-import locales from './i18n/antd.js';
+import {getIconsData, getLatestVersion} from '#utils';
 
 const DefaultLayout = lazy(async () => import('./layouts/default-layout.js'));
 const OpenGraphLayout = lazy(
@@ -25,7 +24,6 @@ const FloatButtons = lazy(
 function App() {
 	const [searchParameters, setSearchParameters] = useSearchParams();
 	const {colorScheme} = useColorScheme();
-	const [colorTheme] = useColorTheme();
 	const [brightnessMode] = useBrightnessMode();
 	const [icons, setIcons] = useIcons();
 	const [, setFilteredIcons] = useFilteredIcons();
@@ -38,7 +36,8 @@ function App() {
 		document.documentElement.lang =
 			languageCode === LanguageCode.Chinese ? 'zh-Hans' : languageCode;
 		document.documentElement.dir = direction;
-	}, [languageCode, direction]);
+		document.documentElement.dataset['uiTheme'] = colorScheme;
+	}, [languageCode, direction, colorScheme]);
 
 	useEffect(() => {
 		const coverElement = document.querySelector<HTMLElement>('#cover')!;
@@ -80,28 +79,20 @@ function App() {
 		}
 	}, [icons.data, selectedIcon, searchParameters, setSearchParameters]);
 
-	const lightTheme = theme.defaultAlgorithm;
-	const darkTheme = theme.darkAlgorithm;
-
 	return (
-		<Ant style={{colorScheme: getColorScheme(colorTheme)}}>
-			<ConfigProvider
-				direction={direction}
-				locale={locales[languageCode]}
-				theme={{
-					algorithm: colorScheme === ColorTheme.Dark ? darkTheme : lightTheme,
-					token:
-						colorScheme === ColorTheme.Light ? {colorBgLayout: '#fff'} : {},
-				}}
-			>
+		<UiProvider
+			direction={direction}
+			theme={colorScheme === ColorTheme.Dark ? 'dark' : 'light'}
+		>
+			<MessageProvider>
 				<Routes>
 					<Route index element={<DefaultLayout />} />
 					<Route element={<OpenGraphLayout />} path="og" />
 					<Route element={<PreviewLayout />} path="preview" />
 				</Routes>
 				{isMobileSize ? null : <FloatButtons />}
-			</ConfigProvider>
-		</Ant>
+			</MessageProvider>
+		</UiProvider>
 	);
 }
 

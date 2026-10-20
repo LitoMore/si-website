@@ -3,8 +3,8 @@ import {
 	IconEyeglass,
 	IconGrid4x4,
 } from '@tabler/icons-react';
-import {Dropdown} from 'antd';
 import {useNavigate} from 'react-router';
+import {Dropdown} from '#components/ui/dropdown.js';
 import {useColorScheme, useI18n} from '#hooks';
 import {PageLayout} from '#types';
 
@@ -15,28 +15,30 @@ export default function Apps() {
 
 	return (
 		<Dropdown
-			menu={{
-				items: [
-					{
-						key: PageLayout.Previewer,
-						icon: <IconEyeglass />,
-						label: <span>{i18n.header.iconPreviewer}</span>,
-						onClick() {
-							void navigate('preview');
-						},
+			items={[
+				{
+					key: PageLayout.Previewer,
+					icon: <IconEyeglass />,
+					label: <span>{i18n.header.iconPreviewer}</span>,
+					onClick() {
+						void navigate('preview');
 					},
-					{
-						key: PageLayout.OpenGraph,
-						icon: <IconGrid4x4 />,
-						label: <span>{i18n.header.openGraphGenerator}</span>,
-						onClick() {
-							void navigate('og');
-						},
+				},
+				{
+					key: PageLayout.OpenGraph,
+					icon: <IconGrid4x4 />,
+					label: <span>{i18n.header.openGraphGenerator}</span>,
+					onClick() {
+						void navigate('og');
 					},
-				],
-			}}
+				},
+			]}
 		>
-			<div className="flex cursor-pointer items-center justify-center">
+			<button
+				aria-label="Simple Icons"
+				className="flex cursor-pointer items-center justify-center"
+				type="button"
+			>
 				<img
 					alt="Simple Icons"
 					className="h-6 w-6"
@@ -45,7 +47,7 @@ export default function Apps() {
 					)}?viewbox=auto`}
 				/>
 				<IconCaretDownFilled className="size-4" />
-			</div>
+			</button>
 		</Dropdown>
 	);
 }

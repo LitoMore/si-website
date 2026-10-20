@@ -140,8 +140,8 @@
 	color: var(--og-muted);
 	font-size: 12px;
 }
-.og-field .ant-input-number,
-.og-field .ant-select {
+.og-field .ui-number,
+.og-field .ui-select {
 	width: 100%;
 }
 .og-settings-actions {

@@ -1,5 +1,5 @@
-import {Button} from 'antd';
 import {useBrightnessMode, useCardSize, useColorMode} from '#atom';
+import {Button} from '#components/ui/button.js';
 import {useI18n} from '#hooks';
 import {BrightnessMode, CardSize, ColorMode} from '#types';
 

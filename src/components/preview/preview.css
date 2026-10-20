@@ -55,8 +55,7 @@
 .preview-brand-group {
 	flex: 1;
 }
-.preview-input-group input,
-.preview-brand-input.ant-select .ant-select-selector {
+.preview-input-group input {
 	box-sizing: border-box;
 	box-shadow: none;
 	border: 1px solid #404040;
@@ -73,14 +72,6 @@
 	flex: 1;
 	min-width: 0;
 	height: 34px;
-}
-.preview-brand-input.ant-select .ant-select-selection-search {
-	inset-inline: 8px;
-}
-.preview-brand-input.ant-select input {
-	border: 0;
-	padding: 0;
-	height: 32px;
 }
 .preview-color-group {
 	flex: none;

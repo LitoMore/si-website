@@ -8,13 +8,17 @@ export default function BackHome() {
 
 	return (
 		<div className="fixed top-0 left-0 p-2.5">
-			<IconArrowLeft
+			<button
+				aria-label="Simple Icons"
 				className="control"
 				style={{color: iconFg}}
+				type="button"
 				onClick={() => {
 					void navigate('/');
 				}}
-			/>
+			>
+				<IconArrowLeft aria-hidden />
+			</button>
 		</div>
 	);
 }

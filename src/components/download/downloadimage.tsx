@@ -1,6 +1,7 @@
 import {IconDownload} from '@tabler/icons-react';
-import {Button, Dropdown} from 'antd';
 import {useIcons} from '#atom';
+import {Button} from '#components/ui/button.js';
+import {Dropdown} from '#components/ui/dropdown.js';
 import {useI18n} from '#hooks';
 import {BitmapFormat, type Icon} from '#types';
 import {downloadBitmap, downloadPdf, downloadSvg} from './_utils.js';
@@ -45,25 +46,15 @@ function DownloadImage({
 		},
 	].map((x) => ({
 		key: x.format,
-		label: (
-			<div
-				key={x.format}
-				className="flex"
-				onClick={() => {
-					void x.onClick();
-				}}
-			>
-				{x.format}
-			</div>
-		),
+		label: x.format,
+		onClick() {
+			void x.onClick();
+		},
 	}));
 
 	return (
-		<Dropdown menu={{items}} placement="bottom">
-			<Button
-				color="default"
-				icon={isShowIcon ? <IconDownload size={16} /> : null}
-			>
+		<Dropdown align="center" items={items}>
+			<Button icon={isShowIcon ? <IconDownload size={16} /> : null}>
 				{i18n.modal.download}
 			</Button>
 		</Dropdown>

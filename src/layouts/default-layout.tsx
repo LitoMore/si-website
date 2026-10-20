@@ -1,16 +1,15 @@
-import {Layout} from 'antd';
 import Gallery from '#components/gallery/gallery.js';
 import Modal from '#components/gallery/modal.js';
 import Header from '#components/header/header.js';
 
 export default function DefaultLayout() {
 	return (
-		<Layout>
+		<div className="ui-app-layout">
 			<Header />
-			<Layout.Content>
+			<main>
 				<Gallery />
-			</Layout.Content>
+			</main>
 			<Modal />
-		</Layout>
+		</div>
 	);
 }
