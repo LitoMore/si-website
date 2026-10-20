@@ -1,6 +1,13 @@
 import {type Internationalization} from '#types';
 
 const translation: Internationalization = {
+	advertisement: {
+		description: '广告可能被拦截，或暂时无法加载。',
+		label: '支持 Simple Icons',
+		loading: '为支持我们留一点空间',
+		support: '广告帮助支持 Simple Icons，感谢你的理解。',
+		unavailable: '这里原本是一则广告',
+	},
 	footer: {
 		iconMissing: '缺少图标？',
 		iconOutdated: '有图标过时了吗？',

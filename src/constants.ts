@@ -6,6 +6,12 @@ export const spinning = {animation: 'spin 1s linear infinite'};
 
 export const mobileWidth = 435;
 
+export const galleryAdvertisement = {
+	enabled: true,
+	columns: 2,
+	rows: 2,
+};
+
 export const unicodeStartAt = 0xea_01;
 
 export const shiledsIoBrightnessThreshold = 0.69;

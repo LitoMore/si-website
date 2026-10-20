@@ -1,0 +1,43 @@
+/* Adapted from simple-icons/simple-icons-website-rs/components/grid/src/item/mod.css. */
+.sponsor-content #carbonads {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+	text-align: center;
+}
+
+.sponsor-content #carbonads a {
+	color: inherit;
+}
+
+.sponsor-content #carbonads a img {
+	margin: 0 auto;
+}
+
+.sponsor-content .carbon-wrap {
+	display: flex;
+	flex-direction: column;
+	place-content: center space-between;
+}
+
+.sponsor-content .carbon-img {
+	display: block;
+	padding: 1rem 1rem 0.5rem;
+}
+
+.sponsor-content .carbon-text {
+	display: block;
+	margin: 0 auto;
+	max-width: 15rem;
+	font-size: 0.75rem;
+	line-height: 1rem;
+}
+
+.sponsor-content .carbon-poweredby {
+	opacity: 0.5;
+	font-weight: 700;
+	font-size: 0.625rem;
+	line-height: 1.5rem;
+	text-transform: uppercase;
+}

@@ -4,6 +4,13 @@ import en from './en.i18n.js';
 import zh from './zh.i18n.js';
 
 export type Internationalization = {
+	advertisement: {
+		description: string;
+		label: string;
+		loading: string;
+		support: string;
+		unavailable: string;
+	};
 	footer: {
 		iconMissing: string;
 		iconOutdated: string;

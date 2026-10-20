@@ -1,6 +1,14 @@
 import {type Internationalization} from '#types';
 
 const translation: Internationalization = {
+	advertisement: {
+		description:
+			'It may be blocked by an ad blocker or temporarily unavailable.',
+		label: 'Support Simple Icons',
+		loading: 'A little space for support',
+		support: 'Ads help support Simple Icons. Thanks for understanding.',
+		unavailable: 'An ad would normally be here',
+	},
 	footer: {
 		iconMissing: 'Icon missing?',
 		iconOutdated: 'Icon outdated?',

@@ -16,10 +16,10 @@ export default function Gallery() {
 	const [filteredIcons] = useFilteredIcons();
 	const {
 		// InnerWidth,
-		// iconsPerRow,
+		iconsPerRow,
 		galleryHeight,
 		galleryMargin,
-		// CardPixels,
+		cardPixels,
 	} = useSizes();
 
 	if (icons.data.length === 0) {
@@ -56,9 +56,11 @@ export default function Gallery() {
 
 	return (
 		<Virtuoso
+			cardPixels={cardPixels}
 			galleryHeight={galleryHeight}
 			galleryMargin={galleryMargin}
 			icons={filteredIcons}
+			iconsPerRow={iconsPerRow}
 		/>
 	);
 }
