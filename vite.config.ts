@@ -1,4 +1,5 @@
 import process from 'node:process';
+import {fileURLToPath} from 'node:url';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import {visualizer} from 'rollup-plugin-visualizer';
@@ -30,6 +31,9 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs',
+			'char-width-table-consumer': fileURLToPath(
+				new URL('src/vendor/char-width-table-consumer.ts', import.meta.url),
+			),
 
 			'#atom': '/src/atom.ts',
 			'#data': '/src/data/index.ts',

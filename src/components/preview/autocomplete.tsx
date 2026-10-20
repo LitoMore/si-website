@@ -1,62 +1,69 @@
-import {useEffect} from 'react';
+import {useState} from 'react';
 import {AutoComplete} from 'antd';
-import {
-	useFilteredIcons,
-	useIcons,
-	useSearchText,
-	useSelectedIcon,
-} from '#atom';
 import {useI18n, useSearcher} from '#hooks';
+import {type Icon} from '#types';
 import PrefixIcon from './prefixicon.js';
 
-export default function Autocomplete() {
-	const [icons] = useIcons();
-	const [searchText, setSearchText] = useSearchText();
+export default function Autocomplete({
+	title,
+	slug,
+	onChange,
+	onSelect,
+}: {
+	readonly title: string;
+	readonly slug: string;
+	readonly onChange: (title: string) => void;
+	readonly onSelect: (icon: Icon) => void;
+}) {
 	const searcher = useSearcher();
-	const [filteredIcons, setFilteredIcons] = useFilteredIcons();
-	const [selectedIcon, setSelectedIcon] = useSelectedIcon();
 	const {i18n} = useI18n();
-
-	useEffect(() => {
-		const searchIcon = () => {
-			const filteredIcons_ = searchText
-				? searcher.search(searchText)
-				: icons.data;
-			setFilteredIcons(filteredIcons_);
-		};
-
-		searchIcon();
-	}, [searchText, icons.data, searcher, setFilteredIcons]);
-
+	const [showMore, setShowMore] = useState(false);
+	const matches =
+		title.trim().length < 2
+			? []
+			: searcher.search(title).filter((icon) => icon.slug !== slug);
+	const visible = showMore ? matches : matches.slice(0, 3);
 	return (
 		<AutoComplete
-			allowClear
-			autoFocus
-			className="w-full"
-			options={filteredIcons.map((icon) => ({
-				key: icon.slug,
-				label: (
-					<div className="flex gap-2">
-						<PrefixIcon key={icon.slug} icon={icon} iconStyle="icon" />
-						<span>{icon.title}</span>
-					</div>
-				),
+			className="preview-brand-input"
+			id="preview-brand"
+			options={visible.map((icon) => ({
 				value: icon.title,
 				icon,
+				label: (
+					<span className="preview-suggestion">
+						<PrefixIcon icon={icon} iconStyle="icon" />
+						{icon.title}
+					</span>
+				),
 			}))}
-			placeholder={i18n.search.searchByBrand}
-			prefix={<PrefixIcon icon={selectedIcon} iconStyle="icon" />}
-			value={searchText}
+			popupRender={(menu) => (
+				<>
+					{menu}
+					{!showMore && matches.length > 3 && (
+						<button
+							aria-label={i18n.preview.moreSuggestions}
+							className="preview-more"
+							type="button"
+							onClick={() => {
+								setShowMore(true);
+							}}
+							onMouseDown={(event) => {
+								event.preventDefault();
+							}}
+						>
+							+
+						</button>
+					)}
+				</>
+			)}
+			value={title}
 			onChange={(value) => {
-				setSearchText(value.trim());
+				onChange(value);
+				setShowMore(false);
 			}}
-			onClear={() => {
-				setSearchText('');
-				setSelectedIcon(undefined);
-			}}
-			onSelect={(value, option) => {
-				setSearchText(value.trim());
-				setSelectedIcon(option.icon);
+			onSelect={(_value, option) => {
+				onSelect(option.icon);
 			}}
 		/>
 	);

@@ -1,135 +1,147 @@
-import {type RefObject, useEffect, useRef, useState} from 'react';
-import type Konva from 'konva';
-import {Layer, Rect, Stage} from 'react-konva';
-import useImage from 'use-image';
-import {useIcons} from '#atom';
-import {usePreviewImage} from '#hooks';
-import {type Icon} from '#types';
-import {getJsdelivrCdnUrl, getSvg, getSvgDataUri} from '#utils';
-import MaskedIcon from '../canvas/masked-icon.js';
-import PreviewText from '../canvas/preview-text.js';
+import {type Ref} from 'react';
+import {makeBadge} from 'badge-maker';
+import {siSimpleicons} from 'simple-icons';
+import {colorForBackground} from '#utils';
+import {
+	iconSvg,
+	isValidColor,
+	previewHeight,
+	previewSlug,
+	previewWidth,
+	svgBase64,
+} from './utils.js';
 
-function PreviewCanvas({
-	icon,
+const truncate = (text: string) =>
+	[...text].length > 32 ? [...text].slice(0, 32).join('') + '…' : text;
+const badgeStyles = ['flat', 'plastic', 'for-the-badge', 'social'] as const;
+const badgePositions = [
+	[10, 3, 34],
+	[188, 7, 35],
+	[365, -3, 31],
+	[610, 3, 32],
+] as const;
+
+export default function PreviewCanvas({
+	title,
 	color,
-	stageRef,
+	path,
+	iconsTotal,
+	svgRef,
 }: {
-	readonly icon: Icon;
+	readonly title: string;
 	readonly color: string;
-	// eslint-disable-next-line @typescript-eslint/no-restricted-types
-	readonly stageRef: RefObject<Konva.Stage | null>;
+	readonly path: string;
+	readonly iconsTotal: number;
+	readonly svgRef: Ref<SVGSVGElement>;
 }) {
-	const [svg, setSvg] = useState('');
-	const [titleHeight, setTitleHeight] = useState(0);
-	const textColor = icon.relativeColor === '#fff' ? '#333' : '#fff';
-	const [icons] = useIcons();
-	const [siSimage] = useImage(getJsdelivrCdnUrl(icons.version, 'simpleicons'));
-	const [images] = usePreviewImage(
-		svg
-			? getSvgDataUri(svg, color)
-			: getJsdelivrCdnUrl(icons.version, icon.slug),
-	);
-	const titleRef = useRef<Konva.Text>(null);
-
-	useEffect(() => {
-		setTitleHeight(titleRef.current?.height() ?? 0);
-	}, [icon.title]);
-
-	useEffect(() => {
-		(async () => {
-			const svg_ = await getSvg(icons.version, icon.slug);
-			setSvg(svg_);
-		})();
-	}, [icons.version, icon.slug]);
-
-	useEffect(() => {
-		if (!siSimage) {
-			return;
-		}
-
-		// eslint-disable-next-line react-hooks/immutability
-		siSimage.crossOrigin = 'anonymous';
-		siSimage.width = 32;
-		siSimage.height = 32;
-	}, [siSimage]);
-
-	const textBoxWidth = 300;
-	const baseTextX = 18;
-	const baseTextY = 170;
-	const titleFontSize = 24;
-	const textFontSize = 14;
-	const fontFamily = [
-		'--apple-system',
-		'BlinkMacSystemFont',
-		'"Segoe UI"',
-		'Roboto',
-		'"Helvetica Neue"',
-		'Arial',
-		'"Noto Sans"',
-		'sans-serif',
-		'"Apple Color Emoji"',
-		'"Segoe UI Emoji"',
-		'"Segoe UI Symbol"',
-		'"Noto Color Emoji"',
-	].join(',');
-
-	const textProps = {
-		fill: textColor,
-		fontSize: textFontSize,
-		fontFamily,
-		fontStyle: '300',
-		letterSpacing: 0,
-	};
+	const isValid = isValidColor(color);
+	const fill =
+		colorForBackground(isValid ? `#${color}` : '#000000', true)
+			.relativeColor === '#fff'
+			? '#FFFFFF'
+			: '#000000';
+	const badgeColor = isValid ? color : 'CC0000';
 
 	return (
-		<Stage ref={stageRef} height={400} id="icon-canvas" width={720}>
-			<Layer>
-				<Rect
-					cornerRadius={5}
-					fill={icon.relativeColor}
-					height={384}
-					width={720}
+		<figure className="preview-figure">
+			<svg
+				ref={svgRef}
+				aria-label={`${title} Preview`}
+				height={previewHeight}
+				role="img"
+				viewBox={`0 0 ${previewWidth} ${previewHeight}`}
+				width={previewWidth}
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<rect
+					fill={isValid ? `#${color}` : '#000000'}
+					height={420}
+					rx={10}
+					width={740}
 				/>
-				<PreviewText
-					icon={icon}
-					iconsTotal={icons.data.length}
-					textBoxWidth={textBoxWidth}
-					textProps={textProps}
-					titleFontSize={titleFontSize}
-					titleHeight={titleHeight}
-					titleRef={titleRef}
-					x={baseTextX}
-					y={baseTextY}
-				/>
-			</Layer>
-			<Layer>
-				<MaskedIcon
-					backgroundColor={icon.relativeColor}
-					foregroundColor={textColor}
-					image={siSimage}
-					size={32}
-					x={baseTextX - 4}
-					y={330}
-				/>
-			</Layer>
-			<Layer>
-				{images.map((image) => {
-					if (!image) return null;
-					return (
-						<MaskedIcon
-							key={`${icon.slug}-${image.size}`}
-							backgroundColor={icon.relativeColor}
-							foregroundColor={`#${icon.hex}`}
-							image={image.element}
-							size={image.size}
-							x={image.x}
-							y={10}
-						/>
-					);
-				})}
-			</Layer>
-		</Stage>
+				{[
+					[18, 24],
+					[70, 80],
+					[174, 138],
+					[350, 375],
+				].map(([x, size]) => (
+					<svg
+						key={size}
+						height={size}
+						viewBox="0 0 24 24"
+						width={size}
+						x={x}
+						y={20}
+					>
+						<path d={path} fill={fill} />
+					</svg>
+				))}
+				<g
+					fill={fill}
+					fontFamily="Helvetica, Arial, sans-serif"
+					transform="translate(21,235)"
+				>
+					<text fontSize={25}>{truncate(`${title} Preview`)}</text>
+					<text fontSize={17} y={25}>
+						{truncate(previewSlug(title))}.svg
+					</text>
+					<text fontSize={16} y={61}>
+						Brand: {truncate(title)}
+					</text>
+					<text fontSize={16} y={84}>
+						Color: #{color}
+					</text>
+					<g transform="translate(3,142)">
+						<svg height={24} viewBox="0 0 24 24" width={24}>
+							<path d={siSimpleicons.path} fill={fill} />
+						</svg>
+						<text fontSize={12} x={30} y={7}>
+							{iconsTotal} SVG brand icons
+						</text>
+						<text fontSize={12} x={30} y={25}>
+							available at simpleicons.org
+						</text>
+					</g>
+				</g>
+				<g transform="translate(10,437) scale(1.03)">
+					{badgeStyles.flatMap((style, column) =>
+						[0, 1].map((row) => {
+							const [x, firstY, secondY] = badgePositions[column]!;
+							// Badge-maker escapes its inputs; SVG path data is escaped by iconSvg.
+
+							let badge = makeBadge({
+								label: style === 'social' ? '' : 'simple icons',
+								message: 'preview',
+								color: badgeColor,
+								style,
+								idSuffix: `preview-${column}-${row}`,
+								logoBase64: svgBase64(
+									iconSvg(
+										'',
+										path,
+										row === 0 && style !== 'social'
+											? '#FFFFFF'
+											: `#${badgeColor}`,
+									),
+								),
+							});
+							if (style === 'social' && row === 1)
+								badge = badge.replace(
+									'<text id="rlinkpreview-3-1"',
+									'<text fill="#4183c4" id="rlinkpreview-3-1"',
+								);
+							return (
+								<g
+									// eslint-disable-next-line react/no-danger -- SVG is generated by badge-maker from escaped path data.
+									dangerouslySetInnerHTML={{__html: badge}}
+									key={`${style}-${row}`}
+									transform={`translate(${x},${row === 0 ? firstY : secondY})`}
+								/>
+							);
+						}),
+					)}
+				</g>
+			</svg>
+		</figure>
 	);
 }
-
-export default PreviewCanvas;

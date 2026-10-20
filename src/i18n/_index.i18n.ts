@@ -44,9 +44,23 @@ export type Internationalization = {
 		width: string;
 	};
 	preview: {
+		brand: string;
+		centered: string;
+		collinear: string;
 		copyScreenshot: string;
 		downloadSvg: string;
+		exportError: string;
+		fix: string;
+		invalidFile: string;
+		invalidPath: string;
+		loadError: string;
+		moreSuggestions: string;
+		negativeZero: string;
+		path: string;
+		precision: string;
 		savePreview: string;
+		show: string;
+		size: string;
 		uploadSvg: string;
 	};
 	search: {
