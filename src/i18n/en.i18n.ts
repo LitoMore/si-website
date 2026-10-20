@@ -31,7 +31,7 @@ const translation: Internationalization = {
 		aliases: 'Aliases',
 		color: 'Color',
 		copied: `Copied {} to clipboard`,
-		copy: 'Copy',
+		copy: 'Copy {}',
 		download: 'Download',
 		guidelines: 'Guidelines',
 		license: 'License',
@@ -104,6 +104,7 @@ const translation: Internationalization = {
 		contrast: 'Contrast',
 		contrastTooltip:
 			'This applies a contrast filter to icons for better visual.',
+		language: 'Change language',
 		reset: 'Reset',
 		themeAuto: 'Auto',
 		themeDark: 'Dark',

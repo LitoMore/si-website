@@ -263,6 +263,7 @@ function PreviewEditor({initialIcon}: {readonly initialIcon?: Icon}) {
 					<input
 						aria-invalid={!isValidColor(color)}
 						autoComplete="off"
+						dir="ltr"
 						id="preview-color"
 						spellCheck={false}
 						value={color}
@@ -287,6 +288,7 @@ function PreviewEditor({initialIcon}: {readonly initialIcon?: Icon}) {
 					}
 					autoComplete="off"
 					className={issues.length > 0 ? 'warn' : ''}
+					dir="ltr"
 					id="preview-path"
 					spellCheck={false}
 					value={path}

@@ -14,6 +14,7 @@
 	"scripts": {
 		"dev": "vite",
 		"test": "xo",
+		"test:i18n": "node --test tests/i18n.test.mjs",
 		"test:opengraph": "node --test tests/opengraph.test.mjs",
 		"test:preview": "node --test tests/preview.test.mjs",
 		"build": "vite build",

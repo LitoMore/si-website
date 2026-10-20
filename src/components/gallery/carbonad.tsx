@@ -110,7 +110,7 @@ function CarbonAd({style}: {readonly style: CSSProperties}) {
 			style={{...style, backgroundColor: cardBg, color: cardFg}}
 		>
 			<link href="https://cdn.carbonads.com" rel="preconnect" />
-			<div ref={containerRef} className="sponsor-content w-full" />
+			<div ref={containerRef} className="sponsor-content w-full" dir="auto" />
 			{status !== 'ready' && (
 				<div
 					className="absolute inset-0 flex flex-col items-center justify-center gap-2 rounded border border-dashed border-current/20 p-3"

@@ -244,7 +244,7 @@ function OpenGraph() {
 						</div>
 					</div>
 					<div className="og-preview-caption">
-						<span>
+						<span dir="ltr">
 							{width} × {height} px
 						</span>
 						<span>{labels.originalSize}</span>

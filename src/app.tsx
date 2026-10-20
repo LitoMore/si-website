@@ -8,16 +8,19 @@ import {
 	useIcons,
 	useSelectedIcon,
 } from '#atom';
-import {useColorScheme, useSizes} from '#hooks';
-import {type BrightnessMode, ColorTheme} from '#types';
+import {useColorScheme, useI18n, useSizes} from '#hooks';
+import {type BrightnessMode, ColorTheme, LanguageCode} from '#types';
 import {getColorScheme, getIconsData, getLatestVersion} from '#utils';
+import locales from './i18n/antd.js';
 
-/* eslint-disable prettier/prettier -- I want to make the code more readable */
 const DefaultLayout = lazy(async () => import('./layouts/default-layout.js'));
-const OpenGraphLayout = lazy(async () => import('./layouts/opengraph-layout.js'));
+const OpenGraphLayout = lazy(
+	async () => import('./layouts/opengraph-layout.js'),
+);
 const PreviewLayout = lazy(async () => import('./layouts/preview-layout.js'));
-const FloatButtons = lazy(async () => import('#components/common/floatbuttons.js'));
-/* eslint-enable prettier/prettier */
+const FloatButtons = lazy(
+	async () => import('#components/common/floatbuttons.js'),
+);
 
 function App() {
 	const [searchParameters, setSearchParameters] = useSearchParams();
@@ -28,6 +31,14 @@ function App() {
 	const [, setFilteredIcons] = useFilteredIcons();
 	const [selectedIcon, setSelectedIcon] = useSelectedIcon();
 	const {isMobileSize} = useSizes();
+	const {languageCode} = useI18n();
+	const direction = languageCode === LanguageCode.Arabic ? 'rtl' : 'ltr';
+
+	useEffect(() => {
+		document.documentElement.lang =
+			languageCode === LanguageCode.Chinese ? 'zh-Hans' : languageCode;
+		document.documentElement.dir = direction;
+	}, [languageCode, direction]);
 
 	useEffect(() => {
 		const coverElement = document.querySelector<HTMLElement>('#cover')!;
@@ -75,6 +86,8 @@ function App() {
 	return (
 		<Ant style={{colorScheme: getColorScheme(colorTheme)}}>
 			<ConfigProvider
+				direction={direction}
+				locale={locales[languageCode]}
 				theme={{
 					algorithm: colorScheme === ColorTheme.Dark ? darkTheme : lightTheme,
 					token:

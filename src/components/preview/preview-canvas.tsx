@@ -47,6 +47,7 @@ export default function PreviewCanvas({
 			<svg
 				ref={svgRef}
 				aria-label={`${title} Preview`}
+				direction="ltr"
 				height={previewHeight}
 				role="img"
 				viewBox={`0 0 ${previewWidth} ${previewHeight}`}

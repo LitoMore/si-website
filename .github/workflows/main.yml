@@ -9,4 +9,5 @@ jobs:
       - run: |
           npm ci
           npm run test
+          npm run test:i18n
           npm run build

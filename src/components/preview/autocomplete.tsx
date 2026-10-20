@@ -33,7 +33,7 @@ export default function Autocomplete({
 				label: (
 					<span className="preview-suggestion">
 						<PrefixIcon icon={icon} iconStyle="icon" />
-						{icon.title}
+						<bdi>{icon.title}</bdi>
 					</span>
 				),
 			}))}

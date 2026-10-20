@@ -40,7 +40,7 @@ function ModalContent({icon}: {readonly icon?: Icon}) {
 				<div className="flex flex-col">
 					<div className="modal-title">{i18n.modal.title}</div>
 					<Typography.Text copyable className="modal-text">
-						{icon.title}
+						<bdi>{icon.title}</bdi>
 					</Typography.Text>
 				</div>
 
@@ -52,7 +52,7 @@ function ModalContent({icon}: {readonly icon?: Icon}) {
 						<div className="flex gap-2">
 							{aliases.map((alias) => (
 								<div key={alias} className="modal-text">
-									{alias}
+									<bdi>{alias}</bdi>
 								</div>
 							))}
 						</div>
@@ -66,6 +66,7 @@ function ModalContent({icon}: {readonly icon?: Icon}) {
 							<Tag
 								className="gray-copy mr-0"
 								color={hexColor}
+								dir="ltr"
 								style={{color: icon.relativeColor}}
 							>
 								{hexColor}
@@ -88,7 +89,7 @@ function ModalContent({icon}: {readonly icon?: Icon}) {
 						rel={linkRel}
 						target="_blank"
 					>
-						{tidyLink(icon.source)}
+						<bdi>{tidyLink(icon.source)}</bdi>
 					</Typography.Link>
 				</div>
 
@@ -103,7 +104,7 @@ function ModalContent({icon}: {readonly icon?: Icon}) {
 							rel={linkRel}
 							target="_blank"
 						>
-							{tidyLink(icon.guidelines)}
+							<bdi>{tidyLink(icon.guidelines)}</bdi>
 						</Typography.Link>
 					</div>
 				) : null}

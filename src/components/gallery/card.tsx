@@ -48,9 +48,12 @@ function Card({
 			}}
 		>
 			<div className="icon-image" style={getMaskStyles(version, icon, true)} />
-			<div className="icon-title">{icon.title}</div>
+			<div className="icon-title" dir="auto">
+				{icon.title}
+			</div>
 			<div
 				className="icon-color"
+				dir="ltr"
 				style={{
 					backgroundColor: hexColor,
 					color: icon.relativeColor,

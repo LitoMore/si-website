@@ -18,7 +18,7 @@ const ModalContent = lazy(async () => import('./modalcontent.js'));
 
 function CopySvgButtons({icon}: {readonly icon: Icon}) {
 	const [{version}] = useIcons();
-	const {i18n} = useI18n();
+	const {i18n, gettext} = useI18n();
 	const copyText = useCopyText();
 
 	const copySvg = async (options?: {colored?: boolean; path?: boolean}) => {
@@ -69,14 +69,14 @@ function CopySvgButtons({icon}: {readonly icon: Icon}) {
 
 	return (
 		<Dropdown menu={{items}} placement="bottom">
-			<Button color="default">{i18n.modal.copy} SVG</Button>
+			<Button color="default">{gettext(i18n.modal.copy, ['SVG'])}</Button>
 		</Dropdown>
 	);
 }
 
 function CdnButtons({icon}: {readonly icon: Icon}) {
 	const [{version}] = useIcons();
-	const {i18n} = useI18n();
+	const {i18n, gettext} = useI18n();
 	const copyText = useCopyText();
 
 	const items = [
@@ -109,7 +109,7 @@ function CdnButtons({icon}: {readonly icon: Icon}) {
 
 	return (
 		<Dropdown menu={{items}} placement="bottom">
-			<Button color="default">{i18n.modal.copy} CDN</Button>
+			<Button color="default">{gettext(i18n.modal.copy, ['CDN'])}</Button>
 		</Dropdown>
 	);
 }
@@ -118,7 +118,7 @@ export default function SiModal() {
 	const [icon, setSelectedIcon] = useSelectedIcon();
 	const {isMobileSize} = useSizes();
 	const [colorMode] = useColorMode();
-	const {i18n} = useI18n();
+	const {i18n, gettext} = useI18n();
 	const copyText = useCopyText();
 	const isDarkIcon = icon?.relativeColor === '#fff';
 
@@ -148,7 +148,7 @@ export default function SiModal() {
 										copyText('slug', icon.slug);
 									}}
 								>
-									{i18n.modal.copy} Slug
+									{gettext(i18n.modal.copy, ['Slug'])}
 								</Button>
 								<CopySvgButtons icon={icon} />
 								<CdnButtons icon={icon} />

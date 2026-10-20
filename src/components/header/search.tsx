@@ -64,6 +64,7 @@ function Search() {
 				isInputFocused || isMobileSize ? null : (
 					<span
 						className="-mr-1.75 rounded bg-black/6 p-1 leading-none text-black/45"
+						dir="ltr"
 						style={{
 							filter: isDark ? 'invert(1)' : undefined,
 						}}

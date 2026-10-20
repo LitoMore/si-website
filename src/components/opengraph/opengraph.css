@@ -186,7 +186,7 @@
 	}
 	.og-export {
 		border-top: 0;
-		border-left: 1px solid var(--og-border);
+		border-inline-start: 1px solid var(--og-border);
 	}
 }
 @media (max-width: 540px) {
@@ -208,7 +208,7 @@
 	}
 	.og-export {
 		border-top: 1px solid var(--og-border);
-		border-left: 0;
+		border-inline-start: 0;
 	}
 	.og-preview-toolbar {
 		padding: 12px 16px;
