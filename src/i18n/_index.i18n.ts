@@ -36,9 +36,27 @@ export type Internationalization = {
 	};
 	openGraph: {
 		apply: string;
+		canvas: string;
+		clipboardUnavailable: string;
+		copied: string;
+		copy: string;
+		copyError: string;
+		description: string;
+		download: string;
+		downloaded: string;
+		export: string;
+		exportError: string;
+		exportHint: string;
+		format: string;
 		gap: string;
 		height: string;
+		invalidSettings: string;
+		loadError: string;
+		loading: string;
+		originalSize: string;
+		preview: string;
 		reset: string;
+		retry: string;
 		shuffleIcons: string;
 		size: string;
 		width: string;

@@ -1,112 +1,71 @@
 import {useState} from 'react';
-import {Button, Input} from 'antd';
+import {Button, InputNumber} from 'antd';
 import {useOpenGraphImage} from '#atom';
 import {defaultOpenGraphImage} from '#constants';
 import {useI18n} from '#hooks';
+import {isValidOpenGraphImage} from './utils.js';
 
-function OpenGraphSettings({onShuffle}: {readonly onShuffle?: () => void}) {
+function OpenGraphSettings() {
 	const [openGraphImage, setOpenGraphImage] = useOpenGraphImage();
 	const [og, setOg] = useState(openGraphImage);
 	const {i18n} = useI18n();
-
-	const onPressEnter = () => {
-		setOpenGraphImage(og);
-	};
+	const labels = i18n.openGraph;
+	const isValid = isValidOpenGraphImage(og);
+	const fields = [
+		{key: 'width', label: labels.width, min: 128, max: 4096},
+		{key: 'height', label: labels.height, min: 128, max: 4096},
+		{key: 'size', label: labels.size, min: 8, max: 256},
+		{key: 'gap', label: labels.gap, min: 0, max: 256},
+	] as const;
 
 	return (
-		<>
-			<div className="flex gap-1">
-				<Input
-					className="max-w-37.5!"
-					placeholder="Width"
-					suffix={
-						<span className="text-gray-400 select-none">
-							{i18n.openGraph.width}
-						</span>
-					}
-					type="number"
-					value={og.width}
-					onChange={(event) => {
-						setOg({...og, width: Number(event.target.value)});
-					}}
-					onPressEnter={onPressEnter}
-				/>
-				<Input
-					className="max-w-37.5!"
-					placeholder="Height"
-					suffix={
-						<span className="text-gray-400 select-none">
-							{i18n.openGraph.height}
-						</span>
-					}
-					type="number"
-					value={og.height}
-					onChange={(event) => {
-						setOg({...og, height: Number(event.target.value)});
-					}}
-					onPressEnter={onPressEnter}
-				/>
+		<form
+			onSubmit={(event) => {
+				event.preventDefault();
+				if (isValid) setOpenGraphImage(og);
+			}}
+		>
+			<h2>{labels.canvas}</h2>
+			<div className="og-fields">
+				{fields.map(({key, label, min, max}) => (
+					<div key={key} className="og-field">
+						<label htmlFor={`og-${key}`}>{label}</label>
+						<InputNumber
+							aria-describedby={isValid ? undefined : 'og-validation'}
+							id={`og-${key}`}
+							max={max}
+							min={min}
+							precision={0}
+							suffix="px"
+							value={og[key] || (key === 'gap' ? 0 : null)}
+							onChange={(value) => {
+								setOg({...og, [key]: value ?? NaN});
+							}}
+						/>
+					</div>
+				))}
 			</div>
-			<div className="flex gap-1">
-				<Input
-					className="max-w-37.5!"
-					placeholder="Width"
-					suffix={
-						<span className="text-gray-400 select-none">
-							{i18n.openGraph.size}
-						</span>
-					}
-					type="number"
-					value={og.size}
-					onChange={(event) => {
-						setOg({...og, size: Number(event.target.value)});
+			{!isValid && (
+				<p className="og-error" id="og-validation" role="alert">
+					{labels.invalidSettings}
+				</p>
+			)}
+			<div className="og-settings-actions">
+				<Button autoInsertSpace={false} disabled={!isValid} htmlType="submit">
+					{labels.apply}
+				</Button>
+				<Button
+					autoInsertSpace={false}
+					type="text"
+					onClick={() => {
+						setOg(defaultOpenGraphImage);
+						setOpenGraphImage(defaultOpenGraphImage);
 					}}
-					onPressEnter={onPressEnter}
-				/>
-				<Input
-					className="max-w-37.5!"
-					placeholder="Height"
-					suffix={
-						<span className="text-gray-400 select-none">
-							{i18n.openGraph.gap}
-						</span>
-					}
-					type="number"
-					value={og.gap}
-					onChange={(event) => {
-						setOg({...og, gap: Number(event.target.value)});
-					}}
-					onPressEnter={onPressEnter}
-				/>
+				>
+					{labels.reset}
+				</Button>
 			</div>
-			<Button
-				autoInsertSpace
-				className="border-0! bg-linear-to-r! from-cyan-500! to-blue-500!"
-				type="primary"
-				onClick={onShuffle}
-			>
-				{i18n.openGraph.shuffleIcons}
-			</Button>
-			<Button
-				autoInsertSpace={false}
-				type="primary"
-				onClick={() => {
-					setOpenGraphImage(og);
-				}}
-			>
-				{i18n.openGraph.apply}
-			</Button>
-			<Button
-				autoInsertSpace={false}
-				type="default"
-				onClick={() => {
-					setOg(defaultOpenGraphImage);
-					setOpenGraphImage(defaultOpenGraphImage);
-				}}
-			>
-				{i18n.openGraph.reset}
-			</Button>
-		</>
+		</form>
 	);
 }
 

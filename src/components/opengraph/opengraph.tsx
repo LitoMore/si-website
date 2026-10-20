@@ -1,21 +1,49 @@
-import {useMemo} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
+import {IconCopy, IconDownload, IconRefresh} from '@tabler/icons-react';
+import {Alert, App, Button, Select, Spin, Tooltip} from 'antd';
 import {arrayToShuffled} from 'array-shuffle';
+import {type Stage as KonvaStage} from 'konva/lib/Stage.js';
 import {Layer, Rect, Stage} from 'react-konva';
 import {useIcons, useOpenGraphImage} from '#atom';
-import {brightThreshold} from '#constants';
-import {useColorScheme} from '#hooks';
+import {brightThreshold, defaultOpenGraphImage} from '#constants';
+import {useColorScheme, useI18n} from '#hooks';
 import {getJsdelivrCdnUrl} from '#utils';
 import MaskedIcon from '../canvas/masked-icon.js';
-
-const centerIconRatio = 2;
+import {downloadBlob} from '../download/blob.js';
+import OpenGraphSettings from './opengraph-settings.js';
+import {
+	canCopyOpenGraphImage,
+	isValidOpenGraphImage,
+	loadOpenGraphImage,
+	openGraphFormatLabel,
+	openGraphGrid,
+	openGraphMimeType,
+	supportedOpenGraphFormats,
+} from './utils.js';
 
 function OpenGraph() {
-	const [{width, height, size, gap}] = useOpenGraphImage();
+	const [settings] = useOpenGraphImage();
+	const imageSettings = isValidOpenGraphImage(settings)
+		? settings
+		: defaultOpenGraphImage;
+	const {width, height, size} = imageSettings;
 	const {isLight} = useColorScheme();
+	const {i18n, gettext} = useI18n();
+	const labels = i18n.openGraph;
+	const {message} = App.useApp();
 	const [{data, version}] = useIcons();
+	const [seed, setSeed] = useState(0);
+	const [loadAttempt, setLoadAttempt] = useState(0);
+	const [format, setFormat] = useState('png');
+	const formats = useMemo(() => supportedOpenGraphFormats(), []);
+	const [busy, setBusy] = useState<'copy' | 'download'>();
+	const stageRef = useRef<KonvaStage>(null);
+	const previewRef = useRef<HTMLDivElement>(null);
+	const [scale, setScale] = useState(1);
 	const shuffled = useMemo(
-		() =>
-			arrayToShuffled(
+		() => ({
+			seed,
+			icons: arrayToShuffled(
 				data.filter(
 					(icon) =>
 						icon.slug !== 'simpleicons' &&
@@ -25,103 +53,257 @@ function OpenGraph() {
 							icon.hex === '000000'),
 				),
 			),
-		[data, isLight],
+		}),
+		[data, isLight, seed],
+	).icons;
+	const grid = useMemo(() => openGraphGrid(imageSettings), [imageSettings]);
+	const icons = useMemo(
+		() =>
+			shuffled
+				.slice(0, grid.rows * grid.columns)
+				.map((icon, index) => ({icon, ...grid.position(index), index}))
+				.filter(({index}) => !grid.isCenter(index)),
+		[shuffled, grid],
 	);
+	const sources = useMemo(
+		() =>
+			version
+				? [
+						getJsdelivrCdnUrl(version, 'simpleicons'),
+						...icons.map(({icon}) => getJsdelivrCdnUrl(version, icon.slug)),
+					]
+				: [],
+		[icons, version],
+	);
+	const [assets, setAssets] = useState<{
+		sources: string[];
+		images?: HTMLImageElement[];
+		failed?: boolean;
+	}>();
+	const isReady = assets?.sources === sources && Boolean(assets?.images);
+	const failed = assets?.sources === sources && assets?.failed;
+	const canCopy = canCopyOpenGraphImage();
 
-	const rows = Math.floor((height - gap) / (size + gap));
-	const columns = Math.floor((width - gap) / (size + gap));
-	const icons = shuffled.slice(0, rows * columns);
-	const paddingLeft = Math.floor(
-		(width - gap * 2 - (columns * size + (columns - 1) * gap)) / 2,
-	);
-	const paddingTop = Math.floor(
-		(height - gap * 2 - (rows * size + (rows - 1) * gap)) / 2,
-	);
+	useEffect(() => {
+		if (sources.length === 0) return;
+		let isActive = true;
+		void Promise.all(sources.map(async (source) => loadOpenGraphImage(source)))
+			.then((images) => {
+				if (isActive) setAssets({sources, images});
+			})
+			.catch(() => {
+				if (isActive) setAssets({sources, failed: true});
+			});
+		return () => {
+			isActive = false;
+		};
+	}, [sources, loadAttempt]);
 
-	const getIconPosition = (index: number) => {
-		const iconRowIndex = Math.floor(index / columns);
-		const iconColumnIndex = index % columns;
-		const x = gap + paddingLeft + iconColumnIndex * (size + gap);
-		const y = gap + paddingTop + iconRowIndex * (size + gap);
-		return {x, y};
+	useEffect(() => {
+		const element = previewRef.current;
+		if (!element) return;
+		const observer = new ResizeObserver(([entry]) => {
+			if (entry) setScale(Math.min(entry.contentRect.width / width, 1));
+		});
+		observer.observe(element);
+		return () => {
+			observer.disconnect();
+		};
+	}, [width]);
+
+	const exportImage = async (shouldCopy: boolean) => {
+		if (!isReady || Boolean(busy) || !stageRef.current) return;
+		setBusy(shouldCopy ? 'copy' : 'download');
+		try {
+			stageRef.current.draw();
+			const mimeType = shouldCopy ? 'image/png' : openGraphMimeType(format);
+			const canvas = stageRef.current.toCanvas({pixelRatio: 1});
+			const blob = new Promise<Blob>((resolve, reject) => {
+				canvas.toBlob(
+					(result) => {
+						if (result?.type === mimeType) resolve(result);
+						else reject(new Error('Image export failed'));
+					},
+					mimeType,
+					0.95,
+				);
+			});
+			if (shouldCopy) {
+				await navigator.clipboard.write([
+					new ClipboardItem({'image/png': blob}),
+				]);
+				void message.success(labels.copied);
+			} else {
+				downloadBlob(
+					await blob,
+					`simple-icons-og-${width}x${height}.${format}`,
+				);
+				void message.success(labels.downloaded);
+			}
+		} catch {
+			void message.error(shouldCopy ? labels.copyError : labels.exportError);
+		} finally {
+			setBusy(undefined);
+		}
 	};
 
-	const ratio = (rows % 2) + centerIconRatio;
-	const isOddColumn = (columns - ratio) % 2 === 1;
-	const mainIconPositionRow = Math.ceil((rows - ratio) / 2);
-	const mainIconPositionColumn = Math.ceil((columns - ratio) / 2);
-	const mainIconIndex = mainIconPositionRow * columns + mainIconPositionColumn;
-	const mainIconPosition = getIconPosition(mainIconIndex);
-
-	const ignoredIndexes = new Set(
-		Array.from({length: ratio}, (_, i) => i + mainIconPositionRow).flatMap(
-			(x) =>
-				Array.from(
-					{length: ratio + (isOddColumn ? 1 : 0)},
-					(_, i) =>
-						i + columns * x + mainIconPositionColumn - (isOddColumn ? 1 : 0),
-				),
-		),
-	);
-
-	const siImage = new globalThis.Image();
-	const siImageSize = size * ratio + gap * (ratio - 1);
-	siImage.src = getJsdelivrCdnUrl(version, 'simpleicons');
-	siImage.width = siImageSize;
-	siImage.height = siImageSize;
-
-	const images = icons.map((icon) => {
-		const image = new globalThis.Image();
-		image.src = getJsdelivrCdnUrl(version, icon.slug);
-		image.width = size;
-		image.height = size;
-		return {image, icon};
-	});
-
 	const fillColor = isLight ? '#fff' : '#000';
-	const centerIconX = mainIconPosition.x - (isOddColumn ? (size + gap) / 2 : 0);
-	const centerIconY = mainIconPosition.y;
-	const centerIconSize = siImageSize;
-	const centerIconColor = isLight ? '#000' : '#fff';
-
 	return (
-		<div className="flex h-screen w-full items-center justify-center">
-			<div className="box-content! border border-white" style={{width, height}}>
-				<Stage height={height} width={width}>
-					<Layer>
-						<Rect fill={fillColor} height={height} width={width} />
-					</Layer>
-					<Layer>
-						{images.map(({image, icon}, index) => {
-							if (ignoredIndexes.has(index)) return null;
-							const iconColor = `#${icon.hex === '000000' ? (isLight ? '222' : 'ddd') : icon.hex}`;
-							const {x, y} = getIconPosition(index);
-							return (
-								<MaskedIcon
-									key={icon.slug}
-									backgroundColor={fillColor}
-									foregroundColor={iconColor}
-									image={image}
-									size={size}
-									x={x}
-									y={y}
-								/>
-							);
-						})}
-					</Layer>
-					<Layer>
-						<MaskedIcon
-							backgroundColor={fillColor}
-							foregroundColor={centerIconColor}
-							image={siImage}
-							size={centerIconSize}
-							x={centerIconX}
-							y={centerIconY}
-						/>
-					</Layer>
-				</Stage>
+		<section aria-label={i18n.header.openGraphGenerator} className="og-editor">
+			<header className="og-heading">
+				<h1>{i18n.header.openGraphGenerator}</h1>
+				<p>{labels.description}</p>
+			</header>
+			<div className="og-workspace">
+				<div className="og-preview-panel">
+					<div className="og-preview-toolbar">
+						<h2>{labels.preview}</h2>
+						<Button
+							autoInsertSpace={false}
+							disabled={Boolean(busy)}
+							icon={<IconRefresh size={16} />}
+							onClick={() => {
+								setSeed(seed + 1);
+							}}
+						>
+							{labels.shuffleIcons}
+						</Button>
+					</div>
+					<div className="og-preview-area">
+						<div
+							ref={previewRef}
+							aria-busy={!isReady && !failed}
+							aria-label={labels.preview}
+							className="og-preview"
+							role="img"
+							style={{aspectRatio: `${width} / ${height}`, maxWidth: width}}
+						>
+							<div
+								className="og-stage"
+								style={{width, height, transform: `scale(${scale})`}}
+							>
+								<Stage ref={stageRef} height={height} width={width}>
+									<Layer>
+										<Rect fill={fillColor} height={height} width={width} />
+									</Layer>
+									<Layer>
+										{isReady
+											? icons.map(({icon, x, y}, index) => (
+													<MaskedIcon
+														key={icon.slug}
+														backgroundColor={fillColor}
+														foregroundColor={`#${icon.hex === '000000' ? (isLight ? '222' : 'ddd') : icon.hex}`}
+														image={assets?.images?.[index + 1]}
+														size={size}
+														x={x}
+														y={y}
+													/>
+												))
+											: null}
+									</Layer>
+									<Layer>
+										{isReady ? (
+											<MaskedIcon
+												backgroundColor={fillColor}
+												foregroundColor={isLight ? '#000' : '#fff'}
+												image={assets?.images?.[0]}
+												size={grid.centerSize}
+												x={grid.centerX}
+												y={grid.centerY}
+											/>
+										) : null}
+									</Layer>
+								</Stage>
+							</div>
+							{!isReady && (
+								<div className="og-loading" role="status">
+									{failed ? (
+										<Alert
+											action={
+												<Button
+													size="small"
+													onClick={() => {
+														setAssets(undefined);
+														setLoadAttempt(loadAttempt + 1);
+													}}
+												>
+													{labels.retry}
+												</Button>
+											}
+											message={labels.loadError}
+											type="error"
+										/>
+									) : (
+										<>
+											<Spin />
+											<span>{labels.loading}</span>
+										</>
+									)}
+								</div>
+							)}
+						</div>
+					</div>
+					<div className="og-preview-caption">
+						<span>
+							{width} × {height} px
+						</span>
+						<span>{labels.originalSize}</span>
+					</div>
+				</div>
+				<aside aria-label={labels.canvas} className="og-sidebar">
+					<OpenGraphSettings />
+					<div className="og-export">
+						<h2>{labels.export}</h2>
+						<div className="og-field">
+							<label htmlFor="og-format">{labels.format}</label>
+							<Select
+								id="og-format"
+								options={formats.map((value) => ({
+									value,
+									label: openGraphFormatLabel(value),
+								}))}
+								value={format}
+								onChange={setFormat}
+							/>
+						</div>
+						<Button
+							block
+							autoInsertSpace={false}
+							disabled={!isReady || Boolean(busy)}
+							icon={<IconDownload size={17} />}
+							loading={busy === 'download'}
+							size="large"
+							type="primary"
+							onClick={() => {
+								void exportImage(false);
+							}}
+						>
+							{gettext(labels.download, [openGraphFormatLabel(format)])}
+						</Button>
+						<Tooltip title={canCopy ? undefined : labels.clipboardUnavailable}>
+							<span>
+								<Button
+									block
+									autoInsertSpace={false}
+									disabled={!isReady || !canCopy || Boolean(busy)}
+									icon={<IconCopy size={17} />}
+									loading={busy === 'copy'}
+									size="large"
+									onClick={() => {
+										void exportImage(true);
+									}}
+								>
+									{labels.copy}
+								</Button>
+							</span>
+						</Tooltip>
+						<p className="og-export-note">
+							{canCopy ? labels.exportHint : labels.clipboardUnavailable}
+						</p>
+					</div>
+				</aside>
 			</div>
-		</div>
+		</section>
 	);
 }
 
