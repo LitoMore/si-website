@@ -23,7 +23,7 @@
 		"pages": "VITE_BASE_URL='si-website' npm run build",
 		"preview": "vite preview",
 		"serve": "vite serve dist/",
-		"deploy": "gh-pages -d dist"
+		"deploy": "npm run build && wrangler pages deploy"
 	},
 	"devDependencies": {
 		"@base-ui/react": "^1.9.0",
@@ -76,6 +76,7 @@
 		"typescript": "^6.0.3",
 		"use-image": "^1.1.4",
 		"vite": "^7.3.1",
+		"wrangler": "^4.151.3",
 		"xo": "^5.0.1"
 	}
 }

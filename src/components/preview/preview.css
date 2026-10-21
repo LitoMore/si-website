@@ -62,6 +62,7 @@
 }
 .preview-input-group > label {
 	flex: 0 0 60px;
+	min-width: 60px;
 }
 .preview-brand-group {
 	flex: 1;
@@ -120,6 +121,7 @@
 }
 .preview-buttons {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 	gap: 12px;
 	margin-top: 4px;
@@ -128,6 +130,8 @@
 }
 .preview-export-buttons {
 	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
 }
 .preview-buttons button {
 	display: inline-flex;
@@ -135,7 +139,6 @@
 	align-items: center;
 	gap: 6px;
 	cursor: pointer;
-	margin-inline: 4px;
 	box-shadow: 0 0 3px var(--preview-shadow);
 	border: 0;
 	border-radius: 4px;
@@ -263,15 +266,8 @@
 	.preview-brand-group {
 		flex-basis: 100%;
 	}
-	.preview-buttons,
-	.preview-export-buttons {
-		flex-wrap: wrap;
-	}
 	.preview-buttons {
 		gap: 16px;
-	}
-	.preview-export-buttons {
-		row-gap: 8px;
 	}
 	.preview-buttons button {
 		padding: 8px;

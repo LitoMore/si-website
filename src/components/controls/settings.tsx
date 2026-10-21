@@ -6,7 +6,6 @@ import {Popover} from '#components/ui/popover.js';
 import {useColorScheme, useI18n} from '#hooks';
 import {BrightnessMode, CardSize, ColorMode} from '#types';
 import componentLabels from '../../i18n/ui.js';
-import Brightness from './brightness.js';
 import CardsizeSlider from './cardsize-slider.js';
 import ColorThemes from './color-themes.js';
 import DisplayColor from './display-color.js';
@@ -36,7 +35,6 @@ function Settings({extraSettings}: {readonly extraSettings?: ReactNode}) {
 					{isMain ? <CardsizeSlider /> : null}
 					<ColorThemes />
 					{isMain ? <DisplayColor /> : null}
-					{isMain ? <Brightness /> : null}
 					{extraSettings}
 					{isMain ? <Reset /> : null}
 				</div>

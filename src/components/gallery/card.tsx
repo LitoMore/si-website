@@ -67,9 +67,6 @@ function Card({
 				}}
 			>
 				{hexColor}
-				{colorMode === ColorMode.Actual
-					? ' ' + icon.brightness.toFixed(2)
-					: null}
 			</span>
 		</button>
 	);
