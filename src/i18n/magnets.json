@@ -58,7 +58,7 @@
 		"diameter": "Diameter",
 		"longestSide": "Longest side",
 		"outlineWidth": "Outline width",
-		"outlineHint": "Default: 3.5 mm, based on the Fanfou character magnet.",
+		"outlineHint": "Default: 3.5 mm.",
 		"radius": "Corner radius",
 		"iconScale": "Icon scale",
 		"position": "Icon position",
@@ -79,7 +79,9 @@
 		"overhang": "The icon extends beyond the base. Reduce its scale, adjust its offset, or change the base shape.",
 		"modelError": "Could not build the model. Adjust the settings and try again.",
 		"previewUnavailable": "3D preview is unavailable. Switch to Front view. You can still export.",
-		"previewLabel": "3D magnet preview. Drag to rotate."
+		"previewLabel": "3D magnet preview. Drag to rotate.",
+		"exportCredit": "3MF export powered by {}",
+		"pathCredit": "Path splitting powered by {}"
 	},
 	"zh": {
 		"name": "3D 冰箱贴",
@@ -140,7 +142,7 @@
 		"diameter": "直径",
 		"longestSide": "最长边",
 		"outlineWidth": "描边宽度",
-		"outlineHint": "默认 3.5 毫米，参考饭否角色冰箱贴。",
+		"outlineHint": "默认 3.5 毫米。",
 		"radius": "圆角半径",
 		"iconScale": "图标比例",
 		"position": "图标位置",
@@ -161,7 +163,9 @@
 		"overhang": "图标超出了底座。请减小比例、调整偏移或更换底座形状。",
 		"modelError": "无法生成模型，请调整参数后重试。",
 		"previewUnavailable": "3D 预览不可用，请切换到正面视图。仍可导出模型。",
-		"previewLabel": "冰箱贴 3D 预览，可拖动旋转。"
+		"previewLabel": "冰箱贴 3D 预览，可拖动旋转。",
+		"exportCredit": "3MF 导出由 {} 提供支持",
+		"pathCredit": "路径拆分由 {} 提供支持"
 	},
 	"zh-Hant": {
 		"name": "3D 冰箱貼",
@@ -222,7 +226,7 @@
 		"diameter": "直徑",
 		"longestSide": "最長邊",
 		"outlineWidth": "描邊寬度",
-		"outlineHint": "預設 3.5 毫米，參考飯否角色冰箱貼。",
+		"outlineHint": "預設 3.5 毫米。",
 		"radius": "圓角半徑",
 		"iconScale": "圖示比例",
 		"position": "圖示位置",
@@ -243,7 +247,9 @@
 		"overhang": "圖示超出了底座。請縮小比例、調整偏移或更換底座形狀。",
 		"modelError": "無法產生模型，請調整參數後重試。",
 		"previewUnavailable": "3D 預覽無法使用，請切換到正面檢視。仍可匯出模型。",
-		"previewLabel": "冰箱貼 3D 預覽，可拖曳旋轉。"
+		"previewLabel": "冰箱貼 3D 預覽，可拖曳旋轉。",
+		"exportCredit": "3MF 匯出由 {} 提供支援",
+		"pathCredit": "路徑拆分由 {} 提供支援"
 	},
 	"fr-FR": {
 		"name": "Aimants 3D",
@@ -304,7 +310,7 @@
 		"diameter": "Diamètre",
 		"longestSide": "Côté le plus long",
 		"outlineWidth": "Largeur du contour",
-		"outlineHint": "Par défaut : 3,5 mm, d’après l’aimant du personnage Fanfou.",
+		"outlineHint": "Par défaut : 3,5 mm.",
 		"radius": "Rayon des coins",
 		"iconScale": "Échelle de l’icône",
 		"position": "Position de l’icône",
@@ -325,7 +331,9 @@
 		"overhang": "L’icône dépasse de la base. Réduisez son échelle, ajustez sa position ou changez la forme de la base.",
 		"modelError": "Impossible de générer le modèle. Ajustez les réglages et réessayez.",
 		"previewUnavailable": "Aperçu 3D indisponible. Passez à la vue de face. L’export reste possible.",
-		"previewLabel": "Aperçu 3D de l’aimant. Glisser pour tourner."
+		"previewLabel": "Aperçu 3D de l’aimant. Glisser pour tourner.",
+		"exportCredit": "Export 3MF avec {}",
+		"pathCredit": "Découpage des tracés avec {}"
 	},
 	"es-ES": {
 		"name": "Imanes 3D",
@@ -386,7 +394,7 @@
 		"diameter": "Diámetro",
 		"longestSide": "Lado más largo",
 		"outlineWidth": "Ancho del borde",
-		"outlineHint": "Predeterminado: 3,5 mm, basado en el imán del personaje Fanfou.",
+		"outlineHint": "Predeterminado: 3,5 mm.",
 		"radius": "Radio de esquina",
 		"iconScale": "Escala del icono",
 		"position": "Posición del icono",
@@ -407,7 +415,9 @@
 		"overhang": "El icono sobresale de la base. Reduce la escala, ajusta el desplazamiento o cambia la forma de la base.",
 		"modelError": "No se pudo generar el modelo. Ajusta las opciones e inténtalo de nuevo.",
 		"previewUnavailable": "La vista 3D no está disponible. Cambia a la vista frontal. Puedes seguir exportando.",
-		"previewLabel": "Vista 3D del imán. Arrastra para girar."
+		"previewLabel": "Vista 3D del imán. Arrastra para girar.",
+		"exportCredit": "Exportación 3MF con {}",
+		"pathCredit": "División de trazados con {}"
 	},
 	"de-DE": {
 		"name": "3D-Magnete",
@@ -468,7 +478,7 @@
 		"diameter": "Durchmesser",
 		"longestSide": "Längste Seite",
 		"outlineWidth": "Randbreite",
-		"outlineHint": "Standard: 3,5 mm, nach dem Fanfou-Figurenmagneten.",
+		"outlineHint": "Standard: 3,5 mm.",
 		"radius": "Eckenradius",
 		"iconScale": "Symbolskalierung",
 		"position": "Symbolposition",
@@ -489,7 +499,9 @@
 		"overhang": "Das Symbol ragt über die Basis hinaus. Verringern Sie die Skalierung, ändern Sie den Versatz oder die Basisform.",
 		"modelError": "Das Modell konnte nicht erstellt werden. Passen Sie die Einstellungen an und versuchen Sie es erneut.",
 		"previewUnavailable": "3D-Vorschau nicht verfügbar. Wechseln Sie zur Vorderansicht. Der Export ist weiterhin möglich.",
-		"previewLabel": "3D-Magnetvorschau. Zum Drehen ziehen."
+		"previewLabel": "3D-Magnetvorschau. Zum Drehen ziehen.",
+		"exportCredit": "3MF-Export mit {}",
+		"pathCredit": "Pfadaufteilung mit {}"
 	},
 	"de-CH": {
 		"name": "3D-Magnete",
@@ -550,7 +562,7 @@
 		"diameter": "Durchmesser",
 		"longestSide": "Längste Seite",
 		"outlineWidth": "Randbreite",
-		"outlineHint": "Standard: 3,5 mm, nach dem Fanfou-Figurenmagneten.",
+		"outlineHint": "Standard: 3,5 mm.",
 		"radius": "Eckenradius",
 		"iconScale": "Symbolskalierung",
 		"position": "Symbolposition",
@@ -571,7 +583,9 @@
 		"overhang": "Das Symbol ragt über die Basis hinaus. Verringern Sie die Skalierung, ändern Sie den Versatz oder die Basisform.",
 		"modelError": "Das Modell konnte nicht erstellt werden. Passen Sie die Einstellungen an und versuchen Sie es erneut.",
 		"previewUnavailable": "3D-Vorschau nicht verfügbar. Wechseln Sie zur Vorderansicht. Der Export ist weiterhin möglich.",
-		"previewLabel": "3D-Magnetvorschau. Zum Drehen ziehen."
+		"previewLabel": "3D-Magnetvorschau. Zum Drehen ziehen.",
+		"exportCredit": "3MF-Export mit {}",
+		"pathCredit": "Pfadaufteilung mit {}"
 	},
 	"it-IT": {
 		"name": "Magneti 3D",
@@ -632,7 +646,7 @@
 		"diameter": "Diametro",
 		"longestSide": "Lato più lungo",
 		"outlineWidth": "Larghezza del bordo",
-		"outlineHint": "Predefinito: 3,5 mm, dal magnete del personaggio Fanfou.",
+		"outlineHint": "Predefinito: 3,5 mm.",
 		"radius": "Raggio degli angoli",
 		"iconScale": "Scala dell’icona",
 		"position": "Posizione dell’icona",
@@ -653,7 +667,9 @@
 		"overhang": "L’icona supera la base. Riduci la scala, regola lo spostamento o cambia la forma della base.",
 		"modelError": "Impossibile generare il modello. Regola le impostazioni e riprova.",
 		"previewUnavailable": "Anteprima 3D non disponibile. Passa alla vista frontale. Puoi comunque esportare.",
-		"previewLabel": "Anteprima 3D del magnete. Trascina per ruotare."
+		"previewLabel": "Anteprima 3D del magnete. Trascina per ruotare.",
+		"exportCredit": "Esportazione 3MF con {}",
+		"pathCredit": "Suddivisione dei tracciati con {}"
 	},
 	"pt-PT": {
 		"name": "Ímanes 3D",
@@ -714,7 +730,7 @@
 		"diameter": "Diâmetro",
 		"longestSide": "Lado maior",
 		"outlineWidth": "Largura do contorno",
-		"outlineHint": "Predefinição: 3,5 mm, baseada no íman da personagem Fanfou.",
+		"outlineHint": "Predefinição: 3,5 mm.",
 		"radius": "Raio dos cantos",
 		"iconScale": "Escala do ícone",
 		"position": "Posição do ícone",
@@ -735,7 +751,9 @@
 		"overhang": "O ícone ultrapassa a base. Reduza a escala, ajuste o deslocamento ou altere a forma da base.",
 		"modelError": "Não foi possível gerar o modelo. Ajuste as opções e tente novamente.",
 		"previewUnavailable": "Pré-visualização 3D indisponível. Mude para a vista frontal. Pode continuar a exportar.",
-		"previewLabel": "Pré-visualização 3D do íman. Arraste para rodar."
+		"previewLabel": "Pré-visualização 3D do íman. Arraste para rodar.",
+		"exportCredit": "Exportação 3MF com {}",
+		"pathCredit": "Divisão de caminhos com {}"
 	},
 	"nl-NL": {
 		"name": "3D-magneten",
@@ -796,7 +814,7 @@
 		"diameter": "Diameter",
 		"longestSide": "Langste zijde",
 		"outlineWidth": "Randbreedte",
-		"outlineHint": "Standaard: 3,5 mm, naar de Fanfou-personagemagneet.",
+		"outlineHint": "Standaard: 3,5 mm.",
 		"radius": "Hoekradius",
 		"iconScale": "Pictogramschaal",
 		"position": "Pictogrampositie",
@@ -817,7 +835,9 @@
 		"overhang": "Het pictogram steekt buiten de basis. Verklein de schaal, pas de verschuiving aan of verander de basisvorm.",
 		"modelError": "Het model kon niet worden gemaakt. Pas de instellingen aan en probeer opnieuw.",
 		"previewUnavailable": "3D-voorbeeld niet beschikbaar. Kies het vooraanzicht. Exporteren blijft mogelijk.",
-		"previewLabel": "3D-voorbeeld van de magneet. Slepen om te draaien."
+		"previewLabel": "3D-voorbeeld van de magneet. Slepen om te draaien.",
+		"exportCredit": "3MF-export met {}",
+		"pathCredit": "Paden splitsen met {}"
 	},
 	"sv-SE": {
 		"name": "3D-magneter",
@@ -878,7 +898,7 @@
 		"diameter": "Diameter",
 		"longestSide": "Längsta sidan",
 		"outlineWidth": "Kantbredd",
-		"outlineHint": "Standard: 3,5 mm, baserat på Fanfou-figurmagneten.",
+		"outlineHint": "Standard: 3,5 mm.",
 		"radius": "Hörnradie",
 		"iconScale": "Ikonskala",
 		"position": "Ikonposition",
@@ -899,7 +919,9 @@
 		"overhang": "Ikonen går utanför basen. Minska skalan, justera förskjutningen eller byt basform.",
 		"modelError": "Kunde inte skapa modellen. Justera inställningarna och försök igen.",
 		"previewUnavailable": "3D-förhandsvisningen är inte tillgänglig. Byt till framvy. Du kan fortfarande exportera.",
-		"previewLabel": "3D-förhandsvisning av magneten. Dra för att rotera."
+		"previewLabel": "3D-förhandsvisning av magneten. Dra för att rotera.",
+		"exportCredit": "3MF-export med {}",
+		"pathCredit": "Banuppdelning med {}"
 	},
 	"nb-NO": {
 		"name": "3D-magneter",
@@ -960,7 +982,7 @@
 		"diameter": "Diameter",
 		"longestSide": "Lengste side",
 		"outlineWidth": "Kantbredde",
-		"outlineHint": "Standard: 3,5 mm, basert på Fanfou-figurmagneten.",
+		"outlineHint": "Standard: 3,5 mm.",
 		"radius": "Hjørneradius",
 		"iconScale": "Ikonskala",
 		"position": "Ikonplassering",
@@ -981,7 +1003,9 @@
 		"overhang": "Ikonet går utenfor basen. Reduser skalaen, juster forskyvningen eller endre baseformen.",
 		"modelError": "Kunne ikke bygge modellen. Juster innstillingene og prøv igjen.",
 		"previewUnavailable": "3D-forhåndsvisning er utilgjengelig. Bytt til frontvisning. Du kan fortsatt eksportere.",
-		"previewLabel": "3D-forhåndsvisning av magneten. Dra for å rotere."
+		"previewLabel": "3D-forhåndsvisning av magneten. Dra for å rotere.",
+		"exportCredit": "3MF-eksport med {}",
+		"pathCredit": "Baneoppdeling med {}"
 	},
 	"fi-FI": {
 		"name": "3D-magneetit",
@@ -1042,7 +1066,7 @@
 		"diameter": "Halkaisija",
 		"longestSide": "Pisin sivu",
 		"outlineWidth": "Reunuksen leveys",
-		"outlineHint": "Oletus: 3,5 mm, Fanfou-hahmomagneetin mukaan.",
+		"outlineHint": "Oletus: 3,5 mm.",
 		"radius": "Kulman säde",
 		"iconScale": "Kuvakkeen mittakaava",
 		"position": "Kuvakkeen sijainti",
@@ -1063,7 +1087,9 @@
 		"overhang": "Kuvake ulottuu pohjan ulkopuolelle. Pienennä mittakaavaa, säädä siirtymää tai vaihda pohjan muoto.",
 		"modelError": "Mallia ei voitu luoda. Muuta asetuksia ja yritä uudelleen.",
 		"previewUnavailable": "3D-esikatselu ei ole käytettävissä. Vaihda etunäkymään. Vienti toimii silti.",
-		"previewLabel": "Magneetin 3D-esikatselu. Kierrä vetämällä."
+		"previewLabel": "Magneetin 3D-esikatselu. Kierrä vetämällä.",
+		"exportCredit": "3MF-vienti: {}",
+		"pathCredit": "Polkujen jakaminen: {}"
 	},
 	"pl-PL": {
 		"name": "Magnesy 3D",
@@ -1124,7 +1150,7 @@
 		"diameter": "Średnica",
 		"longestSide": "Najdłuższy bok",
 		"outlineWidth": "Szerokość obrysu",
-		"outlineHint": "Domyślnie: 3,5 mm, na podstawie magnesu z postacią Fanfou.",
+		"outlineHint": "Domyślnie: 3,5 mm.",
 		"radius": "Promień narożników",
 		"iconScale": "Skala ikony",
 		"position": "Pozycja ikony",
@@ -1145,7 +1171,9 @@
 		"overhang": "Ikona wystaje poza podstawę. Zmniejsz skalę, dostosuj przesunięcie lub zmień kształt podstawy.",
 		"modelError": "Nie można utworzyć modelu. Zmień ustawienia i spróbuj ponownie.",
 		"previewUnavailable": "Podgląd 3D jest niedostępny. Przełącz na widok z przodu. Eksport nadal działa.",
-		"previewLabel": "Podgląd magnesu 3D. Przeciągnij, aby obrócić."
+		"previewLabel": "Podgląd magnesu 3D. Przeciągnij, aby obrócić.",
+		"exportCredit": "Eksport 3MF dzięki {}",
+		"pathCredit": "Podział ścieżek dzięki {}"
 	},
 	"ro-RO": {
 		"name": "Magneți 3D",
@@ -1206,7 +1234,7 @@
 		"diameter": "Diametru",
 		"longestSide": "Latura cea mai lungă",
 		"outlineWidth": "Lățimea marginii",
-		"outlineHint": "Implicit: 3,5 mm, după magnetul personajului Fanfou.",
+		"outlineHint": "Implicit: 3,5 mm.",
 		"radius": "Raza colțurilor",
 		"iconScale": "Scara pictogramei",
 		"position": "Poziția pictogramei",
@@ -1227,7 +1255,9 @@
 		"overhang": "Pictograma depășește baza. Redu scara, ajustează deplasarea sau schimbă forma bazei.",
 		"modelError": "Modelul nu a putut fi creat. Ajustează setările și încearcă din nou.",
 		"previewUnavailable": "Previzualizarea 3D nu este disponibilă. Alege vederea frontală. Exportul rămâne posibil.",
-		"previewLabel": "Previzualizare 3D a magnetului. Trage pentru rotire."
+		"previewLabel": "Previzualizare 3D a magnetului. Trage pentru rotire.",
+		"exportCredit": "Export 3MF cu {}",
+		"pathCredit": "Împărțirea traseelor cu {}"
 	},
 	"tr-TR": {
 		"name": "3D Mıknatıslar",
@@ -1288,7 +1318,7 @@
 		"diameter": "Çap",
 		"longestSide": "En uzun kenar",
 		"outlineWidth": "Kenarlık genişliği",
-		"outlineHint": "Varsayılan: Fanfou karakter mıknatısına göre 3,5 mm.",
+		"outlineHint": "Varsayılan: 3,5 mm.",
 		"radius": "Köşe yarıçapı",
 		"iconScale": "Simge ölçeği",
 		"position": "Simge konumu",
@@ -1309,7 +1339,9 @@
 		"overhang": "Simge tabanın dışına taşıyor. Ölçeği küçültün, kaydırmayı ayarlayın veya taban şeklini değiştirin.",
 		"modelError": "Model oluşturulamadı. Ayarları değiştirip tekrar deneyin.",
 		"previewUnavailable": "3D önizleme kullanılamıyor. Ön görünüme geçin. Dışa aktarmaya devam edebilirsiniz.",
-		"previewLabel": "3D mıknatıs önizlemesi. Döndürmek için sürükleyin."
+		"previewLabel": "3D mıknatıs önizlemesi. Döndürmek için sürükleyin.",
+		"exportCredit": "3MF dışa aktarma: {}",
+		"pathCredit": "Yol bölme: {}"
 	},
 	"ja-JP": {
 		"name": "3D マグネット",
@@ -1370,7 +1402,7 @@
 		"diameter": "直径",
 		"longestSide": "最長辺",
 		"outlineWidth": "縁の幅",
-		"outlineHint": "初期値は 3.5 mm。Fanfou キャラクターマグネットを参考にしています。",
+		"outlineHint": "初期値は 3.5 mm。",
 		"radius": "角の半径",
 		"iconScale": "アイコンの倍率",
 		"position": "アイコンの位置",
@@ -1391,7 +1423,9 @@
 		"overhang": "アイコンが土台からはみ出しています。倍率・位置・土台の形を調整してください。",
 		"modelError": "モデルを生成できませんでした。設定を調整して再試行してください。",
 		"previewUnavailable": "3D プレビューを表示できません。正面表示に切り替えてください。書き出しは可能です。",
-		"previewLabel": "マグネットの 3D プレビュー。ドラッグして回転できます。"
+		"previewLabel": "マグネットの 3D プレビュー。ドラッグして回転できます。",
+		"exportCredit": "3MF 書き出し：{}",
+		"pathCredit": "パスの分割：{}"
 	},
 	"ko-KR": {
 		"name": "3D 자석",
@@ -1452,7 +1486,7 @@
 		"diameter": "지름",
 		"longestSide": "가장 긴 변",
 		"outlineWidth": "테두리 너비",
-		"outlineHint": "기본값 3.5 mm. Fanfou 캐릭터 자석을 참고했습니다.",
+		"outlineHint": "기본값 3.5 mm.",
 		"radius": "모서리 반경",
 		"iconScale": "아이콘 비율",
 		"position": "아이콘 위치",
@@ -1473,7 +1507,9 @@
 		"overhang": "아이콘이 받침을 벗어납니다. 비율이나 위치를 조정하거나 받침 모양을 바꾸세요.",
 		"modelError": "모델을 만들지 못했습니다. 설정을 조정한 뒤 다시 시도하세요.",
 		"previewUnavailable": "3D 미리보기를 사용할 수 없습니다. 정면 보기로 전환하세요. 내보내기는 가능합니다.",
-		"previewLabel": "자석 3D 미리보기. 드래그하여 회전하세요."
+		"previewLabel": "자석 3D 미리보기. 드래그하여 회전하세요.",
+		"exportCredit": "3MF 내보내기: {}",
+		"pathCredit": "경로 분할: {}"
 	},
 	"ar": {
 		"name": "مغناطيسات ثلاثية الأبعاد",
@@ -1534,7 +1570,7 @@
 		"diameter": "القطر",
 		"longestSide": "الضلع الأطول",
 		"outlineWidth": "عرض الإطار",
-		"outlineHint": "الافتراضي: 3.5 مم، استنادًا إلى مغناطيس شخصية Fanfou.",
+		"outlineHint": "الافتراضي: 3.5 مم.",
 		"radius": "نصف قطر الزوايا",
 		"iconScale": "مقياس الأيقونة",
 		"position": "موضع الأيقونة",
@@ -1555,7 +1591,9 @@
 		"overhang": "تتجاوز الأيقونة القاعدة. قلل المقياس أو اضبط الإزاحة أو غيّر شكل القاعدة.",
 		"modelError": "تعذر إنشاء النموذج. اضبط الإعدادات وحاول مجددًا.",
 		"previewUnavailable": "المعاينة ثلاثية الأبعاد غير متاحة. انتقل إلى العرض الأمامي. لا يزال التصدير ممكنًا.",
-		"previewLabel": "معاينة ثلاثية الأبعاد للمغناطيس. اسحب للتدوير."
+		"previewLabel": "معاينة ثلاثية الأبعاد للمغناطيس. اسحب للتدوير.",
+		"exportCredit": "تصدير 3MF بدعم من {}",
+		"pathCredit": "تقسيم المسارات بدعم من {}"
 	},
 	"hi-IN": {
 		"name": "3D चुंबक",
@@ -1616,7 +1654,7 @@
 		"diameter": "व्यास",
 		"longestSide": "सबसे लंबा किनारा",
 		"outlineWidth": "किनारे की चौड़ाई",
-		"outlineHint": "डिफ़ॉल्ट: Fanfou पात्र के चुंबक के अनुसार 3.5 मिमी।",
+		"outlineHint": "डिफ़ॉल्ट: 3.5 मिमी।",
 		"radius": "कोने की त्रिज्या",
 		"iconScale": "आइकन का अनुपात",
 		"position": "आइकन की स्थिति",
@@ -1637,7 +1675,9 @@
 		"overhang": "आइकन आधार से बाहर है। अनुपात घटाएँ, खिसकाव बदलें या आधार की आकृति बदलें।",
 		"modelError": "मॉडल नहीं बन सका। सेटिंग बदलकर फिर कोशिश करें।",
 		"previewUnavailable": "3D पूर्वावलोकन उपलब्ध नहीं है। सामने के दृश्य पर जाएँ। निर्यात अभी भी कर सकते हैं।",
-		"previewLabel": "चुंबक का 3D पूर्वावलोकन। घुमाने के लिए खींचें।"
+		"previewLabel": "चुंबक का 3D पूर्वावलोकन। घुमाने के लिए खींचें।",
+		"exportCredit": "3MF निर्यात के लिए {}",
+		"pathCredit": "पाथ विभाजन के लिए {}"
 	},
 	"el-GR": {
 		"name": "Μαγνήτες 3D",
@@ -1698,7 +1738,7 @@
 		"diameter": "Διάμετρος",
 		"longestSide": "Μεγαλύτερη πλευρά",
 		"outlineWidth": "Πλάτος περιγράμματος",
-		"outlineHint": "Προεπιλογή: 3,5 mm, με βάση τον μαγνήτη χαρακτήρα Fanfou.",
+		"outlineHint": "Προεπιλογή: 3,5 mm.",
 		"radius": "Ακτίνα γωνιών",
 		"iconScale": "Κλίμακα εικονιδίου",
 		"position": "Θέση εικονιδίου",
@@ -1719,7 +1759,9 @@
 		"overhang": "Το εικονίδιο εξέχει από τη βάση. Μειώστε την κλίμακα, ρυθμίστε τη μετατόπιση ή αλλάξτε σχήμα βάσης.",
 		"modelError": "Δεν ήταν δυνατή η δημιουργία μοντέλου. Αλλάξτε τις ρυθμίσεις και δοκιμάστε ξανά.",
 		"previewUnavailable": "Η προεπισκόπηση 3D δεν είναι διαθέσιμη. Επιλέξτε μπροστινή όψη. Η εξαγωγή παραμένει διαθέσιμη.",
-		"previewLabel": "Προεπισκόπηση μαγνήτη 3D. Σύρετε για περιστροφή."
+		"previewLabel": "Προεπισκόπηση μαγνήτη 3D. Σύρετε για περιστροφή.",
+		"exportCredit": "Εξαγωγή 3MF με {}",
+		"pathCredit": "Διαχωρισμός διαδρομών με {}"
 	},
 	"ru-RU": {
 		"name": "3D-магниты",
@@ -1780,7 +1822,7 @@
 		"diameter": "Диаметр",
 		"longestSide": "Длинная сторона",
 		"outlineWidth": "Ширина обводки",
-		"outlineHint": "По умолчанию: 3,5 мм, по образцу магнита персонажа Fanfou.",
+		"outlineHint": "По умолчанию: 3,5 мм.",
 		"radius": "Радиус углов",
 		"iconScale": "Масштаб значка",
 		"position": "Положение значка",
@@ -1801,7 +1843,9 @@
 		"overhang": "Значок выходит за основание. Уменьшите масштаб, измените смещение или форму основания.",
 		"modelError": "Не удалось создать модель. Измените настройки и повторите попытку.",
 		"previewUnavailable": "3D-просмотр недоступен. Переключитесь на вид спереди. Экспорт по-прежнему доступен.",
-		"previewLabel": "3D-просмотр магнита. Перетащите для вращения."
+		"previewLabel": "3D-просмотр магнита. Перетащите для вращения.",
+		"exportCredit": "Экспорт 3MF с помощью {}",
+		"pathCredit": "Разделение контуров с помощью {}"
 	},
 	"uk-UA": {
 		"name": "3D-магніти",
@@ -1862,7 +1906,7 @@
 		"diameter": "Діаметр",
 		"longestSide": "Найдовша сторона",
 		"outlineWidth": "Ширина обведення",
-		"outlineHint": "Типово: 3,5 мм, за зразком магніту персонажа Fanfou.",
+		"outlineHint": "Типово: 3,5 мм.",
 		"radius": "Радіус кутів",
 		"iconScale": "Масштаб значка",
 		"position": "Положення значка",
@@ -1883,7 +1927,9 @@
 		"overhang": "Значок виходить за основу. Зменште масштаб, змініть зміщення або форму основи.",
 		"modelError": "Не вдалося створити модель. Змініть налаштування та спробуйте знову.",
 		"previewUnavailable": "3D-перегляд недоступний. Перейдіть до вигляду спереду. Експорт залишається доступним.",
-		"previewLabel": "3D-перегляд магніту. Перетягніть для обертання."
+		"previewLabel": "3D-перегляд магніту. Перетягніть для обертання.",
+		"exportCredit": "Експорт 3MF за допомогою {}",
+		"pathCredit": "Поділ контурів за допомогою {}"
 	},
 	"sr-Cyrl-RS": {
 		"name": "3D магнети",
@@ -1944,7 +1990,7 @@
 		"diameter": "Пречник",
 		"longestSide": "Најдужа страна",
 		"outlineWidth": "Ширина ивице",
-		"outlineHint": "Подразумевано: 3,5 mm, по узору на магнет лика Fanfou.",
+		"outlineHint": "Подразумевано: 3,5 mm.",
 		"radius": "Полупречник углова",
 		"iconScale": "Размера иконе",
 		"position": "Положај иконе",
@@ -1965,7 +2011,9 @@
 		"overhang": "Икона прелази основу. Смањите размеру, подесите померање или промените облик основе.",
 		"modelError": "Модел није могуће направити. Подесите поставке и покушајте поново.",
 		"previewUnavailable": "3D преглед није доступан. Пређите на предњи приказ. Извоз је и даље могућ.",
-		"previewLabel": "3D преглед магнета. Превуците за ротацију."
+		"previewLabel": "3D преглед магнета. Превуците за ротацију.",
+		"exportCredit": "3MF извоз помоћу {}",
+		"pathCredit": "Раздвајање путања помоћу {}"
 	},
 	"sr-Latn-RS": {
 		"name": "3D magneti",
@@ -2026,7 +2074,7 @@
 		"diameter": "Prečnik",
 		"longestSide": "Najduža strana",
 		"outlineWidth": "Širina ivice",
-		"outlineHint": "Podrazumevano: 3,5 mm, po uzoru na magnet lika Fanfou.",
+		"outlineHint": "Podrazumevano: 3,5 mm.",
 		"radius": "Poluprečnik uglova",
 		"iconScale": "Razmera ikone",
 		"position": "Položaj ikone",
@@ -2047,6 +2095,8 @@
 		"overhang": "Ikona prelazi osnovu. Smanjite razmeru, podesite pomeranje ili promenite oblik osnove.",
 		"modelError": "Model nije moguće napraviti. Podesite postavke i pokušajte ponovo.",
 		"previewUnavailable": "3D pregled nije dostupan. Pređite na prednji prikaz. Izvoz je i dalje moguć.",
-		"previewLabel": "3D pregled magneta. Prevucite za rotaciju."
+		"previewLabel": "3D pregled magneta. Prevucite za rotaciju.",
+		"exportCredit": "3MF izvoz pomoću {}",
+		"pathCredit": "Razdvajanje putanja pomoću {}"
 	}
 }

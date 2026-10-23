@@ -713,6 +713,7 @@ export default function MagnetWorkshop({
 						</div>
 					</section>
 				</div>
+				<PackageCredits />
 			</main>
 			{help ? (
 				<HelpDialog
@@ -800,5 +801,39 @@ function ExportStatus({
 					? gettext(labels.ready, [message.format])
 					: ''}
 		</div>
+	);
+}
+
+function PackageCredits() {
+	const {labels, gettext} = useMagnetI18n();
+	return (
+		<footer className="package-credits">
+			<span>
+				{gettext(labels.exportCredit, [
+					() => (
+						<a
+							href="https://www.npmjs.com/package/three-3mf-exporter"
+							rel="noreferrer"
+							target="_blank"
+						>
+							<bdi>three-3mf-exporter</bdi>
+						</a>
+					),
+				])}
+			</span>
+			<span>
+				{gettext(labels.pathCredit, [
+					() => (
+						<a
+							href="https://github.com/cscnk52/svg-path-areas-splitter"
+							rel="noreferrer"
+							target="_blank"
+						>
+							<bdi>svg-path-areas-splitter</bdi>
+						</a>
+					),
+				])}
+			</span>
+		</footer>
 	);
 }
