@@ -12,7 +12,13 @@ BackHome and Controls components as Icon Previewer and Open Graph Generator.
 Controls, export hints, errors and help follow the same language preference.
 Arabic uses a right-to-left layout. Gallery-specific settings are hidden here.
 Theme and language changes preserve model settings and print colors.
+Color presets keep their base and icon roles when choosing another icon. Only
+the colors linked to the brand update; white, black and manually chosen colors
+stay fixed. Swap exchanges these roles too, and Reset restores brand on white.
 Loading indicators reuse the home page spinner.
+Typography inherits the site's system font, with shared sizes and weights for
+headings, controls and supporting text. Helper text and package credits stay
+at 12 px, with stronger secondary text colors in both themes.
 Three.js, Manifold WASM and the workshop stylesheet load with this route. The
 3MF exporter is loaded only when exporting.
 
@@ -57,6 +63,10 @@ version and JSON metadata through the existing jsDelivr helpers. Visible icon
 thumbnails use `getMaskStyles`, search uses `useSearcher`, and the selected
 icon's SVG is fetched with `getSvg` from the same package version on jsDelivr.
 There is no complete icon path catalogue bundled with the tool.
+The picker keeps the catalogue's default order and uses the same
+`react-virtuoso` virtual grid as the home gallery, with continuous scrolling
+instead of pagination. Searching or clearing the search returns the list to
+the top while preserving the selected icon and model settings.
 
 `getSvg` shares requests and successful responses by versioned URL across
 consumers. Failed HTTP requests or invalid SVGs are evicted so Retry can fetch

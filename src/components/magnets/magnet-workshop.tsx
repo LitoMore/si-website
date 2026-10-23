@@ -2,12 +2,9 @@ import {useDeferredValue, useEffect, useMemo, useRef, useState} from 'react';
 import {
 	ArrowDownToLine,
 	ArrowLeftRight,
-	ArrowUpRight,
 	Box,
 	Check,
 	ChevronDown,
-	ChevronLeft,
-	ChevronRight,
 	CircleHelp,
 	Expand,
 	Layers2,
@@ -18,6 +15,7 @@ import {
 	Sparkles,
 	X,
 } from 'lucide-react';
+import {VirtuosoGrid} from 'react-virtuoso';
 import Loading from '#components/gallery/loading.js';
 import {useColorScheme, useSearcher} from '#hooks';
 import {type Icon, LanguageCode} from '#types';
@@ -36,40 +34,6 @@ import {ShapeControls, Slider} from './shape-controls.js';
 import {useIconPath} from './use-icon-path.js';
 import {useMagnetModel} from './use-magnet-model.js';
 import './magnets.css';
-
-const featured = [
-	'fanfou',
-	'github',
-	'apple',
-	'spotify',
-	'react',
-	'figma',
-	'notion',
-	'discord',
-	'blender',
-	'youtube',
-	'nintendo',
-	'linux',
-	'docker',
-	'raspberrypi',
-	'starbucks',
-	'steam',
-	'adidas',
-	'nike',
-	'pinterest',
-	'reddit',
-	'git',
-	'vuedotjs',
-	'typescript',
-	'python',
-	'rust',
-	'homeassistant',
-	'bilibili',
-	'wechat',
-	'xiaomi',
-	'nasa',
-];
-const pageSize = 60;
 
 function IconImage({
 	icon,
@@ -135,9 +99,12 @@ export default function MagnetWorkshop({
 		...defaults,
 		iconColor: `#${selected.hex}`,
 	}));
+	const [brandColors, setBrandColors] = useState({
+		baseColor: false,
+		iconColor: true,
+	});
 	const [query, setQuery] = useState('');
 	const deferredQuery = useDeferredValue(query.trim().toLowerCase());
-	const [page, setPage] = useState(0);
 	const {
 		path,
 		error: iconError,
@@ -161,29 +128,27 @@ export default function MagnetWorkshop({
 	const [message, setMessage] = useState<{format?: string; failed?: boolean}>();
 	const [help, setHelp] = useState(false);
 	const filtered = useMemo(
-		() =>
-			deferredQuery.length > 0
-				? searcher.search(deferredQuery)
-				: [
-						...featured.flatMap(
-							(slug) => icons.find((icon) => icon.slug === slug) ?? [],
-						),
-						...icons.filter((icon) => !featured.includes(icon.slug)),
-					],
+		() => (deferredQuery.length > 0 ? searcher.search(deferredQuery) : icons),
 		[deferredQuery, icons, searcher],
 	);
-	const visibleIcons = filtered.slice(page * pageSize, (page + 1) * pageSize);
 
 	function update<K extends keyof MagnetSettings>(
 		key: K,
 		value: MagnetSettings[K],
 	) {
 		setSettings((previous) => ({...previous, [key]: value}));
+		if (key === 'baseColor' || key === 'iconColor') {
+			setBrandColors((previous) => ({...previous, [key]: false}));
+		}
 	}
 
 	function selectIcon(icon: Icon) {
 		setSelected(icon);
-		update('iconColor', `#${icon.hex}`);
+		setSettings((previous) => ({
+			...previous,
+			...(brandColors.baseColor && {baseColor: `#${icon.hex}`}),
+			...(brandColors.iconColor && {iconColor: `#${icon.hex}`}),
+		}));
 	}
 
 	async function exportFile() {
@@ -250,7 +215,6 @@ export default function MagnetWorkshop({
 								value={query}
 								onChange={(event) => {
 									setQuery(event.target.value);
-									setPage(0);
 								}}
 							/>
 							{query.length > 0 && (
@@ -260,7 +224,6 @@ export default function MagnetWorkshop({
 									type="button"
 									onClick={() => {
 										setQuery('');
-										setPage(0);
 									}}
 								>
 									<X size={14} />
@@ -268,83 +231,53 @@ export default function MagnetWorkshop({
 							)}
 						</div>
 						<div className="collection-label">
+							<span>{query.length > 0 ? labels.results : labels.allIcons}</span>
 							<span>
-								{query.length > 0 ? labels.results : labels.favorites}
-							</span>
-							<span>
-								{query.length > 0
-									? gettext(labels.iconCount, [
-											filtered.length.toLocaleString(languageCode),
-										])
-									: labels.allIcons}
+								{gettext(labels.iconCount, [
+									filtered.length.toLocaleString(languageCode),
+								])}
 							</span>
 						</div>
-						<div className="icon-grid">
-							{visibleIcons.map((icon) => (
-								<button
-									key={icon.slug}
-									aria-pressed={selected.slug === icon.slug}
-									className={`icon-tile ${selected.slug === icon.slug ? 'selected' : ''}`}
-									title={icon.title}
-									type="button"
-									onClick={() => {
-										selectIcon(icon);
-									}}
-								>
-									<IconImage icon={icon} isLight={isLight} version={version} />
-									<span>{icon.title}</span>
-									{selected.slug === icon.slug && (
-										<span className="selection-check">
-											<Check size={9} strokeWidth={3} />
-										</span>
-									)}
-								</button>
-							))}
-							{visibleIcons.length === 0 && (
-								<div className="empty-state">
-									<Search size={25} />
-									<p>{i18n.search.noIconsFound}</p>
-									<small>{labels.trySearch}</small>
-								</div>
-							)}
-						</div>
-						<div className="pagination">
-							<span>
-								{page + 1} /{' '}
-								{Math.max(1, Math.ceil(filtered.length / pageSize))}
-							</span>
-							<div>
-								<button
-									aria-label={labels.previous}
-									className="icon-button"
-									disabled={page === 0}
-									type="button"
-									onClick={() => {
-										setPage((previous) => previous - 1);
-									}}
-								>
-									<ChevronLeft size={15} />
-								</button>
-								<button
-									aria-label={labels.next}
-									className="icon-button"
-									disabled={(page + 1) * pageSize >= filtered.length}
-									type="button"
-									onClick={() => {
-										setPage((previous) => previous + 1);
-									}}
-								>
-									<ChevronRight size={15} />
-								</button>
+						{filtered.length > 0 ? (
+							<VirtuosoGrid
+								key={deferredQuery}
+								className="icon-grid-scroller"
+								computeItemKey={(_index, icon) => icon.slug}
+								data={filtered}
+								itemClassName="icon-grid-item"
+								itemContent={(_index, icon) => (
+									<button
+										aria-pressed={selected.slug === icon.slug}
+										className={`icon-tile ${selected.slug === icon.slug ? 'selected' : ''}`}
+										title={icon.title}
+										type="button"
+										onClick={() => {
+											selectIcon(icon);
+										}}
+									>
+										<IconImage
+											icon={icon}
+											isLight={isLight}
+											version={version}
+										/>
+										<span>{icon.title}</span>
+										{selected.slug === icon.slug && (
+											<span className="selection-check">
+												<Check size={9} strokeWidth={3} />
+											</span>
+										)}
+									</button>
+								)}
+								listClassName="icon-grid"
+								overscan={200}
+							/>
+						) : (
+							<div className="empty-state">
+								<Search size={25} />
+								<p>{i18n.search.noIconsFound}</p>
+								<small>{labels.trySearch}</small>
 							</div>
-						</div>
-						<div className="source-credit">
-							<Layers2 size={14} />
-							<span>
-								Simple Icons <b>v{version}</b>
-							</span>
-							<ArrowUpRight size={12} />
-						</div>
+						)}
 					</section>
 					<section className="preview-panel panel">
 						<div className="panel-heading">
@@ -544,6 +477,7 @@ export default function MagnetWorkshop({
 								type="button"
 								onClick={() => {
 									setSettings({...defaults, iconColor: `#${selected.hex}`});
+									setBrandColors({baseColor: false, iconColor: true});
 								}}
 							>
 								<RotateCcw size={15} />
@@ -560,6 +494,10 @@ export default function MagnetWorkshop({
 									onClick={() => {
 										setSettings((previous) => ({
 											...previous,
+											baseColor: previous.iconColor,
+											iconColor: previous.baseColor,
+										}));
+										setBrandColors((previous) => ({
 											baseColor: previous.iconColor,
 											iconColor: previous.baseColor,
 										}));
@@ -606,6 +544,7 @@ export default function MagnetWorkshop({
 											baseColor: '#ffffff',
 											iconColor: `#${selected.hex}`,
 										}));
+										setBrandColors({baseColor: false, iconColor: true});
 									}}
 								>
 									<span style={{background: '#ffffff'}} />
@@ -621,6 +560,7 @@ export default function MagnetWorkshop({
 											baseColor: `#${selected.hex}`,
 											iconColor: '#ffffff',
 										}));
+										setBrandColors({baseColor: true, iconColor: false});
 									}}
 								>
 									<span style={{background: `#${selected.hex}`}} />
@@ -636,6 +576,7 @@ export default function MagnetWorkshop({
 											baseColor: '#ffffff',
 											iconColor: '#252525',
 										}));
+										setBrandColors({baseColor: false, iconColor: false});
 									}}
 								>
 									<span style={{background: '#ffffff'}} />
