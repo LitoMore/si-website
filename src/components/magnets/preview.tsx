@@ -21,6 +21,22 @@ export default function Preview({
 	const {labels} = useMagnetI18n();
 	const hostRef = useRef<HTMLDivElement>(null);
 	const [error, setError] = useState(false);
+	const colorsRef = useRef({
+		base: settings.baseColor,
+		logo: settings.iconColor,
+	});
+	const materialsRef = useRef<{
+		base: ReturnType<typeof createPreviewMaterials>;
+		logo: ReturnType<typeof createPreviewMaterials>;
+	}>(undefined);
+	useEffect(() => {
+		colorsRef.current = {base: settings.baseColor, logo: settings.iconColor};
+		for (const part of ['base', 'logo'] as const) {
+			for (const material of materialsRef.current?.[part] ?? []) {
+				material.color.set(colorsRef.current[part]);
+			}
+		}
+	}, [settings.baseColor, settings.iconColor]);
 	useEffect(() => {
 		if (!hostRef.current) {
 			return;
@@ -57,8 +73,15 @@ export default function Preview({
 		scene.add(hemisphere, key, rim);
 		const baseGeometry = createPreviewGeometry(model.base);
 		const logoGeometry = createPreviewGeometry(model.logo);
-		const baseMaterials = createPreviewMaterials(settings.baseColor, 'base');
-		const logoMaterials = createPreviewMaterials(settings.iconColor, 'logo');
+		const baseMaterials = createPreviewMaterials(
+			colorsRef.current.base,
+			'base',
+		);
+		const logoMaterials = createPreviewMaterials(
+			colorsRef.current.logo,
+			'logo',
+		);
+		materialsRef.current = {base: baseMaterials, logo: logoMaterials};
 		scene.add(
 			new THREE.Mesh(baseGeometry, [...baseMaterials]),
 			new THREE.Mesh(logoGeometry, [...logoMaterials]),
@@ -104,6 +127,7 @@ export default function Preview({
 			renderer.render(scene, camera);
 		});
 		return () => {
+			materialsRef.current = undefined;
 			resize.disconnect();
 			renderer.setAnimationLoop(null);
 			controls.dispose();
@@ -117,15 +141,7 @@ export default function Preview({
 			renderer.forceContextLoss();
 			renderer.domElement.remove();
 		};
-	}, [
-		model,
-		settings.baseColor,
-		settings.iconColor,
-		settings.baseHeight,
-		settings.reliefHeight,
-		isFront,
-		reset,
-	]);
+	}, [model, settings.baseHeight, settings.reliefHeight, isFront, reset]);
 	return (
 		<div
 			ref={hostRef}

@@ -29,6 +29,7 @@ import {
 	polygonsToPath,
 } from './geometry.js';
 import {type MagnetLabels, useMagnetI18n} from './i18n.js';
+import {fuseForExport} from './model-client.js';
 import Preview from './preview.js';
 import {ShapeControls, Slider} from './shape-controls.js';
 import {useIconPath} from './use-icon-path.js';
@@ -70,7 +71,7 @@ function localizedModelError(error: string, labels: MagnetLabels) {
 function initialIcon(icons: Icon[], slug?: string) {
 	return (
 		icons.find((icon) => icon.slug === slug) ??
-		icons.find((icon) => icon.slug === 'fanfou') ??
+		icons.find((icon) => icon.slug === 'simpleicons') ??
 		icons[0]!
 	);
 }
@@ -162,7 +163,7 @@ export default function MagnetWorkshop({
 			const filename = `${selected.slug}-${settings.style}-${settings.size}mm.${format}`;
 			switch (format) {
 				case 'stl': {
-					download(stl(model.fused), filename, 'model/stl');
+					download(stl(await fuseForExport(model)), filename, 'model/stl');
 					break;
 				}
 

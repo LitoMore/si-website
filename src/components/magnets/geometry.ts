@@ -2,6 +2,7 @@ import createManifold, {
 	type CrossSection,
 	type Manifold,
 	type Mesh,
+	type MeshOptions,
 	type Vec2,
 } from 'manifold-3d';
 import wasmUrl from 'manifold-3d/manifold.wasm?url';
@@ -23,6 +24,28 @@ export type MagnetSettings = {
 	iconColor: string;
 };
 
+export type MagnetGeometrySettings = Omit<
+	MagnetSettings,
+	'baseColor' | 'iconColor'
+>;
+
+export function geometrySettings(
+	settings: MagnetSettings,
+): MagnetGeometrySettings {
+	return {
+		style: settings.style,
+		size: settings.size,
+		border: settings.border,
+		radius: settings.radius,
+		iconScale: settings.iconScale,
+		circleIconScale: settings.circleIconScale,
+		offsetX: settings.offsetX,
+		offsetY: settings.offsetY,
+		baseHeight: settings.baseHeight,
+		reliefHeight: settings.reliefHeight,
+	};
+}
+
 export const defaults: MagnetSettings = {
 	style: 'outline',
 	size: 50,
@@ -38,11 +61,13 @@ export const defaults: MagnetSettings = {
 	iconColor: '#00ccff',
 };
 
+// Plain data survives worker messages; Mesh's count getters do not.
+export type MagnetMesh = MeshOptions & {numVert: number; numTri: number};
+
 export type MagnetModel = {
-	base: Mesh;
-	logo: Mesh;
-	logoParts: Mesh[];
-	fused: Mesh;
+	base: MagnetMesh;
+	logo: MagnetMesh;
+	logoParts: MagnetMesh[];
 	basePolygons: Vec2[][];
 	logoPolygons: Vec2[][];
 	width: number;
@@ -50,6 +75,10 @@ export type MagnetModel = {
 	components: number;
 	volume: number;
 };
+
+function meshData(mesh: Mesh): MagnetMesh {
+	return {...mesh, numVert: mesh.numVert, numTri: mesh.numTri};
+}
 
 let kernel: ReturnType<typeof createManifold> | undefined;
 export async function getKernel() {
@@ -90,9 +119,16 @@ function pathPolygons(path: string) {
 	return polygons;
 }
 
+export function prepareIcon(path: string) {
+	return {
+		polygons: pathPolygons(path),
+		regions: split(path, 'nonzero').map((area) => pathPolygons(area)),
+	};
+}
+
 export async function createModel(
-	path: string,
-	settings: MagnetSettings,
+	icon: ReturnType<typeof prepareIcon>,
+	settings: MagnetGeometrySettings,
 ): Promise<MagnetModel> {
 	const kernelModule = await getKernel();
 	const objects: Array<CrossSection | Manifold> = [];
@@ -102,7 +138,7 @@ export async function createModel(
 	}
 
 	try {
-		const original = keep(new kernelModule.CrossSection(pathPolygons(path)));
+		const original = keep(new kernelModule.CrossSection(icon.polygons));
 		if (original.isEmpty()) {
 			throw new Error('The icon has no closed contours to build.');
 		}
@@ -171,8 +207,7 @@ export async function createModel(
 		const baseSolid = keep(base.extrude(settings.baseHeight));
 		const relief = keep(logo.extrude(settings.reliefHeight));
 		const raised = keep(relief.translate([0, 0, settings.baseHeight]));
-		const fused = keep(baseSolid.add(raised));
-		const logoParts: Mesh[] = [];
+		const logoParts: MagnetMesh[] = [];
 		function addLogoRegion(region: CrossSection) {
 			if (region.isEmpty()) {
 				return;
@@ -183,11 +218,11 @@ export async function createModel(
 			const section = transformLogo(region);
 			const solid = keep(section.extrude(settings.reliefHeight));
 			const part = keep(solid.translate([0, 0, settings.baseHeight]));
-			logoParts.push(part.getMesh());
+			logoParts.push(meshData(part.getMesh()));
 		}
 
-		const candidates = split(path, 'nonzero').map((area) =>
-			keep(new kernelModule.CrossSection(pathPolygons(area))),
+		const candidates = icon.regions.map((polygons) =>
+			keep(new kernelModule.CrossSection(polygons)),
 		);
 		let remaining = original;
 		// Assign nested small areas first so a surrounding fill cannot swallow
@@ -217,21 +252,37 @@ export async function createModel(
 
 		const box = base.bounds();
 		return {
-			base: baseSolid.getMesh(),
-			logo: raised.getMesh(),
+			base: meshData(baseSolid.getMesh()),
+			logo: meshData(raised.getMesh()),
 			logoParts,
-			fused: fused.getMesh(),
 			basePolygons: base.toPolygons(),
 			logoPolygons: logo.toPolygons(),
 			width: box.max[0] - box.min[0],
 			height: box.max[1] - box.min[1],
 			components,
-			volume: fused.volume(),
+			// The logo begins at the base's top face; their volumes do not overlap.
+			volume: baseSolid.volume() + raised.volume(),
 		};
 	} finally {
 		for (const object of objects.toReversed()) {
 			object.delete();
 		}
+	}
+}
+
+export async function fuseModel(base: MagnetMesh, logo: MagnetMesh) {
+	const kernelModule = await getKernel();
+	const objects: Manifold[] = [];
+	try {
+		const baseSolid = new kernelModule.Manifold(new kernelModule.Mesh(base));
+		objects.push(baseSolid);
+		const logoSolid = new kernelModule.Manifold(new kernelModule.Mesh(logo));
+		objects.push(logoSolid);
+		const fused = baseSolid.add(logoSolid);
+		objects.push(fused);
+		return meshData(fused.getMesh());
+	} finally {
+		for (const object of objects.toReversed()) object.delete();
 	}
 }
 

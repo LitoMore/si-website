@@ -1,8 +1,8 @@
-import type {Mesh} from 'manifold-3d';
 import {BufferAttribute, BufferGeometry} from 'three';
 import {toCreasedNormals} from 'three/addons/utils/BufferGeometryUtils.js';
+import type {MagnetMesh} from './geometry.js';
 
-export function createPreviewGeometry(mesh: Mesh) {
+export function createPreviewGeometry(mesh: MagnetMesh) {
 	const indexed = new BufferGeometry();
 	const positions = new Float32Array(mesh.numVert * 3);
 	for (let index = 0; index < mesh.numVert; index++) {

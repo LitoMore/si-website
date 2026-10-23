@@ -1,9 +1,11 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {
+	type MagnetGeometrySettings,
 	type MagnetModel,
 	type MagnetSettings,
-	createModel,
+	geometrySettings,
 } from './geometry.js';
+import {buildModel} from './model-client.js';
 
 export function useMagnetModel(
 	path: string | undefined,
@@ -14,14 +16,18 @@ export function useMagnetModel(
 	const [failure, setFailure] = useState<{key: string; message: string}>();
 	const [busy, setBusy] = useState(true);
 	const [builtKey, setBuiltKey] = useState('');
-	const key = JSON.stringify([identity, settings]);
+	const previousIdentity = useRef<string>(undefined);
+	const shapeKey = JSON.stringify(geometrySettings(settings));
+	const key = JSON.stringify([identity, path, shapeKey]);
 	useEffect(() => {
 		if (!path) return;
 		let isCancelled = false;
+		const delay = previousIdentity.current === identity ? 100 : 0;
+		previousIdentity.current = identity;
 		const timer = setTimeout(() => {
 			setBusy(true);
 			setFailure(undefined);
-			void createModel(path, settings)
+			void buildModel(key, path, JSON.parse(shapeKey) as MagnetGeometrySettings)
 				.then((result) => {
 					if (isCancelled) return;
 					setLastModel(result);
@@ -40,12 +46,12 @@ export function useMagnetModel(
 				.finally(() => {
 					if (!isCancelled) setBusy(false);
 				});
-		}, 100);
+		}, delay);
 		return () => {
 			isCancelled = true;
 			clearTimeout(timer);
 		};
-	}, [path, settings, key]);
+	}, [path, identity, shapeKey, key]);
 	return {
 		model: key === builtKey ? lastModel : undefined,
 		error: failure?.key === key ? failure.message : '',

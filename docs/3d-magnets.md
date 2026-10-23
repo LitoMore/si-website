@@ -3,7 +3,8 @@
 The fridge magnet workshop lives at `/3d`. Open it from the application menu,
 next to Icon Previewer. The shared BackHome button returns to the gallery through the site
 router, including deployments with a base path. `/3d?slug=figma` selects an icon
-on initial load; an unknown slug falls back to Fanfou.
+on initial load; the default icon and the fallback for an unknown slug are
+Simple Icons (`simpleicons`).
 
 The workshop uses the site’s shared Light, Dark and Auto theme preference and
 all 25 site languages. Its CSS is scoped to `.magnet-workshop`, and its layout owns a scroll area
@@ -21,6 +22,15 @@ headings, controls and supporting text. Helper text and package credits stay
 at 12 px, with stronger secondary text colors in both themes.
 Three.js, Manifold WASM and the workshop stylesheet load with this route. The
 3MF exporter is loaded only when exporting.
+
+SVG contours are prepared on the main thread, then Manifold builds the model
+in a module worker. Preview and 3MF keep the base and relief separate; the
+expensive solid union runs in the worker only when exporting STL. Weight uses
+the sum of the two non-overlapping solids. Curve sampling and print precision
+are unchanged. The eight most recently requested models share cached builds,
+keyed by icon version, path and geometry settings. Failed builds are evicted.
+Color changes update preview materials without rebuilding geometry or the
+WebGL renderer. Selecting another icon skips the slider's 100 ms debounce.
 
 ## Shapes and placement
 

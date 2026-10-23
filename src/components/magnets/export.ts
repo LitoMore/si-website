@@ -1,8 +1,12 @@
-import type {Mesh} from 'manifold-3d';
 import * as THREE from 'three';
-import {type MagnetModel, type MagnetSettings, modelSvg} from './geometry.js';
+import {
+	type MagnetMesh,
+	type MagnetModel,
+	type MagnetSettings,
+	modelSvg,
+} from './geometry.js';
 
-export function stl(mesh: Mesh) {
+export function stl(mesh: MagnetMesh) {
 	const bytes = new Uint8Array(84 + mesh.numTri * 50);
 	const view = new DataView(bytes.buffer);
 	bytes.set(new TextEncoder().encode('Simple Magnets - millimeters'));
@@ -40,7 +44,7 @@ export function stl(mesh: Mesh) {
 	return bytes;
 }
 
-function printablePart(mesh: Mesh, color: string, name: string) {
+function printablePart(mesh: MagnetMesh, color: string, name: string) {
 	const geometry = new THREE.BufferGeometry();
 	const positions = new Float32Array(mesh.numVert * 3);
 	for (let index = 0; index < mesh.numVert; index++) {
