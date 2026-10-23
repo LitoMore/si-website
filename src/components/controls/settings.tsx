@@ -19,9 +19,7 @@ function Settings({extraSettings}: {readonly extraSettings?: ReactNode}) {
 	const [colorMode] = useColorMode();
 	const {iconFg} = useColorScheme();
 
-	const isOpenGraph = pathname === '/og';
-	const isPreview = pathname === '/preview';
-	const isMain = !isOpenGraph && !isPreview;
+	const isMain = pathname === '/';
 
 	const isSettingsChanged =
 		brightnessMode !== BrightnessMode.SimpleIcons ||
@@ -47,7 +45,9 @@ function Settings({extraSettings}: {readonly extraSettings?: ReactNode}) {
 				type="button"
 			>
 				<IconSettings aria-hidden style={{color: iconFg}} />
-				{isSettingsChanged ? <span className="ui-settings-dot" /> : null}
+				{isMain && isSettingsChanged ? (
+					<span className="ui-settings-dot" />
+				) : null}
 			</button>
 		</Popover>
 	);

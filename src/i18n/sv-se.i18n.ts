@@ -25,6 +25,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: 'Förhandsvisningsgenerator',
+		magnetGenerator: '3D-magneter',
 		openGraphGenerator: 'OpenGraph-generator',
 	},
 	languageName: 'Svenska',

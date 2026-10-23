@@ -26,6 +26,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: 'Önizleme oluşturucu',
+		magnetGenerator: '3D Mıknatıslar',
 		openGraphGenerator: 'OpenGraph Oluşturucu',
 	},
 	languageName: 'Türkçe',

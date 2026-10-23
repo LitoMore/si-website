@@ -26,6 +26,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: 'プレビュー ジェネレーター',
+		magnetGenerator: '3D マグネット',
 		openGraphGenerator: 'OpenGraph 画像ジェネレーター',
 	},
 	languageName: '日本語',

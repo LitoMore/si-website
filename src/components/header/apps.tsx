@@ -2,6 +2,7 @@ import {
 	IconCaretDownFilled,
 	IconEyeglass,
 	IconGrid4x4,
+	IconMagnet,
 } from '@tabler/icons-react';
 import {useNavigate} from 'react-router';
 import {Dropdown} from '#components/ui/dropdown.js';
@@ -22,6 +23,14 @@ export default function Apps() {
 					label: <span>{i18n.header.iconPreviewer}</span>,
 					onClick() {
 						void navigate('preview');
+					},
+				},
+				{
+					key: PageLayout.Magnets,
+					icon: <IconMagnet />,
+					label: <span>{i18n.header.magnetGenerator}</span>,
+					onClick() {
+						void navigate('/3d');
 					},
 				},
 				{

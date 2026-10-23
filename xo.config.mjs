@@ -71,6 +71,16 @@ const xoConfig = [
 		},
 	},
 	{
+		files: ['src/components/magnets/**/*.{ts,tsx}'],
+		languageOptions: {
+			parserOptions: {project: './tsconfig.json', projectService: false},
+		},
+	},
+	{
+		files: ['src/components/magnets/magnet-workshop.tsx'],
+		rules: {complexity: ['error', 40]},
+	},
+	{
 		files: ['**/*.i18n.ts'],
 		plugins: {perfectionist},
 		rules: {

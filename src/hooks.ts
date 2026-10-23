@@ -7,7 +7,13 @@ import {useCardSize, useColorTheme, useIcons} from '#atom';
 import {message} from '#components/ui/feedback.js';
 import {mobileWidth} from '#constants';
 import {useI18n} from '#i18n';
-import {CardSize, ColorTheme, type ImageElement, type ImageState} from '#types';
+import {
+	CardSize,
+	ColorTheme,
+	type Icon,
+	type ImageElement,
+	type ImageState,
+} from '#types';
 import {
 	cardSizeToPixels,
 	cloneImagetoSize,
@@ -56,14 +62,15 @@ export const useSizes = () => {
 	};
 };
 
-export const useSearcher = () => {
+export const useSearcher = (data?: Icon[]) => {
 	const [icons] = useIcons();
+	const source = data ?? icons.data;
 	return useMemo(
 		() =>
-			new Searcher(icons.data, {
+			new Searcher(source, {
 				keySelector: searcherKeySelector,
 			}),
-		[icons.data],
+		[source],
 	);
 };
 

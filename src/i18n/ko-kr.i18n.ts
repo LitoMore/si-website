@@ -26,6 +26,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: '미리보기 생성기',
+		magnetGenerator: '3D 자석',
 		openGraphGenerator: 'OpenGraph 생성기',
 	},
 	languageName: '한국어',

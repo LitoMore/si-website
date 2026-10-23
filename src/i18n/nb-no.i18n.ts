@@ -24,6 +24,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: 'Forhåndsvisningsgenerator',
+		magnetGenerator: '3D-magneter',
 		openGraphGenerator: 'OpenGraph-generator',
 	},
 	languageName: 'Norsk bokmål',

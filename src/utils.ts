@@ -22,6 +22,7 @@ export const getLatestVersion = async (packageName: string) => {
 			cache: 'no-cache',
 		}),
 	);
+	if (!response.ok) throw new Error('Could not load the Simple Icons version.');
 	const json = (await response.json()) as JsDelivrNpmResponse;
 	return json.tags['latest'] ?? 'latest';
 };
@@ -38,6 +39,7 @@ export const getIconsData = async (
 			isNewDataFolder ? 'data' : '_data'
 		}/simple-icons.json`,
 	);
+	if (!response.ok) throw new Error('Could not load the icon list.');
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const json = await response.json();
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -57,14 +59,44 @@ export const getIconsData = async (
 	}) as Icon[];
 };
 
-export const getSvg = async (simpleIconsVersion: string, slug: string) => {
-	const iconUrl = `https://cdn.jsdelivr.net/npm/simple-icons@${simpleIconsVersion}/icons/${slug}.svg`;
-	const response = await fetch(iconUrl);
-	const svg = await response.text();
-	return svg;
+const svgRequests = new Map<string, Promise<string>>();
+
+export const getSvgPath = (svg: string) => {
+	const document = new DOMParser().parseFromString(svg, 'image/svg+xml');
+	if (
+		document.documentElement.localName !== 'svg' ||
+		document.querySelector('parsererror')
+	)
+		return undefined;
+	return (
+		[...document.querySelectorAll('path')]
+			.map((element) => element.getAttribute('d'))
+			.filter(Boolean)
+			.join(' ') || undefined
+	);
 };
 
-export const getSvgPath = (svg: string) => svg.split('"', 8)[7];
+async function downloadSvg(url: string) {
+	const response = await fetch(url);
+	if (!response.ok) throw new Error('Could not load the icon SVG.');
+	const svg = await response.text();
+	if (!getSvgPath(svg)) throw new Error('The icon SVG has no valid path.');
+	return svg;
+}
+
+export const getSvg = async (simpleIconsVersion: string, slug: string) => {
+	const iconUrl = getJsdelivrCdnUrl(simpleIconsVersion, slug);
+	let request = svgRequests.get(iconUrl);
+	if (!request) {
+		request = downloadSvg(iconUrl).catch((error: unknown) => {
+			svgRequests.delete(iconUrl);
+			throw error;
+		});
+		svgRequests.set(iconUrl, request);
+	}
+
+	return request;
+};
 
 export const normalizeColor = (style?: string) => {
 	if (style && /^[\da-f]{3,4}|[\da-f]{6}$/i.test(style)) {

@@ -24,6 +24,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: 'Generator pregleda',
+		magnetGenerator: '3D magneti',
 		openGraphGenerator: 'OpenGraph generator',
 	},
 	languageName: 'Srpski (latinica)',

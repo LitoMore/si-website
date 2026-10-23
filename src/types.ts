@@ -6,6 +6,7 @@ export {type Internationalization, LanguageCode} from '#i18n';
 export enum PageLayout {
 	Default = 'default',
 	Previewer = 'previewer',
+	Magnets = '3d',
 	OpenGraph = 'og',
 }
 

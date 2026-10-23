@@ -24,6 +24,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: '圖示預覽器',
+		magnetGenerator: '3D 冰箱貼',
 		openGraphGenerator: '分享圖產生器',
 	},
 	languageName: '繁體中文',

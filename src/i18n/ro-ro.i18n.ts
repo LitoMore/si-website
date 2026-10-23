@@ -25,6 +25,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: 'Generator de previzualizare',
+		magnetGenerator: 'Magneți 3D',
 		openGraphGenerator: 'Generator OpenGraph',
 	},
 	languageName: 'Română',

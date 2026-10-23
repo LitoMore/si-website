@@ -1,15 +1,28 @@
+import {type CSSProperties} from 'react';
 import {IconLoader2} from '@tabler/icons-react';
-import {useSizes} from '#hooks';
+import {useI18n, useSizes} from '#hooks';
 
-export default function Loading() {
+export default function Loading({
+	height,
+	label,
+}: {
+	readonly height?: CSSProperties['height'];
+	readonly label?: string;
+}) {
 	const {galleryHeight} = useSizes();
-
+	const {i18n} = useI18n();
 	return (
 		<div
+			aria-label={label ?? i18n.openGraph.loading}
 			className="flex flex-col items-center justify-center gap-5"
-			style={{height: galleryHeight}}
+			role="status"
+			style={{height: height ?? galleryHeight}}
 		>
-			<IconLoader2 className="animate-spin" color="#0cf" />
+			<IconLoader2
+				aria-hidden
+				className="animate-spin motion-reduce:animate-none"
+				color="#0cf"
+			/>
 		</div>
 	);
 }

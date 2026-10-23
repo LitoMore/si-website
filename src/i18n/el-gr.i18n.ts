@@ -26,6 +26,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: 'Γεννήτρια προεπισκόπησης',
+		magnetGenerator: 'Μαγνήτες 3D',
 		openGraphGenerator: 'Δημιουργία εικόνων OpenGraph',
 	},
 	languageName: 'Ελληνικά',

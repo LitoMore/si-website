@@ -24,6 +24,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: 'منشئ المعاينة',
+		magnetGenerator: 'مغناطيسات ثلاثية الأبعاد',
 		openGraphGenerator: 'منشئ صور OpenGraph',
 	},
 	languageName: 'العربية',

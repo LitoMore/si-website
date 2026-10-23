@@ -11,7 +11,7 @@ import {useIcons, useSelectedIcon} from '#atom';
 import {message} from '#components/ui/feedback.js';
 import {useI18n, useSearcher} from '#hooks';
 import {type Icon} from '#types';
-import {getSvg} from '#utils';
+import {getSvg, getSvgPath} from '#utils';
 import AutoComplete from './autocomplete.js';
 import PreviewCanvas from './preview-canvas.js';
 import {
@@ -65,8 +65,7 @@ function PreviewEditor({initialIcon}: {readonly initialIcon?: Icon}) {
 		void getSvg(icons.version, initialIcon.slug)
 			.then((svg) => {
 				if (!isActive || request !== requestRef.current) return;
-				const parsed = new DOMParser().parseFromString(svg, 'image/svg+xml');
-				const nextPath = parsed.querySelector('path')?.getAttribute('d');
+				const nextPath = getSvgPath(svg);
 				if (!nextPath) throw new Error('Missing SVG path');
 				setPath(nextPath);
 				++requestRef.current;
@@ -93,8 +92,7 @@ function PreviewEditor({initialIcon}: {readonly initialIcon?: Icon}) {
 		setLoading(true);
 		try {
 			const svg = await getSvg(icons.version, icon.slug);
-			const parsed = new DOMParser().parseFromString(svg, 'image/svg+xml');
-			const nextPath = parsed.querySelector('path')?.getAttribute('d');
+			const nextPath = getSvgPath(svg);
 			if (!nextPath) throw new Error('Missing SVG path');
 			if (request === requestRef.current) setPath(nextPath);
 		} catch {

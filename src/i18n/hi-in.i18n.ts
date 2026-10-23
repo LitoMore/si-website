@@ -25,6 +25,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: 'पूर्वावलोकन जेनरेटर',
+		magnetGenerator: '3D चुंबक',
 		openGraphGenerator: 'OpenGraph जनरेटर',
 	},
 	languageName: 'हिन्दी',

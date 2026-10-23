@@ -12,7 +12,12 @@ import {
 	type PageLayout,
 } from '#types';
 
-const icons = atom({data: [] as Icon[], version: ''});
+const icons = atom<{data: Icon[]; version: string; error?: string}>({
+	data: [],
+	version: '',
+});
+const iconsLoadRequest = atom(0);
+export const useIconsLoadRequest = () => useAtom(iconsLoadRequest);
 export const useIcons = () => useAtom(icons);
 
 const searchText = atom('');

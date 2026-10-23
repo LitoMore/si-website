@@ -25,6 +25,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: 'Генератор предварительного просмотра',
+		magnetGenerator: '3D-магниты',
 		openGraphGenerator: 'Генератор OpenGraph',
 	},
 	languageName: 'Русский',

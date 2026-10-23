@@ -46,6 +46,7 @@ export type Internationalization = {
 	};
 	header: {
 		iconPreviewer: string;
+		magnetGenerator: string;
 		openGraphGenerator: string;
 	};
 	languageName: string;

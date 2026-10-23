@@ -26,6 +26,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: 'Gerador de visualização',
+		magnetGenerator: 'Ímanes 3D',
 		openGraphGenerator: 'Gerador de OpenGraph',
 	},
 	languageName: 'Português',

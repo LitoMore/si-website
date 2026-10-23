@@ -26,6 +26,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: 'Esikatselugeneraattori',
+		magnetGenerator: '3D-magneetit',
 		openGraphGenerator: 'OpenGraph-generaattori',
 	},
 	languageName: 'Suomi',

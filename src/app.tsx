@@ -1,9 +1,10 @@
 import {lazy, useEffect} from 'react';
-import {Route, Routes, useSearchParams} from 'react-router';
+import {Route, Routes, useMatch, useSearchParams} from 'react-router';
 import {
 	useBrightnessMode,
 	useFilteredIcons,
 	useIcons,
+	useIconsLoadRequest,
 	useSelectedIcon,
 } from '#atom';
 import {MessageProvider} from '#components/ui/feedback.js';
@@ -17,15 +18,18 @@ const OpenGraphLayout = lazy(
 	async () => import('./layouts/opengraph-layout.js'),
 );
 const PreviewLayout = lazy(async () => import('./layouts/preview-layout.js'));
+const MagnetsLayout = lazy(async () => import('./layouts/magnets-layout.js'));
 const FloatButtons = lazy(
 	async () => import('#components/common/floatbuttons.js'),
 );
 
 function App() {
+	const isMagnetPage = Boolean(useMatch('/3d'));
 	const [searchParameters, setSearchParameters] = useSearchParams();
 	const {colorScheme} = useColorScheme();
 	const [brightnessMode] = useBrightnessMode();
 	const [icons, setIcons] = useIcons();
+	const [iconsLoadRequest] = useIconsLoadRequest();
 	const [, setFilteredIcons] = useFilteredIcons();
 	const [selectedIcon, setSelectedIcon] = useSelectedIcon();
 	const {isMobileSize} = useSizes();
@@ -49,18 +53,35 @@ function App() {
 	}, []);
 
 	useEffect(() => {
+		let isActive = true;
+		setIcons((previous) => ({...previous, error: undefined}));
 		const loadIconsData = async (brightnessMode_: BrightnessMode) => {
-			const latestVersion = await getLatestVersion('simple-icons');
-			const allIcons = await getIconsData(latestVersion, brightnessMode_);
-			setIcons({data: allIcons, version: latestVersion});
-			setFilteredIcons(allIcons);
+			try {
+				const latestVersion = await getLatestVersion('simple-icons');
+				const allIcons = await getIconsData(latestVersion, brightnessMode_);
+				if (!isActive) return;
+				setIcons({data: allIcons, version: latestVersion});
+				setFilteredIcons(allIcons);
+			} catch {
+				if (isActive)
+					setIcons((previous) => ({
+						...previous,
+						error: 'Could not load the icon list. Please try again.',
+					}));
+			}
 		};
 
 		void loadIconsData(brightnessMode);
-	}, [brightnessMode, setIcons, setFilteredIcons]);
+		return () => {
+			isActive = false;
+		};
+	}, [brightnessMode, setIcons, setFilteredIcons, iconsLoadRequest]);
 
 	useEffect(() => {
-		if (!(icons.data.length > 0 && searchParameters.has('slug'))) {
+		if (
+			isMagnetPage ||
+			!(icons.data.length > 0 && searchParameters.has('slug'))
+		) {
 			return;
 		}
 
@@ -68,16 +89,22 @@ function App() {
 		if (!slug) return;
 		const icon = icons.data.find((icon) => icon.slug === slug);
 		if (icon) setSelectedIcon(icon);
-	}, [icons.data, searchParameters, setSelectedIcon]);
+	}, [icons.data, searchParameters, setSelectedIcon, isMagnetPage]);
 
 	useEffect(() => {
-		if (icons.data.length === 0) return;
+		if (isMagnetPage || icons.data.length === 0) return;
 		if (selectedIcon) {
 			setSearchParameters({slug: selectedIcon.slug});
 		} else if (searchParameters.has('slug')) {
 			setSearchParameters();
 		}
-	}, [icons.data, selectedIcon, searchParameters, setSearchParameters]);
+	}, [
+		icons.data,
+		selectedIcon,
+		searchParameters,
+		setSearchParameters,
+		isMagnetPage,
+	]);
 
 	return (
 		<UiProvider
@@ -89,8 +116,9 @@ function App() {
 					<Route index element={<DefaultLayout />} />
 					<Route element={<OpenGraphLayout />} path="og" />
 					<Route element={<PreviewLayout />} path="preview" />
+					<Route element={<MagnetsLayout />} path="3d" />
 				</Routes>
-				{isMobileSize ? null : <FloatButtons />}
+				{isMobileSize || isMagnetPage ? null : <FloatButtons />}
 			</MessageProvider>
 		</UiProvider>
 	);

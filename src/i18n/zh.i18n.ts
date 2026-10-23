@@ -23,6 +23,7 @@ const translation: Internationalization = {
 	},
 	header: {
 		iconPreviewer: '图标预览器',
+		magnetGenerator: '3D 冰箱贴',
 		openGraphGenerator: '分享图生成器',
 	},
 	languageName: '简体中文',
