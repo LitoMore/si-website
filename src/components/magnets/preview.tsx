@@ -7,6 +7,23 @@ import {createPreviewGeometry} from './preview-geometry.js';
 import {createPreviewLighting} from './preview-lighting.js';
 import {createPreviewMaterials} from './preview-materials.js';
 
+type PreviewView = {
+	position: THREE.Vector3;
+	target: THREE.Vector3;
+	zoom: number;
+};
+
+type PreviewResetAnimation = {
+	startedAt: number;
+	duration: number;
+	fromTarget: THREE.Vector3;
+	toTarget: THREE.Vector3;
+	fromOrbit: THREE.Spherical;
+	toOrbit: THREE.Spherical;
+	fromZoom: number;
+	toZoom: number;
+};
+
 export default function Preview({
 	model,
 	settings,
@@ -20,6 +37,7 @@ export default function Preview({
 }) {
 	const {labels} = useMagnetI18n();
 	const hostRef = useRef<HTMLDivElement>(null);
+	const resetViewRef = useRef<() => void>(undefined);
 	const [error, setError] = useState(false);
 	const colorsRef = useRef({
 		base: settings.baseColor,
@@ -69,6 +87,86 @@ export default function Preview({
 		controls.minDistance = size * 1.2;
 		controls.maxDistance = size * 6;
 		controls.maxPolarAngle = Math.PI * 0.49;
+		const homeDirection = camera.position
+			.clone()
+			.sub(controls.target)
+			.normalize();
+		// Interpolate in OrbitControls' coordinate system, with camera.up as north.
+		const orbitRotation = new THREE.Quaternion().setFromUnitVectors(
+			camera.up,
+			new THREE.Vector3(0, 1, 0),
+		);
+		const inverseOrbitRotation = orbitRotation.clone().invert();
+		let homeView: PreviewView | undefined;
+		let resetAnimation: PreviewResetAnimation | undefined;
+		const cancelViewReset = () => {
+			resetAnimation = undefined;
+			controls.enabled = true;
+		};
+
+		renderer.domElement.addEventListener('pointerdown', cancelViewReset, {
+			capture: true,
+		});
+		renderer.domElement.addEventListener('wheel', cancelViewReset, {
+			capture: true,
+		});
+		resetViewRef.current = () => {
+			if (!homeView) return;
+			const currentView = {
+				position: camera.position.clone(),
+				target: controls.target.clone(),
+				zoom: camera.zoom,
+			};
+			// Flush pending orbit damping without changing the visible starting pose.
+			controls.enableDamping = false;
+			controls.update();
+			controls.enableDamping = true;
+			camera.position.copy(currentView.position);
+			controls.target.copy(currentView.target);
+			camera.zoom = currentView.zoom;
+			camera.updateProjectionMatrix();
+			camera.lookAt(controls.target);
+			if (globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+				cancelViewReset();
+				camera.position.copy(homeView.position);
+				controls.target.copy(homeView.target);
+				camera.zoom = homeView.zoom;
+				camera.updateProjectionMatrix();
+				camera.lookAt(controls.target);
+				return;
+			}
+
+			const fromOrbit = new THREE.Spherical().setFromVector3(
+				currentView.position
+					.clone()
+					.sub(currentView.target)
+					.applyQuaternion(orbitRotation),
+			);
+			const toOrbit = new THREE.Spherical().setFromVector3(
+				homeView.position
+					.clone()
+					.sub(homeView.target)
+					.applyQuaternion(orbitRotation),
+			);
+			const thetaDelta =
+				THREE.MathUtils.euclideanModulo(
+					toOrbit.theta - fromOrbit.theta + Math.PI,
+					Math.PI * 2,
+				) - Math.PI;
+			toOrbit.theta = fromOrbit.theta + thetaDelta;
+			resetAnimation = {
+				startedAt: performance.now(),
+				duration: 850,
+				fromTarget: currentView.target,
+				toTarget: homeView.target.clone(),
+				fromOrbit,
+				toOrbit,
+				fromZoom: currentView.zoom,
+				toZoom: homeView.zoom,
+			};
+			controls.enabled = false;
+		};
+
 		const {hemisphere, key, rim} = createPreviewLighting();
 		scene.add(hemisphere, key, rim);
 		const baseGeometry = createPreviewGeometry(model.base);
@@ -96,6 +194,7 @@ export default function Preview({
 				return;
 			}
 
+			cancelViewReset();
 			renderer.setSize(width, height);
 			camera.aspect = width / height;
 			camera.updateProjectionMatrix();
@@ -120,16 +219,87 @@ export default function Preview({
 				.addScaledVector(direction, distance);
 			controls.maxDistance = Math.max(size * 6, distance * 2);
 			controls.update();
+			homeView = {
+				position: controls.target
+					.clone()
+					.addScaledVector(homeDirection, distance),
+				target: controls.target.clone(),
+				zoom: camera.zoom,
+			};
 		});
 		resize.observe(element);
-		renderer.setAnimationLoop(() => {
-			controls.update();
+		const resetOffset = new THREE.Vector3();
+		const resetOrbit = new THREE.Spherical();
+		renderer.setAnimationLoop((time) => {
+			if (resetAnimation) {
+				// Match badge3d's damping response and smoothly settle within 850 ms.
+				const elapsedProgress = THREE.MathUtils.clamp(
+					(time - resetAnimation.startedAt) / resetAnimation.duration,
+					0,
+					1,
+				);
+				const elapsedSeconds =
+					(elapsedProgress * resetAnimation.duration) / 1000;
+				const dampingRemaining =
+					(1 - THREE.MathUtils.clamp(controls.dampingFactor, 0.01, 0.99)) **
+					(elapsedSeconds * 60 * 1.6);
+				const settlingWindow = THREE.MathUtils.smootherstep(
+					elapsedProgress,
+					0,
+					1,
+				);
+				const progress = 1 - dampingRemaining * (1 - settlingWindow);
+				resetOrbit.radius = Math.exp(
+					THREE.MathUtils.lerp(
+						Math.log(resetAnimation.fromOrbit.radius),
+						Math.log(resetAnimation.toOrbit.radius),
+						progress,
+					),
+				);
+				resetOrbit.phi = THREE.MathUtils.lerp(
+					resetAnimation.fromOrbit.phi,
+					resetAnimation.toOrbit.phi,
+					progress,
+				);
+				resetOrbit.theta = THREE.MathUtils.lerp(
+					resetAnimation.fromOrbit.theta,
+					resetAnimation.toOrbit.theta,
+					progress,
+				);
+				controls.target.lerpVectors(
+					resetAnimation.fromTarget,
+					resetAnimation.toTarget,
+					progress,
+				);
+				camera.position
+					.copy(resetOffset.setFromSpherical(resetOrbit))
+					.applyQuaternion(inverseOrbitRotation)
+					.add(controls.target);
+				camera.zoom = THREE.MathUtils.lerp(
+					resetAnimation.fromZoom,
+					resetAnimation.toZoom,
+					progress,
+				);
+				camera.updateProjectionMatrix();
+				camera.lookAt(controls.target);
+				if (elapsedProgress >= 1) cancelViewReset();
+			} else {
+				controls.update();
+			}
+
 			renderer.render(scene, camera);
 		});
 		return () => {
+			resetViewRef.current = undefined;
 			materialsRef.current = undefined;
 			resize.disconnect();
 			renderer.setAnimationLoop(null);
+			renderer.domElement.removeEventListener('pointerdown', cancelViewReset, {
+				capture: true,
+			});
+			renderer.domElement.removeEventListener('wheel', cancelViewReset, {
+				capture: true,
+			});
 			controls.dispose();
 			baseGeometry.dispose();
 			logoGeometry.dispose();
@@ -141,7 +311,10 @@ export default function Preview({
 			renderer.forceContextLoss();
 			renderer.domElement.remove();
 		};
-	}, [model, settings.baseHeight, settings.reliefHeight, isFront, reset]);
+	}, [model, settings.baseHeight, settings.reliefHeight, isFront]);
+	useEffect(() => {
+		resetViewRef.current?.();
+	}, [reset]);
 	return (
 		<div
 			ref={hostRef}

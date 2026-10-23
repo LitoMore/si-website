@@ -1,4 +1,5 @@
-import {useDeferredValue, useEffect, useMemo, useRef, useState} from 'react';
+import {useDeferredValue, useId, useMemo, useState} from 'react';
+import {Tooltip} from '@base-ui/react/tooltip';
 import {
 	ArrowDownToLine,
 	ArrowLeftRight,
@@ -8,8 +9,6 @@ import {
 	CircleHelp,
 	Expand,
 	Layers2,
-	Magnet,
-	Maximize2,
 	RotateCcw,
 	Search,
 	Sparkles,
@@ -17,6 +16,7 @@ import {
 } from 'lucide-react';
 import {VirtuosoGrid} from 'react-virtuoso';
 import Loading from '#components/gallery/loading.js';
+import {useSurfaceTheme} from '#components/ui/theme.js';
 import {useColorScheme, useSearcher} from '#hooks';
 import {type Icon, LanguageCode} from '#types';
 import {colorForBackground, getMaskStyles} from '#utils';
@@ -87,7 +87,6 @@ export default function MagnetWorkshop({
 }) {
 	const {labels, i18n, gettext, languageCode} = useMagnetI18n();
 	const {colorScheme, isLight} = useColorScheme();
-	const closeLabel = componentLabels[languageCode].global.close;
 	const styleLabels = {
 		outline: labels.outline,
 		square: labels.square,
@@ -127,7 +126,6 @@ export default function MagnetWorkshop({
 	const [format, setFormat] = useState('3mf');
 	const [exporting, setExporting] = useState(false);
 	const [message, setMessage] = useState<{format?: string; failed?: boolean}>();
-	const [help, setHelp] = useState(false);
 	const filtered = useMemo(
 		() => (deferredQuery.length > 0 ? searcher.search(deferredQuery) : icons),
 		[deferredQuery, icons, searcher],
@@ -286,17 +284,7 @@ export default function MagnetWorkshop({
 								<h2>
 									<span className="step">02</span> {i18n.openGraph.preview}
 								</h2>
-								<button
-									aria-label={labels.help}
-									className="icon-button"
-									title={labels.help}
-									type="button"
-									onClick={() => {
-										setHelp(true);
-									}}
-								>
-									<CircleHelp size={19} />
-								</button>
+								<HelpTooltip />
 							</div>
 							<div className="view-switch">
 								<button
@@ -326,12 +314,13 @@ export default function MagnetWorkshop({
 							<button
 								aria-label={labels.resetView}
 								className="stage-reset icon-button"
+								title={labels.resetView}
 								type="button"
 								onClick={() => {
 									setReset((previous) => previous + 1);
 								}}
 							>
-								<Maximize2 size={17} />
+								<RotateCcw size={17} />
 							</button>
 							{model && error.length === 0 ? (
 								front ? (
@@ -657,75 +646,53 @@ export default function MagnetWorkshop({
 				</div>
 				<PackageCredits />
 			</main>
-			{help ? (
-				<HelpDialog
-					onClose={() => {
-						setHelp(false);
-					}}
-				>
-					<button
-						aria-label={closeLabel}
-						className="icon-button close-dialog"
-						type="button"
-						onClick={() => {
-							setHelp(false);
-						}}
-					>
-						<X size={20} />
-					</button>
-					<Magnet size={28} />
-					<h2>{labels.help}</h2>
-					<p>{labels.helpIntro}</p>
-					<p>{labels.helpOutline}</p>
-					<p>{labels.helpExport}</p>
-					<p>{labels.helpBack}</p>
-					<button
-						className="export-button"
-						type="button"
-						onClick={() => {
-							setHelp(false);
-						}}
-					>
-						{closeLabel}
-					</button>
-				</HelpDialog>
-			) : null}
 		</div>
 	);
 }
 
-function HelpDialog({
-	children,
-	onClose,
-}: {
-	readonly children: React.ReactNode;
-	readonly onClose: () => void;
-}) {
+function HelpTooltip() {
 	const {labels} = useMagnetI18n();
-	const dialogRef = useRef<HTMLDialogElement>(null);
-	useEffect(() => {
-		const dialog = dialogRef.current;
-		dialog?.showModal();
-		return () => {
-			dialog?.close();
-		};
-	}, []);
+	const theme = useSurfaceTheme();
+	const [open, setOpen] = useState(false);
+	const tooltipId = useId();
 	return (
-		<dialog
-			ref={dialogRef}
-			aria-label={labels.help}
-			className="help-dialog"
-			onClose={(event) => {
-				// StrictMode may reopen the dialog before its queued close event
-				// arrives. Only dismiss a live dialog that is actually closed.
-				const dialog = event.currentTarget;
-				if (dialog.isConnected && !dialog.open) {
-					onClose();
-				}
-			}}
-		>
-			{children}
-		</dialog>
+		<Tooltip.Root open={open} onOpenChange={setOpen}>
+			<Tooltip.Trigger
+				aria-describedby={open ? tooltipId : undefined}
+				aria-label={labels.help}
+				className="icon-button"
+				closeOnClick={false}
+				type="button"
+				onClick={(event) => {
+					const isTouch =
+						'pointerType' in event.nativeEvent &&
+						event.nativeEvent.pointerType === 'touch';
+					setOpen((previous) => (isTouch ? !previous : true));
+				}}
+			>
+				<CircleHelp size={19} />
+			</Tooltip.Trigger>
+			<Tooltip.Portal>
+				<Tooltip.Positioner
+					align="start"
+					className="ui-positioner"
+					side="bottom"
+					sideOffset={8}
+				>
+					<Tooltip.Popup
+						className="ui-tooltip magnet-help-tooltip"
+						data-ui-theme={theme}
+						id={tooltipId}
+						role="tooltip"
+					>
+						<p>{labels.helpIntro}</p>
+						<p>{labels.helpOutline}</p>
+						<p>{labels.helpExport}</p>
+						<p>{labels.helpBack}</p>
+					</Tooltip.Popup>
+				</Tooltip.Positioner>
+			</Tooltip.Portal>
+		</Tooltip.Root>
 	);
 }
 

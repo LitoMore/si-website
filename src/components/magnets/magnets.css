@@ -18,7 +18,6 @@
 	--magnet-range: #718b5f;
 	--magnet-track: #e9eddf;
 	--magnet-shadow: #24341c20;
-	--magnet-overlay: #ffffffd9;
 	--magnet-scheme: light;
 	--magnet-font-caption: 0.75rem;
 	--magnet-font-body: 0.875rem;
@@ -850,48 +849,12 @@
 	font-size: var(--magnet-font-caption);
 	text-align: center;
 }
-.magnet-workshop .modal-backdrop {
-	display: grid;
-	position: fixed;
-	place-items: center;
-	z-index: 10;
-	backdrop-filter: blur(5px);
-	inset: 0;
-	background: var(--magnet-overlay);
-	padding: 20px;
+.magnet-help-tooltip {
+	padding: 10px 12px;
+	max-width: min(340px, calc(100vw - 16px));
 }
-.magnet-workshop .help-dialog {
-	position: relative;
-	box-shadow: 0 20px 100px var(--magnet-shadow);
-	border: 1px solid var(--magnet-border);
-	border-radius: 16px;
-	background: var(--magnet-soft);
-	padding: 33px;
-	width: min(480px, calc(100% - 40px));
-	max-width: 480px;
-	max-height: calc(100dvh - 40px);
-	overflow-y: auto;
-	color: var(--magnet-muted);
-}
-.magnet-workshop .help-dialog h2 {
-	margin: 17px 0;
-	color: var(--magnet-text);
-	font-weight: var(--magnet-weight-heading);
-	font-size: 1.5rem;
-}
-.magnet-workshop .help-dialog p {
-	margin: 13px 0;
-	color: var(--magnet-muted);
-	font-size: var(--magnet-font-body);
-	line-height: 1.7;
-}
-.magnet-workshop .help-dialog .export-button {
-	margin-top: 22px;
-}
-.magnet-workshop .close-dialog {
-	position: absolute;
-	top: 16px;
-	right: 16px;
+.magnet-help-tooltip p + p {
+	margin-block-start: 8px;
 }
 @media (min-width: 1450px) {
 	.magnet-workshop .workbench {
@@ -1127,23 +1090,12 @@
 	.magnet-workshop .color-presets {
 		margin-top: 14px;
 	}
-	.magnet-workshop .help-dialog {
-		padding: 25px;
-	}
-	.magnet-workshop .help-dialog h2 {
-		font-size: 1.375rem;
-	}
 }
 @media (prefers-reduced-motion: reduce) {
 	.magnet-workshop * {
 		transition: none !important;
 		scroll-behavior: auto !important;
 	}
-}
-
-.magnet-workshop .help-dialog::backdrop {
-	backdrop-filter: blur(5px);
-	background: var(--magnet-overlay);
 }
 
 .magnet-workshop .placement-controls {
@@ -1165,10 +1117,6 @@
 	overflow: visible;
 	color-scheme: var(--magnet-scheme);
 	line-height: 1.5;
-}
-/* Tailwind's base reset removes the browser's native dialog centering margin. */
-.magnet-workshop .help-dialog {
-	margin: auto;
 }
 .magnet-workshop .brand-icon {
 	display: inline-block;
@@ -1199,7 +1147,6 @@
 	--magnet-range: #9bbd81;
 	--magnet-track: #414e38;
 	--magnet-shadow: #00000045;
-	--magnet-overlay: #222921e8;
 	--magnet-scheme: dark;
 }
 .magnets-page {
@@ -1241,10 +1188,6 @@
 .magnet-workshop[dir='rtl'] .style-check {
 	right: auto;
 	left: 4px;
-}
-.magnet-workshop[dir='rtl'] .close-dialog {
-	right: auto;
-	left: 16px;
 }
 
 .magnet-workshop .selection-check {
