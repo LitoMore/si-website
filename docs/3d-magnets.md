@@ -18,7 +18,7 @@ Three.js, Manifold WASM and the workshop stylesheet load with this route. The
 
 ## Shapes and placement
 
-- Outline: 50 mm longest overall side, with a 3.5 mm outward border and round
+- Outline: 50 mm longest overall side, with a 2.5 mm outward border and round
   joins. Enclosed backing holes are filled; logo counters remain recessed.
 - Rounded square: 50 mm sides, 11 mm corner radius, 76% icon scale.
 - Circle: 50 mm diameter, 70% icon scale.

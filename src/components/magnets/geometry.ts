@@ -26,7 +26,7 @@ export type MagnetSettings = {
 export const defaults: MagnetSettings = {
 	style: 'outline',
 	size: 50,
-	border: 3.5,
+	border: 2.5,
 	radius: 11,
 	iconScale: 76,
 	circleIconScale: 70,
