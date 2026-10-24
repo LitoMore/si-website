@@ -7,7 +7,7 @@ export const spinning = {animation: 'spin 1s linear infinite'};
 export const mobileWidth = 435;
 
 export const galleryAdvertisement = {
-	enabled: true,
+	enabled: false,
 	columns: 2,
 	rows: 2,
 };
