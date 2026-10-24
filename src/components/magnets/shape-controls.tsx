@@ -230,7 +230,7 @@ export function ShapeControls({
 					)}
 					<Slider
 						label={labels.iconScale}
-						max={90}
+						max={100}
 						min={35}
 						step={1}
 						unit="%"
