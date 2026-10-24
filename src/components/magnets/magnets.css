@@ -1029,9 +1029,9 @@
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
 	.magnet-workshop .icon-grid-scroller {
-		flex: none;
+		/* Keep a fixed viewport despite Virtuoso's inline height: 100%. */
+		flex: 0 0 196px;
 		margin-inline: 13px;
-		height: 196px;
 	}
 	.magnet-workshop .icon-tile {
 		height: 88px;
