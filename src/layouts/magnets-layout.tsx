@@ -8,7 +8,7 @@ import {useColorScheme, useI18n} from '#hooks';
 
 export default function MagnetsLayout() {
 	const {i18n} = useI18n();
-	const [parameters] = useSearchParams();
+	const [parameters, setParameters] = useSearchParams();
 	const [catalog] = useIcons();
 	const [, requestIcons] = useIconsLoadRequest();
 	const {colorScheme, headerBg} = useColorScheme();
@@ -29,8 +29,18 @@ export default function MagnetsLayout() {
 			{catalog.data.length > 0 && catalog.version ? (
 				<MagnetWorkshop
 					icons={catalog.data}
-					initialSlug={parameters.get('slug') ?? undefined}
+					slug={parameters.get('slug') ?? undefined}
 					version={catalog.version}
+					onSelectIcon={(icon) => {
+						setParameters(
+							(previous) => {
+								const next = new URLSearchParams(previous);
+								next.set('slug', icon.slug);
+								return next;
+							},
+							{replace: true},
+						);
+					}}
 				/>
 			) : catalog.error ? (
 				<div

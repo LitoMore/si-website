@@ -3,8 +3,11 @@
 The fridge magnet workshop lives at `/3d`. Open it from the application menu,
 next to Icon Previewer. The shared BackHome button returns to the gallery through the site
 router, including deployments with a base path. `/3d?slug=figma` selects an icon
-on initial load; the default icon and the fallback for an unknown slug are
-Simple Icons (`simpleicons`).
+from the URL; the default icon and the fallback for an unknown slug are
+Simple Icons (`simpleicons`). Selecting an icon updates the `slug` query
+parameter so the current address can be copied and shared. It preserves other
+query parameters and replaces the current history entry. URL changes also
+update the selection without resetting model settings or color presets.
 
 The workshop uses the site’s shared Light, Dark and Auto theme preference and
 all 25 site languages. Its CSS is scoped to `.magnet-workshop`, and its layout owns a scroll area

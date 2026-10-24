@@ -68,7 +68,7 @@ function localizedModelError(error: string, labels: MagnetLabels) {
 		: labels.modelError;
 }
 
-function initialIcon(icons: Icon[], slug?: string) {
+function selectedIcon(icons: Icon[], slug?: string) {
 	return (
 		icons.find((icon) => icon.slug === slug) ??
 		icons.find((icon) => icon.slug === 'simpleicons') ??
@@ -79,11 +79,13 @@ function initialIcon(icons: Icon[], slug?: string) {
 export default function MagnetWorkshop({
 	icons,
 	version,
-	initialSlug,
+	slug,
+	onSelectIcon,
 }: {
 	readonly icons: Icon[];
 	readonly version: string;
-	readonly initialSlug?: string;
+	readonly slug?: string;
+	readonly onSelectIcon: (icon: Icon) => void;
 }) {
 	const {labels, i18n, gettext, languageCode} = useMagnetI18n();
 	const {colorScheme, isLight} = useColorScheme();
@@ -92,9 +94,8 @@ export default function MagnetWorkshop({
 		square: labels.square,
 		circle: labels.circle,
 	};
-	const [selected, setSelected] = useState<Icon>(() =>
-		initialIcon(icons, initialSlug),
-	);
+	const selected = selectedIcon(icons, slug);
+	const [previousSlug, setPreviousSlug] = useState(selected.slug);
 	const [settings, setSettings] = useState<MagnetSettings>(() => ({
 		...defaults,
 		iconColor: `#${selected.hex}`,
@@ -103,6 +104,15 @@ export default function MagnetWorkshop({
 		baseColor: false,
 		iconColor: true,
 	});
+	if (previousSlug !== selected.slug) {
+		setPreviousSlug(selected.slug);
+		setSettings((previous) => ({
+			...previous,
+			...(brandColors.baseColor && {baseColor: `#${selected.hex}`}),
+			...(brandColors.iconColor && {iconColor: `#${selected.hex}`}),
+		}));
+	}
+
 	const [query, setQuery] = useState('');
 	const deferredQuery = useDeferredValue(query.trim().toLowerCase());
 	const {
@@ -139,15 +149,6 @@ export default function MagnetWorkshop({
 		if (key === 'baseColor' || key === 'iconColor') {
 			setBrandColors((previous) => ({...previous, [key]: false}));
 		}
-	}
-
-	function selectIcon(icon: Icon) {
-		setSelected(icon);
-		setSettings((previous) => ({
-			...previous,
-			...(brandColors.baseColor && {baseColor: `#${icon.hex}`}),
-			...(brandColors.iconColor && {iconColor: `#${icon.hex}`}),
-		}));
 	}
 
 	async function exportFile() {
@@ -251,7 +252,7 @@ export default function MagnetWorkshop({
 										title={icon.title}
 										type="button"
 										onClick={() => {
-											selectIcon(icon);
+											onSelectIcon(icon);
 										}}
 									>
 										<IconImage
