@@ -17,6 +17,8 @@ const styles = [
 	{value: 'circle', description: 'circleDesc', Icon: Circle},
 ] as const;
 
+const joins = ['round', 'miter', 'bevel'] as const;
+
 export function Slider({
 	label,
 	value,
@@ -106,19 +108,26 @@ export function ShapeControls({
 	return (
 		<>
 			<div className="field-label">{labels.magnetStyle}</div>
-			<div className="style-options">
+			<div
+				aria-label={labels.magnetStyle}
+				className="style-options"
+				role="group"
+			>
 				{styles.map(({value, description, Icon}) => (
 					<button
 						key={value}
 						aria-pressed={settings.style === value}
 						className={settings.style === value ? 'active' : ''}
+						title={labels[description]}
 						type="button"
 						onClick={() => {
 							update('style', value);
 						}}
 					>
-						<Icon size={25} strokeWidth={1.4} />
-						<strong>{styleLabels[value]}</strong>
+						<span className="style-option-content">
+							<Icon size={25} strokeWidth={1.4} />
+							<strong>{styleLabels[value]}</strong>
+						</span>
 						<small>{labels[description]}</small>
 						{settings.style === value && (
 							<Check className="style-check" size={12} />
@@ -151,16 +160,61 @@ export function ShapeControls({
 				}}
 			/>
 			{settings.style === 'outline' ? (
-				<Slider
-					hint={labels.outlineHint}
-					label={labels.outlineWidth}
-					max={Math.min(10, settings.size / 4)}
-					min={0.5}
-					value={settings.border}
-					onChange={(value) => {
-						update('border', value);
-					}}
-				/>
+				<>
+					<Slider
+						hint={labels.outlineHint}
+						label={labels.outlineWidth}
+						max={Math.min(10, settings.size / 4)}
+						min={0.5}
+						value={settings.border}
+						onChange={(value) => {
+							update('border', value);
+						}}
+					/>
+					<div
+						aria-label={labels.outlineJoin}
+						className="join-field"
+						role="group"
+					>
+						<div className="field-label">{labels.outlineJoin}</div>
+						<div className="join-options">
+							{joins.map((join) => (
+								<button
+									key={join}
+									aria-pressed={settings.join === join}
+									className={settings.join === join ? 'active' : ''}
+									title={labels[join]}
+									type="button"
+									onClick={() => {
+										update('join', join);
+									}}
+								>
+									<svg
+										aria-hidden="true"
+										height="28"
+										viewBox="0 0 32 28"
+										width="32"
+									>
+										<path
+											d="M6 23 16 7 26 23"
+											fill="none"
+											stroke="currentColor"
+											strokeLinejoin={join}
+											strokeWidth="6"
+										/>
+									</svg>
+									<span>
+										{join === 'miter'
+											? 'Miter'
+											: join === 'bevel'
+												? 'Bevel'
+												: 'Round'}
+									</span>
+								</button>
+							))}
+						</div>
+					</div>
+				</>
 			) : (
 				<>
 					{settings.style === 'square' && (

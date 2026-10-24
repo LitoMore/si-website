@@ -329,7 +329,7 @@ export default function MagnetWorkshop({
 										aria-label={gettext(labels.frontLabel, [selected.title])}
 										className="front-preview"
 										role="img"
-										viewBox={`${-model.width / 2 - 12} ${-model.height / 2 - 12} ${model.width + 24} ${model.height + 24}`}
+										viewBox={`${model.bounds.min[0] - 12} ${-model.bounds.max[1] - 12} ${model.width + 24} ${model.height + 24}`}
 									>
 										<path
 											d={polygonsToPath(model.basePolygons)}
@@ -717,33 +717,48 @@ function ExportStatus({
 function PackageCredits() {
 	const {labels, gettext} = useMagnetI18n();
 	return (
-		<footer className="package-credits">
-			<span>
-				{gettext(labels.exportCredit, [
+		<footer className="workshop-footer">
+			<p className="maintainer-credit">
+				{gettext(labels.maintainerCredit, [
 					() => (
 						<a
-							href="https://www.npmjs.com/package/three-3mf-exporter"
+							href="https://github.com/LitoMore"
 							rel="noreferrer"
 							target="_blank"
 						>
-							<bdi>three-3mf-exporter</bdi>
+							<bdi>LitoMore</bdi>
 						</a>
 					),
 				])}
-			</span>
-			<span>
-				{gettext(labels.pathCredit, [
-					() => (
-						<a
-							href="https://github.com/cscnk52/svg-path-areas-splitter"
-							rel="noreferrer"
-							target="_blank"
-						>
-							<bdi>svg-path-areas-splitter</bdi>
-						</a>
-					),
-				])}
-			</span>
+			</p>
+			<div className="package-credits">
+				<span>
+					{gettext(labels.exportCredit, [
+						() => (
+							<a
+								href="https://www.npmjs.com/package/three-3mf-exporter"
+								rel="noreferrer"
+								target="_blank"
+							>
+								<bdi>three-3mf-exporter</bdi>
+							</a>
+						),
+					])}
+				</span>
+				<span>
+					{gettext(labels.pathCredit, [
+						() => (
+							<a
+								href="https://github.com/cscnk52/svg-path-areas-splitter"
+								rel="noreferrer"
+								target="_blank"
+							>
+								<bdi>svg-path-areas-splitter</bdi>
+							</a>
+						),
+					])}
+				</span>
+			</div>
 		</footer>
 	);
 }

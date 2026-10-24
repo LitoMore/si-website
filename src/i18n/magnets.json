@@ -59,6 +59,10 @@
 		"longestSide": "Longest side",
 		"outlineWidth": "Outline width",
 		"outlineHint": "Default: 2.5 mm.",
+		"outlineJoin": "Corner join",
+		"miter": "Sharp corners",
+		"bevel": "Beveled corners",
+		"round": "Round corners",
 		"radius": "Corner radius",
 		"iconScale": "Icon scale",
 		"position": "Icon position",
@@ -81,7 +85,8 @@
 		"previewUnavailable": "3D preview is unavailable. Switch to Front view. You can still export.",
 		"previewLabel": "3D magnet preview. Drag to rotate.",
 		"exportCredit": "3MF export powered by {}",
-		"pathCredit": "Path splitting powered by {}"
+		"pathCredit": "Path splitting powered by {}",
+		"maintainerCredit": "Crafted and maintained with ♥ by {}, a member of the Simple Icons team."
 	},
 	"zh": {
 		"name": "3D 冰箱贴",
@@ -143,6 +148,10 @@
 		"longestSide": "最长边",
 		"outlineWidth": "描边宽度",
 		"outlineHint": "默认 2.5 毫米。",
+		"outlineJoin": "转角连接",
+		"miter": "尖角",
+		"bevel": "斜角",
+		"round": "圆角",
 		"radius": "圆角半径",
 		"iconScale": "图标比例",
 		"position": "图标位置",
@@ -165,7 +174,8 @@
 		"previewUnavailable": "3D 预览不可用，请切换到正面视图。仍可导出模型。",
 		"previewLabel": "冰箱贴 3D 预览，可拖动旋转。",
 		"exportCredit": "3MF 导出由 {} 提供支持",
-		"pathCredit": "路径拆分由 {} 提供支持"
+		"pathCredit": "路径拆分由 {} 提供支持",
+		"maintainerCredit": "由 Simple Icons 团队成员 {} 用 ♥ 打造并维护。"
 	},
 	"zh-Hant": {
 		"name": "3D 冰箱貼",
@@ -227,6 +237,10 @@
 		"longestSide": "最長邊",
 		"outlineWidth": "描邊寬度",
 		"outlineHint": "預設 2.5 毫米。",
+		"outlineJoin": "轉角連接",
+		"miter": "尖角",
+		"bevel": "斜角",
+		"round": "圓角",
 		"radius": "圓角半徑",
 		"iconScale": "圖示比例",
 		"position": "圖示位置",
@@ -249,7 +263,8 @@
 		"previewUnavailable": "3D 預覽無法使用，請切換到正面檢視。仍可匯出模型。",
 		"previewLabel": "冰箱貼 3D 預覽，可拖曳旋轉。",
 		"exportCredit": "3MF 匯出由 {} 提供支援",
-		"pathCredit": "路徑拆分由 {} 提供支援"
+		"pathCredit": "路徑拆分由 {} 提供支援",
+		"maintainerCredit": "由 Simple Icons 團隊成員 {} 用 ♥ 打造並維護。"
 	},
 	"fr-FR": {
 		"name": "Aimants 3D",
@@ -311,6 +326,10 @@
 		"longestSide": "Côté le plus long",
 		"outlineWidth": "Largeur du contour",
 		"outlineHint": "Par défaut : 2,5 mm.",
+		"outlineJoin": "Jonction des angles",
+		"miter": "Angles pointus",
+		"bevel": "Angles biseautés",
+		"round": "Angles arrondis",
 		"radius": "Rayon des coins",
 		"iconScale": "Échelle de l’icône",
 		"position": "Position de l’icône",
@@ -333,7 +352,8 @@
 		"previewUnavailable": "Aperçu 3D indisponible. Passez à la vue de face. L’export reste possible.",
 		"previewLabel": "Aperçu 3D de l’aimant. Glisser pour tourner.",
 		"exportCredit": "Export 3MF avec {}",
-		"pathCredit": "Découpage des tracés avec {}"
+		"pathCredit": "Découpage des tracés avec {}",
+		"maintainerCredit": "Créé et maintenu avec ♥ par {}, membre de l’équipe Simple Icons."
 	},
 	"es-ES": {
 		"name": "Imanes 3D",
@@ -395,6 +415,10 @@
 		"longestSide": "Lado más largo",
 		"outlineWidth": "Ancho del borde",
 		"outlineHint": "Predeterminado: 2,5 mm.",
+		"outlineJoin": "Unión de esquinas",
+		"miter": "Esquinas en punta",
+		"bevel": "Esquinas biseladas",
+		"round": "Esquinas redondeadas",
 		"radius": "Radio de esquina",
 		"iconScale": "Escala del icono",
 		"position": "Posición del icono",
@@ -417,7 +441,8 @@
 		"previewUnavailable": "La vista 3D no está disponible. Cambia a la vista frontal. Puedes seguir exportando.",
 		"previewLabel": "Vista 3D del imán. Arrastra para girar.",
 		"exportCredit": "Exportación 3MF con {}",
-		"pathCredit": "División de trazados con {}"
+		"pathCredit": "División de trazados con {}",
+		"maintainerCredit": "Creado y mantenido con ♥ por {}, miembro del equipo de Simple Icons."
 	},
 	"de-DE": {
 		"name": "3D-Magnete",
@@ -479,6 +504,10 @@
 		"longestSide": "Längste Seite",
 		"outlineWidth": "Randbreite",
 		"outlineHint": "Standard: 2,5 mm.",
+		"outlineJoin": "Eckenverbindung",
+		"miter": "Spitze Ecken",
+		"bevel": "Abgeschrägte Ecken",
+		"round": "Runde Ecken",
 		"radius": "Eckenradius",
 		"iconScale": "Symbolskalierung",
 		"position": "Symbolposition",
@@ -501,7 +530,8 @@
 		"previewUnavailable": "3D-Vorschau nicht verfügbar. Wechseln Sie zur Vorderansicht. Der Export ist weiterhin möglich.",
 		"previewLabel": "3D-Magnetvorschau. Zum Drehen ziehen.",
 		"exportCredit": "3MF-Export mit {}",
-		"pathCredit": "Pfadaufteilung mit {}"
+		"pathCredit": "Pfadaufteilung mit {}",
+		"maintainerCredit": "Mit ♥ gestaltet und gepflegt von {}, Mitglied des Simple Icons-Teams."
 	},
 	"de-CH": {
 		"name": "3D-Magnete",
@@ -563,6 +593,10 @@
 		"longestSide": "Längste Seite",
 		"outlineWidth": "Randbreite",
 		"outlineHint": "Standard: 2,5 mm.",
+		"outlineJoin": "Eckenverbindung",
+		"miter": "Spitze Ecken",
+		"bevel": "Abgeschrägte Ecken",
+		"round": "Runde Ecken",
 		"radius": "Eckenradius",
 		"iconScale": "Symbolskalierung",
 		"position": "Symbolposition",
@@ -585,7 +619,8 @@
 		"previewUnavailable": "3D-Vorschau nicht verfügbar. Wechseln Sie zur Vorderansicht. Der Export ist weiterhin möglich.",
 		"previewLabel": "3D-Magnetvorschau. Zum Drehen ziehen.",
 		"exportCredit": "3MF-Export mit {}",
-		"pathCredit": "Pfadaufteilung mit {}"
+		"pathCredit": "Pfadaufteilung mit {}",
+		"maintainerCredit": "Mit ♥ gestaltet und gepflegt von {}, Mitglied des Simple Icons-Teams."
 	},
 	"it-IT": {
 		"name": "Magneti 3D",
@@ -647,6 +682,10 @@
 		"longestSide": "Lato più lungo",
 		"outlineWidth": "Larghezza del bordo",
 		"outlineHint": "Predefinito: 2,5 mm.",
+		"outlineJoin": "Giunzione degli angoli",
+		"miter": "Angoli a punta",
+		"bevel": "Angoli smussati",
+		"round": "Angoli arrotondati",
 		"radius": "Raggio degli angoli",
 		"iconScale": "Scala dell’icona",
 		"position": "Posizione dell’icona",
@@ -669,7 +708,8 @@
 		"previewUnavailable": "Anteprima 3D non disponibile. Passa alla vista frontale. Puoi comunque esportare.",
 		"previewLabel": "Anteprima 3D del magnete. Trascina per ruotare.",
 		"exportCredit": "Esportazione 3MF con {}",
-		"pathCredit": "Suddivisione dei tracciati con {}"
+		"pathCredit": "Suddivisione dei tracciati con {}",
+		"maintainerCredit": "Creato e mantenuto con ♥ da {}, membro del team Simple Icons."
 	},
 	"pt-PT": {
 		"name": "Ímanes 3D",
@@ -731,6 +771,10 @@
 		"longestSide": "Lado maior",
 		"outlineWidth": "Largura do contorno",
 		"outlineHint": "Predefinição: 2,5 mm.",
+		"outlineJoin": "Junção dos cantos",
+		"miter": "Cantos em ponta",
+		"bevel": "Cantos biselados",
+		"round": "Cantos arredondados",
 		"radius": "Raio dos cantos",
 		"iconScale": "Escala do ícone",
 		"position": "Posição do ícone",
@@ -753,7 +797,8 @@
 		"previewUnavailable": "Pré-visualização 3D indisponível. Mude para a vista frontal. Pode continuar a exportar.",
 		"previewLabel": "Pré-visualização 3D do íman. Arraste para rodar.",
 		"exportCredit": "Exportação 3MF com {}",
-		"pathCredit": "Divisão de caminhos com {}"
+		"pathCredit": "Divisão de caminhos com {}",
+		"maintainerCredit": "Criado e mantido com ♥ por {}, membro da equipa Simple Icons."
 	},
 	"nl-NL": {
 		"name": "3D-magneten",
@@ -815,6 +860,10 @@
 		"longestSide": "Langste zijde",
 		"outlineWidth": "Randbreedte",
 		"outlineHint": "Standaard: 2,5 mm.",
+		"outlineJoin": "Hoekverbinding",
+		"miter": "Scherpe hoeken",
+		"bevel": "Afgeschuinde hoeken",
+		"round": "Ronde hoeken",
 		"radius": "Hoekradius",
 		"iconScale": "Pictogramschaal",
 		"position": "Pictogrampositie",
@@ -837,7 +886,8 @@
 		"previewUnavailable": "3D-voorbeeld niet beschikbaar. Kies het vooraanzicht. Exporteren blijft mogelijk.",
 		"previewLabel": "3D-voorbeeld van de magneet. Slepen om te draaien.",
 		"exportCredit": "3MF-export met {}",
-		"pathCredit": "Paden splitsen met {}"
+		"pathCredit": "Paden splitsen met {}",
+		"maintainerCredit": "Met ♥ gemaakt en onderhouden door {}, lid van het Simple Icons-team."
 	},
 	"sv-SE": {
 		"name": "3D-magneter",
@@ -899,6 +949,10 @@
 		"longestSide": "Längsta sidan",
 		"outlineWidth": "Kantbredd",
 		"outlineHint": "Standard: 2,5 mm.",
+		"outlineJoin": "Hörnfog",
+		"miter": "Spetsiga hörn",
+		"bevel": "Fasade hörn",
+		"round": "Runda hörn",
 		"radius": "Hörnradie",
 		"iconScale": "Ikonskala",
 		"position": "Ikonposition",
@@ -921,7 +975,8 @@
 		"previewUnavailable": "3D-förhandsvisningen är inte tillgänglig. Byt till framvy. Du kan fortfarande exportera.",
 		"previewLabel": "3D-förhandsvisning av magneten. Dra för att rotera.",
 		"exportCredit": "3MF-export med {}",
-		"pathCredit": "Banuppdelning med {}"
+		"pathCredit": "Banuppdelning med {}",
+		"maintainerCredit": "Skapat och underhållet med ♥ av {}, medlem i Simple Icons-teamet."
 	},
 	"nb-NO": {
 		"name": "3D-magneter",
@@ -983,6 +1038,10 @@
 		"longestSide": "Lengste side",
 		"outlineWidth": "Kantbredde",
 		"outlineHint": "Standard: 2,5 mm.",
+		"outlineJoin": "Hjørneskjøt",
+		"miter": "Spisse hjørner",
+		"bevel": "Avfasede hjørner",
+		"round": "Runde hjørner",
 		"radius": "Hjørneradius",
 		"iconScale": "Ikonskala",
 		"position": "Ikonplassering",
@@ -1005,7 +1064,8 @@
 		"previewUnavailable": "3D-forhåndsvisning er utilgjengelig. Bytt til frontvisning. Du kan fortsatt eksportere.",
 		"previewLabel": "3D-forhåndsvisning av magneten. Dra for å rotere.",
 		"exportCredit": "3MF-eksport med {}",
-		"pathCredit": "Baneoppdeling med {}"
+		"pathCredit": "Baneoppdeling med {}",
+		"maintainerCredit": "Laget og vedlikeholdt med ♥ av {}, medlem av Simple Icons-teamet."
 	},
 	"fi-FI": {
 		"name": "3D-magneetit",
@@ -1067,6 +1127,10 @@
 		"longestSide": "Pisin sivu",
 		"outlineWidth": "Reunuksen leveys",
 		"outlineHint": "Oletus: 2,5 mm.",
+		"outlineJoin": "Kulmaliitos",
+		"miter": "Terävät kulmat",
+		"bevel": "Viistetyt kulmat",
+		"round": "Pyöristetyt kulmat",
 		"radius": "Kulman säde",
 		"iconScale": "Kuvakkeen mittakaava",
 		"position": "Kuvakkeen sijainti",
@@ -1089,7 +1153,8 @@
 		"previewUnavailable": "3D-esikatselu ei ole käytettävissä. Vaihda etunäkymään. Vienti toimii silti.",
 		"previewLabel": "Magneetin 3D-esikatselu. Kierrä vetämällä.",
 		"exportCredit": "3MF-vienti: {}",
-		"pathCredit": "Polkujen jakaminen: {}"
+		"pathCredit": "Polkujen jakaminen: {}",
+		"maintainerCredit": "Luonut ja ylläpitää ♥:llä {}, Simple Icons -tiimin jäsen."
 	},
 	"pl-PL": {
 		"name": "Magnesy 3D",
@@ -1151,6 +1216,10 @@
 		"longestSide": "Najdłuższy bok",
 		"outlineWidth": "Szerokość obrysu",
 		"outlineHint": "Domyślnie: 2,5 mm.",
+		"outlineJoin": "Łączenie narożników",
+		"miter": "Ostre narożniki",
+		"bevel": "Ścięte narożniki",
+		"round": "Zaokrąglone narożniki",
 		"radius": "Promień narożników",
 		"iconScale": "Skala ikony",
 		"position": "Pozycja ikony",
@@ -1173,7 +1242,8 @@
 		"previewUnavailable": "Podgląd 3D jest niedostępny. Przełącz na widok z przodu. Eksport nadal działa.",
 		"previewLabel": "Podgląd magnesu 3D. Przeciągnij, aby obrócić.",
 		"exportCredit": "Eksport 3MF dzięki {}",
-		"pathCredit": "Podział ścieżek dzięki {}"
+		"pathCredit": "Podział ścieżek dzięki {}",
+		"maintainerCredit": "Stworzone i utrzymywane z ♥ przez {}, członka zespołu Simple Icons."
 	},
 	"ro-RO": {
 		"name": "Magneți 3D",
@@ -1235,6 +1305,10 @@
 		"longestSide": "Latura cea mai lungă",
 		"outlineWidth": "Lățimea marginii",
 		"outlineHint": "Implicit: 2,5 mm.",
+		"outlineJoin": "Îmbinarea colțurilor",
+		"miter": "Colțuri ascuțite",
+		"bevel": "Colțuri teșite",
+		"round": "Colțuri rotunjite",
 		"radius": "Raza colțurilor",
 		"iconScale": "Scara pictogramei",
 		"position": "Poziția pictogramei",
@@ -1257,7 +1331,8 @@
 		"previewUnavailable": "Previzualizarea 3D nu este disponibilă. Alege vederea frontală. Exportul rămâne posibil.",
 		"previewLabel": "Previzualizare 3D a magnetului. Trage pentru rotire.",
 		"exportCredit": "Export 3MF cu {}",
-		"pathCredit": "Împărțirea traseelor cu {}"
+		"pathCredit": "Împărțirea traseelor cu {}",
+		"maintainerCredit": "Creat și întreținut cu ♥ de {}, membru al echipei Simple Icons."
 	},
 	"tr-TR": {
 		"name": "3D Mıknatıslar",
@@ -1319,6 +1394,10 @@
 		"longestSide": "En uzun kenar",
 		"outlineWidth": "Kenarlık genişliği",
 		"outlineHint": "Varsayılan: 2,5 mm.",
+		"outlineJoin": "Köşe birleşimi",
+		"miter": "Sivri köşeler",
+		"bevel": "Pahlı köşeler",
+		"round": "Yuvarlak köşeler",
 		"radius": "Köşe yarıçapı",
 		"iconScale": "Simge ölçeği",
 		"position": "Simge konumu",
@@ -1341,7 +1420,8 @@
 		"previewUnavailable": "3D önizleme kullanılamıyor. Ön görünüme geçin. Dışa aktarmaya devam edebilirsiniz.",
 		"previewLabel": "3D mıknatıs önizlemesi. Döndürmek için sürükleyin.",
 		"exportCredit": "3MF dışa aktarma: {}",
-		"pathCredit": "Yol bölme: {}"
+		"pathCredit": "Yol bölme: {}",
+		"maintainerCredit": "Simple Icons ekibinden {} tarafından ♥ ile geliştirildi ve sürdürülüyor."
 	},
 	"ja-JP": {
 		"name": "3D マグネット",
@@ -1403,6 +1483,10 @@
 		"longestSide": "最長辺",
 		"outlineWidth": "縁の幅",
 		"outlineHint": "初期値は 2.5 mm。",
+		"outlineJoin": "角の結合",
+		"miter": "鋭角",
+		"bevel": "面取り",
+		"round": "丸角",
 		"radius": "角の半径",
 		"iconScale": "アイコンの倍率",
 		"position": "アイコンの位置",
@@ -1425,7 +1509,8 @@
 		"previewUnavailable": "3D プレビューを表示できません。正面表示に切り替えてください。書き出しは可能です。",
 		"previewLabel": "マグネットの 3D プレビュー。ドラッグして回転できます。",
 		"exportCredit": "3MF 書き出し：{}",
-		"pathCredit": "パスの分割：{}"
+		"pathCredit": "パスの分割：{}",
+		"maintainerCredit": "Simple Icons チームのメンバー {} が ♥ を込めて制作・メンテナンスしています。"
 	},
 	"ko-KR": {
 		"name": "3D 자석",
@@ -1487,6 +1572,10 @@
 		"longestSide": "가장 긴 변",
 		"outlineWidth": "테두리 너비",
 		"outlineHint": "기본값 2.5 mm.",
+		"outlineJoin": "모서리 연결",
+		"miter": "뾰족한 모서리",
+		"bevel": "경사진 모서리",
+		"round": "둥근 모서리",
 		"radius": "모서리 반경",
 		"iconScale": "아이콘 비율",
 		"position": "아이콘 위치",
@@ -1509,7 +1598,8 @@
 		"previewUnavailable": "3D 미리보기를 사용할 수 없습니다. 정면 보기로 전환하세요. 내보내기는 가능합니다.",
 		"previewLabel": "자석 3D 미리보기. 드래그하여 회전하세요.",
 		"exportCredit": "3MF 내보내기: {}",
-		"pathCredit": "경로 분할: {}"
+		"pathCredit": "경로 분할: {}",
+		"maintainerCredit": "Simple Icons 팀의 {} 님이 ♥를 담아 만들고 유지 관리합니다."
 	},
 	"ar": {
 		"name": "مغناطيسات ثلاثية الأبعاد",
@@ -1571,6 +1661,10 @@
 		"longestSide": "الضلع الأطول",
 		"outlineWidth": "عرض الإطار",
 		"outlineHint": "الافتراضي: 2.5 مم.",
+		"outlineJoin": "وصل الزوايا",
+		"miter": "زوايا حادة",
+		"bevel": "زوايا مشطوفة",
+		"round": "زوايا مستديرة",
 		"radius": "نصف قطر الزوايا",
 		"iconScale": "مقياس الأيقونة",
 		"position": "موضع الأيقونة",
@@ -1593,7 +1687,8 @@
 		"previewUnavailable": "المعاينة ثلاثية الأبعاد غير متاحة. انتقل إلى العرض الأمامي. لا يزال التصدير ممكنًا.",
 		"previewLabel": "معاينة ثلاثية الأبعاد للمغناطيس. اسحب للتدوير.",
 		"exportCredit": "تصدير 3MF بدعم من {}",
-		"pathCredit": "تقسيم المسارات بدعم من {}"
+		"pathCredit": "تقسيم المسارات بدعم من {}",
+		"maintainerCredit": "صُمّم ويُصان بكل ♥ بواسطة {}، أحد أعضاء فريق Simple Icons."
 	},
 	"hi-IN": {
 		"name": "3D चुंबक",
@@ -1655,6 +1750,10 @@
 		"longestSide": "सबसे लंबा किनारा",
 		"outlineWidth": "किनारे की चौड़ाई",
 		"outlineHint": "डिफ़ॉल्ट: 2.5 मिमी।",
+		"outlineJoin": "कोने का जोड़",
+		"miter": "नुकीले कोने",
+		"bevel": "तिरछे कोने",
+		"round": "गोल कोने",
 		"radius": "कोने की त्रिज्या",
 		"iconScale": "आइकन का अनुपात",
 		"position": "आइकन की स्थिति",
@@ -1677,7 +1776,8 @@
 		"previewUnavailable": "3D पूर्वावलोकन उपलब्ध नहीं है। सामने के दृश्य पर जाएँ। निर्यात अभी भी कर सकते हैं।",
 		"previewLabel": "चुंबक का 3D पूर्वावलोकन। घुमाने के लिए खींचें।",
 		"exportCredit": "3MF निर्यात के लिए {}",
-		"pathCredit": "पाथ विभाजन के लिए {}"
+		"pathCredit": "पाथ विभाजन के लिए {}",
+		"maintainerCredit": "Simple Icons टीम के सदस्य {} द्वारा ♥ से बनाया और अनुरक्षित।"
 	},
 	"el-GR": {
 		"name": "Μαγνήτες 3D",
@@ -1739,6 +1839,10 @@
 		"longestSide": "Μεγαλύτερη πλευρά",
 		"outlineWidth": "Πλάτος περιγράμματος",
 		"outlineHint": "Προεπιλογή: 2,5 mm.",
+		"outlineJoin": "Ένωση γωνιών",
+		"miter": "Αιχμηρές γωνίες",
+		"bevel": "Λοξές γωνίες",
+		"round": "Στρογγυλές γωνίες",
 		"radius": "Ακτίνα γωνιών",
 		"iconScale": "Κλίμακα εικονιδίου",
 		"position": "Θέση εικονιδίου",
@@ -1761,7 +1865,8 @@
 		"previewUnavailable": "Η προεπισκόπηση 3D δεν είναι διαθέσιμη. Επιλέξτε μπροστινή όψη. Η εξαγωγή παραμένει διαθέσιμη.",
 		"previewLabel": "Προεπισκόπηση μαγνήτη 3D. Σύρετε για περιστροφή.",
 		"exportCredit": "Εξαγωγή 3MF με {}",
-		"pathCredit": "Διαχωρισμός διαδρομών με {}"
+		"pathCredit": "Διαχωρισμός διαδρομών με {}",
+		"maintainerCredit": "Δημιουργήθηκε και συντηρείται με ♥ από τον {}, μέλος της ομάδας Simple Icons."
 	},
 	"ru-RU": {
 		"name": "3D-магниты",
@@ -1823,6 +1928,10 @@
 		"longestSide": "Длинная сторона",
 		"outlineWidth": "Ширина обводки",
 		"outlineHint": "По умолчанию: 2,5 мм.",
+		"outlineJoin": "Соединение углов",
+		"miter": "Острые углы",
+		"bevel": "Скошенные углы",
+		"round": "Скруглённые углы",
 		"radius": "Радиус углов",
 		"iconScale": "Масштаб значка",
 		"position": "Положение значка",
@@ -1845,7 +1954,8 @@
 		"previewUnavailable": "3D-просмотр недоступен. Переключитесь на вид спереди. Экспорт по-прежнему доступен.",
 		"previewLabel": "3D-просмотр магнита. Перетащите для вращения.",
 		"exportCredit": "Экспорт 3MF с помощью {}",
-		"pathCredit": "Разделение контуров с помощью {}"
+		"pathCredit": "Разделение контуров с помощью {}",
+		"maintainerCredit": "Создано и поддерживается с ♥ участником команды Simple Icons — {}."
 	},
 	"uk-UA": {
 		"name": "3D-магніти",
@@ -1907,6 +2017,10 @@
 		"longestSide": "Найдовша сторона",
 		"outlineWidth": "Ширина обведення",
 		"outlineHint": "Типово: 2,5 мм.",
+		"outlineJoin": "З’єднання кутів",
+		"miter": "Гострі кути",
+		"bevel": "Скошені кути",
+		"round": "Заокруглені кути",
 		"radius": "Радіус кутів",
 		"iconScale": "Масштаб значка",
 		"position": "Положення значка",
@@ -1929,7 +2043,8 @@
 		"previewUnavailable": "3D-перегляд недоступний. Перейдіть до вигляду спереду. Експорт залишається доступним.",
 		"previewLabel": "3D-перегляд магніту. Перетягніть для обертання.",
 		"exportCredit": "Експорт 3MF за допомогою {}",
-		"pathCredit": "Поділ контурів за допомогою {}"
+		"pathCredit": "Поділ контурів за допомогою {}",
+		"maintainerCredit": "Створено й підтримується з ♥ учасником команди Simple Icons — {}."
 	},
 	"sr-Cyrl-RS": {
 		"name": "3D магнети",
@@ -1991,6 +2106,10 @@
 		"longestSide": "Најдужа страна",
 		"outlineWidth": "Ширина ивице",
 		"outlineHint": "Подразумевано: 2,5 mm.",
+		"outlineJoin": "Спој углова",
+		"miter": "Оштри углови",
+		"bevel": "Закошени углови",
+		"round": "Заобљени углови",
 		"radius": "Полупречник углова",
 		"iconScale": "Размера иконе",
 		"position": "Положај иконе",
@@ -2013,7 +2132,8 @@
 		"previewUnavailable": "3D преглед није доступан. Пређите на предњи приказ. Извоз је и даље могућ.",
 		"previewLabel": "3D преглед магнета. Превуците за ротацију.",
 		"exportCredit": "3MF извоз помоћу {}",
-		"pathCredit": "Раздвајање путања помоћу {}"
+		"pathCredit": "Раздвајање путања помоћу {}",
+		"maintainerCredit": "Направио и одржава с ♥ {}, члан тима Simple Icons."
 	},
 	"sr-Latn-RS": {
 		"name": "3D magneti",
@@ -2075,6 +2195,10 @@
 		"longestSide": "Najduža strana",
 		"outlineWidth": "Širina ivice",
 		"outlineHint": "Podrazumevano: 2,5 mm.",
+		"outlineJoin": "Spoj uglova",
+		"miter": "Oštri uglovi",
+		"bevel": "Zakošeni uglovi",
+		"round": "Zaobljeni uglovi",
 		"radius": "Poluprečnik uglova",
 		"iconScale": "Razmera ikone",
 		"position": "Položaj ikone",
@@ -2097,6 +2221,7 @@
 		"previewUnavailable": "3D pregled nije dostupan. Pređite na prednji prikaz. Izvoz je i dalje moguć.",
 		"previewLabel": "3D pregled magneta. Prevucite za rotaciju.",
 		"exportCredit": "3MF izvoz pomoću {}",
-		"pathCredit": "Razdvajanje putanja pomoću {}"
+		"pathCredit": "Razdvajanje putanja pomoću {}",
+		"maintainerCredit": "Napravio i održava s ♥ {}, član tima Simple Icons."
 	}
 }

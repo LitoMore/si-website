@@ -8,11 +8,13 @@ import createManifold, {
 import wasmUrl from 'manifold-3d/manifold.wasm?url';
 import {split} from 'svg-path-areas-splitter';
 import {SVGLoader} from 'three/addons/loaders/SVGLoader.js';
+import {bevelBorder} from './bevel-border.js';
 
 export type MagnetSettings = {
 	style: 'outline' | 'square' | 'circle';
 	size: number;
 	border: number;
+	join: 'miter' | 'bevel' | 'round';
 	radius: number;
 	iconScale: number;
 	circleIconScale: number;
@@ -36,6 +38,7 @@ export function geometrySettings(
 		style: settings.style,
 		size: settings.size,
 		border: settings.border,
+		join: settings.join,
 		radius: settings.radius,
 		iconScale: settings.iconScale,
 		circleIconScale: settings.circleIconScale,
@@ -50,6 +53,7 @@ export const defaults: MagnetSettings = {
 	style: 'outline',
 	size: 50,
 	border: 2.5,
+	join: 'round',
 	radius: 11,
 	iconScale: 76,
 	circleIconScale: 70,
@@ -70,6 +74,7 @@ export type MagnetModel = {
 	logoParts: MagnetMesh[];
 	basePolygons: Vec2[][];
 	logoPolygons: Vec2[][];
+	bounds: {min: Vec2; max: Vec2};
 	width: number;
 	height: number;
 	components: number;
@@ -188,7 +193,23 @@ export async function createModel(
 					radius > 0 ? keep(square.offset(radius, 'Round', 2, 128)) : square;
 			}
 		} else {
-			const expanded = keep(logo.offset(settings.border, 'Round', 2, 96));
+			// SVGs can close with a microscopic edge whose tangent creates a false
+			// corner. Remove redundant samples within 5 microns before sharp joins.
+			const contour =
+				settings.join === 'round' ? logo : keep(logo.simplify(0.005));
+			const polygons = contour.toPolygons();
+			const expanded = keep(
+				settings.join === 'bevel'
+					? new kernelModule.CrossSection(
+							bevelBorder(polygons, settings.border),
+						)
+					: contour.offset(
+							settings.border,
+							settings.join === 'miter' ? 'Miter' : 'Round',
+							4,
+							96,
+						),
+			);
 			// Remove every interior contour AFTER offsetting: enclosed gaps get solid backing.
 			base = keep(
 				new kernelModule.CrossSection(
@@ -257,6 +278,7 @@ export async function createModel(
 			logoParts,
 			basePolygons: base.toPolygons(),
 			logoPolygons: logo.toPolygons(),
+			bounds: box,
 			width: box.max[0] - box.min[0],
 			height: box.max[1] - box.min[1],
 			components,
@@ -296,5 +318,5 @@ export function polygonsToPath(polygons: Vec2[][]) {
 }
 
 export function modelSvg(model: MagnetModel, settings: MagnetSettings) {
-	return `<svg xmlns="http://www.w3.org/2000/svg" width="${model.width}mm" height="${model.height}mm" viewBox="${-model.width / 2} ${-model.height / 2} ${model.width} ${model.height}"><path fill="${settings.baseColor}" fill-rule="nonzero" d="${polygonsToPath(model.basePolygons)}"/><path fill="${settings.iconColor}" fill-rule="nonzero" d="${polygonsToPath(model.logoPolygons)}"/></svg>`;
+	return `<svg xmlns="http://www.w3.org/2000/svg" width="${model.width}mm" height="${model.height}mm" viewBox="${model.bounds.min[0]} ${-model.bounds.max[1]} ${model.width} ${model.height}"><path fill="${settings.baseColor}" fill-rule="nonzero" d="${polygonsToPath(model.basePolygons)}"/><path fill="${settings.iconColor}" fill-rule="nonzero" d="${polygonsToPath(model.logoPolygons)}"/></svg>`;
 }

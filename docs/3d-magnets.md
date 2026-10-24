@@ -15,6 +15,9 @@ because the gallery locks body scrolling. Its navigation reuses the same
 BackHome and Controls components as Icon Previewer and Open Graph Generator.
 Controls, export hints, errors and help follow the same language preference.
 Arabic uses a right-to-left layout. Gallery-specific settings are hidden here.
+Desktop uses the available viewport height with compact shape and join controls;
+shorter windows tighten spacing further. Expanded settings scroll within their
+panel while the preview stays in place. Mobile keeps the vertical page layout.
 Theme and language changes preserve model settings and print colors.
 Color presets keep their base and icon roles when choosing another icon. Only
 the colors linked to the brand update; white, black and manually chosen colors
@@ -37,8 +40,15 @@ WebGL renderer. Selecting another icon skips the slider's 100 ms debounce.
 
 ## Shapes and placement
 
-- Outline: 50 mm longest overall side, with a 2.5 mm outward border and round
-  joins. Enclosed backing holes are filled; logo counters remain recessed.
+- Outline: 50 mm longest overall side with the default 2.5 mm outward border
+  and round joins. Corner join also offers Miter and Bevel. Miter uses a limit
+  of 4 to cap sharp spikes and can extend beyond the requested longest side.
+  Sharp joins first simplify redundant contour samples within 0.005 mm so
+  microscopic SVG closing edges cannot produce artificial corners. Bevel
+  connects adjacent offset edges with a straight cut, using complete offset
+  contours and negative-winding wedges to trim concave intersections because
+  Manifold 3.5.4's Square join differs from Bevel. Enclosed backing holes are
+  filled; logo counters remain recessed.
 - Rounded square: 50 mm sides, 11 mm corner radius, 76% icon scale.
 - Circle: 50 mm diameter, 70% icon scale.
 - The base is 3 mm thick and the raised icon is 1 mm thick by default.

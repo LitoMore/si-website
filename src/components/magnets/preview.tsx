@@ -75,13 +75,15 @@ export default function Preview({
 		const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 2000);
 		camera.up.set(0, 0, 1);
 		const size = Math.max(model.width, model.height);
+		const centerX = (model.bounds.min[0] + model.bounds.max[0]) / 2;
+		const centerY = (model.bounds.min[1] + model.bounds.max[1]) / 2;
 		camera.position.set(
-			0,
-			isFront ? 0 : -size * 0.92,
+			centerX,
+			centerY + (isFront ? 0 : -size * 0.92),
 			size * (isFront ? 2.8 : 2.4),
 		);
 		const controls = new OrbitControls(camera, renderer.domElement);
-		controls.target.set(0, 0, settings.baseHeight / 2);
+		controls.target.set(centerX, centerY, settings.baseHeight / 2);
 		controls.enableDamping = true;
 		controls.enablePan = false;
 		controls.minDistance = size * 1.2;
