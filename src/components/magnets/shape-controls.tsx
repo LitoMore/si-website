@@ -203,13 +203,7 @@ export function ShapeControls({
 											strokeWidth="6"
 										/>
 									</svg>
-									<span>
-										{join === 'miter'
-											? 'Miter'
-											: join === 'bevel'
-												? 'Bevel'
-												: 'Round'}
-									</span>
+									<span>{labels[join]}</span>
 								</button>
 							))}
 						</div>
