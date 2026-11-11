@@ -8,6 +8,7 @@ export enum PageLayout {
 	Previewer = 'previewer',
 	Magnets = '3d',
 	OpenGraph = 'og',
+	Cdn = 'cdn',
 }
 
 export enum CardSize {

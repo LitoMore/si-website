@@ -1,8 +1,7 @@
 import {useSearchParams} from 'react-router';
 import {useIcons, useIconsLoadRequest} from '#atom';
-import Controls from '#components/controls/controls.js';
 import Loading from '#components/gallery/loading.js';
-import BackHome from '#components/header/backhome.js';
+import SubpageHeader from '#components/header/subpage-header.js';
 import MagnetWorkshop from '#components/magnets/magnet-workshop.js';
 import {useColorScheme, useI18n} from '#hooks';
 
@@ -11,21 +10,13 @@ export default function MagnetsLayout() {
 	const [parameters, setParameters] = useSearchParams();
 	const [catalog] = useIcons();
 	const [, requestIcons] = useIconsLoadRequest();
-	const {colorScheme, headerBg} = useColorScheme();
+	const {colorScheme} = useColorScheme();
 	return (
 		<div
 			className="magnets-page h-dvh overflow-auto pt-[54px]"
 			data-theme={colorScheme}
 		>
-			<header
-				className="fixed top-0 right-0 left-0 z-10 h-[54px] border-b border-black/10"
-				style={{background: headerBg}}
-			>
-				<BackHome />
-				<div className="fixed top-0 right-0 flex items-center justify-center p-2.5">
-					<Controls />
-				</div>
-			</header>
+			<SubpageHeader />
 			{catalog.data.length > 0 && catalog.version ? (
 				<MagnetWorkshop
 					icons={catalog.data}

@@ -3,6 +3,7 @@ import {
 	IconEyeglass,
 	IconGrid4x4,
 	IconMagnet,
+	IconWorld,
 } from '@tabler/icons-react';
 import {useNavigate} from 'react-router';
 import {Dropdown} from '#components/ui/dropdown.js';
@@ -17,6 +18,14 @@ export default function Apps() {
 	return (
 		<Dropdown
 			items={[
+				{
+					key: PageLayout.Cdn,
+					icon: <IconWorld />,
+					label: <span>Simple Icons CDN</span>,
+					onClick() {
+						void navigate('/cdn');
+					},
+				},
 				{
 					key: PageLayout.Previewer,
 					icon: <IconEyeglass />,

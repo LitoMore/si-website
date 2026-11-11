@@ -145,9 +145,24 @@ export const getColorVariables = (isDark: boolean) => ({
 
 export const getSimpleIconsCdnUrl = (
 	slug: string,
-	options?: {autoViewbox?: boolean; size?: number},
+	options?: {
+		autoViewbox?: boolean;
+		size?: number;
+		color?: string;
+		darkModeColor?: string;
+	},
 ) => {
 	const url = new URL(`https://cdn.simpleicons.org/${slug}`);
+	const encodeColor = (color: string) =>
+		encodeURIComponent(color).replaceAll(
+			/[!'()*]/g,
+			(character) => `%${character.codePointAt(0)!.toString(16).toUpperCase()}`,
+		);
+	if (options?.color || options?.darkModeColor) {
+		url.pathname += `/${encodeColor(options.color || '_')}`;
+		if (options.darkModeColor)
+			url.pathname += `/${encodeColor(options.darkModeColor)}`;
+	}
 	if (options?.autoViewbox) url.searchParams.set('viewbox', 'auto');
 	if (options?.size) url.searchParams.set('size', String(options.size));
 	return url.href;

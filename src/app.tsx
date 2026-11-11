@@ -19,6 +19,7 @@ const OpenGraphLayout = lazy(
 );
 const PreviewLayout = lazy(async () => import('./layouts/preview-layout.js'));
 const MagnetsLayout = lazy(async () => import('./layouts/magnets-layout.js'));
+const CdnLayout = lazy(async () => import('./layouts/cdn-layout.js'));
 const FloatButtons = lazy(
 	async () => import('#components/common/floatbuttons.js'),
 );
@@ -117,6 +118,7 @@ function App() {
 					<Route element={<OpenGraphLayout />} path="og" />
 					<Route element={<PreviewLayout />} path="preview" />
 					<Route element={<MagnetsLayout />} path="3d" />
+					<Route element={<CdnLayout />} path="cdn" />
 				</Routes>
 				{isMobileSize || isMagnetPage ? null : <FloatButtons />}
 			</MessageProvider>
