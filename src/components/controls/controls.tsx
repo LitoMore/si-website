@@ -16,7 +16,7 @@ function Controls({extraSettings}: {readonly extraSettings?: ReactNode}) {
 			<Legal />
 		</div>
 	) : (
-		<>
+		<div className="flex items-center">
 			<div className="flex justify-center">
 				<Settings extraSettings={extraSettings} />
 				<Translations />
@@ -25,7 +25,7 @@ function Controls({extraSettings}: {readonly extraSettings?: ReactNode}) {
 			</div>
 			<span aria-hidden className="ui-divider" />
 			<Socials />
-		</>
+		</div>
 	);
 }
 

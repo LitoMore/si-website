@@ -18,16 +18,6 @@
 	--og-surface: #202020;
 	background: #111;
 }
-.og-navigation {
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
-	z-index: 10;
-	border-bottom: 1px solid var(--og-border);
-	background: var(--og-bg);
-	height: 54px;
-}
 .og-editor {
 	margin: 0 auto;
 	max-width: 1240px;

@@ -519,7 +519,7 @@ button:not(:disabled),
 	height: 100dvh;
 }
 .ui-divider {
-	margin-inline: 16px;
+	margin-inline: 8px;
 	border-inline-start: 1px solid var(--ui-border);
 	height: 16px;
 }
