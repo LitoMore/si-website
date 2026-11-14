@@ -11,6 +11,9 @@ const translation: Internationalization = {
 			'Mainokset auttavat tukemaan Simple Iconsia. Kiitos ymmärryksestäsi.',
 		unavailable: 'Tässä olisi tavallisesti mainos',
 	},
+	controls: {
+		legalDisclaimer: 'Oikeudellinen ilmoitus',
+	},
 	footer: {
 		iconMissing: 'Puuttuuko kuvake?',
 		iconOutdated: 'Kuvake vanhentunut?',

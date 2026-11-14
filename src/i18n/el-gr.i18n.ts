@@ -11,6 +11,9 @@ const translation: Internationalization = {
 			'Οι διαφημίσεις βοηθούν το Simple Icons. Ευχαριστούμε για την κατανόηση.',
 		unavailable: 'Εδώ συνήθως εμφανίζεται μια διαφήμιση',
 	},
+	controls: {
+		legalDisclaimer: 'Νομική Αποποίηση',
+	},
 	footer: {
 		iconMissing: 'Λείπει εικονίδιο;',
 		iconOutdated: 'Εικονίδιο ξεπερασμένο;',

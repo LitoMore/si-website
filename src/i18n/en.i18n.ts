@@ -9,6 +9,9 @@ const translation: Internationalization = {
 		support: 'Ads help support Simple Icons. Thanks for understanding.',
 		unavailable: 'An ad would normally be here',
 	},
+	controls: {
+		legalDisclaimer: 'Legal Disclaimer',
+	},
 	footer: {
 		iconMissing: 'Icon missing?',
 		iconOutdated: 'Icon outdated?',

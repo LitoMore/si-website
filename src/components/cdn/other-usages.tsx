@@ -115,13 +115,13 @@ export default function OtherUsages() {
 												<li key={step}>{step}</li>
 											))}
 										</ol>
-										{exampleUrl && (
+										{exampleUrl ? (
 											<div className="cdn-code" dir="ltr">
 												<CopyText text={exampleUrl}>
 													<code>{exampleUrl}</code>
 												</CopyText>
 											</div>
-										)}
+										) : null}
 										{guide.id === 'terminal' && (
 											<div className="cdn-terminal-commands">
 												{commands.map((command) => (

@@ -15,11 +15,12 @@
 		"dev": "vite",
 		"lint": "xo",
 		"build": "vite build",
+		"test": "node --run build && node --run lint",
 		"deps": "VITE_ENABLE_VISUALIZER=true npm run build",
 		"pages": "VITE_BASE_URL='si-website' npm run build",
 		"preview": "vite preview",
 		"serve": "vite serve dist/",
-		"deploy": "npm run build && wrangler pages deploy"
+		"deploy": "node --run build && wrangler pages deploy"
 	},
 	"devDependencies": {
 		"@base-ui/react": "^1.9.0",

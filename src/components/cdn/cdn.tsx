@@ -16,7 +16,7 @@ import OtherUsages from './other-usages.js';
 const repository = 'https://github.com/LitoMore/simple-icons-cdn';
 const endpoint =
 	'https://cdn.simpleicons.org/:icon_slug/:color?/:dark_mode_color?';
-type Format = 'URL' | 'HTML' | 'Markdown' | 'Terminal';
+type Format = 'url' | 'html' | 'markdown' | 'terminal';
 type IconOptions = {
 	slug: string;
 	color: string;
@@ -39,6 +39,7 @@ function iconUrl(options: IconOptions, preview?: 'light' | 'dark') {
 				? options.darkModeColor || options.color
 				: options.color,
 		darkModeColor: preview ? undefined : options.darkModeColor,
+		// eslint-disable-next-line unicorn/explicit-length-check
 		size: options.size ? Number(options.size) : undefined,
 		autoViewbox: options.autoViewbox,
 	});
@@ -66,7 +67,7 @@ function RemoteIcon({
 		'loading',
 	);
 	return (
-		<div className="cdn-remote-icon" aria-busy={state === 'loading'}>
+		<div aria-busy={state === 'loading'} className="cdn-remote-icon">
 			{state === 'failed' ? (
 				<div className="cdn-preview-status" role="status">
 					<p>{labels.loadError}</p>
@@ -114,37 +115,38 @@ export default function Cdn() {
 	const searcher = useSearcher();
 	const [options, setOptions] = useState(defaults);
 	const [previewOptions, setPreviewOptions] = useState(defaults);
-	const [format, setFormat] = useState<Format>('URL');
+	const [format, setFormat] = useState<Format>('url');
 	const builderRef = useRef<HTMLElement>(null);
-	const validSlug = /^[a-z\d]+$/.test(options.slug);
-	const validSize =
+	const isValidSlug = /^[\da-z]+$/.test(options.slug);
+	const isValidSize =
+		// eslint-disable-next-line unicorn/explicit-length-check
 		!options.size ||
 		(Number.isSafeInteger(Number(options.size)) && Number(options.size) > 0);
-	const valid = validSlug && validSize;
-	const url = valid ? iconUrl(options) : '';
+	const isValid = isValidSlug && isValidSize;
+	const url = isValid ? iconUrl(options) : '';
 	const title =
 		icons.data.find((icon) => icon.slug === options.slug)?.title ??
 		options.slug;
 	const suggestions = searcher.search(options.slug).slice(0, 10);
 	const snippets: Record<Format, string> = {
-		URL: url,
-		HTML: `<img src="${escapeHtml(url)}" alt="${escapeHtml(title)}" />`,
-		Markdown: `![${title.replaceAll(/[\[\]\\]/g, '\\$&')}](${url})`,
-		Terminal: `imgcat -u '${url}'`,
+		url,
+		html: `<img src="${escapeHtml(url)}" alt="${escapeHtml(title)}" />`,
+		markdown: `![${title.replaceAll(/[[\\\]]/g, String.raw`\$&`)}](${url})`,
+		terminal: `imgcat -u '${url}'`,
 	};
 	const previewUrls = {
 		light: iconUrl(previewOptions, 'light'),
 		dark: iconUrl(previewOptions, 'dark'),
 	};
 	useEffect(() => {
-		if (!valid) return;
+		if (!isValid) return;
 		const timer = setTimeout(() => {
 			setPreviewOptions(options);
 		}, 350);
 		return () => {
 			clearTimeout(timer);
 		};
-	}, [options, valid]);
+	}, [options, isValid]);
 
 	const examples = [
 		{
@@ -190,8 +192,8 @@ export default function Cdn() {
 					<img
 						alt=""
 						height={44}
-						width={44}
 						src="https://cdn.simpleicons.org/simpleiconscdn/111/eee"
+						width={44}
 					/>
 					<h1>Simple Icons CDN</h1>
 				</div>
@@ -223,7 +225,7 @@ export default function Cdn() {
 							<label htmlFor="cdn-slug">{labels.slug}</label>
 							<input
 								aria-describedby="cdn-slug-hint"
-								aria-invalid={!validSlug}
+								aria-invalid={!isValidSlug}
 								autoComplete="off"
 								dir="ltr"
 								id="cdn-slug"
@@ -280,7 +282,7 @@ export default function Cdn() {
 						<div className="cdn-field cdn-size-field">
 							<label htmlFor="cdn-size">{labels.size}</label>
 							<input
-								aria-invalid={!validSize}
+								aria-invalid={!isValidSize}
 								dir="ltr"
 								id="cdn-size"
 								min={1}
@@ -306,7 +308,7 @@ export default function Cdn() {
 						</label>
 						<p className="cdn-field-hint">{labels.viewboxHint}</p>
 					</div>
-					<div className="cdn-previews" aria-label={labels.preview}>
+					<div aria-label={labels.preview} className="cdn-previews">
 						<div className="cdn-preview-pair">
 							{(['light', 'dark'] as const).map((mode) => (
 								<div
@@ -339,14 +341,17 @@ export default function Cdn() {
 						<h3>{labels.output}</h3>
 						<SegmentedControl
 							label={labels.format}
-							options={(['URL', 'HTML', 'Markdown', 'Terminal'] as const).map(
-								(value) => ({value, label: value}),
-							)}
+							options={[
+								{value: 'url', label: 'URL'},
+								{value: 'html', label: 'HTML'},
+								{value: 'markdown', label: 'Markdown'},
+								{value: 'terminal', label: 'Terminal'},
+							]}
 							value={format}
 							onChange={setFormat}
 						/>
 					</div>
-					{valid ? (
+					{isValid ? (
 						<div className="cdn-code" dir="ltr">
 							<CopyText text={snippets[format]}>
 								<code>{snippets[format]}</code>

@@ -1,5 +1,6 @@
 import {type ReactNode} from 'react';
 import {useSizes} from '#hooks';
+import Legal from './legal.js';
 import Settings from './settings.js';
 import Socials from './socials.js';
 import ThridParty from './thirdparty.js';
@@ -12,6 +13,7 @@ function Controls({extraSettings}: {readonly extraSettings?: ReactNode}) {
 			<Settings />
 			<Translations />
 			<ThridParty />
+			<Legal />
 		</div>
 	) : (
 		<>
@@ -19,6 +21,7 @@ function Controls({extraSettings}: {readonly extraSettings?: ReactNode}) {
 				<Settings extraSettings={extraSettings} />
 				<Translations />
 				<ThridParty />
+				<Legal />
 			</div>
 			<span aria-hidden className="ui-divider" />
 			<Socials />

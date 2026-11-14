@@ -11,6 +11,9 @@ const translation: Internationalization = {
 			'Advertenties helpen Simple Icons te ondersteunen. Bedankt voor je begrip.',
 		unavailable: 'Hier zou normaal een advertentie staan',
 	},
+	controls: {
+		legalDisclaimer: 'Wettelijke kennisgeving',
+	},
 	footer: {
 		iconMissing: 'Icoon ontbreekt?',
 		iconOutdated: 'Icoon verouderd?',

@@ -34,6 +34,9 @@ export type Internationalization = {
 		support: string;
 		unavailable: string;
 	};
+	controls: {
+		legalDisclaimer: string;
+	};
 	footer: {
 		iconMissing: string;
 		iconOutdated: string;

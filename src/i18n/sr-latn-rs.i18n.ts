@@ -9,6 +9,9 @@ const translation: Internationalization = {
 		support: 'Oglasi pomažu da podržimo Simple Icons. Hvala na razumevanju.',
 		unavailable: 'Ovde bi se obično prikazao oglas',
 	},
+	controls: {
+		legalDisclaimer: 'Pravno upozorenje',
+	},
 	footer: {
 		iconMissing: 'Nedostaje ikonica?',
 		iconOutdated: 'Zastarela ikonica?',

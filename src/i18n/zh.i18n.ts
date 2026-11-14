@@ -8,6 +8,9 @@ const translation: Internationalization = {
 		support: '广告帮助支持 Simple Icons，感谢你的理解。',
 		unavailable: '这里原本是一则广告',
 	},
+	controls: {
+		legalDisclaimer: '法律声明',
+	},
 	footer: {
 		iconMissing: '缺少图标？',
 		iconOutdated: '有图标过时了吗？',

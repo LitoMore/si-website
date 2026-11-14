@@ -10,6 +10,9 @@ const translation: Internationalization = {
 		support: 'विज्ञापन Simple Icons को सहयोग देते हैं। समझने के लिए धन्यवाद।',
 		unavailable: 'यहाँ सामान्यतः एक विज्ञापन होता है',
 	},
+	controls: {
+		legalDisclaimer: 'कानूनी अस्वीकरण',
+	},
 	footer: {
 		iconMissing: 'आइकन गायब है?',
 		iconOutdated: 'आइकन पुराना है?',

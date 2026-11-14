@@ -11,6 +11,9 @@ const translation: Internationalization = {
 			'広告は Simple Icons の運営を支えています。ご理解ありがとうございます。',
 		unavailable: '通常はここに広告が表示されます',
 	},
+	controls: {
+		legalDisclaimer: '法的免責事項',
+	},
 	footer: {
 		iconMissing: 'アイコンがない？',
 		iconOutdated: 'アイコンが古い？',

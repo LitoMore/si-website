@@ -9,6 +9,9 @@ const translation: Internationalization = {
 		support: 'Annonser bidrar til å støtte Simple Icons. Takk for forståelsen.',
 		unavailable: 'Her ville det vanligvis vært en annonse',
 	},
+	controls: {
+		legalDisclaimer: 'Juridisk ansvarsfraskrivelse',
+	},
 	footer: {
 		iconMissing: 'Mangler ikon?',
 		iconOutdated: 'Ikon utdatert?',

@@ -11,6 +11,9 @@ const translation: Internationalization = {
 			'광고는 Simple Icons 운영에 도움이 됩니다. 이해해 주셔서 감사합니다.',
 		unavailable: '여기에는 보통 광고가 표시됩니다',
 	},
+	controls: {
+		legalDisclaimer: '법적 면책 조항',
+	},
 	footer: {
 		iconMissing: '아이콘이 없나요?',
 		iconOutdated: '아이콘이 최신이 아닌가요?',

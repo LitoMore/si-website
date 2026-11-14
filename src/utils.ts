@@ -158,13 +158,17 @@ export const getSimpleIconsCdnUrl = (
 			/[!'()*]/g,
 			(character) => `%${character.codePointAt(0)!.toString(16).toUpperCase()}`,
 		);
+	// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- Empty strings mean no color; either nonempty color requires URL segments.
 	if (options?.color || options?.darkModeColor) {
+		// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- An empty light color needs the same placeholder as an undefined color.
 		url.pathname += `/${encodeColor(options.color || '_')}`;
 		if (options.darkModeColor)
 			url.pathname += `/${encodeColor(options.darkModeColor)}`;
 	}
+
 	if (options?.autoViewbox) url.searchParams.set('viewbox', 'auto');
 	if (options?.size) url.searchParams.set('size', String(options.size));
+
 	return url.href;
 };
 

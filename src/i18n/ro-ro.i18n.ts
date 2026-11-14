@@ -10,6 +10,9 @@ const translation: Internationalization = {
 			'Reclamele ajută la susținerea Simple Icons. Mulțumim pentru înțelegere.',
 		unavailable: 'În mod normal, aici ar apărea o reclamă',
 	},
+	controls: {
+		legalDisclaimer: 'Avertisment legal',
+	},
 	footer: {
 		iconMissing: 'Lipsește o pictogramă?',
 		iconOutdated: 'Pictogramă depășită?',

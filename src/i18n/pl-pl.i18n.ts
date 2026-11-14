@@ -10,6 +10,9 @@ const translation: Internationalization = {
 			'Reklamy pomagają wspierać Simple Icons. Dziękujemy za zrozumienie.',
 		unavailable: 'Tutaj zwykle pojawia się reklama',
 	},
+	controls: {
+		legalDisclaimer: 'Zastrzeżenie prawne',
+	},
 	footer: {
 		iconMissing: 'Brakuje ikony?',
 		iconOutdated: 'Ikona nieaktualna?',
