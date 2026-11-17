@@ -15,7 +15,7 @@ const en = {
 	brandColor: 'Brand color',
 	sameColor: 'Same as light',
 	colorHint:
-		'Use hex (without #) or a CSS color name. Leave blank for the brand color.',
+		'Use hex (without #) or a CSS color name. Leave both blank for the brand color, or enter _ for either mode.',
 	size: 'Size (px)',
 	intrinsicSize: 'Default',
 	autoViewbox: 'Fit viewBox to the icon',
@@ -129,7 +129,8 @@ const zh: typeof en = {
 	darkColor: '深色模式颜色',
 	brandColor: '品牌原色',
 	sameColor: '与浅色模式相同',
-	colorHint: '支持十六进制颜色（不含 #）或 CSS 颜色名称，留空使用品牌原色。',
+	colorHint:
+		'支持十六进制颜色（不含 #）或 CSS 颜色名称。两项留空使用品牌原色；单独使用品牌原色时填 _。',
 	size: '尺寸（px）',
 	intrinsicSize: '默认',
 	autoViewbox: '让 viewBox 贴合图标',
@@ -237,7 +238,8 @@ const zhHant: typeof en = {
 	darkColor: '深色模式顏色',
 	brandColor: '品牌原色',
 	sameColor: '與淺色模式相同',
-	colorHint: '支援十六進位顏色（不含 #）或 CSS 顏色名稱，留空使用品牌原色。',
+	colorHint:
+		'支援十六進位顏色（不含 #）或 CSS 顏色名稱。兩項留空使用品牌原色；單獨使用品牌原色時填 _。',
 	size: '尺寸（px）',
 	intrinsicSize: '預設',
 	autoViewbox: '讓 viewBox 貼合圖示',

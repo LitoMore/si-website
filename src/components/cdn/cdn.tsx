@@ -25,9 +25,9 @@ type IconOptions = {
 	autoViewbox: boolean;
 };
 const defaults: IconOptions = {
-	slug: 'simpleicons',
+	slug: 'nodedotjs',
 	color: '',
-	darkModeColor: 'eee',
+	darkModeColor: '',
 	size: '',
 	autoViewbox: false,
 };
@@ -164,7 +164,12 @@ export default function Cdn() {
 		},
 		{
 			label: labels.themeExample,
-			options: {...defaults, color: '111', darkModeColor: 'eee'},
+			options: {
+				...defaults,
+				slug: 'simpleicons',
+				color: '111',
+				darkModeColor: 'eee',
+			},
 		},
 		{
 			label: labels.sizeExample,
