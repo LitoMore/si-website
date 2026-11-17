@@ -26,7 +26,7 @@
 	}
 
 	.icon-image {
-		@apply w-full flex-1 overflow-hidden;
+		@apply min-h-0 w-full flex-1 overflow-hidden;
 	}
 
 	.icon {
@@ -74,10 +74,6 @@ input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
-}
-
-.virtuoso-grid-item:last-child {
-	margin-bottom: 8px;
 }
 
 :root {

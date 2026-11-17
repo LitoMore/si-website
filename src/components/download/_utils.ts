@@ -1,5 +1,10 @@
 import {type BitmapFormat} from '#types';
-import {downloadFromCanvas, getImageCanvas, getSvg} from '#utils';
+import {
+	downloadFromCanvas,
+	getImageCanvas,
+	getSvg,
+	getSvgDataUri,
+} from '#utils';
 
 export const downloadSvg = async (
 	version: string,
@@ -8,8 +13,7 @@ export const downloadSvg = async (
 ) => {
 	let svg = await getSvg(version, slug);
 	if (hex) svg = svg.replace('<svg ', () => `<svg fill="#${hex}" `);
-	// eslint-disable-next-line no-restricted-globals
-	const url = `data:image/svg+xml;base64,${btoa(svg)}`;
+	const url = getSvgDataUri(svg);
 	const a = document.createElement('a');
 	a.classList.add('hidden');
 	a.setAttribute('href', url);
@@ -61,8 +65,7 @@ export const downloadBitmap = async (
 ) => {
 	let svg = await getSvg(version, slug);
 	svg = svg.replace('<svg ', () => `<svg fill="#${hex}" `);
-	// eslint-disable-next-line no-restricted-globals
-	const imageSource = `data:image/svg+xml;base64,${btoa(svg)}`;
+	const imageSource = getSvgDataUri(svg);
 	const {canvas} = await getImageCanvas(imageSource, size, size, {
 		imageWidth: size,
 		imageHeight: size,

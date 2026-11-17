@@ -1,6 +1,5 @@
-import {useIcons} from '#atom';
 import {type Icon} from '#types';
-import {getMaskStyles, normalizeColor} from '#utils';
+import {normalizeColor} from '#utils';
 
 function PrefixIcon({
 	icon,
@@ -11,7 +10,6 @@ function PrefixIcon({
 	readonly color?: string;
 	readonly iconStyle: 'color' | 'icon';
 }) {
-	const [{version}] = useIcons();
 	if (!icon) return null;
 
 	const borderRadius = iconStyle === 'color' ? 4 : undefined;
@@ -26,12 +24,22 @@ function PrefixIcon({
 		<div
 			className="h-[21px] w-[21px] shrink-0"
 			style={{
-				...(iconStyle === 'icon' && getMaskStyles(version, icon, true)),
 				borderRadius,
 				boxShadow,
-				backgroundColor,
+				backgroundColor: iconStyle === 'color' ? backgroundColor : undefined,
 			}}
-		/>
+		>
+			{iconStyle === 'icon' ? (
+				<svg
+					aria-hidden
+					className="h-full w-full"
+					fill="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path d={icon.path} />
+				</svg>
+			) : null}
+		</div>
 	);
 }
 

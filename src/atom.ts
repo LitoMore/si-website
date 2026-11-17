@@ -1,4 +1,4 @@
-import {atom, useAtom} from 'jotai';
+import {atom, useAtom, useAtomValue} from 'jotai';
 import {atomWithStorage} from 'jotai/utils';
 import {defaultOpenGraphImage} from '#constants';
 import {
@@ -19,6 +19,11 @@ const icons = atom<{data: Icon[]; version: string; error?: string}>({
 const iconsLoadRequest = atom(0);
 export const useIconsLoadRequest = () => useAtom(iconsLoadRequest);
 export const useIcons = () => useAtom(icons);
+const iconsBySlug = atom(
+	(get) => new Map(get(icons).data.map((icon) => [icon.slug, icon])),
+);
+export const useIconBySlug = (slug: string) =>
+	useAtomValue(iconsBySlug).get(slug);
 
 const searchText = atom('');
 export const useSearchText = () => useAtom(searchText);

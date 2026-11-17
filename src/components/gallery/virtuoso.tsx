@@ -1,8 +1,7 @@
-import {type ComponentPropsWithoutRef, forwardRef} from 'react';
 import {
+	type Components,
 	type ContextProp,
-	type GridComponents,
-	VirtuosoGrid,
+	Virtuoso as VirtualList,
 } from 'react-virtuoso';
 import {galleryAdvertisement} from '#constants';
 import {type Icon} from '#types';
@@ -18,7 +17,7 @@ type GalleryContext = {
 
 function GalleryHeader({context}: ContextProp<GalleryContext>) {
 	if (!context?.advertisement) {
-		return null;
+		return <div className="h-2.5" />;
 	}
 
 	const {headerIcons, iconsPerRow, cardPixels, advertisement} = context;
@@ -43,27 +42,14 @@ function GalleryHeader({context}: ContextProp<GalleryContext>) {
 	);
 }
 
-const GalleryList = forwardRef<
-	HTMLDivElement,
-	ComponentPropsWithoutRef<'div'> & ContextProp<GalleryContext>
->(({children, style, context, ...props}, ref) => (
-	<div
-		ref={ref}
-		{...props}
-		className={
-			context?.advertisement
-				? 'mb-2.5 flex flex-wrap gap-1.25'
-				: 'my-2.5 flex flex-wrap gap-1.25'
-		}
-		style={style}
-	>
-		{children}
-	</div>
-));
+function GalleryFooter() {
+	// Keep outer spacing in measured components, not margins on recycled items.
+	return <div className="h-2.5" />;
+}
 
-const components: GridComponents<GalleryContext> = {
+const components: Components<Icon[], GalleryContext> = {
 	Header: GalleryHeader,
-	List: GalleryList,
+	Footer: GalleryFooter,
 };
 
 function Virtuoso({
@@ -97,23 +83,46 @@ function Virtuoso({
 		: 0;
 	const headerIcons = icons.slice(0, headerCount);
 	const remainingIcons = headerCount > 0 ? icons.slice(headerCount) : icons;
+	const rows = Array.from(
+		{length: Math.ceil(remainingIcons.length / iconsPerRow)},
+		(_, index) =>
+			remainingIcons.slice(index * iconsPerRow, (index + 1) * iconsPerRow),
+	);
+	// Keep two rows ready at both ends, but avoid mounting several rows of SVG
+	// paths as one large chunk in a single scroll frame.
+	const rowHeight = cardPixels + 5;
 
 	return (
-		<VirtuosoGrid
+		<VirtualList
 			components={components}
-			computeItemKey={(_index, icon) => icon.slug}
+			computeItemKey={(_index, row) => row[0]!.slug}
 			context={{
 				headerIcons,
 				iconsPerRow,
 				cardPixels,
 				advertisement: activeAdvertisement,
 			}}
-			data={remainingIcons}
-			itemContent={(_index, icon) => <Card key={icon.slug} icon={icon} />}
-			overscan={200}
+			data={rows}
+			fixedItemHeight={rowHeight}
+			increaseViewportBy={rowHeight * 2}
+			itemContent={(_index, row) => (
+				<div
+					className="grid gap-1.25 pb-1.25"
+					style={{
+						gridTemplateColumns: `repeat(${iconsPerRow}, ${cardPixels}px)`,
+						height: rowHeight,
+					}}
+				>
+					{row.map((icon) => (
+						<Card key={icon.slug} icon={icon} />
+					))}
+				</div>
+			)}
+			overscan={0}
 			style={{
 				height: galleryHeight,
 				margin: `0 ${galleryMargin}px`,
+				overflowAnchor: 'none',
 			}}
 		/>
 	);

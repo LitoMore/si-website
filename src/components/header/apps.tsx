@@ -6,6 +6,7 @@ import {
 	IconWorld,
 } from '@tabler/icons-react';
 import {useNavigate} from 'react-router';
+import BrandIcon from '#components/common/brand-icon.js';
 import {Dropdown} from '#components/ui/dropdown.js';
 import {useColorScheme, useI18n} from '#hooks';
 import {PageLayout} from '#types';
@@ -57,13 +58,7 @@ export default function Apps() {
 				className="flex cursor-pointer items-center justify-center"
 				type="button"
 			>
-				<img
-					alt="Simple Icons"
-					className="h-6 w-6"
-					src={`https://cdn.simpleicons.org/simpleicons/${iconFg.slice(
-						1,
-					)}?viewbox=auto`}
-				/>
+				<BrandIcon className="h-6 w-6" color={iconFg} slug="simpleicons" />
 				<IconCaretDownFilled className="size-4" />
 			</button>
 		</Dropdown>

@@ -1,65 +1,20 @@
-import {type CSSProperties} from 'react';
 import {
 	type BitmapFormat,
 	BrightnessMode,
 	CardSize,
 	ColorTheme,
 	type Icon,
-	type IconData,
-	type JsDelivrNpmResponse,
 } from '#types';
-import {colorForBackground} from './vendor/make-badge-color.js';
-import {getIconSlug} from './vendor/simple-icons-sdk.js';
+import {loadIconCatalog} from './icon-catalog/client.js';
 
 export {colorForBackground} from './vendor/make-badge-color.js';
 export {getIconSlug} from './vendor/simple-icons-sdk.js';
+export {searcherKeySelector} from './icon-catalog/search.js';
 
 export const pixelRatio = globalThis.devicePixelRatio || 1;
 
-export const getLatestVersion = async (packageName: string) => {
-	const response = await fetch(
-		new Request(`https://data.jsdelivr.com/v1/packages/npm/${packageName}`, {
-			cache: 'no-cache',
-		}),
-	);
-	if (!response.ok) throw new Error('Could not load the Simple Icons version.');
-	const json = (await response.json()) as JsDelivrNpmResponse;
-	return json.tags['latest'] ?? 'latest';
-};
-
-export const getIconsData = async (
-	simpleIconsVersion: string,
-	brightnessMode: BrightnessMode,
-) => {
-	const [major] = simpleIconsVersion.split('.', 1);
-	const isNewFormat = Number(major) >= 14;
-	const isNewDataFolder = Number(major) >= 15;
-	const response = await fetch(
-		`https://cdn.jsdelivr.net/npm/simple-icons@${simpleIconsVersion}/${
-			isNewDataFolder ? 'data' : '_data'
-		}/simple-icons.json`,
-	);
-	if (!response.ok) throw new Error('Could not load the icon list.');
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-	const json = await response.json();
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	const iconsData = (isNewFormat ? json : json.icons) as IconData[];
-	return iconsData.map((icon, index) => {
-		const {relativeColor, brightness} = colorForBackground(
-			`#${icon.hex}`,
-			brightnessMode === BrightnessMode.SimpleIcons,
-		);
-		return {
-			...icon,
-			slug: getIconSlug(icon),
-			index,
-			relativeColor,
-			brightness,
-		};
-	}) as Icon[];
-};
-
 const svgRequests = new Map<string, Promise<string>>();
+const iconLookups = new Map<string, Map<string, Icon>>();
 
 export const getSvgPath = (svg: string) => {
 	const document = new DOMParser().parseFromString(svg, 'image/svg+xml');
@@ -76,23 +31,37 @@ export const getSvgPath = (svg: string) => {
 	);
 };
 
-async function downloadSvg(url: string) {
-	const response = await fetch(url);
-	if (!response.ok) throw new Error('Could not load the icon SVG.');
-	const svg = await response.text();
-	if (!getSvgPath(svg)) throw new Error('The icon SVG has no valid path.');
-	return svg;
+async function readBundledSvg(version: string, slug: string) {
+	const catalog = await loadIconCatalog(BrightnessMode.SimpleIcons);
+	if (version !== catalog.version)
+		throw new Error('Icon catalog version mismatch.');
+	let lookup = iconLookups.get(version);
+	if (!lookup) {
+		lookup = new Map(catalog.icons.map((icon) => [icon.slug, icon]));
+		iconLookups.set(version, lookup);
+	}
+
+	const icon = lookup.get(slug);
+	if (!icon) throw new Error(`Unknown bundled icon: ${slug}`);
+	const title = icon.title
+		.replaceAll('&', '&amp;')
+		.replaceAll('<', '&lt;')
+		.replaceAll('>', '&gt;')
+		.replaceAll('"', '&quot;');
+	return `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>${title}</title><path d="${icon.path}"/></svg>`;
 }
 
 export const getSvg = async (simpleIconsVersion: string, slug: string) => {
-	const iconUrl = getJsdelivrCdnUrl(simpleIconsVersion, slug);
-	let request = svgRequests.get(iconUrl);
+	const key = `${simpleIconsVersion}/${slug}`;
+	let request = svgRequests.get(key);
 	if (!request) {
-		request = downloadSvg(iconUrl).catch((error: unknown) => {
-			svgRequests.delete(iconUrl);
-			throw error;
-		});
-		svgRequests.set(iconUrl, request);
+		request = readBundledSvg(simpleIconsVersion, slug).catch(
+			(error: unknown) => {
+				svgRequests.delete(key);
+				throw error;
+			},
+		);
+		svgRequests.set(key, request);
 	}
 
 	return request;
@@ -111,25 +80,11 @@ export const normalizeColor = (style?: string) => {
 
 export const getSvgDataUri = (svg: string, color?: string) => {
 	const hexColor = normalizeColor(color);
-	// eslint-disable-next-line no-restricted-globals
-	return `data:image/svg+xml;base64,${btoa(
-		hexColor ? svg.replace('<svg ', () => `<svg fill="#${hexColor}" `) : svg,
-	)}`;
+	const source = hexColor
+		? svg.replace('<svg ', () => `<svg fill="#${hexColor}" `)
+		: svg;
+	return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(source)}`;
 };
-
-export const getMaskStyles = (
-	version: string,
-	icon: Icon,
-	isLight: boolean,
-): CSSProperties => ({
-	backgroundColor: isLight ? `#${icon.hex}` : 'var(--si-gallery-fg-dark)',
-	/* eslint-disable @typescript-eslint/naming-convention -- Allow using Webkit-prefixed CSS properties */
-	WebkitMaskImage: `url(https://cdn.jsdelivr.net/npm/simple-icons@${version}/icons/${icon.slug}.svg)`,
-	WebkitMaskSize: 'contain',
-	WebkitMaskRepeat: 'no-repeat',
-	WebkitMaskPosition: 'center',
-	/* eslint-enable @typescript-eslint/naming-convention */
-});
 
 export const getColorVariables = (isDark: boolean) => ({
 	iconFg: isDark ? '#eee' : '#111',
@@ -190,21 +145,6 @@ export const getShareUrl = (
 
 	return shareUrl.href;
 };
-
-export const searcherKeySelector = (icon: Icon): string[] =>
-	[
-		icon.title,
-		icon.slug,
-		icon.aliases?.aka,
-		icon.aliases?.old,
-		icon.aliases?.dup?.map((duplicate) => duplicate.title),
-		Object.values(icon.aliases?.loc ?? {}),
-		icon.license?.type && icon.license.type !== 'custom'
-			? icon.license.type
-			: undefined,
-	]
-		.flat()
-		.filter(Boolean) as string[];
 
 export const getAliases = (icon?: Icon) => {
 	if (!icon) return [];

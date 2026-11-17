@@ -10,7 +10,7 @@ import {Select} from '#components/ui/form.js';
 import {Tooltip} from '#components/ui/popover.js';
 import {brightThreshold, defaultOpenGraphImage} from '#constants';
 import {useColorScheme, useI18n} from '#hooks';
-import {getJsdelivrCdnUrl} from '#utils';
+import {getSvg, getSvgDataUri} from '#utils';
 import MaskedIcon from '../canvas/masked-icon.js';
 import {downloadBlob} from '../download/blob.js';
 import OpenGraphSettings from './opengraph-settings.js';
@@ -68,13 +68,7 @@ function OpenGraph() {
 		[shuffled, grid],
 	);
 	const sources = useMemo(
-		() =>
-			version
-				? [
-						getJsdelivrCdnUrl(version, 'simpleicons'),
-						...icons.map(({icon}) => getJsdelivrCdnUrl(version, icon.slug)),
-					]
-				: [],
+		() => (version ? ['simpleicons', ...icons.map(({icon}) => icon.slug)] : []),
 		[icons, version],
 	);
 	const [assets, setAssets] = useState<{
@@ -89,7 +83,11 @@ function OpenGraph() {
 	useEffect(() => {
 		if (sources.length === 0) return;
 		let isActive = true;
-		void Promise.all(sources.map(async (source) => loadOpenGraphImage(source)))
+		void Promise.all(
+			sources.map(async (slug) =>
+				loadOpenGraphImage(getSvgDataUri(await getSvg(version, slug))),
+			),
+		)
 			.then((images) => {
 				if (isActive) setAssets({sources, images});
 			})
@@ -99,7 +97,7 @@ function OpenGraph() {
 		return () => {
 			isActive = false;
 		};
-	}, [sources, loadAttempt]);
+	}, [sources, loadAttempt, version]);
 
 	useEffect(() => {
 		const element = previewRef.current;

@@ -11,7 +11,7 @@ import {MessageProvider} from '#components/ui/feedback.js';
 import {UiProvider} from '#components/ui/theme.js';
 import {useColorScheme, useI18n, useSizes} from '#hooks';
 import {type BrightnessMode, ColorTheme, LanguageCode} from '#types';
-import {getIconsData, getLatestVersion} from '#utils';
+import {loadIconCatalog} from './icon-catalog/client.js';
 
 const DefaultLayout = lazy(async () => import('./layouts/default-layout.js'));
 const OpenGraphLayout = lazy(
@@ -58,10 +58,10 @@ function App() {
 		setIcons((previous) => ({...previous, error: undefined}));
 		const loadIconsData = async (brightnessMode_: BrightnessMode) => {
 			try {
-				const latestVersion = await getLatestVersion('simple-icons');
-				const allIcons = await getIconsData(latestVersion, brightnessMode_);
+				const {version, icons: allIcons} =
+					await loadIconCatalog(brightnessMode_);
 				if (!isActive) return;
-				setIcons({data: allIcons, version: latestVersion});
+				setIcons({data: allIcons, version});
 				setFilteredIcons(allIcons);
 			} catch {
 				if (isActive)

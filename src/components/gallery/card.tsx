@@ -1,12 +1,40 @@
 /*
  * [INFO] We don't use styled-components for this component due to performance reasons.
  */
-import {type CSSProperties} from 'react';
-import {useColorMode, useIcons, useSelectedIcon} from '#atom';
+import {
+	type CSSProperties,
+	type ReactNode,
+	createContext,
+	useContext,
+} from 'react';
+import {useColorMode, useSelectedIcon} from '#atom';
 import {brightThreshold, darkThreshold} from '#constants';
 import {useColorScheme, useSizes} from '#hooks';
 import {ColorMode, type Icon} from '#types';
-import {getMaskStyles} from '#utils';
+
+function useCardSettings() {
+	const [selectedIcon, setSelectedIcon] = useSelectedIcon();
+	const [colorMode] = useColorMode();
+	const {cardPixels} = useSizes();
+	const colorScheme = useColorScheme();
+	return {
+		selectedIcon,
+		setSelectedIcon,
+		colorMode,
+		cardPixels,
+		...colorScheme,
+	};
+}
+
+const CardSettings = createContext<
+	ReturnType<typeof useCardSettings> | undefined
+>(undefined);
+
+export function CardProvider({children}: {readonly children: ReactNode}) {
+	// Subscribe once for the gallery, rather than for every mounted card.
+	const settings = useCardSettings();
+	return <CardSettings value={settings}>{children}</CardSettings>;
+}
 
 function Card({
 	icon,
@@ -15,11 +43,18 @@ function Card({
 	readonly icon: Icon;
 	readonly style?: CSSProperties;
 }) {
-	const [{version}] = useIcons();
-	const [selectedIcon, setSelectedIcon] = useSelectedIcon();
-	const [colorMode] = useColorMode();
-	const {cardPixels} = useSizes();
-	const {isLight, isDark, galleryFg, contrast} = useColorScheme();
+	const settings = useContext(CardSettings);
+	if (!settings) throw new Error('Cards must be rendered inside CardProvider.');
+	const {
+		selectedIcon,
+		setSelectedIcon,
+		colorMode,
+		cardPixels,
+		isLight,
+		isDark,
+		galleryFg,
+		contrast,
+	} = settings;
 	const hexColor = `#${icon.hex}`;
 	const borderColor = isLight ? hexColor : galleryFg;
 	const borderWidth = isLight ? 2 : 1;
@@ -49,11 +84,14 @@ function Card({
 				setSelectedIcon(icon);
 			}}
 		>
-			<span
+			<svg
 				aria-hidden
 				className="icon-image"
-				style={getMaskStyles(version, icon, true)}
-			/>
+				fill={hexColor}
+				viewBox="0 0 24 24"
+			>
+				<path d={icon.path} />
+			</svg>
 			<span className="icon-title" dir="auto">
 				{icon.title}
 			</span>

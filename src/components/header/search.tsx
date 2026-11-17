@@ -1,13 +1,13 @@
 import {useEffect, useRef, useState} from 'react';
 import {IconX} from '@tabler/icons-react';
 import {useFilteredIcons, useIcons, useSearchText} from '#atom';
-import {useI18n, useSearcher, useSizes} from '#hooks';
+import {useI18n, useSizes} from '#hooks';
 import componentLabels from '../../i18n/ui.js';
+import {searchIconCatalog} from '../../icon-catalog/client.js';
 
 function Search() {
 	const [searchText, setSearchText] = useSearchText();
-	const [icons] = useIcons();
-	const searcher = useSearcher();
+	const [icons, setIcons] = useIcons();
 	const [, setFilteredIcons] = useFilteredIcons();
 	const {isMobileSize} = useSizes();
 	const {i18n, languageCode} = useI18n();
@@ -45,8 +45,30 @@ function Search() {
 	}, [setSearchText]);
 
 	useEffect(() => {
-		setFilteredIcons(searchText ? searcher.search(searchText) : icons.data);
-	}, [searchText, icons.data, searcher, setFilteredIcons]);
+		if (!searchText) {
+			setFilteredIcons(icons.data);
+			return;
+		}
+
+		let isActive = true;
+		void searchIconCatalog(searchText)
+			.then((indices) => {
+				if (isActive)
+					setFilteredIcons(
+						indices.map((index) => icons.data[index]!).filter(Boolean),
+					);
+			})
+			.catch(() => {
+				if (isActive)
+					setIcons((previous) => ({
+						...previous,
+						error: 'Could not search the icon list. Please try again.',
+					}));
+			});
+		return () => {
+			isActive = false;
+		};
+	}, [searchText, icons.data, setFilteredIcons, setIcons]);
 
 	return (
 		<div className="ui-search">

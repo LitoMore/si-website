@@ -4,6 +4,7 @@ import {IconCheck, IconLink, IconShare, IconX} from '@tabler/icons-react';
 import {QRCodeSVG} from 'qrcode.react';
 import Draggable from 'react-draggable';
 import {useIcons, useLanguageCode} from '#atom';
+import BrandIcon from '#components/common/brand-icon.js';
 import {Tooltip} from '#components/ui/popover.js';
 import {actionIntentUrl} from '#constants';
 import {useColorScheme, useI18n, useSizes} from '#hooks';
@@ -12,20 +13,13 @@ import {getShareUrl} from '#utils';
 import isPublicDomain from '#vendor/is-public-domain.js';
 import componentLabels from '../../i18n/ui.js';
 
-function Icon({
-	slug,
-	color,
-	colorHover,
-}: {
-	readonly slug: string;
-	readonly color?: string;
-	readonly colorHover?: string;
-}) {
+function Icon({slug, color}: {readonly slug: string; readonly color?: string}) {
 	const {isDark, iconFg} = useColorScheme();
 	return (
-		<img
-			alt=""
-			src={`https://cdn.simpleicons.org/${[slug, isDark ? iconFg.slice(1) : [color, colorHover]].flat().filter(Boolean).join('/')}`}
+		<BrandIcon
+			className="h-full w-full"
+			color={isDark ? iconFg : color ? `#${color}` : undefined}
+			slug={slug}
 		/>
 	);
 }
@@ -108,7 +102,7 @@ function MastodonButton({
 				}
 			>
 				<span className="ui-share-icon">
-					<Icon colorHover="_" slug="mastodon" />
+					<Icon slug="mastodon" />
 				</span>
 			</BasePopover.Trigger>
 			<BasePopover.Portal>
@@ -307,7 +301,7 @@ export default function FloatButtons() {
 											href={getShareUrl('https://bsky.app/intent/compose', {
 												text: [actionIntentText, actionIntentUrl].join('\n'),
 											})}
-											icon={<Icon colorHover="_" slug="bluesky" />}
+											icon={<Icon slug="bluesky" />}
 											label="Bluesky"
 										/>
 										<ShareButton

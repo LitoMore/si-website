@@ -1,14 +1,13 @@
-import {useColorMode, useIcons} from '#atom';
+import {useColorMode} from '#atom';
 import {CopyText} from '#components/ui/copy-text.js';
 import {brightThreshold, darkThreshold} from '#constants';
 import {useColorScheme, useI18n} from '#hooks';
 import {ColorMode, type Icon} from '#types';
-import {getAliases, getMaskStyles, tidyLink} from '#utils';
+import {getAliases, tidyLink} from '#utils';
 
 function ModalContent({icon}: {readonly icon?: Icon}) {
 	const [colorMode] = useColorMode();
 	const {contrast, isLight, isDark} = useColorScheme();
-	const [{version}] = useIcons();
 	const {i18n} = useI18n();
 	if (!icon) return null;
 
@@ -25,13 +24,15 @@ function ModalContent({icon}: {readonly icon?: Icon}) {
 		<div className="ui-dialog-details">
 			<div>
 				<div className="flex h-full items-center justify-center">
-					<div
+					<svg
+						aria-hidden
 						className="ui-dialog-icon"
-						style={{
-							...getMaskStyles(version, icon, isLight),
-							filter: $contrast,
-						}}
-					/>
+						fill={isLight ? hexColor : 'var(--si-gallery-fg-dark)'}
+						style={{filter: $contrast}}
+						viewBox="0 0 24 24"
+					>
+						<path d={icon.path} />
+					</svg>
 				</div>
 			</div>
 

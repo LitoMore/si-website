@@ -51,6 +51,7 @@ export type JsDelivrNpmResponse = {
 };
 
 export type Icon = IconData & {
+	path: string;
 	index: number;
 	slug: string;
 	relativeColor: string;

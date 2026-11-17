@@ -19,7 +19,7 @@ import Loading from '#components/gallery/loading.js';
 import {useSurfaceTheme} from '#components/ui/theme.js';
 import {useColorScheme, useSearcher} from '#hooks';
 import {type Icon, LanguageCode} from '#types';
-import {colorForBackground, getMaskStyles} from '#utils';
+import {colorForBackground} from '#utils';
 import componentLabels from '../../i18n/ui.js';
 import {download, downloadPng, stl, threeMf} from './export.js';
 import {
@@ -38,25 +38,23 @@ import './magnets.css';
 
 function IconImage({
 	icon,
-	version,
 	color,
 	isLight,
 }: {
 	readonly icon: Icon;
-	readonly version: string;
 	readonly color?: string;
 	readonly isLight: boolean;
 }) {
 	return (
-		<span
+		<svg
 			aria-label={icon.title}
 			className="brand-icon"
+			fill={color ?? (isLight ? `#${icon.hex}` : 'var(--si-gallery-fg-dark)')}
 			role="img"
-			style={{
-				...getMaskStyles(version, icon, isLight),
-				...(color && {backgroundColor: color}),
-			}}
-		/>
+			viewBox="0 0 24 24"
+		>
+			<path d={icon.path} />
+		</svg>
 	);
 }
 
@@ -255,11 +253,7 @@ export default function MagnetWorkshop({
 											onSelectIcon(icon);
 										}}
 									>
-										<IconImage
-											icon={icon}
-											isLight={isLight}
-											version={version}
-										/>
+										<IconImage icon={icon} isLight={isLight} />
 										<span>{icon.title}</span>
 										{selected.slug === icon.slug && (
 											<span className="selection-check">
@@ -403,7 +397,6 @@ export default function MagnetWorkshop({
 										color={settings.iconColor}
 										icon={selected}
 										isLight={isLight}
-										version={version}
 									/>
 								</span>
 								<div>
