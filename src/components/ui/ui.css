@@ -197,6 +197,15 @@ button:not(:disabled),
 	color: var(--ui-muted);
 	font-size: 12px;
 }
+@media (min-width: 48rem) {
+	.third-party-menu {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		align-items: start;
+		gap: 8px;
+		overflow-wrap: anywhere;
+	}
+}
 .ui-popover {
 	padding: 12px;
 	overflow: visible;

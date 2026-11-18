@@ -38,6 +38,7 @@ export default function ThirdParty() {
 					extra: isMobileSize ? undefined : authorName,
 				})),
 			}))}
+			popupClassName="third-party-menu"
 		>
 			<button
 				aria-label={`${i18n.thirdParties.extensions} / ${i18n.thirdParties.libraries}`}

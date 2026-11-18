@@ -52,12 +52,14 @@ export function Dropdown({
 	children,
 	isHoverEnabled = true,
 	align = 'end',
+	popupClassName,
 	style,
 }: {
 	readonly items: MenuItem[];
 	readonly children: ReactElement;
 	readonly isHoverEnabled?: boolean;
 	readonly align?: 'start' | 'center' | 'end';
+	readonly popupClassName?: string;
 	readonly style?: CSSProperties;
 }) {
 	const theme = useSurfaceTheme();
@@ -71,7 +73,7 @@ export function Dropdown({
 			<Menu.Portal>
 				<Menu.Positioner align={align} className="ui-positioner" sideOffset={4}>
 					<Menu.Popup
-						className="ui-menu"
+						className={popupClassName ? `ui-menu ${popupClassName}` : 'ui-menu'}
 						data-ui-overlay="menu"
 						data-ui-theme={theme}
 						style={style}
