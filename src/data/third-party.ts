@@ -1,6 +1,13 @@
 export default {
 	extensions: [
 		{
+			name: 'Await widget',
+			url: 'https://awaitwidget.com/simple-icons',
+			icon: 'https://cdn.simpleicons.org/await/000/fff',
+			authorName: '@LitoMore',
+			authorUrl: 'https://github.com/LitoMore',
+		},
+		{
 			name: 'Blender add-on',
 			url: 'https://github.com/mondeja/simple-icons-blender',
 			icon: 'https://cdn.simpleicons.org/blender/000/fff',
@@ -64,6 +71,13 @@ export default {
 			authorUrl: 'https://github.com/mackenly',
 		},
 		{
+			name: 'Typst package',
+			url: 'https://typst.app/universe/package/sicons',
+			icon: 'https://cdn.simpleicons.org/typst/000/fff',
+			authorName: '@cscnk52',
+			authorUrl: 'https://github.com/cscnk52',
+		},
+		{
 			name: 'Webflow app',
 			url: 'https://webflow.com/apps/detail/simple-icons',
 			icon: 'https://cdn.simpleicons.org/webflow/000/fff',
@@ -74,14 +88,14 @@ export default {
 	libraries: [
 		{
 			name: 'Angular package',
-			url: 'https://github.com/khalilou88/semantic-icons/tree/main/libs/simple-icons',
+			url: 'https://github.com/gridatek/semantic-icons/tree/main/libs/simple-icons',
 			icon: 'https://cdn.simpleicons.org/angular/000/fff',
-			authorName: '@khalilou88',
-			authorUrl: 'https://github.com/khalilou88',
+			authorName: '@gridatek',
+			authorUrl: 'https://github.com/gridatek',
 			license:
-				'https://img.shields.io/github/license/khalilou88/semantic-icons?label=',
+				'https://img.shields.io/github/license/gridatek/semantic-icons?label=',
 			version:
-				"https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fkhalilou88%2Fsemantic-icons%2Fmain%2Fpackage.json&query=%24..devDependencies%5B'simple-icons'%5D&label=",
+				"https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fgridatek%2Fsemantic-icons%2Fmain%2Fpackage.json&query=%24..devDependencies%5B'simple-icons'%5D&label=",
 		},
 		{
 			name: 'Astro package',
@@ -106,6 +120,28 @@ export default {
 				'https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2FTimeWarpEngineering%2Ftimewarp-simple-icons%2Fmain%2Fsource%2Ftimewarp-simple-icons%2Ftimewarp-simple-icons.csproj&query=%2FProject%2FPropertyGroup%2FVersion&label=',
 		},
 		{
+			name: 'Django package',
+			url: 'https://github.com/M4p4/django-simple-icons',
+			icon: 'https://cdn.simpleicons.org/django/000/fff',
+			authorName: '@M4p4',
+			authorUrl: 'https://github.com/M4p4',
+			license:
+				'https://img.shields.io/github/license/M4p4/django-simple-icons?label=',
+			version:
+				'https://img.shields.io/pypi/v/django-simple-icons?color=blue&label=',
+		},
+		{
+			name: 'Elm package',
+			url: 'https://package.elm-lang.org/packages/agj/elm-simple-icons/latest/',
+			icon: 'https://cdn.simpleicons.org/elm/000/fff',
+			authorName: '@agj',
+			authorUrl: 'https://github.com/agj',
+			license:
+				'https://img.shields.io/github/license/agj/elm-simple-icons?label=',
+			version:
+				"https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fagj%2Felm-simple-icons%2Freleases%2Fpackage.json&query=%24..%5B'simple-icons'%5D&label=",
+		},
+		{
 			name: 'Flutter package',
 			url: 'https://github.com/jlnrrg/simple_icons',
 			icon: 'https://cdn.simpleicons.org/flutter/000/fff',
@@ -128,6 +164,17 @@ export default {
 				'https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsimple-icons%2Fsimple-icons%2Fmaster%2Fpackage.json&query=%24.version&label=',
 		},
 		{
+			name: 'Go package',
+			url: 'https://pkg.go.dev/github.com/dimmerz92/go-icons',
+			icon: 'https://cdn.simpleicons.org/go/000/fff',
+			authorName: '@dimmerz92',
+			authorUrl: 'https://github.com/dimmerz92',
+			license:
+				'https://img.shields.io/github/license/dimmerz92/go-icons?label=',
+			version:
+				'https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdimmerz92%2Fgo-icons%2Frefs%2Fheads%2Fmaster%2Fversions.json&query=%24.simpleIcons&label=',
+		},
+		{
 			name: 'Hugo module',
 			url: 'https://github.com/foo-dogsquared/hugo-mod-simple-icons',
 			icon: 'https://cdn.simpleicons.org/hugo/000/fff',
@@ -137,6 +184,17 @@ export default {
 				'https://img.shields.io/github/license/foo-dogsquared/hugo-mod-simple-icons?label=',
 			version:
 				'https://img.shields.io/github/v/tag/foo-dogsquared/hugo-mod-simple-icons?label=',
+		},
+		{
+			name: 'Java library',
+			url: 'https://github.com/silentsoft/simpleicons4j',
+			icon: 'https://cdn.simpleicons.org/openjdk/000/fff',
+			authorName: '@silentsoft',
+			authorUrl: 'https://github.com/silentsoft',
+			license:
+				'https://img.shields.io/github/license/silentsoft/simpleicons4j?label=',
+			version:
+				'https://img.shields.io/maven-metadata/v.svg?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Forg%2Fsilentsoft%2Fsimpleicons4j%2Fmaven-metadata.xml&label=',
 		},
 		{
 			name: 'Kirby plugin',
@@ -180,7 +238,7 @@ export default {
 			license:
 				'https://img.shields.io/github/license/carstencodes/simplepycons?label=',
 			version:
-				'https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcarstencodes%2Fsimplepycons%2Fmaster%2Fsimple-icons.json&query=%24.simple-icons.version&label=',
+				'https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcarstencodes%2Fsimplepycons%2Frefs%2Fheads%2Fmain%2F.gitmodules&search=%5C%5Bsubmodule%20%22vendor%5C%2Fsimple-icons%22%5C%5D%5B%5E%5C%5B%5D%2Bbranch%5Cs*%3D%5Cs*%28%3F%3Cversion%3E%5Cd%2B%5C.%5Cd%2B%5C.%5Cd%2B%3F%29&replace=%24%3Cversion%3E&flags=ims&label=',
 		},
 		{
 			name: 'React package',
@@ -203,6 +261,17 @@ export default {
 				'https://img.shields.io/github/license/the-pew-inc/simple-icons-rails?label=',
 			version:
 				'https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsimple-icons%2Fsimple-icons%2Fmaster%2Fpackage.json&query=%24.version&label=',
+		},
+		{
+			name: 'Rust crate',
+			url: 'https://crates.io/crates/simpleicons-rs',
+			icon: 'https://cdn.simpleicons.org/rust/000/fff',
+			authorName: '@cscnk52',
+			authorUrl: 'https://github.com/cscnk52',
+			license:
+				'https://img.shields.io/github/license/cscnk52/simpleicons-rs?label=',
+			version:
+				'https://img.shields.io/crates/v/simpleicons-rs?color=blue&label=',
 		},
 		{
 			name: 'Svelte package',
