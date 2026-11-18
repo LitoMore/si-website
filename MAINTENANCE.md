@@ -1,0 +1,37 @@
+# Maintenance
+
+## Icon catalog
+
+The icon catalog comes from the installed `simple-icons` npm package. `npm ci`
+uses the version recorded in `package-lock.json`; updating the catalog requires
+updating that dependency, rebuilding, and deploying the site.
+
+The Vite plugin in `build/icon-catalog.ts` packages metadata and SVG paths into a
+content-hashed WebAssembly asset. It generates a standard data-only Wasm module
+without requiring a Rust or C compiler. The development server serves the same
+catalog through a virtual asset.
+
+A module Worker loads and reads the catalog once, calculates brightness, and
+builds the fuzzy search index. Search responses contain indices rather than
+copying the entire catalog. Cards render cached paths as inline SVG with `fill`;
+previews and downloads use the same packaged version and do not fetch individual
+icon files from an external CDN. Wasm is the resource container; catalog and
+search calculations run as JavaScript inside the Worker.
+
+`npm test` validates the Wasm encoding and catalog contents, builds the site, and
+runs lint. The build emits the catalog and Worker beside the other static assets,
+including when using `VITE_BASE_URL` for a subdirectory deployment.
+
+## Caching on Cloudflare Pages
+
+`public/_headers` gives content-hashed files under `/assets/` a one-year browser
+cache lifetime. This includes the icon catalog and Worker. Updating their contents
+changes their URLs; HTML keeps Pages' default revalidation policy so visitors can
+discover the new asset URLs. The rule targets the root deployment used by Pages;
+adjust the path if deploying Pages under a subdirectory.
+
+Pages has its own built-in asset cache. A custom domain's `CF-Cache-Status` refers
+to a separate CDN cache layer, and `.wasm` is not among that layer's default cached
+file extensions. To enable it there too, add a Cloudflare Cache Rule matching the
+site hostname, the `/assets/` path prefix, and the `.wasm` suffix, set eligibility
+to **Eligible for cache**, and respect the response's cache-control headers.
