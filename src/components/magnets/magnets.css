@@ -219,8 +219,6 @@
 }
 .magnet-workshop .icon-grid {
 	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 8px;
 }
 .magnet-workshop .icon-grid > div {
 	min-width: 0;
@@ -231,14 +229,14 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 9px;
+	gap: 4px;
 	border: 1px solid var(--magnet-border);
 	border-radius: 8px;
 	background: var(--magnet-surface);
-	padding: 7px 3px;
+	padding: 3px;
+	aspect-ratio: 1;
 	width: 100%;
 	min-width: 0;
-	height: 88px;
 }
 .magnet-workshop .icon-tile:hover {
 	border-color: var(--magnet-border);
@@ -907,9 +905,6 @@
 	.magnet-workshop .preview-stage {
 		min-height: 430px;
 	}
-	.magnet-workshop .icon-tile {
-		height: 96px;
-	}
 }
 @media (max-width: 1150px) {
 	.magnet-workshop .workbench {
@@ -925,14 +920,8 @@
 	.magnet-workshop .settings-content {
 		padding: 0 15px;
 	}
-	.magnet-workshop .icon-grid {
-		gap: 6px;
-	}
 	.magnet-workshop .icon-grid-scroller {
 		margin-inline: 12px;
-	}
-	.magnet-workshop .icon-tile {
-		height: 84px;
 	}
 	.magnet-workshop .search-box {
 		margin: 0 12px;
@@ -1069,16 +1058,10 @@
 	.magnet-workshop .settings-panel {
 		order: 2;
 	}
-	.magnet-workshop .icon-grid {
-		grid-template-columns: repeat(4, minmax(0, 1fr));
-	}
 	.magnet-workshop .icon-grid-scroller {
 		/* Keep a fixed viewport for the virtualized icon picker. */
 		flex: 0 0 196px;
 		margin-inline: 13px;
-	}
-	.magnet-workshop .icon-tile {
-		height: 88px;
 	}
 	.magnet-workshop .icon-tile > .brand-icon {
 		width: 22px;

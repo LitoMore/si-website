@@ -1,7 +1,10 @@
 import {type ReactNode, useCallback, useLayoutEffect, useRef} from 'react';
 import {useVirtualizer} from '@tanstack/react-virtual';
-import {useMediaQuery} from '@uidotdev/usehooks';
+import {useMeasure} from '@uidotdev/usehooks';
 import {type Icon} from '#types';
+
+const gap = 8;
+const targetTileSize = 68;
 
 export default function IconGrid({
 	icons,
@@ -14,23 +17,26 @@ export default function IconGrid({
 	'use no memo';
 
 	const scrollRef = useRef<HTMLDivElement>(null);
-	// Match the column, tile height and gap breakpoints in magnets.css.
-	const isMobile = useMediaQuery('(max-width: 600px)');
-	const isCompact = useMediaQuery('(max-width: 1150px)');
-	const columns = isMobile ? 4 : 3;
-	const rowHeight = isCompact && !isMobile ? 84 : 88;
-	const gap = isCompact ? 6 : 8;
+	const [gridRef, {width}] = useMeasure<HTMLDivElement>();
+	const gridWidth = width ?? 0;
+	const columns = Math.max(
+		1,
+		Math.round((gridWidth + gap) / (targetTileSize + gap)),
+	);
+	const rowHeight = (gridWidth - gap * (columns - 1)) / columns;
 	const getRowKey = useCallback(
 		(index: number) => icons[index * columns]!.slug,
 		[icons, columns],
 	);
 	// eslint-disable-next-line react-hooks/incompatible-library -- Opted out of React Compiler above.
 	const virtualizer = useVirtualizer({
-		count: Math.ceil(icons.length / columns),
+		count: gridWidth > 0 ? Math.ceil(icons.length / columns) : 0,
 		getScrollElement: () => scrollRef.current,
 		getItemKey: getRowKey,
 		estimateSize: () => rowHeight,
 		gap,
+		paddingStart: gap,
+		paddingEnd: gap,
 		overscan: 2,
 	});
 
@@ -40,7 +46,10 @@ export default function IconGrid({
 
 	return (
 		<div ref={scrollRef} className="icon-grid-scroller">
-			<div style={{height: virtualizer.getTotalSize(), position: 'relative'}}>
+			<div
+				ref={gridRef}
+				style={{height: virtualizer.getTotalSize(), position: 'relative'}}
+			>
 				{virtualizer.getVirtualItems().map((row) => (
 					<div
 						key={row.key}
@@ -51,6 +60,8 @@ export default function IconGrid({
 							top: 0,
 							left: 0,
 							width: '100%',
+							gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+							gap,
 							transform: `translateY(${row.start}px)`,
 						}}
 					>
