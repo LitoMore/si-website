@@ -204,12 +204,16 @@
 .magnet-workshop .icon-panel {
 	display: flex;
 	flex-direction: column;
+	min-height: 0;
 }
 .magnet-workshop .icon-grid-scroller {
-	flex: 1;
+	/* A pixel basis keeps the tablet grid from sizing itself to the full list. */
+	flex: 1 1 0px;
 	margin: 0 18px 12px;
 	height: 0;
 	min-height: 0;
+	overflow: auto;
+	overflow-anchor: none;
 	scrollbar-color: var(--magnet-border) transparent;
 	scrollbar-width: thin;
 }
@@ -218,7 +222,7 @@
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: 8px;
 }
-.magnet-workshop .icon-grid-item {
+.magnet-workshop .icon-grid > div {
 	min-width: 0;
 }
 .magnet-workshop .icon-tile {
@@ -1069,7 +1073,7 @@
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
 	.magnet-workshop .icon-grid-scroller {
-		/* Keep a fixed viewport despite Virtuoso's inline height: 100%. */
+		/* Keep a fixed viewport for the virtualized icon picker. */
 		flex: 0 0 196px;
 		margin-inline: 13px;
 	}

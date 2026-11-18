@@ -10,22 +10,14 @@ import {CardProvider} from './card.js';
 import Empty from './empty.js';
 import Loading from './loading.js';
 
-// Const Virutalized = lazy(() => import("./virtualized.tsx"));
-const Virtuoso = lazy(async () => import('./virtuoso.js'));
-// Const VirutalScroll = lazy(() => import("./virtualscroll.tsx"));
+const VirtualGrid = lazy(async () => import('./virtual-grid.js'));
 
 export default function Gallery() {
 	const [icons] = useIcons();
 	const [filteredIcons] = useFilteredIcons();
 	const [, requestReload] = useIconsLoadRequest();
 	const {i18n} = useI18n();
-	const {
-		// InnerWidth,
-		iconsPerRow,
-		galleryHeight,
-		galleryMargin,
-		cardPixels,
-	} = useSizes();
+	const {iconsPerRow, galleryHeight, galleryMargin, cardPixels} = useSizes();
 
 	if (icons.error) {
 		return (
@@ -54,33 +46,9 @@ export default function Gallery() {
 		return <Empty />;
 	}
 
-	// If (mode === "virtualscroll") {
-	// 	return (
-	// 		<VirutalScroll
-	// 			icons={filteredIcons}
-	// 			innerWidth={innerWidth}
-	// 			cardPixels={cardPixels}
-	// 			galleryHeight={galleryHeight}
-	// 			iconsPerRow={iconsPerRow}
-	// 		/>
-	// 	);
-	// }
-
-	// if (mode === "virtualized") {
-	// 	return (
-	// 		<Virutalized
-	// 			icons={filteredIcons}
-	// 			innerWidth={innerWidth}
-	// 			galleryHeight={galleryHeight}
-	// 			cardPixels={cardPixels}
-	// 			iconsPerRow={iconsPerRow}
-	// 		/>
-	// 	);
-	// }
-
 	return (
 		<CardProvider>
-			<Virtuoso
+			<VirtualGrid
 				cardPixels={cardPixels}
 				galleryHeight={galleryHeight}
 				galleryMargin={galleryMargin}

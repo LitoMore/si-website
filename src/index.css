@@ -57,12 +57,12 @@ body {
 		'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-div[data-testid='virtuoso-scroller'] {
+.gallery-scroller {
 	-ms-overflow-style: none;
 	scrollbar-width: none;
 }
 
-div[data-testid='virtuoso-scroller']::-webkit-scrollbar {
+.gallery-scroller::-webkit-scrollbar {
 	display: none;
 }
 

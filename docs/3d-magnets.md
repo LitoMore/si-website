@@ -87,7 +87,7 @@ thumbnails use `getMaskStyles`, search uses `useSearcher`, and the selected
 icon's SVG is fetched with `getSvg` from the same package version on jsDelivr.
 There is no complete icon path catalogue bundled with the tool.
 The picker keeps the catalogue's default order and uses the same
-`react-virtuoso` virtual grid as the home gallery, with continuous scrolling
+TanStack Virtual row virtualization as the home gallery, with continuous scrolling
 instead of pagination. Searching or clearing the search returns the list to
 the top while preserving the selected icon and model settings.
 

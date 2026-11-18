@@ -14,7 +14,6 @@ import {
 	Sparkles,
 	X,
 } from 'lucide-react';
-import {VirtuosoGrid} from 'react-virtuoso';
 import Loading from '#components/gallery/loading.js';
 import {useSurfaceTheme} from '#components/ui/theme.js';
 import {useColorScheme, useSearcher} from '#hooks';
@@ -29,6 +28,7 @@ import {
 	polygonsToPath,
 } from './geometry.js';
 import {type MagnetLabels, useMagnetI18n} from './i18n.js';
+import IconGrid from './icon-grid.js';
 import {fuseForExport} from './model-client.js';
 import Preview from './preview.js';
 import {ShapeControls, Slider} from './shape-controls.js';
@@ -237,13 +237,10 @@ export default function MagnetWorkshop({
 							</span>
 						</div>
 						{filtered.length > 0 ? (
-							<VirtuosoGrid
+							<IconGrid
 								key={deferredQuery}
-								className="icon-grid-scroller"
-								computeItemKey={(_index, icon) => icon.slug}
-								data={filtered}
-								itemClassName="icon-grid-item"
-								itemContent={(_index, icon) => (
+								icons={filtered}
+								renderIcon={(icon) => (
 									<button
 										aria-pressed={selected.slug === icon.slug}
 										className={`icon-tile ${selected.slug === icon.slug ? 'selected' : ''}`}
@@ -262,8 +259,6 @@ export default function MagnetWorkshop({
 										)}
 									</button>
 								)}
-								listClassName="icon-grid"
-								overscan={200}
 							/>
 						) : (
 							<div className="empty-state">
