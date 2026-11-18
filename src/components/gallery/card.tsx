@@ -9,10 +9,10 @@ import {
 } from 'react';
 import {useMediaQuery} from '@uidotdev/usehooks';
 import {useColorMode, useSelectedIcon} from '#atom';
+import {getContrastingIconColor} from '#components/ui/icon-color.js';
 import {useSurfaceTheme} from '#components/ui/theme.js';
 import {useColorScheme, useSizes} from '#hooks';
 import {ColorMode, type Icon} from '#types';
-import {getContrastingIconColor} from './icon-color.js';
 
 function useCardSettings() {
 	const [selectedIcon, setSelectedIcon] = useSelectedIcon();

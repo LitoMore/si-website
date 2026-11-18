@@ -1,11 +1,11 @@
 import {useMediaQuery} from '@uidotdev/usehooks';
 import {useColorMode} from '#atom';
 import {CopyText} from '#components/ui/copy-text.js';
+import {getContrastingIconColor} from '#components/ui/icon-color.js';
 import {useSurfaceTheme} from '#components/ui/theme.js';
 import {useI18n} from '#hooks';
 import {ColorMode, type Icon} from '#types';
 import {getAliases, tidyLink} from '#utils';
-import {getContrastingIconColor} from './icon-color.js';
 
 function ModalContent({icon}: {readonly icon?: Icon}) {
 	const [colorMode] = useColorMode();

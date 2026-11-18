@@ -1,86 +1,120 @@
+import {
+	siAngular,
+	siAstro,
+	siAwait,
+	siBlazor,
+	siBlender,
+	siBoxysvg,
+	siDiagramsdotnet,
+	siDjango,
+	siElgato,
+	siElm,
+	siFigma,
+	siFlutter,
+	siFramer,
+	siGo,
+	siHugo,
+	siJekyll,
+	siKando,
+	siKirby,
+	siLaravel,
+	siLatex,
+	siMiro,
+	siOpenjdk,
+	siPython,
+	siRaycast,
+	siReact,
+	siRubygems,
+	siRust,
+	siSvelte,
+	siTypst,
+	siVuedotjs,
+	siWebflow,
+} from 'simple-icons';
+
 export default {
 	extensions: [
 		{
 			name: 'Await widget',
 			url: 'https://awaitwidget.com/simple-icons',
-			icon: 'https://cdn.simpleicons.org/await/000/fff',
+			icon: siAwait,
 			authorName: '@LitoMore',
 			authorUrl: 'https://github.com/LitoMore',
 		},
 		{
 			name: 'Blender add-on',
 			url: 'https://github.com/mondeja/simple-icons-blender',
-			icon: 'https://cdn.simpleicons.org/blender/000/fff',
+			icon: siBlender,
 			authorName: '@mondeja',
 			authorUrl: 'https://github.com/mondeja',
 		},
 		{
 			name: 'Boxy SVG library',
 			url: 'https://boxy-svg.com/ideas/298/simple-icons-library-provider',
-			icon: 'https://cdn.simpleicons.org/boxysvg/000/fff',
+			icon: siBoxysvg,
 			authorName: '@Jarek',
 			authorUrl: 'https://boxy-svg.com/profiles/0000000000/jarek',
 		},
 		{
 			name: 'Drawio library',
 			url: 'https://github.com/mondeja/simple-icons-drawio',
-			icon: 'https://cdn.simpleicons.org/diagramsdotnet/000/fff',
+			icon: siDiagramsdotnet,
 			authorName: '@mondeja',
 			authorUrl: 'https://github.com/mondeja',
 		},
 		{
 			name: 'Figma plugin',
 			url: 'https://www.figma.com/community/plugin/1149614463603005908',
-			icon: 'https://cdn.simpleicons.org/figma/000/fff',
+			icon: siFigma,
 			authorName: '@LitoMore',
 			authorUrl: 'https://github.com/LitoMore',
 		},
 		{
 			name: 'Jekyll plugin',
 			url: 'https://github.com/pirafrank/jekyll-simple-icons',
-			icon: 'https://cdn.simpleicons.org/jekyll/000/fff',
+			icon: siJekyll,
 			authorName: '@pirafrank',
 			authorUrl: 'https://github.com/pirafrank',
 		},
 		{
 			name: 'Kando icon theme',
 			url: 'https://kando.menu/icon-themes#built-in-icon-themes',
-			icon: 'https://cdn.simpleicons.org/kando/000/fff',
+			icon: siKando,
 			authorName: '@Schneegans',
 			authorUrl: 'https://github.com/Schneegans',
 		},
 		{
 			name: 'Miro app',
 			url: 'https://miro.com/marketplace/brand-icons/',
-			icon: 'https://cdn.simpleicons.org/miro/000/fff',
+			icon: siMiro,
 			authorName: '@LitoMore',
 			authorUrl: 'https://github.com/LitoMore',
 		},
 		{
 			name: 'Raycast extension',
 			url: 'https://www.raycast.com/litomore/simple-icons',
-			icon: 'https://cdn.simpleicons.org/raycast/000/fff',
+			icon: siRaycast,
 			authorName: '@LitoMore',
 			authorUrl: 'https://github.com/LitoMore',
 		},
 		{
 			name: 'Stream Deck icon pack',
 			url: 'https://github.com/mackenly/simple-icons-stream-deck',
-			icon: 'https://cdn.simpleicons.org/elgato/000/fff',
+			icon: siElgato,
 			authorName: '@mackenly',
 			authorUrl: 'https://github.com/mackenly',
 		},
 		{
 			name: 'Typst package',
 			url: 'https://typst.app/universe/package/sicons',
-			icon: 'https://cdn.simpleicons.org/typst/000/fff',
+			icon: siTypst,
 			authorName: '@cscnk52',
 			authorUrl: 'https://github.com/cscnk52',
 		},
 		{
 			name: 'Webflow app',
 			url: 'https://webflow.com/apps/detail/simple-icons',
-			icon: 'https://cdn.simpleicons.org/webflow/000/fff',
+			icon: siWebflow,
 			authorName: '@diegoliv',
 			authorUrl: 'https://github.com/diegoliv',
 		},
@@ -89,7 +123,7 @@ export default {
 		{
 			name: 'Angular package',
 			url: 'https://github.com/gridatek/semantic-icons/tree/main/libs/simple-icons',
-			icon: 'https://cdn.simpleicons.org/angular/000/fff',
+			icon: siAngular,
 			authorName: '@gridatek',
 			authorUrl: 'https://github.com/gridatek',
 			license:
@@ -100,7 +134,7 @@ export default {
 		{
 			name: 'Astro package',
 			url: 'https://github.com/dzeiocom/simple-icons-astro',
-			icon: 'https://cdn.simpleicons.org/astro/000/fff',
+			icon: siAstro,
 			authorName: '@Aviortheking',
 			authorUrl: 'https://github.com/aviortheking',
 			license:
@@ -111,7 +145,7 @@ export default {
 		{
 			name: 'Blazor Nuget package',
 			url: 'https://github.com/TimeWarpEngineering/timewarp-simple-icons',
-			icon: 'https://cdn.simpleicons.org/blazor/000/fff',
+			icon: siBlazor,
 			authorName: '@TimeWarpEngineering',
 			authorUrl: 'https://github.com/TimeWarpEngineering',
 			license:
@@ -122,7 +156,7 @@ export default {
 		{
 			name: 'Django package',
 			url: 'https://github.com/M4p4/django-simple-icons',
-			icon: 'https://cdn.simpleicons.org/django/000/fff',
+			icon: siDjango,
 			authorName: '@M4p4',
 			authorUrl: 'https://github.com/M4p4',
 			license:
@@ -133,7 +167,7 @@ export default {
 		{
 			name: 'Elm package',
 			url: 'https://package.elm-lang.org/packages/agj/elm-simple-icons/latest/',
-			icon: 'https://cdn.simpleicons.org/elm/000/fff',
+			icon: siElm,
 			authorName: '@agj',
 			authorUrl: 'https://github.com/agj',
 			license:
@@ -144,7 +178,7 @@ export default {
 		{
 			name: 'Flutter package',
 			url: 'https://github.com/jlnrrg/simple_icons',
-			icon: 'https://cdn.simpleicons.org/flutter/000/fff',
+			icon: siFlutter,
 			authorName: '@jlnrrg',
 			authorUrl: 'https://github.com/jlnrrg',
 			license:
@@ -155,7 +189,7 @@ export default {
 		{
 			name: 'Framer component',
 			url: 'https://github.com/LitoMore/simple-icons-framer',
-			icon: 'https://cdn.simpleicons.org/framer/000/fff',
+			icon: siFramer,
 			authorName: '@LitoMore',
 			authorUrl: 'https://github.com/LitoMore',
 			license:
@@ -166,7 +200,7 @@ export default {
 		{
 			name: 'Go package',
 			url: 'https://pkg.go.dev/github.com/dimmerz92/go-icons',
-			icon: 'https://cdn.simpleicons.org/go/000/fff',
+			icon: siGo,
 			authorName: '@dimmerz92',
 			authorUrl: 'https://github.com/dimmerz92',
 			license:
@@ -177,7 +211,7 @@ export default {
 		{
 			name: 'Hugo module',
 			url: 'https://github.com/foo-dogsquared/hugo-mod-simple-icons',
-			icon: 'https://cdn.simpleicons.org/hugo/000/fff',
+			icon: siHugo,
 			authorName: '@foo-dogsquared',
 			authorUrl: 'https://github.com/foo-dogsquared',
 			license:
@@ -188,7 +222,7 @@ export default {
 		{
 			name: 'Java library',
 			url: 'https://github.com/silentsoft/simpleicons4j',
-			icon: 'https://cdn.simpleicons.org/openjdk/000/fff',
+			icon: siOpenjdk,
 			authorName: '@silentsoft',
 			authorUrl: 'https://github.com/silentsoft',
 			license:
@@ -199,7 +233,7 @@ export default {
 		{
 			name: 'Kirby plugin',
 			url: 'https://github.com/runxel/kirby3-simpleicons',
-			icon: 'https://cdn.simpleicons.org/kirby/000/fff',
+			icon: siKirby,
 			authorName: '@runxel',
 			authorUrl: 'https://github.com/runxel',
 			license:
@@ -210,7 +244,7 @@ export default {
 		{
 			name: 'LaTeX package',
 			url: 'https://github.com/ineshbose/simple-icons-latex',
-			icon: 'https://cdn.simpleicons.org/latex/000/fff',
+			icon: siLatex,
 			authorName: '@ineshbose',
 			authorUrl: 'https://github.com/ineshbose',
 			license:
@@ -221,7 +255,7 @@ export default {
 		{
 			name: 'Laravel package',
 			url: 'https://github.com/ublabs/blade-simple-icons',
-			icon: 'https://cdn.simpleicons.org/laravel/000/fff',
+			icon: siLaravel,
 			authorName: '@adrian-ub',
 			authorUrl: 'https://github.com/adrian-ub',
 			license:
@@ -232,7 +266,7 @@ export default {
 		{
 			name: 'Python wheel',
 			url: 'https://github.com/carstencodes/simplepycons',
-			icon: 'https://cdn.simpleicons.org/python/000/fff',
+			icon: siPython,
 			authorName: '@carstencodes',
 			authorUrl: 'https://github.com/carstencodes',
 			license:
@@ -243,7 +277,7 @@ export default {
 		{
 			name: 'React package',
 			url: 'https://github.com/icons-pack/react-simple-icons',
-			icon: 'https://cdn.simpleicons.org/react/000/fff',
+			icon: siReact,
 			authorName: '@wootsbot',
 			authorUrl: 'https://github.com/wootsbot',
 			license:
@@ -254,7 +288,7 @@ export default {
 		{
 			name: 'Ruby gem',
 			url: 'https://rubygems.org/gems/simple-icons-rails',
-			icon: 'https://cdn.simpleicons.org/rubygems/000/fff',
+			icon: siRubygems,
 			authorName: '@thepew',
 			authorUrl: 'https://github.com/the-pew-inc',
 			license:
@@ -265,7 +299,7 @@ export default {
 		{
 			name: 'Rust crate',
 			url: 'https://crates.io/crates/simpleicons-rs',
-			icon: 'https://cdn.simpleicons.org/rust/000/fff',
+			icon: siRust,
 			authorName: '@cscnk52',
 			authorUrl: 'https://github.com/cscnk52',
 			license:
@@ -276,7 +310,7 @@ export default {
 		{
 			name: 'Svelte package',
 			url: 'https://github.com/icons-pack/svelte-simple-icons',
-			icon: 'https://cdn.simpleicons.org/svelte/000/fff',
+			icon: siSvelte,
 			authorName: '@wootsbot',
 			authorUrl: 'https://github.com/wootsbot',
 			license:
@@ -287,7 +321,7 @@ export default {
 		{
 			name: 'Vue 3 package',
 			url: 'https://github.com/wyatt-herkamp/vue3-simple-icons',
-			icon: 'https://cdn.simpleicons.org/vuedotjs/000/fff',
+			icon: siVuedotjs,
 			authorName: '@wyatt-herkamp',
 			authorUrl: 'https://github.com/wyatt-herkamp',
 			license:

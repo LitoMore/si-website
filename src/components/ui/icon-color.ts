@@ -1,9 +1,9 @@
 import colorString from 'color-string';
 import {memoize} from 'es-toolkit';
-import {type SurfaceTheme} from '#components/ui/theme.js';
 import getRelativeLuminance from '#vendor/get-relative-luminance.js';
+import {type SurfaceTheme} from './theme.js';
 
-// Cards and dialogs both sit on --ui-bg from ui.css.
+// Cards, dialogs, and menus share --ui-bg from ui.css.
 const surfaceLuminance = {
 	light: getRelativeLuminance('#fff'),
 	dark: getRelativeLuminance('#141414'),
