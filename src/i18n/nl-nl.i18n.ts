@@ -113,7 +113,7 @@ const translation: Internationalization = {
 			'Toont de oorspronkelijke kleuren van pictogrammen. Sommige zijn mogelijk moeilijk zichtbaar.',
 		contrast: 'Contrast',
 		contrastTooltip:
-			'Past een contrastfilter toe om pictogrammen beter zichtbaar te maken.',
+			'Past pictogramkleuren aan die te veel op de achtergrondkleur lijken.',
 		language: 'Taal wijzigen',
 		reset: 'Herstellen',
 		themeAuto: 'Systeem kleurenschema',

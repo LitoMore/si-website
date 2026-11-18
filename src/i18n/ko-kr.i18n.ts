@@ -107,7 +107,7 @@ const translation: Internationalization = {
 		actualTooltip:
 			'아이콘의 원래 색상을 표시합니다. 일부 아이콘은 잘 보이지 않을 수 있습니다.',
 		contrast: '대비',
-		contrastTooltip: '아이콘이 잘 보이도록 대비 필터를 적용합니다.',
+		contrastTooltip: '배경색과 비슷한 아이콘 색상을 조정합니다.',
 		language: '언어 변경',
 		reset: '초기화',
 		themeAuto: '시스템 색 구성',

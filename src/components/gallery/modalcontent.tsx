@@ -1,24 +1,29 @@
+import {useMediaQuery} from '@uidotdev/usehooks';
 import {useColorMode} from '#atom';
 import {CopyText} from '#components/ui/copy-text.js';
-import {brightThreshold, darkThreshold} from '#constants';
-import {useColorScheme, useI18n} from '#hooks';
+import {useSurfaceTheme} from '#components/ui/theme.js';
+import {useI18n} from '#hooks';
 import {ColorMode, type Icon} from '#types';
 import {getAliases, tidyLink} from '#utils';
+import {getContrastingIconColor} from './icon-color.js';
 
 function ModalContent({icon}: {readonly icon?: Icon}) {
 	const [colorMode] = useColorMode();
-	const {contrast, isLight, isDark} = useColorScheme();
+	const theme = useSurfaceTheme();
+	const isHighContrastPreferred = useMediaQuery('(prefers-contrast: more)');
 	const {i18n} = useI18n();
 	if (!icon) return null;
 
 	const aliases = getAliases(icon);
 	const hexColor = `#${icon.hex}`;
-	const isA11yFriendly =
-		(isLight && icon.brightness <= brightThreshold) ||
-		(isDark && icon.brightness > darkThreshold);
-
-	const $contrast =
-		!isA11yFriendly && colorMode === ColorMode.Contrast ? contrast : undefined;
+	const iconColor =
+		colorMode === ColorMode.Contrast
+			? getContrastingIconColor({
+					color: hexColor,
+					theme,
+					prefersMoreContrast: isHighContrastPreferred,
+				})
+			: hexColor;
 
 	return (
 		<div className="ui-dialog-details">
@@ -27,8 +32,7 @@ function ModalContent({icon}: {readonly icon?: Icon}) {
 					<svg
 						aria-hidden
 						className="ui-dialog-icon"
-						fill={isLight ? hexColor : 'var(--si-gallery-fg-dark)'}
-						style={{filter: $contrast}}
+						fill={iconColor}
 						viewBox="0 0 24 24"
 					>
 						<path d={icon.path} />

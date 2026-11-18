@@ -107,7 +107,8 @@ const translation: Internationalization = {
 		actualTooltip:
 			'Wyświetla oryginalne kolory ikon. Niektóre mogą być słabo widoczne.',
 		contrast: 'Kontrast',
-		contrastTooltip: 'Stosuje filtr kontrastu, aby poprawić widoczność ikon.',
+		contrastTooltip:
+			'Dostosowuje kolory ikon, które są zbyt podobne do koloru tła.',
 		language: 'Zmień język',
 		reset: 'Resetuj',
 		themeAuto: 'Systemowy schemat kolorów',

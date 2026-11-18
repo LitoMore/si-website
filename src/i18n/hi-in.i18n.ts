@@ -106,7 +106,7 @@ const translation: Internationalization = {
 		actual: 'मूल रंग',
 		actualTooltip: 'आइकन के मूल रंग दिखाता है। कुछ रंग स्पष्ट नहीं दिख सकते।',
 		contrast: 'कंट्रास्ट',
-		contrastTooltip: 'आइकन को स्पष्ट दिखाने के लिए कंट्रास्ट फ़िल्टर लगाता है।',
+		contrastTooltip: 'पृष्ठभूमि के रंग से मिलते-जुलते आइकन के रंग बदलता है।',
 		language: 'भाषा बदलें',
 		reset: 'रीसेट करें',
 		themeAuto: 'सिस्टम कलर स्कीम',

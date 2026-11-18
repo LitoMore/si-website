@@ -84,7 +84,6 @@ input[type='number']::-webkit-outer-spin-button {
 	--si-card-fg: #333;
 	--si-card-bg: #fff;
 	--si-empty-fg: #00000073;
-	--si-contrast: contrast(0.65);
 
 	--si-header-fg-dark: #eee;
 	--si-header-bg-dark: #111;
@@ -93,5 +92,4 @@ input[type='number']::-webkit-outer-spin-button {
 	--si-card-fg-dark: #fff;
 	--si-card-bg-dark: #333;
 	--si-empty-fg-dark: #ffffff73;
-	--si-contrast-dark: contrast(0.65) brightness(2);
 }

@@ -107,7 +107,7 @@ const translation: Internationalization = {
 			'This displays the actual of the icon, but some icons might not have good visual.',
 		contrast: 'Contrast',
 		contrastTooltip:
-			'This applies a contrast filter to icons for better visual.',
+			'Adjusts icon colors that are too close to the background color.',
 		language: 'Change language',
 		reset: 'Reset',
 		themeAuto: 'Auto',

@@ -108,7 +108,7 @@ const translation: Internationalization = {
 			'Afișează culorile originale ale pictogramelor. Unele pot fi greu de distins.',
 		contrast: 'Contrast',
 		contrastTooltip:
-			'Aplică un filtru de contrast pentru o vizibilitate mai bună.',
+			'Ajustează culorile pictogramelor prea apropiate de culoarea fundalului.',
 		language: 'Schimbă limba',
 		reset: 'Resetează',
 		themeAuto: 'Schemă de culori a sistemului',

@@ -107,7 +107,7 @@ const translation: Internationalization = {
 			'Prikazuje izvorne boje ikonica. Neke mogu biti slabo vidljive.',
 		contrast: 'Kontrast',
 		contrastTooltip:
-			'Primenjuje filter kontrasta radi bolje vidljivosti ikonica.',
+			'Prilagođava boje ikonica koje su previše slične boji pozadine.',
 		language: 'Promeni jezik',
 		reset: 'Vrati na početno',
 		themeAuto: 'Sistemska tema',

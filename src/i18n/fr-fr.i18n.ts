@@ -109,7 +109,7 @@ const translation: Internationalization = {
 			'Affiche les couleurs d’origine des icônes. Certaines peuvent être difficiles à distinguer.',
 		contrast: 'Contraste',
 		contrastTooltip:
-			'Applique un filtre de contraste pour améliorer la visibilité des icônes.',
+			'Ajuste les couleurs des icônes trop proches de celle du fond.',
 		language: 'Changer de langue',
 		reset: 'Réinitialiser',
 		themeAuto: 'Thème du système',

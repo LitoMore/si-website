@@ -106,7 +106,7 @@ const translation: Internationalization = {
 		actualTooltip:
 			'Viser ikonenes opprinnelige farger. Noen kan være vanskelige å se.',
 		contrast: 'Kontrast',
-		contrastTooltip: 'Bruker et kontrastfilter for å gjøre ikonene tydeligere.',
+		contrastTooltip: 'Justerer ikonfarger som ligger for nær bakgrunnsfargen.',
 		language: 'Bytt språk',
 		reset: 'Tilbakestill',
 		themeAuto: 'Systemets fargetema',

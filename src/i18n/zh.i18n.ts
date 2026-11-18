@@ -102,7 +102,7 @@ const translation: Internationalization = {
 		actualTooltip:
 			'将以图标真实颜色展示，但可能会存在有些颜色看起来不是很清楚。',
 		contrast: '对比度模式',
-		contrastTooltip: '颜色会添加一层对比度滤镜，以便浏览。',
+		contrastTooltip: '图标颜色与背景太接近时，会自动调整图标颜色。',
 		language: '切换语言',
 		reset: '恢复默认',
 		themeAuto: '跟随系统',

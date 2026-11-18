@@ -109,7 +109,7 @@ const translation: Internationalization = {
 			'Simgelerin özgün renklerini gösterir. Bazıları zor görülebilir.',
 		contrast: 'Kontrast',
 		contrastTooltip:
-			'Simgelerin görünürlüğünü artırmak için kontrast filtresi uygular.',
+			'Arka plan rengine çok yakın olan simge renklerini ayarlar.',
 		language: 'Dili değiştir',
 		reset: 'Sıfırla',
 		themeAuto: 'Sistem renk şeması',

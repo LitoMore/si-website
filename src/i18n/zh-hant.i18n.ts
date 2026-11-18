@@ -102,7 +102,7 @@ const translation: Internationalization = {
 		actual: '原色模式',
 		actualTooltip: '以圖示原始顏色顯示，部分圖示可能不易辨識。',
 		contrast: '對比度模式',
-		contrastTooltip: '套用對比度濾鏡，讓圖示更清楚。',
+		contrastTooltip: '圖示顏色與背景太接近時，會自動調整圖示顏色。',
 		language: '切換語言',
 		reset: '還原預設值',
 		themeAuto: '跟隨系統',

@@ -108,7 +108,8 @@ const translation: Internationalization = {
 		actualTooltip:
 			'Näyttää kuvakkeiden alkuperäiset värit. Joitakin voi olla vaikea erottaa.',
 		contrast: 'Kontrasti',
-		contrastTooltip: 'Parantaa kuvakkeiden näkyvyyttä kontrastisuodattimella.',
+		contrastTooltip:
+			'Säätää kuvakkeiden värejä, jotka ovat lähellä taustaväriä.',
 		language: 'Vaihda kieli',
 		reset: 'Palauta oletukset',
 		themeAuto: 'Järjestelmän väriteema',

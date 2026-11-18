@@ -7,22 +7,29 @@ import {
 	createContext,
 	useContext,
 } from 'react';
+import {useMediaQuery} from '@uidotdev/usehooks';
 import {useColorMode, useSelectedIcon} from '#atom';
-import {brightThreshold, darkThreshold} from '#constants';
+import {useSurfaceTheme} from '#components/ui/theme.js';
 import {useColorScheme, useSizes} from '#hooks';
 import {ColorMode, type Icon} from '#types';
+import {getContrastingIconColor} from './icon-color.js';
 
 function useCardSettings() {
 	const [selectedIcon, setSelectedIcon] = useSelectedIcon();
 	const [colorMode] = useColorMode();
 	const {cardPixels} = useSizes();
-	const colorScheme = useColorScheme();
+	const {isLight, galleryFg} = useColorScheme();
+	const theme = useSurfaceTheme();
+	const isHighContrastPreferred = useMediaQuery('(prefers-contrast: more)');
 	return {
 		selectedIcon,
 		setSelectedIcon,
 		colorMode,
 		cardPixels,
-		...colorScheme,
+		isLight,
+		galleryFg,
+		theme,
+		prefersMoreContrast: isHighContrastPreferred,
 	};
 }
 
@@ -51,17 +58,17 @@ function Card({
 		colorMode,
 		cardPixels,
 		isLight,
-		isDark,
 		galleryFg,
-		contrast,
+		theme,
+		prefersMoreContrast,
 	} = settings;
 	const hexColor = `#${icon.hex}`;
+	const iconColor =
+		colorMode === ColorMode.Contrast
+			? getContrastingIconColor({color: hexColor, theme, prefersMoreContrast})
+			: hexColor;
 	const borderColor = isLight ? hexColor : galleryFg;
 	const borderWidth = isLight ? 2 : 1;
-	const isA11yFriendly =
-		(isLight && icon.brightness <= brightThreshold) ||
-		(isDark && icon.brightness > darkThreshold);
-	const isApplyContrast = colorMode === ColorMode.Contrast && !isA11yFriendly;
 
 	return (
 		<button
@@ -75,7 +82,6 @@ function Card({
 				borderLeft: `${borderWidth}px solid ${borderColor}`,
 				borderRight: `${borderWidth}px solid ${borderColor}`,
 				borderBottom: isLight ? 0 : `${borderWidth}px solid ${borderColor}`,
-				filter: isApplyContrast ? contrast : undefined,
 				transform:
 					selectedIcon?.slug === icon.slug ? 'translateY(-2px)' : undefined,
 			}}
@@ -87,7 +93,7 @@ function Card({
 			<svg
 				aria-hidden
 				className="icon-image"
-				fill={hexColor}
+				fill={iconColor}
 				viewBox="0 0 24 24"
 			>
 				<path d={icon.path} />

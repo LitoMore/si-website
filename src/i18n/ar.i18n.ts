@@ -103,7 +103,7 @@ const translation: Internationalization = {
 		actual: 'الألوان الأصلية',
 		actualTooltip: 'يعرض الألوان الأصلية للأيقونات، وقد يصعب تمييز بعضها.',
 		contrast: 'التباين',
-		contrastTooltip: 'يطبّق مرشح تباين لتحسين وضوح الأيقونات.',
+		contrastTooltip: 'يضبط ألوان الأيقونات القريبة من لون الخلفية.',
 		language: 'تغيير اللغة',
 		reset: 'إعادة ضبط',
 		themeAuto: 'مظهر النظام',

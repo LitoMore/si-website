@@ -111,8 +111,7 @@ const translation: Internationalization = {
 		actualTooltip:
 			'Zeigt die Originalfarben der Icons an. Einige sind möglicherweise schwer erkennbar.',
 		contrast: 'Kontrast',
-		contrastTooltip:
-			'Wendet einen Kontrastfilter an, um Icons besser sichtbar zu machen.',
+		contrastTooltip: 'Passt Icon-Farben an, die der Hintergrundfarbe ähneln.',
 		language: 'Sprache ändern',
 		reset: 'Zurücksetzen',
 		themeAuto: 'System Farbschema',

@@ -108,7 +108,7 @@ const translation: Internationalization = {
 		actualTooltip:
 			'アイコン本来の色で表示します。一部のアイコンが見えにくくなる場合があります。',
 		contrast: 'コントラスト',
-		contrastTooltip: 'コントラストフィルターでアイコンを見やすくします。',
+		contrastTooltip: '背景色に近いアイコンの色を調整します。',
 		language: '言語を変えてください',
 		reset: 'リセット',
 		themeAuto: 'システムと同期',

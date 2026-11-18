@@ -95,7 +95,6 @@ export const getColorVariables = (isDark: boolean) => ({
 	cardFg: isDark ? 'var(--si-card-fg-dark)' : 'var(--si-card-fg)',
 	cardBg: isDark ? 'var(--si-card-bg-dark)' : 'var(--si-card-bg)',
 	emptyFg: isDark ? 'var(--si-empty-fg-dark)' : 'var(--si-empty-fg)',
-	contrast: isDark ? 'var(--si-contrast-dark)' : 'var(--si-contrast)',
 });
 
 export const getSimpleIconsCdnUrl = (
