@@ -1,10 +1,10 @@
 {
-	"name": "si-website",
+	"name": "simpleicons.org",
 	"version": "1.0.0",
 	"private": true,
 	"description": "WIP - The Simple Icons new website",
 	"license": "MIT",
-	"repository": "https://github.com/LitoMore/si-website",
+	"repository": "https://github.com/LitoMore/simpleicons.org",
 	"homepage": "https://icons.litomore.me",
 	"author": "LitoMore",
 	"type": "module",

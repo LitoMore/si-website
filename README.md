@@ -1,4 +1,4 @@
-# si-website
+# simpleicons.org
 
 The Simple Icons new website
 
