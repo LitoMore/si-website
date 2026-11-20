@@ -4,7 +4,7 @@ import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
 import react, {reactCompilerPreset} from '@vitejs/plugin-react';
 import {visualizer} from 'rollup-plugin-visualizer';
-import {defineConfig} from 'vite';
+import {type Plugin, defineConfig} from 'vite';
 import iconCatalogPlugin from './build/icon-catalog.js';
 import pageMetadataPlugin from './build/page-metadata.js';
 
@@ -16,6 +16,26 @@ export default defineConfig({
 	plugins: [
 		iconCatalogPlugin(),
 		pageMetadataPlugin(),
+		{
+			name: 'pages-asset-headers',
+			generateBundle: {
+				order: 'post',
+				handler(_options, bundle) {
+					const rules = Object.keys(bundle)
+						.filter((file) => file.startsWith('assets/'))
+						.toSorted()
+						.map(
+							(file) =>
+								`/${file}\n  Cache-Control: public, max-age=31536000, immutable\n`,
+						);
+					this.emitFile({
+						type: 'asset',
+						fileName: '_headers',
+						source: rules.join(''),
+					});
+				},
+			},
+		} satisfies Plugin,
 		react(),
 		babel({presets: [reactCompilerPreset()]}),
 		tailwindcss(),

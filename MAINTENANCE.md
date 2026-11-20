@@ -23,11 +23,10 @@ runs lint. The build emits the catalog and Worker beside the other static assets
 
 ## Caching on Cloudflare Pages
 
-`public/_headers` gives content-hashed files under `/assets/` a one-year browser
-cache lifetime. This includes the icon catalog and Worker. Updating their contents
-changes their URLs; HTML keeps Pages' default revalidation policy so visitors can
-discover the new asset URLs. The rule targets the root deployment used by Pages;
-adjust the path if deploying Pages under a subdirectory.
+The build generates `dist/_headers` with a one-year browser cache rule for each
+emitted asset, including the icon catalog and Workers. HTML uses Pages' default
+revalidation policy. Missing assets return HTTP 404 through `public/404.html` and
+use the default cache policy.
 
 Pages has its own built-in asset cache. A custom domain's `CF-Cache-Status` refers
 to a separate CDN cache layer, and `.wasm` is not among that layer's default cached
