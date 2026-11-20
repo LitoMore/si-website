@@ -1,7 +1,9 @@
+import {useTransition} from 'react';
 import {
 	IconCaretDownFilled,
 	IconEyeglass,
 	IconGrid4x4,
+	IconLoader2,
 	IconMagnet,
 	IconWorld,
 } from '@tabler/icons-react';
@@ -14,8 +16,11 @@ import {PageLayout} from '#types';
 export default function Apps() {
 	const navigate = useNavigate();
 	const {search} = useLocation();
+	const [isPending, startTransition] = useTransition();
 	const openPage = (path: string) => {
-		void navigate(path, {state: {gallerySearch: search}});
+		startTransition(() => {
+			void navigate(path, {state: {gallerySearch: search}});
+		});
 	};
 
 	const {iconFg} = useColorScheme();
@@ -59,12 +64,20 @@ export default function Apps() {
 			]}
 		>
 			<button
-				aria-label="Simple Icons"
+				aria-busy={isPending}
+				aria-label={isPending ? i18n.catalog.loading : 'Simple Icons'}
 				className="flex cursor-pointer items-center justify-center"
 				type="button"
 			>
 				<BrandIcon className="h-6 w-6" color={iconFg} slug="simpleicons" />
-				<IconCaretDownFilled className="size-4" />
+				{isPending ? (
+					<IconLoader2
+						aria-hidden
+						className="size-4 motion-safe:animate-spin"
+					/>
+				) : (
+					<IconCaretDownFilled aria-hidden className="size-4" />
+				)}
 			</button>
 		</Dropdown>
 	);
