@@ -41,6 +41,7 @@ function hasVisibleContent(container: HTMLDivElement) {
 
 function CarbonAd({style}: {readonly style: CSSProperties}) {
 	const containerRef = useRef<HTMLDivElement>(null);
+	const adRequestedRef = useRef(false);
 	const [status, setStatus] = useState<'loading' | 'ready' | 'unavailable'>(
 		'loading',
 	);
@@ -84,11 +85,18 @@ function CarbonAd({style}: {readonly style: CSSProperties}) {
 
 		// Defer loading so Strict Mode's initial cleanup cancels the first request.
 		const timeout = setTimeout(() => {
+			// The gallery keeps this slot mounted while search results are empty.
+			if (adRequestedRef.current) {
+				updateStatus();
+				return;
+			}
+
 			const script = document.createElement('script');
 			script.id = '_carbonads_js';
 			script.async = true;
 			script.src = carbonAdsScript;
 			script.type = 'text/javascript';
+			adRequestedRef.current = true;
 			container.append(script);
 		}, 0);
 
@@ -99,7 +107,6 @@ function CarbonAd({style}: {readonly style: CSSProperties}) {
 			observer.disconnect();
 			container.removeEventListener('load', updateStatus, {capture: true});
 			container.removeEventListener('error', handleError, {capture: true});
-			container.replaceChildren();
 		};
 	}, []);
 

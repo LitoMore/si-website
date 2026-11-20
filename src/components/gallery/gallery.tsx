@@ -1,7 +1,7 @@
 /*
  * [INFO] We don't use styled-components for child components due to performance reasons.
  */
-import {lazy} from 'react';
+import {Activity, lazy} from 'react';
 import {useFilteredIcons, useIcons, useIconsLoadRequest} from '#atom';
 import {Button} from '#components/ui/button.js';
 import {Alert} from '#components/ui/feedback.js';
@@ -42,19 +42,21 @@ export default function Gallery() {
 		return <CatalogLoading />;
 	}
 
-	if (icons.data.length > 0 && filteredIcons.length === 0) {
-		return <Empty />;
-	}
-
+	const isEmpty = filteredIcons.length === 0;
 	return (
-		<CardProvider>
-			<VirtualGrid
-				cardPixels={cardPixels}
-				galleryHeight={galleryHeight}
-				galleryMargin={galleryMargin}
-				icons={filteredIcons}
-				iconsPerRow={iconsPerRow}
-			/>
-		</CardProvider>
+		<>
+			<Activity mode={isEmpty ? 'hidden' : 'visible'}>
+				<CardProvider>
+					<VirtualGrid
+						cardPixels={cardPixels}
+						galleryHeight={galleryHeight}
+						galleryMargin={galleryMargin}
+						icons={filteredIcons}
+						iconsPerRow={iconsPerRow}
+					/>
+				</CardProvider>
+			</Activity>
+			{isEmpty ? <Empty /> : null}
+		</>
 	);
 }
