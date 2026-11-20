@@ -6,11 +6,9 @@ import {visualizer} from 'rollup-plugin-visualizer';
 import {defineConfig} from 'vite';
 import iconCatalogPlugin from './build/icon-catalog.js';
 
-const baseUrl = process.env['VITE_BASE_URL'];
 const enableVisualizer = process.env['VITE_ENABLE_VISUALIZER'];
 
 export default defineConfig({
-	base: baseUrl ? `/${baseUrl}` : undefined,
 	server: {host: '127.0.0.1', port: 5173, strictPort: true},
 	preview: {host: '127.0.0.1', port: 5173, strictPort: true},
 	plugins: [

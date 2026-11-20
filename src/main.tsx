@@ -7,7 +7,7 @@ import './index.css';
 
 createRoot(document.querySelector('#root')!).render(
 	<StrictMode>
-		<BrowserRouter basename={import.meta.env.VITE_BASE_URL}>
+		<BrowserRouter>
 			<App />
 		</BrowserRouter>
 	</StrictMode>,

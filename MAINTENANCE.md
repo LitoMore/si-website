@@ -19,8 +19,7 @@ icon files from an external CDN. Wasm is the resource container; catalog and
 search calculations run as JavaScript inside the Worker.
 
 `npm test` validates the Wasm encoding and catalog contents, builds the site, and
-runs lint. The build emits the catalog and Worker beside the other static assets,
-including when using `VITE_BASE_URL` for a subdirectory deployment.
+runs lint. The build emits the catalog and Worker beside the other static assets.
 
 ## Caching on Cloudflare Pages
 
