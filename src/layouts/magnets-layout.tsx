@@ -1,6 +1,6 @@
 import {useSearchParams} from 'react-router';
 import {useIcons, useIconsLoadRequest} from '#atom';
-import Loading from '#components/gallery/loading.js';
+import {CatalogLoading} from '#components/gallery/loading.js';
 import SubpageHeader from '#components/header/subpage-header.js';
 import MagnetWorkshop from '#components/magnets/magnet-workshop.js';
 import {useColorScheme, useI18n} from '#hooks';
@@ -52,7 +52,7 @@ export default function MagnetsLayout() {
 					) : null}
 				</div>
 			) : (
-				<Loading height="calc(100dvh - 54px)" label={i18n.openGraph.loading} />
+				<CatalogLoading />
 			)}
 		</div>
 	);

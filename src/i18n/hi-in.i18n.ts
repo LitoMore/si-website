@@ -10,6 +10,7 @@ const translation: Internationalization = {
 		support: 'विज्ञापन Simple Icons को सहयोग देते हैं। समझने के लिए धन्यवाद।',
 		unavailable: 'यहाँ सामान्यतः एक विज्ञापन होता है',
 	},
+	catalog: {loading: 'लोड हो रहा है'},
 	controls: {
 		legalDisclaimer: 'कानूनी अस्वीकरण',
 	},

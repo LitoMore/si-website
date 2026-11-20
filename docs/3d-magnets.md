@@ -22,7 +22,8 @@ Theme and language changes preserve model settings and print colors.
 Color presets keep their base and icon roles when choosing another icon. Only
 the colors linked to the brand update; white, black and manually chosen colors
 stay fixed. Swap exchanges these roles too, and Reset restores brand on white.
-Loading indicators reuse the home page spinner.
+The workshop shows the same WebAssembly download progress as the home page
+while loading the icon catalog. A spinner appears while it builds the 3D preview.
 Typography inherits the site's system font, with shared sizes and weights for
 headings, controls and supporting text. Helper text and package credits stay
 at 12 px, with stronger secondary text colors in both themes.

@@ -9,6 +9,7 @@ const translation: Internationalization = {
 		support: 'Annonser bidrar til å støtte Simple Icons. Takk for forståelsen.',
 		unavailable: 'Her ville det vanligvis vært en annonse',
 	},
+	catalog: {loading: 'Laster'},
 	controls: {
 		legalDisclaimer: 'Juridisk ansvarsfraskrivelse',
 	},

@@ -12,8 +12,10 @@ export type CatalogResult =
 	{kind: 'load'; catalog: LoadedCatalog} | {kind: 'search'; indices: number[]};
 
 export type CatalogRequest = {id: number; task: CatalogTask};
-export type CatalogResponse = {
-	id: number;
-	result?: CatalogResult;
-	error?: string;
-};
+export type CatalogResponse =
+	| {progress: number}
+	| {
+			id: number;
+			result?: CatalogResult;
+			error?: string;
+	  };

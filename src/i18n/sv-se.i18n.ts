@@ -10,6 +10,7 @@ const translation: Internationalization = {
 			'Annonser hjälper till att stödja Simple Icons. Tack för din förståelse.',
 		unavailable: 'Här skulle det vanligtvis visas en annons',
 	},
+	catalog: {loading: 'Laddar'},
 	controls: {
 		legalDisclaimer: 'Juridisk ansvarsfriskrivning',
 	},

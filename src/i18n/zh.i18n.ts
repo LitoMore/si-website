@@ -8,6 +8,7 @@ const translation: Internationalization = {
 		support: '广告帮助支持 Simple Icons，感谢你的理解。',
 		unavailable: '这里原本是一则广告',
 	},
+	catalog: {loading: '正在加载'},
 	controls: {
 		legalDisclaimer: '法律声明',
 	},

@@ -1,3 +1,4 @@
+import {atom, getDefaultStore} from 'jotai/vanilla';
 import {type BrightnessMode} from '#types';
 import type {
 	CatalogRequest,
@@ -6,6 +7,8 @@ import type {
 	CatalogTask,
 	LoadedCatalog,
 } from './types.js';
+
+export const catalogProgress = atom(0);
 
 let worker: Worker | undefined;
 let nextId = 0;
@@ -24,6 +27,12 @@ function getWorker() {
 		worker.addEventListener(
 			'message',
 			({data}: MessageEvent<CatalogResponse>) => {
+				if (worker !== activeWorker) return;
+				if ('progress' in data) {
+					getDefaultStore().set(catalogProgress, data.progress);
+					return;
+				}
+
 				const request = pending.get(data.id);
 				pending.delete(data.id);
 				if (data.result) request?.resolve(data.result);
@@ -36,6 +45,7 @@ function getWorker() {
 		const fail = () => {
 			if (worker !== activeWorker) return;
 			activeWorker.terminate();
+			getDefaultStore().set(catalogProgress, 0);
 			worker = undefined;
 			catalogs.clear();
 			for (const request of pending.values())

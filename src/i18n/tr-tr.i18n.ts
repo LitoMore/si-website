@@ -11,6 +11,7 @@ const translation: Internationalization = {
 			'Reklamlar Simple Icons’u desteklemeye yardımcı olur. Anlayışınız için teşekkürler.',
 		unavailable: 'Normalde burada bir reklam görünür',
 	},
+	catalog: {loading: 'Yükleniyor'},
 	controls: {
 		legalDisclaimer: 'Yasal Sorumluluk Reddi',
 	},

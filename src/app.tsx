@@ -44,15 +44,6 @@ function App() {
 	}, [languageCode, direction, colorScheme]);
 
 	useEffect(() => {
-		const coverElement = document.querySelector<HTMLElement>('#cover')!;
-		if (!coverElement) return;
-		coverElement.style.opacity = '0';
-		globalThis.window.setTimeout(() => {
-			document.querySelector('#cover')?.remove();
-		}, 500);
-	}, []);
-
-	useEffect(() => {
 		let isActive = true;
 		setIcons((previous) => ({...previous, error: undefined}));
 		const loadIconsData = async (brightnessMode_: BrightnessMode) => {

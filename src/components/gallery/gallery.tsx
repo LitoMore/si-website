@@ -8,7 +8,7 @@ import {Alert} from '#components/ui/feedback.js';
 import {useI18n, useSizes} from '#hooks';
 import {CardProvider} from './card.js';
 import Empty from './empty.js';
-import Loading from './loading.js';
+import {CatalogLoading} from './loading.js';
 
 const VirtualGrid = lazy(async () => import('./virtual-grid.js'));
 
@@ -39,7 +39,7 @@ export default function Gallery() {
 	}
 
 	if (icons.data.length === 0) {
-		return <Loading />;
+		return <CatalogLoading />;
 	}
 
 	if (icons.data.length > 0 && filteredIcons.length === 0) {

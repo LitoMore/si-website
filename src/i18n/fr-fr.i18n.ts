@@ -11,6 +11,7 @@ const translation: Internationalization = {
 			'Les publicités contribuent à soutenir Simple Icons. Merci de votre compréhension.',
 		unavailable: 'Une publicité apparaîtrait normalement ici',
 	},
+	catalog: {loading: 'Chargement'},
 	controls: {
 		legalDisclaimer: 'Avertissement juridique',
 	},

@@ -34,6 +34,7 @@ export type Internationalization = {
 		support: string;
 		unavailable: string;
 	};
+	catalog: {loading: string};
 	controls: {
 		legalDisclaimer: string;
 	};

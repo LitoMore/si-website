@@ -121,14 +121,15 @@ export default function iconCatalogPlugin(): Plugin {
 			if (source !== id) return;
 			const {bytes, files} = getCatalog();
 			for (const file of files) this.addWatchFile(file);
+			const sizeExport = `export const catalogByteLength = ${bytes.byteLength};`;
 			if (isDevelopment)
-				return 'export default import.meta.env.BASE_URL + "@icon-catalog/catalog.wasm"';
+				return `${sizeExport} export default import.meta.env.BASE_URL + "@icon-catalog/catalog.wasm"`;
 			const reference = this.emitFile({
 				type: 'asset',
 				name: 'icon-catalog.wasm',
 				source: bytes,
 			});
-			return `export default import.meta.ROLLUP_FILE_URL_${reference}`;
+			return `${sizeExport} export default import.meta.ROLLUP_FILE_URL_${reference}`;
 		},
 		configureServer(server) {
 			server.middlewares.use((request, response, next) => {

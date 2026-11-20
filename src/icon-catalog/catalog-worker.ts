@@ -1,5 +1,5 @@
 import {Searcher} from 'fast-fuzzy';
-import catalogUrl from 'virtual:icon-catalog';
+import catalogUrl, {catalogByteLength} from 'virtual:icon-catalog';
 import {BrightnessMode} from '#types';
 import {colorForBackground} from '#vendor/make-badge-color.js';
 import {searcherKeySelector} from './search.js';
@@ -24,14 +24,39 @@ function createSearcher(icons: Catalog['icons']) {
 	return new Searcher(icons, {keySelector: searcherKeySelector});
 }
 
+function reportProgress(progress: number) {
+	globalThis.postMessage({progress} satisfies CatalogResponse);
+}
+
+async function downloadCatalog() {
+	const response = await fetch(catalogUrl);
+	if (!response.ok || !response.body)
+		throw new Error('Could not load the bundled icon catalog.');
+
+	// Fetch exposes decoded bytes even when the server compresses the response.
+	const bytes = new Uint8Array(catalogByteLength);
+	let loaded = 0;
+	let lastProgress = 0;
+	await response.body.pipeTo(
+		new WritableStream<Uint8Array>({
+			write(chunk) {
+				bytes.set(chunk, loaded);
+				loaded += chunk.byteLength;
+				const progress = Math.floor((loaded / catalogByteLength) * 100);
+				if (progress === lastProgress) return;
+				reportProgress(progress);
+				lastProgress = progress;
+			},
+		}),
+	);
+
+	if (loaded !== catalogByteLength) throw new Error('Incomplete icon catalog.');
+	return bytes;
+}
+
 async function getCatalog() {
 	catalog ??= (async () => {
-		const response = await fetch(catalogUrl);
-		if (!response.ok)
-			throw new Error('Could not load the bundled icon catalog.');
-		const {instance} = await WebAssembly.instantiate(
-			await response.arrayBuffer(),
-		);
+		const {instance} = await WebAssembly.instantiate(await downloadCatalog());
 		const exports = instance.exports as unknown as CatalogExports;
 		const bytes = new Uint8Array(
 			exports.memory.buffer,
@@ -42,6 +67,7 @@ async function getCatalog() {
 		searcher = createSearcher(data.icons);
 		return data;
 	})().catch((error: unknown) => {
+		reportProgress(0);
 		catalog = undefined;
 		throw error;
 	});

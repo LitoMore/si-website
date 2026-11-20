@@ -10,6 +10,7 @@ const translation: Internationalization = {
 			'Реклама допомагає підтримувати Simple Icons. Дякуємо за розуміння.',
 		unavailable: 'Зазвичай тут відображається реклама',
 	},
+	catalog: {loading: 'Завантаження'},
 	controls: {
 		legalDisclaimer: 'Юридичне повідомлення',
 	},
