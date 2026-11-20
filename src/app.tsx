@@ -1,17 +1,17 @@
 import {lazy, useEffect} from 'react';
-import {Route, Routes, useMatch, useSearchParams} from 'react-router';
+import {Route, Routes, useLocation, useMatch} from 'react-router';
 import {
 	useBrightnessMode,
 	useFilteredIcons,
 	useIcons,
 	useIconsLoadRequest,
-	useSelectedIcon,
 } from '#atom';
 import {MessageProvider} from '#components/ui/feedback.js';
 import {UiProvider} from '#components/ui/theme.js';
 import {useColorScheme, useI18n, useSizes} from '#hooks';
 import {type BrightnessMode, ColorTheme, LanguageCode} from '#types';
 import {loadIconCatalog} from './icon-catalog/client.js';
+import {findPage, pageMetaTags, siteUrl} from './page-metadata.js';
 
 const DefaultLayout = lazy(async () => import('./layouts/default-layout.js'));
 const OpenGraphLayout = lazy(
@@ -26,13 +26,12 @@ const FloatButtons = lazy(
 
 function App() {
 	const isMagnetPage = Boolean(useMatch('/3d'));
-	const [searchParameters, setSearchParameters] = useSearchParams();
+	const {pathname} = useLocation();
 	const {colorScheme} = useColorScheme();
 	const [brightnessMode] = useBrightnessMode();
-	const [icons, setIcons] = useIcons();
+	const [, setIcons] = useIcons();
 	const [iconsLoadRequest] = useIconsLoadRequest();
 	const [, setFilteredIcons] = useFilteredIcons();
-	const [selectedIcon, setSelectedIcon] = useSelectedIcon();
 	const {isMobileSize} = useSizes();
 	const {languageCode} = useI18n();
 	const direction = languageCode === LanguageCode.Arabic ? 'rtl' : 'ltr';
@@ -79,33 +78,18 @@ function App() {
 	}, [brightnessMode, setIcons, setFilteredIcons, iconsLoadRequest]);
 
 	useEffect(() => {
-		if (
-			isMagnetPage ||
-			!(icons.data.length > 0 && searchParameters.has('slug'))
-		) {
-			return;
+		const page = findPage(pathname);
+		if (!page) return;
+		document.title = page.title;
+		document.querySelector<HTMLLinkElement>('link[rel="canonical"]')!.href =
+			siteUrl + page.path;
+		for (const {name, property, content} of pageMetaTags(page)) {
+			const selector = name
+				? `meta[name="${name}"]`
+				: `meta[property="${property}"]`;
+			document.querySelector<HTMLMetaElement>(selector)!.content = content;
 		}
-
-		const slug = searchParameters.get('slug');
-		if (!slug) return;
-		const icon = icons.data.find((icon) => icon.slug === slug);
-		if (icon) setSelectedIcon(icon);
-	}, [icons.data, searchParameters, setSelectedIcon, isMagnetPage]);
-
-	useEffect(() => {
-		if (isMagnetPage || icons.data.length === 0) return;
-		if (selectedIcon) {
-			setSearchParameters({slug: selectedIcon.slug});
-		} else if (searchParameters.has('slug')) {
-			setSearchParameters();
-		}
-	}, [
-		icons.data,
-		selectedIcon,
-		searchParameters,
-		setSearchParameters,
-		isMagnetPage,
-	]);
+	}, [pathname]);
 
 	return (
 		<UiProvider

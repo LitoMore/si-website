@@ -5,7 +5,7 @@
 	"description": "WIP - The Simple Icons new website",
 	"license": "MIT",
 	"repository": "https://github.com/LitoMore/simpleicons.org",
-	"homepage": "https://icons.litomore.me",
+	"homepage": "https://simpleicons.org",
 	"author": "LitoMore",
 	"type": "module",
 	"engines": {

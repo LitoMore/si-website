@@ -1,9 +1,10 @@
 import {IconArrowLeft} from '@tabler/icons-react';
-import {useNavigate} from 'react-router';
+import {useLocation, useNavigate} from 'react-router';
 import {useColorScheme} from '#hooks';
 
 export default function BackHome() {
 	const navigate = useNavigate();
+	const state = useLocation().state as {gallerySearch?: string} | undefined;
 	const {iconFg} = useColorScheme();
 
 	return (
@@ -14,7 +15,7 @@ export default function BackHome() {
 				style={{color: iconFg}}
 				type="button"
 				onClick={() => {
-					void navigate('/');
+					void navigate({pathname: '/', search: state?.gallerySearch ?? ''});
 				}}
 			>
 				<IconArrowLeft aria-hidden />

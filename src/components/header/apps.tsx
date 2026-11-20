@@ -5,7 +5,7 @@ import {
 	IconMagnet,
 	IconWorld,
 } from '@tabler/icons-react';
-import {useNavigate} from 'react-router';
+import {useLocation, useNavigate} from 'react-router';
 import BrandIcon from '#components/common/brand-icon.js';
 import {Dropdown} from '#components/ui/dropdown.js';
 import {useColorScheme, useI18n} from '#hooks';
@@ -13,6 +13,11 @@ import {PageLayout} from '#types';
 
 export default function Apps() {
 	const navigate = useNavigate();
+	const {search} = useLocation();
+	const openPage = (path: string) => {
+		void navigate(path, {state: {gallerySearch: search}});
+	};
+
 	const {iconFg} = useColorScheme();
 	const {i18n} = useI18n();
 
@@ -24,7 +29,7 @@ export default function Apps() {
 					icon: <IconWorld />,
 					label: <span>Simple Icons CDN</span>,
 					onClick() {
-						void navigate('/cdn');
+						openPage('/cdn');
 					},
 				},
 				{
@@ -32,7 +37,7 @@ export default function Apps() {
 					icon: <IconEyeglass />,
 					label: <span>{i18n.header.iconPreviewer}</span>,
 					onClick() {
-						void navigate('preview');
+						openPage('/preview');
 					},
 				},
 				{
@@ -40,7 +45,7 @@ export default function Apps() {
 					icon: <IconMagnet />,
 					label: <span>{i18n.header.magnetGenerator}</span>,
 					onClick() {
-						void navigate('/3d');
+						openPage('/3d');
 					},
 				},
 				{
@@ -48,7 +53,7 @@ export default function Apps() {
 					icon: <IconGrid4x4 />,
 					label: <span>{i18n.header.openGraphGenerator}</span>,
 					onClick() {
-						void navigate('og');
+						openPage('/og');
 					},
 				},
 			]}

@@ -1,12 +1,23 @@
-import {useEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {IconX} from '@tabler/icons-react';
-import {useFilteredIcons, useIcons, useSearchText} from '#atom';
+import {useSearchParams} from 'react-router';
+import {useFilteredIcons, useIcons} from '#atom';
 import {useI18n, useSizes} from '#hooks';
 import componentLabels from '../../i18n/ui.js';
 import {searchIconCatalog} from '../../icon-catalog/client.js';
 
 function Search() {
-	const [searchText, setSearchText] = useSearchText();
+	const [parameters, setParameters] = useSearchParams();
+	const searchText = parameters.get('q') ?? '';
+	const setSearchText = useCallback(
+		(value: string) => {
+			const next = new URLSearchParams(parameters);
+			if (value) next.set('q', value);
+			else next.delete('q');
+			setParameters(next, {replace: true});
+		},
+		[parameters, setParameters],
+	);
 	const [icons, setIcons] = useIcons();
 	const [, setFilteredIcons] = useFilteredIcons();
 	const {isMobileSize} = useSizes();
@@ -45,7 +56,7 @@ function Search() {
 	}, [setSearchText]);
 
 	useEffect(() => {
-		if (!searchText) {
+		if (!searchText.trim() || icons.data.length === 0) {
 			setFilteredIcons(icons.data);
 			return;
 		}
@@ -82,7 +93,7 @@ function Search() {
 					setIsInputFocused(false);
 				}}
 				onChange={(event) => {
-					setSearchText(event.target.value.trim());
+					setSearchText(event.target.value);
 				}}
 				onFocus={() => {
 					setIsInputFocused(true);

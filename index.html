@@ -6,7 +6,7 @@
 			content="width=device-width, initial-scale=1, viewport-fit=cover"
 			name="viewport"
 		/>
-		<title>Simple Icons</title>
+		<title>{{pageTitle}}</title>
 		<style>
 			@keyframes animate {
 				0% {
@@ -58,14 +58,43 @@
 			}
 			*/
 		</style>
-		<meta
-			content="Browse, customize, and download free SVG icons for popular brands."
-			name="description"
-		/>
-		<meta content="Simple Icons" property="og:title" />
+		<meta content="{{pageDescription}}" name="description" />
+		<link href="https://simpleicons.org{{pagePath}}" rel="canonical" />
+		<meta content="{{pageTitle}}" property="og:title" />
+		<meta content="{{pageDescription}}" property="og:description" />
+		<meta content="https://simpleicons.org{{pagePath}}" property="og:url" />
+		<meta content="{{pageTitle}}" name="twitter:title" />
+		<meta content="{{pageDescription}}" name="twitter:description" />
+		<meta content="https://simpleicons.org{{pagePath}}" name="twitter:url" />
+		<meta content="14319924BC1F00DC15EF0EAA29E72404" name="msvalidate.01" />
+		<meta content="8b467a0b98aa2725" name="yandex-verification" />
 		<meta content="website" property="og:type" />
-		<meta content="https://icons.litomore.me/" property="og:url" />
-		<meta content="https://icons.litomore.me/og.png" property="og:image" />
+		<meta content="Simple Icons" property="og:site_name" />
+		<meta content="https://simpleicons.org/og.png" property="og:image" />
+		<meta content="summary_large_image" name="twitter:card" />
+		<meta content="https://simpleicons.org/og.png" name="twitter:image" />
+		<link
+			type="application/opensearchdescription+xml"
+			href="/opensearch.xml"
+			rel="search"
+			title="Simple Icons"
+		/>
+		<link href="/license.txt" rel="license" />
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Organization",
+				"name": "Simple Icons",
+				"url": "https://simpleicons.org/",
+				"logo": "https://simpleicons.org/simpleicons-icon.svg",
+				"image": "https://simpleicons.org/simpleicons-icon.svg",
+				"potentialAction": {
+					"@type": "SearchAction",
+					"target": "https://simpleicons.org/?q={search_term_string}",
+					"query-input": "required name=search_term_string"
+				}
+			}
+		</script>
 		<link type="image/svg+xml" href="/simpleicons-icon.svg" rel="icon" />
 		<link href="/simpleicons-icon.png" rel="shortcut icon" />
 		<link href="/simpleicons-icon.png" rel="apple-touch-icon" />

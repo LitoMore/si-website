@@ -1,5 +1,6 @@
 import {atom, useAtom, useAtomValue} from 'jotai';
 import {atomWithStorage} from 'jotai/utils';
+import {useSearchParams} from 'react-router';
 import {defaultOpenGraphImage} from '#constants';
 import {
 	type BadgeStyle,
@@ -25,14 +26,21 @@ const iconsBySlug = atom(
 export const useIconBySlug = (slug: string) =>
 	useAtomValue(iconsBySlug).get(slug);
 
-const searchText = atom('');
-export const useSearchText = () => useAtom(searchText);
-
 const filteredIcons = atom([] as Icon[]);
 export const useFilteredIcons = () => useAtom(filteredIcons);
 
-const selectedIcon = atom<Icon | undefined>(undefined);
-export const useSelectedIcon = () => useAtom(selectedIcon);
+export function useSelectedIcon() {
+	const [parameters, setParameters] = useSearchParams();
+	const icon = useIconBySlug(parameters.get('slug') ?? '');
+	const select = (nextIcon: Icon | undefined) => {
+		const next = new URLSearchParams(parameters);
+		if (nextIcon) next.set('slug', nextIcon.slug);
+		else next.delete('slug');
+		setParameters(next);
+	};
+
+	return [icon, select] as const;
+}
 
 const pageLayout = atom('default' as PageLayout);
 export const usePageLayout = () => useAtom(pageLayout);

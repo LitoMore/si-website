@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+	<ShortName>Simple Icons</ShortName>
+	<Description>Search free SVG icons for popular brands</Description>
+	<InputEncoding>UTF-8</InputEncoding>
+	<Image type="image/svg+xml">https://simpleicons.org/simpleicons-icon.svg</Image>
+	<Url type="text/html" template="https://simpleicons.org/?q={searchTerms}" />
+</OpenSearchDescription>

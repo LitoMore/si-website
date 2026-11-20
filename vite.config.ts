@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react';
 import {visualizer} from 'rollup-plugin-visualizer';
 import {defineConfig} from 'vite';
 import iconCatalogPlugin from './build/icon-catalog.js';
+import pageMetadataPlugin from './build/page-metadata.js';
 
 const enableVisualizer = process.env['VITE_ENABLE_VISUALIZER'];
 
@@ -13,6 +14,7 @@ export default defineConfig({
 	preview: {host: '127.0.0.1', port: 5173, strictPort: true},
 	plugins: [
 		iconCatalogPlugin(),
+		pageMetadataPlugin(),
 		react({
 			babel: {
 				plugins: ['babel-plugin-react-compiler'],
