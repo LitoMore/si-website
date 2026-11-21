@@ -1,6 +1,6 @@
 import Cdn from '#components/cdn/cdn.js';
 import SubpageHeader from '#components/header/subpage-header.js';
-import '../components/cdn/cdn.css';
+import '#components/cdn/cdn.css';
 
 export default function CdnLayout() {
 	return (

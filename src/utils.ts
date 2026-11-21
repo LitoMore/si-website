@@ -1,3 +1,4 @@
+import {loadIconCatalog} from '#icon-catalog/client.js';
 import {
 	type BitmapFormat,
 	BrightnessMode,
@@ -5,11 +6,10 @@ import {
 	ColorTheme,
 	type Icon,
 } from '#types';
-import {loadIconCatalog} from './icon-catalog/client.js';
 
-export {colorForBackground} from './vendor/make-badge-color.js';
-export {getIconSlug} from './vendor/simple-icons-sdk.js';
-export {searcherKeySelector} from './icon-catalog/search.js';
+export {searcherKeySelector} from '#icon-catalog/search.js';
+export {colorForBackground} from '#vendor/make-badge-color.js';
+export {getIconSlug} from '#vendor/simple-icons-sdk.js';
 
 export const pixelRatio = globalThis.devicePixelRatio || 1;
 

@@ -3,8 +3,8 @@ import {IconX} from '@tabler/icons-react';
 import {useSearchParams} from 'react-router';
 import {useFilteredIcons, useIcons} from '#atom';
 import {useI18n, useSizes} from '#hooks';
+import {searchIconCatalog} from '#icon-catalog/client.js';
 import componentLabels from '../../i18n/ui.js';
-import {searchIconCatalog} from '../../icon-catalog/client.js';
 
 function Search() {
 	const [parameters, setParameters] = useSearchParams();

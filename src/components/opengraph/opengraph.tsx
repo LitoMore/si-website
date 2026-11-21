@@ -4,6 +4,8 @@ import {arrayToShuffled} from 'array-shuffle';
 import {type Stage as KonvaStage} from 'konva/lib/Stage.js';
 import {Layer, Rect, Stage} from 'react-konva';
 import {useIcons, useOpenGraphImage} from '#atom';
+import MaskedIcon from '#components/canvas/masked-icon.js';
+import {downloadBlob} from '#components/download/blob.js';
 import {Button} from '#components/ui/button.js';
 import {Alert, Spinner, message} from '#components/ui/feedback.js';
 import {Select} from '#components/ui/form.js';
@@ -11,8 +13,6 @@ import {Tooltip} from '#components/ui/popover.js';
 import {brightThreshold, defaultOpenGraphImage} from '#constants';
 import {useColorScheme, useI18n} from '#hooks';
 import {getSvg, getSvgDataUri} from '#utils';
-import MaskedIcon from '../canvas/masked-icon.js';
-import {downloadBlob} from '../download/blob.js';
 import OpenGraphSettings from './opengraph-settings.js';
 import {
 	canCopyOpenGraphImage,

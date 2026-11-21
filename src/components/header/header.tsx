@@ -3,7 +3,7 @@ import {useColorScheme, useSizes} from '#hooks';
 import Apps from './apps.js';
 import Search from './search.js';
 
-const Controls = lazy(async () => import('../controls/controls.js'));
+const Controls = lazy(async () => import('#components/controls/controls.js'));
 
 export default function Header() {
 	const {padding} = useSizes();

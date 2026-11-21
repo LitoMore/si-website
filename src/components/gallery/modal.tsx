@@ -1,4 +1,5 @@
 import {useColorMode, useIcons, useSelectedIcon} from '#atom';
+import DownloadImage from '#components/download/downloadimage.js';
 import {Button} from '#components/ui/button.js';
 import {Dialog} from '#components/ui/dialog.js';
 import {Dropdown} from '#components/ui/dropdown.js';
@@ -12,7 +13,6 @@ import {
 	getUnpkgCdnUrl,
 } from '#utils';
 import componentLabels from '../../i18n/ui.js';
-import DownloadImage from '../download/downloadimage.js';
 import ModalContent from './modalcontent.js';
 
 function CopySvgButtons({icon}: {readonly icon: Icon}) {

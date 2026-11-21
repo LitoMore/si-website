@@ -9,8 +9,8 @@ import {
 import {MessageProvider} from '#components/ui/feedback.js';
 import {UiProvider} from '#components/ui/theme.js';
 import {useColorScheme, useI18n, useSizes} from '#hooks';
+import {loadIconCatalog} from '#icon-catalog/client.js';
 import {type BrightnessMode, ColorTheme, LanguageCode} from '#types';
-import {loadIconCatalog} from './icon-catalog/client.js';
 import {findPage, pageMetaTags, siteUrl} from './page-metadata.js';
 
 const DefaultLayout = lazy(async () => import('./layouts/default-layout.js'));

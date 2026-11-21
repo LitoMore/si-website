@@ -10,6 +10,7 @@
 			"#context": ["./src/context.tsx"],
 			"#hooks": ["./src/hooks.ts"],
 			"#i18n": ["./src/i18n/_index.i18n.ts"],
+			"#icon-catalog/*": ["./src/icon-catalog/*"],
 			"#types": ["./src/types.ts"],
 			"#utils": ["./src/utils.ts"],
 			"#vendor/*": ["./src/vendor/*"]

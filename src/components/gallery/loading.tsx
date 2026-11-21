@@ -3,7 +3,7 @@ import {IconLoader2} from '@tabler/icons-react';
 import {useAtomValue} from 'jotai';
 import {createPortal} from 'react-dom';
 import {useI18n, useSizes} from '#hooks';
-import {catalogProgress} from '../../icon-catalog/client.js';
+import {catalogProgress} from '#icon-catalog/client.js';
 
 export function CatalogLoading() {
 	const progress = useAtomValue(catalogProgress);

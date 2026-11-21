@@ -1,6 +1,6 @@
-import {type IconData} from './vendor/simple-icons-sdk.js';
+import {type IconData} from '#vendor/simple-icons-sdk.js';
 
-export type {IconData} from './vendor/simple-icons-sdk.js';
+export type {IconData} from '#vendor/simple-icons-sdk.js';
 export {type Internationalization, LanguageCode} from '#i18n';
 
 export enum PageLayout {

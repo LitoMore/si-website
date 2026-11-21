@@ -39,7 +39,7 @@ export const svgBase64 = (svg: string) => {
 	return `data:image/svg+xml;base64,${btoa(Array.from(bytes, (byte) => String.fromCodePoint(byte)).join(''))}`;
 };
 
-export {downloadBlob} from '../download/blob.js';
+export {downloadBlob} from '#components/download/blob.js';
 
 export type PathIssue = {
 	message: string;
